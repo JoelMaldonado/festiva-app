@@ -36,57 +36,63 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     return Scaffold(
       backgroundColor: AppColors.colorB1,
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(32),
-          child: Column(
-            children: [
-              _sliderImages(),
-              const SizedBox(height: 24),
-              _indicators(),
-              SizedBox(height: 48),
-              Text(
-                _getTitle(),
-                style: AppTextStyles.title3.copyWith(
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.colorT1,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 24),
-              Text(
-                _getDetail(),
-                style: AppTextStyles.footnote.copyWith(
-                  color: AppColors.colorT2,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              const Spacer(),
-              _currentPage < images.length - 1
-                  ? SizedBox(
-                      width: double.infinity,
-                      height: 42,
-                      child: OutlinedButton(
-                        onPressed: _nextPage,
-                        style: OutlinedButton.styleFrom(
-                          side: BorderSide(color: AppColors.colorP1),
-                          foregroundColor: AppColors.colorP1,
-                          textStyle: AppTextStyles.headline,
-                        ),
-                        child: Text("Siguiente"),
+        child: Column(
+          children: [
+            const SizedBox(height: 48),
+            _sliderImages(),
+            const SizedBox(height: 24),
+            _indicators(),
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.all(32),
+                child: Column(
+                  children: [
+                    Text(
+                      _getTitle(),
+                      style: AppTextStyles.title3.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: AppColors.colorT1,
                       ),
-                    )
-                  : CustomButton(
-                      label: "Continuar",
-                      onPressed: () async {
-                        final prefs = getIt<Prefs>();
-                        await prefs.saveOnboarding(true);
-                        // Pasar al hilo principal
-                        if (!mounted) return;
-                        Navigator.pushNamed(context, '/login');
-                      },
-                    )
-            ],
-          ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const SizedBox(height: 24),
+                    Text(
+                      _getDetail(),
+                      style: AppTextStyles.footnote.copyWith(
+                        color: AppColors.colorT2,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    const Spacer(),
+                    _currentPage < images.length - 1
+                        ? SizedBox(
+                            width: double.infinity,
+                            height: 42,
+                            child: OutlinedButton(
+                              onPressed: _nextPage,
+                              style: OutlinedButton.styleFrom(
+                                side: BorderSide(color: AppColors.colorP1),
+                                foregroundColor: AppColors.colorP1,
+                                textStyle: AppTextStyles.headline,
+                              ),
+                              child: Text("Siguiente"),
+                            ),
+                          )
+                        : CustomButton(
+                            label: "Continuar",
+                            onPressed: () async {
+                              final prefs = getIt<Prefs>();
+                              await prefs.saveOnboarding(true);
+                              // Pasar al hilo principal
+                              if (!mounted) return;
+                              Navigator.pushNamed(context, '/login');
+                            },
+                          )
+                  ],
+                ),
+              ),
+            ),
+          ],
         ),
       ),
     );
