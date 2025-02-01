@@ -1,10 +1,18 @@
+import 'package:festiva_flutter/data/model/request/login_request.dart';
+import 'package:festiva_flutter/data/model/response/login_response.dart';
+import 'package:festiva_flutter/data/services/auth_service.dart';
 import 'package:festiva_flutter/domain/model/user.dart';
 import 'package:festiva_flutter/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {
+  final AuthService service;
+
+  AuthRepositoryImpl(this.service);
+
   @override
-  Future<User> login(String email, String password) async {
-    return User(name: email);
+  Future<LoginResponse> login(String email, String password) async {
+    final request = LoginRequest(email: email, pass: password);
+    return await service.login(request);
   }
 
   @override

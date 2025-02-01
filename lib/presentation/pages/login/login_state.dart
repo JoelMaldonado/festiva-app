@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class LoginState {
-  final userController = TextEditingController(text: "admin");
+  final userController = TextEditingController(text: "joel@gmail.com");
   final passwordController = TextEditingController(text: "1234");
   bool obscureText = true;
   bool rememberMe = false;
