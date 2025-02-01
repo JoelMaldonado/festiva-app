@@ -9,10 +9,6 @@
 ## 📸 **Capturas de Pantalla**
 <img src="assets/screens/screen_login.png" width="300">
 
-| Eventos                               | Discoteca                               | Perfil de Artista                     |
-| ------------------------------------- | --------------------------------------- | ------------------------------------- |
-| ![Eventos](assets/images/screen2.png) | ![Discoteca](assets/images/screen3.png) | ![Artista](assets/images/screen4.png) |
-
 ---
 
 ## 🎯 **Características Principales**
@@ -33,7 +29,7 @@
 - **Firebase** (Autenticación y base de datos en la nube) 🔥
 - **Dio** (Manejo de API) 🌐
 - **GetIt** (Inyección de dependencias) ⚙️
-- **Provider / Riverpod** (Gestión de estado) 🏗️
+- **Provider** (Gestión de estado) 🏗️
 
 ---
 
@@ -42,6 +38,6 @@
 ### 1️⃣ **Clonar el repositorio**
 
 ```sh
-git clone https://github.com/tuusuario/festiva-app.git
-cd festiva-app
+git clone https://github.com/JoelMaldonado/festiva_flutter.git
+cd festiva_flutter
 ```
