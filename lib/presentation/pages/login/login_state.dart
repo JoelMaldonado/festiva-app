@@ -6,6 +6,7 @@ class LoginState {
   bool obscureText = true;
   bool rememberMe = false;
   bool isLoading = false;
+  String? error;
 
   void dispose() {
     userController.dispose();

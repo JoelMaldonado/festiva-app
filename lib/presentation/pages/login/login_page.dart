@@ -86,10 +86,12 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 16),
-                CustomButton(
-                  label: "Iniciar Sesión",
-                  onPressed: () {},
-                ),
+                state.isLoading
+                    ? CircularProgressIndicator()
+                    : CustomButton(
+                        label: "Iniciar Sesión",
+                        onPressed: provider.login,
+                      ),
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () {},
@@ -109,11 +111,15 @@ class LoginPage extends StatelessWidget {
                       style: AppTextStyles.footnote,
                     ),
                     const SizedBox(width: 4),
-                    Text(
-                      " Regístrate",
-                      style: AppTextStyles.footnote.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.colorP1,
+                    TextButton(
+                      style: TextButton.styleFrom(
+                        overlayColor: AppColors.colorT1,
+                        foregroundColor: AppColors.colorP1,
+                        textStyle: AppTextStyles.footnote,
+                      ),
+                      onPressed: () {},
+                      child: Text(
+                        "Regístrate",
                       ),
                     )
                   ],
