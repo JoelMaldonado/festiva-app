@@ -8,9 +8,9 @@
 
 ## 📸 **Capturas de Pantalla**
 
-| Inicio                               | Eventos                               | Discoteca                               | Perfil de Artista                     |
+| Login                                | Eventos                               | Discoteca                               | Perfil de Artista                     |
 | ------------------------------------ | ------------------------------------- | --------------------------------------- | ------------------------------------- |
-| ![Inicio](assets/images/screen1.png) | ![Eventos](assets/images/screen2.png) | ![Discoteca](assets/images/screen3.png) | ![Artista](assets/images/screen4.png) |
+| ![Login](assets/screens/screen_login.png) | ![Eventos](assets/images/screen2.png) | ![Discoteca](assets/images/screen3.png) | ![Artista](assets/images/screen4.png) |
 
 ---
 
