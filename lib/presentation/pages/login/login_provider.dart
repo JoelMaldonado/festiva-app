@@ -6,7 +6,12 @@ class LoginProvider extends ChangeNotifier {
   LoginState get state => _state;
 
   void toggleRememberMe() {
-    _state.toggleRememberMe();
+    _state.rememberMe = !_state.rememberMe;
+    notifyListeners();
+  }
+
+  void toggleObscureText() {
+    _state.obscureText = !_state.obscureText;
     notifyListeners();
   }
 

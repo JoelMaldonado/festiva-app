@@ -6,12 +6,14 @@ class CustomTextField extends StatelessWidget {
   final String? placeholder;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
+  final bool obscureText;
   const CustomTextField({
     super.key,
     this.controller,
     this.placeholder,
     this.prefixIcon,
     this.suffixIcon,
+    this.obscureText = false,
   });
 
   @override
@@ -26,6 +28,7 @@ class CustomTextField extends StatelessWidget {
           color: Colors.white,
         ),
         cursorColor: AppColors.colorT2,
+        obscureText: obscureText,
       ),
     );
   }

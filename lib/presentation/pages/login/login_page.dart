@@ -2,7 +2,6 @@ import 'package:festiva_flutter/presentation/pages/login/login_provider.dart';
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:festiva_flutter/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
@@ -27,38 +26,7 @@ class LoginPage extends StatelessWidget {
                   width: 200,
                 ),
                 const SizedBox(height: 48),
-                SizedBox(
-                  width: double.infinity,
-                  height: 42,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.colorB3,
-                      elevation: 0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                    ),
-                    onPressed: () {},
-                    child: Center(
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Image.asset(
-                            "assets/icons/ic_mail.png",
-                            width: 24,
-                          ),
-                          const SizedBox(width: 8),
-                          Text(
-                            "Continuar con Google",
-                            style: AppTextStyles.headline.copyWith(
-                              color: AppColors.colorT1,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
+                _buttonGoogle(),
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () {},
@@ -83,10 +51,13 @@ class LoginPage extends StatelessWidget {
                 CustomTextField(
                   controller: state.passwordController,
                   placeholder: "Contraseña",
+                  obscureText: state.obscureText,
                   suffixIcon: IconButton(
-                    onPressed: () {},
-                    icon: FaIcon(
-                      FontAwesomeIcons.eyeSlash,
+                    onPressed: provider.toggleObscureText,
+                    icon: Icon(
+                      state.obscureText
+                          ? Icons.visibility_off
+                          : Icons.visibility,
                       size: 18,
                       color: AppColors.colorT2,
                     ),
@@ -120,10 +91,13 @@ class LoginPage extends StatelessWidget {
                   onPressed: () {},
                 ),
                 const SizedBox(height: 16),
-                Text(
-                  "¿Olvidaste tu contraseña?",
-                  style: AppTextStyles.footnote.copyWith(
-                    color: AppColors.colorT2,
+                TextButton(
+                  onPressed: () {},
+                  child: Text(
+                    "¿Olvidaste tu contraseña?",
+                    style: AppTextStyles.footnote.copyWith(
+                      color: AppColors.colorT2,
+                    ),
                   ),
                 ),
                 const SizedBox(height: 48),
@@ -146,6 +120,41 @@ class LoginPage extends StatelessWidget {
                 )
               ],
             ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  SizedBox _buttonGoogle() {
+    return SizedBox(
+      width: double.infinity,
+      height: 42,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: AppColors.colorB3,
+          elevation: 0,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(50),
+          ),
+        ),
+        onPressed: () {},
+        child: Center(
+          child: Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                "assets/icons/ic_mail.png",
+                width: 24,
+              ),
+              const SizedBox(width: 8),
+              Text(
+                "Continuar con Google",
+                style: AppTextStyles.headline.copyWith(
+                  color: AppColors.colorT1,
+                ),
+              ),
+            ],
           ),
         ),
       ),
