@@ -82,11 +82,8 @@ class ApiService {
 
   ApiException _handleDioError(DioException e) {
     if (e.response != null) {
-      return ApiException(
-        message: e.response?.statusMessage ?? 'Error de servidor',
-        error: e.response?.data.toString() ?? 'Error desconocido',
-        statusCode: e.response?.statusCode ?? 500,
-      );
+      final data = ApiException.fromJson(e.response!.data);
+      return data;
     } else {
       return ApiException(
         message: 'Error de conexión',

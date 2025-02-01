@@ -92,6 +92,9 @@ class LoginPage extends StatelessWidget {
                         label: "Iniciar Sesión",
                         onPressed: provider.login,
                       ),
+                state.error == null
+                    ? const SizedBox.shrink()
+                    : Text(state.error!),
                 const SizedBox(height: 16),
                 TextButton(
                   onPressed: () {},

@@ -1,6 +1,8 @@
+import 'package:festiva_flutter/data/model/response/api_exception.dart';
 import 'package:festiva_flutter/domain/repository/auth_repository.dart';
 import 'package:festiva_flutter/presentation/pages/login/login_state.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginProvider extends ChangeNotifier {
   final AuthRepository repo;
@@ -17,11 +19,12 @@ class LoginProvider extends ChangeNotifier {
       _state.isLoading = true;
       notifyListeners();
       await Future.delayed(Duration(seconds: 2));
-      final res = await repo.login(_state.toRequest());
-      print("Si obtuvo info: ${res.token}");
+      await repo.login(_state.toRequest());
+      Fluttertoast.showToast(msg: "Bienvenido");
+    } on ApiException catch (e) {
+      _state.error = e.message;
     } catch (e) {
-      print("Error del viewmodel: ${e.toString()}");
-      _state.error = e.toString();
+      Fluttertoast.showToast(msg: e.toString());
     } finally {
       _state.isLoading = false;
       notifyListeners();

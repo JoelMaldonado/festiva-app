@@ -12,7 +12,6 @@ class AuthService {
       url: '/auth/login',
       body: request.toJson(),
     );
-
     return LoginResponse.fromJson(res.data);
   }
 }

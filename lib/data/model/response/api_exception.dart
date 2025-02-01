@@ -10,7 +10,7 @@ class ApiException implements Exception {
   @JsonKey(name: "error")
   final String error;
 
-  @JsonKey(name: "statusCcode")
+  @JsonKey(name: "statusCode")
   final int statusCode;
 
   ApiException({
