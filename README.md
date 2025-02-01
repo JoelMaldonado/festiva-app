@@ -7,7 +7,7 @@
 ---
 
 ## 📸 **Capturas de Pantalla**
-![Login](assets/screens/screen_login.png)
+<img src="assets/screens/screen_login.png" width="300">
 
 | Eventos                               | Discoteca                               | Perfil de Artista                     |
 | ------------------------------------- | --------------------------------------- | ------------------------------------- |
