@@ -6,6 +6,7 @@ class AppTextStyles {
     fontSize: 34,
     fontWeight: FontWeight.w400,
     height: 41 / 34,
+    //fontFamily: 'Poppins',
   );
 
   // Title 1
@@ -13,6 +14,7 @@ class AppTextStyles {
     fontSize: 28,
     fontWeight: FontWeight.w400, // Regular
     height: 34 / 28,
+    //fontFamily: 'Poppins',
   );
 
   // Title 2
@@ -20,6 +22,7 @@ class AppTextStyles {
     fontSize: 22,
     fontWeight: FontWeight.w400, // Regular
     height: 28 / 22,
+    //fontFamily: 'Poppins',
   );
 
   // Title 3
@@ -27,6 +30,7 @@ class AppTextStyles {
     fontSize: 20,
     fontWeight: FontWeight.w400, // Regular
     height: 25 / 20,
+    //fontFamily: 'Poppins',
   );
 
   // Headline
@@ -34,6 +38,7 @@ class AppTextStyles {
     fontSize: 17,
     fontWeight: FontWeight.w600, // Semibold
     height: 22 / 17,
+    // fontFamily: 'Poppins',
   );
 
   // Body
@@ -41,6 +46,7 @@ class AppTextStyles {
     fontSize: 17,
     fontWeight: FontWeight.w400, // Regular
     height: 22 / 17,
+    //fontFamily: 'Poppins',
   );
 
   // Callout
@@ -48,6 +54,7 @@ class AppTextStyles {
     fontSize: 16,
     fontWeight: FontWeight.w400, // Regular
     height: 21 / 16,
+    // fontFamily: 'Poppins',
   );
 
   // Subhead
@@ -55,6 +62,7 @@ class AppTextStyles {
     fontSize: 15,
     fontWeight: FontWeight.w400, // Regular
     height: 20 / 15,
+    // fontFamily: 'Poppins',
   );
 
   // Footnote
@@ -62,6 +70,7 @@ class AppTextStyles {
     fontSize: 13,
     fontWeight: FontWeight.w400, // Regular
     height: 18 / 13,
+    // fontFamily: 'Poppins',
   );
 
   // Caption 1
@@ -69,6 +78,7 @@ class AppTextStyles {
     fontSize: 12,
     fontWeight: FontWeight.w400, // Regular
     height: 16 / 12,
+    // fontFamily: 'Poppins',
   );
 
   // Caption 2
@@ -76,5 +86,6 @@ class AppTextStyles {
     fontSize: 11,
     fontWeight: FontWeight.w400, // Regular
     height: 13 / 11,
+    // fontFamily: 'Poppins',
   );
 }

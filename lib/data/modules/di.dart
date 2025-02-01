@@ -6,9 +6,9 @@ import 'package:get_it/get_it.dart';
 
 final GetIt getIt = GetIt.instance;
 
-void setupDependencies() {
-  serviceModule(getIt);
-  repositoryModule(getIt);
-  providerModule(getIt);
-  networkModule(getIt);
+Future<void> setupDependencies() async {
+  await serviceModule(getIt);
+  await repositoryModule(getIt);
+  await providerModule(getIt);
+  await networkModule(getIt);
 }
