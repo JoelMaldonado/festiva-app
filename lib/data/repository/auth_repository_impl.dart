@@ -1,4 +1,5 @@
 import 'package:festiva_flutter/data/model/request/login_request.dart';
+import 'package:festiva_flutter/data/model/response/api_exception.dart';
 import 'package:festiva_flutter/data/model/response/login_response.dart';
 import 'package:festiva_flutter/data/services/auth_service.dart';
 import 'package:festiva_flutter/domain/model/user.dart';
@@ -10,9 +11,14 @@ class AuthRepositoryImpl implements AuthRepository {
   AuthRepositoryImpl(this.service);
 
   @override
-  Future<LoginResponse> login(String email, String password) async {
-    final request = LoginRequest(email: email, pass: password);
-    return await service.login(request);
+  Future<LoginResponse> login(LoginRequest request) async {
+    try {
+      return await service.login(request);
+    } on ApiException catch (e) {
+      throw Exception(e.error);
+    } catch (e) {
+      throw Exception('Error desconocido');
+    }
   }
 
   @override

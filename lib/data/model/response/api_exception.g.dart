@@ -1,18 +1,18 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'http_response.dart';
+part of 'api_exception.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-HttpResponse _$HttpResponseFromJson(Map<String, dynamic> json) => HttpResponse(
+ApiException _$ApiExceptionFromJson(Map<String, dynamic> json) => ApiException(
       message: json['message'] as String,
       error: json['error'] as String,
       statusCode: (json['statusCcode'] as num).toInt(),
     );
 
-Map<String, dynamic> _$HttpResponseToJson(HttpResponse instance) =>
+Map<String, dynamic> _$ApiExceptionToJson(ApiException instance) =>
     <String, dynamic>{
       'message': instance.message,
       'error': instance.error,

@@ -17,10 +17,7 @@ class LoginProvider extends ChangeNotifier {
       _state.isLoading = true;
       notifyListeners();
       await Future.delayed(Duration(seconds: 2));
-      final res = await repo.login(
-        _state.userController.text,
-        _state.passwordController.text,
-      );
+      final res = await repo.login(_state.toRequest());
       print("Si obtuvo info: ${res.token}");
     } catch (e) {
       print("Error del viewmodel: ${e.toString()}");

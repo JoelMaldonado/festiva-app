@@ -1,9 +1,9 @@
 import 'package:json_annotation/json_annotation.dart';
 
-part 'http_response.g.dart';
+part 'api_exception.g.dart';
 
 @JsonSerializable()
-class HttpResponse implements Exception {
+class ApiException implements Exception {
   @JsonKey(name: "message")
   final String message;
 
@@ -13,14 +13,14 @@ class HttpResponse implements Exception {
   @JsonKey(name: "statusCcode")
   final int statusCode;
 
-  HttpResponse({
+  ApiException({
     required this.message,
     required this.error,
     required this.statusCode,
   });
 
-  factory HttpResponse.fromJson(Map<String, dynamic> json) =>
-      _$HttpResponseFromJson(json);
+  factory ApiException.fromJson(Map<String, dynamic> json) =>
+      _$ApiExceptionFromJson(json);
 
-  Map<String, dynamic> toJson() => _$HttpResponseToJson(this);
+  Map<String, dynamic> toJson() => _$ApiExceptionToJson(this);
 }
