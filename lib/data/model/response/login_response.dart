@@ -7,8 +7,12 @@ class LoginResponse {
   @JsonKey(name: 'access_token')
   final String token;
 
+  @JsonKey(name: 'refresh_token')
+  final String? refreshToken;
+
   LoginResponse({
     required this.token,
+    this.refreshToken,
   });
 
   factory LoginResponse.fromJson(Map<String, dynamic> json) =>

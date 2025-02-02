@@ -1,23 +1,26 @@
 import 'package:dio/dio.dart';
+import 'package:festiva_flutter/core/network/auth_interceptor.dart';
 import 'package:festiva_flutter/data/model/response/api_exception.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
 class ApiService {
-  final Dio dio;
+  late final Dio _dio;
 
-  ApiService({
-    required this.dio,
-  }) {
-    dio.options = BaseOptions(
-      baseUrl: dotenv.env['BASE_URL']!,
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10),
-      headers: {
-        'Content-Type': 'application/json',
-      },
+  ApiService() {
+    _dio = Dio(
+      BaseOptions(
+        baseUrl: dotenv.env['BASE_URL']!,
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      ),
     );
-    dio.interceptors.add(
+
+    _dio.interceptors.add(AuthInterceptor());
+    _dio.interceptors.add(
       PrettyDioLogger(
         requestHeader: true,
         requestBody: true,
@@ -39,7 +42,7 @@ class ApiService {
             },
           )
         : null;
-    return dio.get(
+    return _dio.get(
       url,
       queryParameters: queryParameters,
       options: options,
@@ -56,7 +59,7 @@ class ApiService {
           ? Options(headers: {'Authorization': 'Bearer $token'})
           : null;
 
-      final response = await dio.post(
+      final response = await _dio.post(
         url,
         data: body,
         options: options,

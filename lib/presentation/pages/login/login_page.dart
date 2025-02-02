@@ -11,6 +11,10 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final provider = Provider.of<LoginProvider>(context);
     final state = provider.state;
+
+    state.onSuccess = () {
+      Navigator.pushReplacementNamed(context, '/menu');
+    };
     return Scaffold(
       backgroundColor: AppColors.colorB1,
       body: SingleChildScrollView(
@@ -47,7 +51,7 @@ class LoginPage extends StatelessWidget {
                   controller: state.userController,
                   placeholder: "Usuario",
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 24),
                 CustomTextField(
                   controller: state.passwordController,
                   placeholder: "Contraseña",
@@ -63,29 +67,7 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: provider.toggleRememberMe,
-                      icon: Icon(
-                        state.rememberMe
-                            ? Icons.check_circle
-                            : Icons.circle_outlined,
-                        color: state.rememberMe
-                            ? AppColors.colorP1
-                            : AppColors.colorT2,
-                      ),
-                    ),
-                    Text(
-                      "Recordarme",
-                      style: AppTextStyles.footnote.copyWith(
-                        color: AppColors.colorT2,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 32),
                 state.isLoading
                     ? CircularProgressIndicator()
                     : CustomButton(

@@ -20,7 +20,7 @@ class LoginProvider extends ChangeNotifier {
       notifyListeners();
       await Future.delayed(Duration(seconds: 2));
       await repo.login(_state.toRequest());
-      Fluttertoast.showToast(msg: "Bienvenido");
+      _state.onSuccess?.call();
     } on ApiException catch (e) {
       _state.error = e.message;
     } catch (e) {
@@ -29,11 +29,6 @@ class LoginProvider extends ChangeNotifier {
       _state.isLoading = false;
       notifyListeners();
     }
-  }
-
-  void toggleRememberMe() {
-    _state.rememberMe = !_state.rememberMe;
-    notifyListeners();
   }
 
   void toggleObscureText() {

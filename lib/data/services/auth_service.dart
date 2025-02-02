@@ -8,10 +8,10 @@ class AuthService {
   AuthService(this.api);
 
   Future<LoginResponse> login(LoginRequest request) async {
-    final res = await api.post(
+    final call = await api.post(
       url: '/auth/login',
       body: request.toJson(),
     );
-    return LoginResponse.fromJson(res.data);
+    return LoginResponse.fromJson(call.data);
   }
 }

@@ -5,9 +5,10 @@ class LoginState {
   final userController = TextEditingController(text: "joel@gmail.com");
   final passwordController = TextEditingController(text: "1234");
   bool obscureText = true;
-  bool rememberMe = false;
   bool isLoading = false;
   String? error;
+
+  Function? onSuccess;
 
   LoginRequest toRequest() {
     return LoginRequest(

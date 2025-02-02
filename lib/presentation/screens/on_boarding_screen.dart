@@ -80,12 +80,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           )
                         : CustomButton(
                             label: "Continuar",
-                            onPressed: () async {
-                              final prefs = getIt<Prefs>();
-                              await prefs.saveOnboarding(true);
-                              // Pasar al hilo principal
-                              if (!mounted) return;
-                              Navigator.pushNamed(context, '/login');
+                            onPressed: () {
+                              _saveOnBoarding();
+                              Navigator.pushReplacementNamed(context, '/login');
                             },
                           )
                   ],
@@ -96,6 +93,15 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         ),
       ),
     );
+  }
+
+  void _saveOnBoarding() {
+    final prefs = getIt<Prefs>();
+    save(prefs);
+  }
+
+  Future<void> save(Prefs prefs) async {
+    await prefs.saveOnboarding(true);
   }
 
   String _getTitle() {

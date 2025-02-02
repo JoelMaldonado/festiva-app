@@ -7,6 +7,7 @@
 ---
 
 ## 📸 **Capturas de Pantalla**
+
 <p align="center">
   <img src="assets/screens/ss_onboarding.png" width="300">
   <img src="assets/screens/ss_login.png" width="300">
