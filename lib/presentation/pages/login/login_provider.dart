@@ -18,7 +18,7 @@ class LoginProvider extends ChangeNotifier {
     try {
       _state.isLoading = true;
       notifyListeners();
-      await Future.delayed(Duration(seconds: 2));
+      await Future.delayed(Duration(seconds: 1));
       await repo.login(_state.toRequest());
       _state.onSuccess?.call();
     } on ApiException catch (e) {

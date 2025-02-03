@@ -1,6 +1,9 @@
 import 'package:festiva_flutter/app/app.dart';
 import 'package:festiva_flutter/data/modules/di.dart';
+import 'package:festiva_flutter/presentation/pages/login/login_page.dart';
 import 'package:festiva_flutter/presentation/pages/login/login_provider.dart';
+import 'package:festiva_flutter/presentation/pages/menu/menu_page.dart';
+import 'package:festiva_flutter/presentation/pages/menu/menu_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -21,6 +24,11 @@ void main() async {
       providers: [
         ChangeNotifierProvider(
           create: (_) => getIt<LoginProvider>(),
+          child: LoginPage(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => getIt<MenuProvider>(),
+          child: MenuPage(),
         ),
       ],
       child: const MyApp(),

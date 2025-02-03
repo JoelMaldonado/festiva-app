@@ -1,13 +1,20 @@
+import 'package:festiva_flutter/domain/enum/menu_enum.dart';
 import 'package:festiva_flutter/presentation/pages/clubs/clubs_page.dart';
+import 'package:festiva_flutter/presentation/pages/home/home_page.dart';
+import 'package:festiva_flutter/presentation/pages/menu/components/menu_bottom.dart';
+import 'package:festiva_flutter/presentation/pages/menu/menu_provider.dart';
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<MenuProvider>(context);
+
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         systemNavigationBarColor: AppColors.colorB3,
@@ -21,53 +28,18 @@ class MenuPage extends StatelessWidget {
         child: Column(
           children: [
             Expanded(
-              child: ClubsPage(),
+              child: switch (provider.menuSelected) {
+                MenuEnum.maps => Text("data"),
+                MenuEnum.events => Text("Prueba"),
+                MenuEnum.home => HomePage(),
+                MenuEnum.clubs => ClubsPage(),
+                MenuEnum.preferences => Text("data"),
+              },
             ),
-            Container(
-              width: double.infinity,
-              height: 60,
-              color: AppColors.colorB3,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.home,
-                      color: AppColors.colorP1,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.search,
-                      color: AppColors.colorT1,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.favorite,
-                      color: AppColors.colorT1,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.person,
-                      color: AppColors.colorT1,
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () {},
-                    icon: Icon(
-                      Icons.settings,
-                      color: AppColors.colorT1,
-                    ),
-                  )
-                ],
-              ),
-            )
+            MenuBottom(
+              selected: provider.menuSelected,
+              onSelected: provider.setMenuSelected,
+            ),
           ],
         ),
       ),
