@@ -13,7 +13,7 @@ class CardArtist extends StatelessWidget {
           ClipRRect(
             borderRadius: BorderRadius.circular(16),
             child: Image.network(
-              "https://s3-alpha-sig.figma.com/img/1ffb/191e/1f1237f9b91d2797285dded335b7e95e?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=ZZKY3POL6Z6EkjeGtvb5t6bmVfQ7E-zp8eqZfK5DGUFqCrS89l-n9R6wYY4dHqFmGmJanOqPXCqwiVVvg3EXgwAfzgJ0DygOitGlxEJ3dC2xFkDfO9fpAKnBL-bdcNfq7Zr0hv0~IZkuUZ4c4SzcZcyF66to3sZU3Nn7pm2OQSTdblIfG8PMhW3U-DkslRcsnRTX0hvs2X2Ygk0Cl0qZ1gjKi9qwwzgaFv15ee7VOl1wiQISCqdH~yQi~IBkGtoU5muv1oOwrQmlQZHKEhlmYHh5l93Oqg9nqdQq7D-24O7x7TKZXbpasv05EJ3am4~QyODIjhM3bBex9LzeVqCPNw__",
+              "https://www.infobae.com/resizer/v2/UMAXX7NK7NCKPOC22TCFTGRRAA.jpg?auth=f1aabba022d02dd8671969c31bcebf474d220664c364366fcd44d7a3038464b6&smart=true&width=350&height=467&quality=85",
               width: 72,
               height: 72,
               fit: BoxFit.cover,

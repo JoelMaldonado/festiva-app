@@ -25,7 +25,7 @@ class CardEvent extends StatelessWidget {
                     topRight: Radius.circular(16),
                   ),
                   child: Image.network(
-                    "https://s3-alpha-sig.figma.com/img/385d/1c53/951ba075ed9b335ceca0cf71ab50f69f?Expires=1739750400&Key-Pair-Id=APKAQ4GOSFWCW27IBOMQ&Signature=dVsUlYBhRiKoe~FvSNSK2MWESBRvB6t2h1EBS6aMr6K3pekle8AEZNNYVNkdsbQ7ERFYmfIVmJhuaTwAeSRsiWN13aVtJWybO~YAzkzwli4IjSAU9yNs1VTqQwjlWszGLflzgCVn7G6OLt1zE4zGjNlI8vWD0Mxii5nURHrapRCUYCIRzFKtNPz-lcI2mK4B2k3HshGLpaoyeGfANm4~DQkm2wbntb0y3qyflq-QxNom03rF9Ud1xestmJzfEJ4tiJUUmA-ctWqP9Y~f0-DLx~aTam0vnvbKbvxWSKF-LfXw7QMmM4jTfcRp8SNurysYifvUDLjz1URn6TUEkCuH2Q__",
+                    "https://www.infobae.com/resizer/v2/UMAXX7NK7NCKPOC22TCFTGRRAA.jpg?auth=f1aabba022d02dd8671969c31bcebf474d220664c364366fcd44d7a3038464b6&smart=true&width=350&height=467&quality=85",
                     fit: BoxFit.cover,
                     width: double.infinity,
                     height: double.infinity,

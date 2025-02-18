@@ -7,6 +7,7 @@ class CustomTextField extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
+  final FocusNode? focusNode;
   const CustomTextField({
     super.key,
     this.controller,
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.obscureText = false,
+    this.focusNode,
   });
 
   @override
@@ -29,6 +31,7 @@ class CustomTextField extends StatelessWidget {
         ),
         cursorColor: AppColors.colorT2,
         obscureText: obscureText,
+        focusNode: focusNode,
       ),
     );
   }

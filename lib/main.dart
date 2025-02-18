@@ -1,8 +1,9 @@
 import 'package:festiva_flutter/app/app.dart';
 import 'package:festiva_flutter/data/modules/di.dart';
 import 'package:festiva_flutter/firebase_options.dart';
-import 'package:festiva_flutter/presentation/pages/home/home_page.dart';
-import 'package:festiva_flutter/presentation/pages/home/home_provider.dart';
+import 'package:festiva_flutter/presentation/pages/home/pages/home_page.dart';
+import 'package:festiva_flutter/presentation/pages/home/providers/home_provider.dart';
+import 'package:festiva_flutter/presentation/pages/home/providers/home_search_provider.dart';
 import 'package:festiva_flutter/presentation/pages/login/login_page.dart';
 import 'package:festiva_flutter/presentation/pages/login/login_provider.dart';
 import 'package:festiva_flutter/presentation/pages/menu/menu_page.dart';
@@ -42,6 +43,9 @@ void main() async {
         ChangeNotifierProvider(
           create: (_) => getIt<HomeProvider>(),
           child: const HomePage(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => getIt<HomeSearchProvider>(),
         ),
       ],
       child: const MyApp(),
