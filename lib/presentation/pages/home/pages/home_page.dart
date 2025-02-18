@@ -23,12 +23,11 @@ class HomePage extends StatelessWidget {
       child: Column(
         children: [
           _top(),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
-                spacing: 12,
                 children: [
                   HomeButtonSearch(
                     onPressed: () {
@@ -40,9 +39,11 @@ class HomePage extends StatelessWidget {
                       );
                     },
                   ),
+                  const SizedBox(height: 16),
                   _section(
                     title: "Categorías",
                   ),
+                  const SizedBox(height: 8),
                   Row(
                     children: [
                       _chipCategory(
@@ -70,11 +71,13 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
+                  const SizedBox(height: 16),
                   _section(
                     title: "Clubs",
                     onPressed: () {},
                   ),
                   CardClub(),
+                  const SizedBox(height: 16),
                   _section(
                     title: "Eventos",
                     onPressed: () {},
@@ -89,6 +92,7 @@ class HomePage extends StatelessWidget {
                       itemBuilder: (context, index) => CardEvent(),
                     ),
                   ),
+                  const SizedBox(height: 16),
                   _section(
                     title: "Artistas",
                     onPressed: () {},
