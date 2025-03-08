@@ -57,13 +57,21 @@ class ClubsPage extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  CardClub(),
+                  CardClub(
+                    onPressed: () {},
+                  ),
                   const SizedBox(height: 16),
-                  CardClub(),
+                  CardClub(
+                    onPressed: () {},
+                  ),
                   const SizedBox(height: 16),
-                  CardClub(),
+                  CardClub(
+                    onPressed: () {},
+                  ),
                   const SizedBox(height: 16),
-                  CardClub(),
+                  CardClub(
+                    onPressed: () {},
+                  ),
                 ],
               ),
             ),

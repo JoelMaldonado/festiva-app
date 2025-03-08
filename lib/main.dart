@@ -1,5 +1,5 @@
 import 'package:festiva_flutter/app/app.dart';
-import 'package:festiva_flutter/data/modules/di.dart';
+import 'package:festiva_flutter/core/di/di.dart';
 import 'package:festiva_flutter/firebase_options.dart';
 import 'package:festiva_flutter/presentation/pages/home/pages/home_page.dart';
 import 'package:festiva_flutter/presentation/pages/home/providers/home_provider.dart';

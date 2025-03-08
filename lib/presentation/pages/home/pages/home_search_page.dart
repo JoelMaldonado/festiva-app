@@ -1,3 +1,6 @@
+import 'package:festiva_flutter/presentation/pages/detail_artist/detail_artist_page.dart';
+import 'package:festiva_flutter/presentation/pages/detail_club/detail_club_page.dart';
+import 'package:festiva_flutter/presentation/pages/detail_event/detail_event_page.dart';
 import 'package:festiva_flutter/presentation/pages/home/providers/home_search_provider.dart';
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:festiva_flutter/presentation/widgets/widgets.dart';
@@ -45,6 +48,48 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                     Navigator.pop(context);
                   },
                   child: Icon(Icons.close),
+                ),
+              ),
+              Expanded(
+                child: ListView.separated(
+                  itemBuilder: (context, index) {
+                    final item = provider.searchItems[index];
+                    return ListTile(
+                      title: Text(item.detail),
+                      onTap: () {
+                        switch (item.type) {
+                          case "A":
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const DetailArtistPage(),
+                              ),
+                            );
+                            break;
+
+                          case "C":
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const DetailClubPage(),
+                              ),
+                            );
+                            break;
+
+                          case "E":
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => const DetailEventPage(),
+                              ),
+                            );
+                            break;
+                        }
+                      },
+                    );
+                  },
+                  separatorBuilder: (_, __) => const SizedBox(height: 8),
+                  itemCount: provider.searchItems.length,
                 ),
               )
             ],

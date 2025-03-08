@@ -1,5 +1,6 @@
 import 'package:festiva_flutter/presentation/components/card_artist.dart';
 import 'package:festiva_flutter/presentation/components/components.dart';
+import 'package:festiva_flutter/presentation/pages/detail_club/detail_club_page.dart';
 import 'package:festiva_flutter/presentation/pages/home/components/home_button_search.dart';
 import 'package:festiva_flutter/presentation/pages/home/providers/home_provider.dart';
 import 'package:festiva_flutter/presentation/pages/home/pages/home_search_page.dart';
@@ -76,7 +77,29 @@ class HomePage extends StatelessWidget {
                     title: "Clubs",
                     onPressed: () {},
                   ),
-                  CardClub(),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 220,
+                    child: PageView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 16),
+                          child: CardClub(
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => DetailClubPage(),
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      itemCount: 2,
+                    ),
+                  ),
                   const SizedBox(height: 16),
                   _section(
                     title: "Eventos",

@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/app/prefs.dart';
-import 'package:festiva_flutter/data/modules/di.dart';
+import 'package:festiva_flutter/core/storage/prefs.dart';
+import 'package:festiva_flutter/core/di/di.dart';
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:festiva_flutter/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';

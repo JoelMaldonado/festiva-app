@@ -1,9 +1,9 @@
 import 'package:festiva_flutter/data/model/request/login_request.dart';
 import 'package:festiva_flutter/data/model/response/login_response.dart';
-import 'package:festiva_flutter/data/modules/api_service.dart';
+import 'package:festiva_flutter/core/network/dio_config.dart';
 
 class AuthService {
-  ApiService api;
+  DioConfig api;
 
   AuthService(this.api);
 

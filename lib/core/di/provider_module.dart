@@ -1,4 +1,5 @@
 import 'package:festiva_flutter/domain/repository/auth_repository.dart';
+import 'package:festiva_flutter/domain/repository/common_repository.dart';
 import 'package:festiva_flutter/presentation/pages/home/providers/home_provider.dart';
 import 'package:festiva_flutter/presentation/pages/home/providers/home_search_provider.dart';
 import 'package:festiva_flutter/presentation/pages/login/login_provider.dart';
@@ -11,5 +12,9 @@ Future<void> providerModule(GetIt getIt) async {
 
   // Home
   getIt.registerFactory(() => HomeProvider());
-  getIt.registerFactory(() => HomeSearchProvider());
+  getIt.registerFactory(
+    () => HomeSearchProvider(
+      getIt<CommonRepository>(),
+    ),
+  );
 }

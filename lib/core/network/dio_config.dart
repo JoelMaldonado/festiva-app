@@ -4,10 +4,10 @@ import 'package:festiva_flutter/data/model/response/api_exception.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
-class ApiService {
+class DioConfig {
   late final Dio _dio;
 
-  ApiService() {
+  DioConfig() {
     _dio = Dio(
       BaseOptions(
         baseUrl: dotenv.env['BASE_URL']!,
