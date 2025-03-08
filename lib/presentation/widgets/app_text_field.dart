@@ -1,14 +1,14 @@
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
+class AppTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String? placeholder;
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final bool obscureText;
   final FocusNode? focusNode;
-  const CustomTextField({
+  const AppTextField({
     super.key,
     this.controller,
     this.placeholder,

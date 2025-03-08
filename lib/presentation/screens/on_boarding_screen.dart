@@ -78,7 +78,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                               child: Text("Siguiente"),
                             ),
                           )
-                        : CustomButton(
+                        : AppButton(
                             label: "Continuar",
                             onPressed: () {
                               _saveOnBoarding();

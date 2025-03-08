@@ -1,10 +1,10 @@
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-class CustomFloatingActionButton extends StatelessWidget {
+class AppFloatingActionButton extends StatelessWidget {
   final VoidCallback onPressed;
   final IconData icon;
-  const CustomFloatingActionButton({
+  const AppFloatingActionButton({
     super.key,
     required this.onPressed,
     required this.icon,

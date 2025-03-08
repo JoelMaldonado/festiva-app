@@ -65,11 +65,11 @@ class _DetailEventPageState extends State<DetailEventPage> {
                     ),
                   ),
                 ),
-                CustomFloatingActionButton(
+                AppFloatingActionButton(
                   onPressed: () {},
                   icon: Icons.favorite_outline,
                 ),
-                CustomFloatingActionButton(
+                AppFloatingActionButton(
                   onPressed: () {},
                   icon: Icons.share_outlined,
                 ),

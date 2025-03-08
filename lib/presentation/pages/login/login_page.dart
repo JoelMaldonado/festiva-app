@@ -47,12 +47,12 @@ class LoginPage extends StatelessWidget {
                   thickness: 1,
                 ),
                 const SizedBox(height: 16),
-                CustomTextField(
+                AppTextField(
                   controller: state.userController,
                   placeholder: "Usuario",
                 ),
                 const SizedBox(height: 24),
-                CustomTextField(
+                AppTextField(
                   controller: state.passwordController,
                   placeholder: "Contraseña",
                   obscureText: state.obscureText,
@@ -68,12 +68,11 @@ class LoginPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 32),
-                state.isLoading
-                    ? CircularProgressIndicator()
-                    : CustomButton(
-                        label: "Iniciar Sesión",
-                        onPressed: provider.login,
-                      ),
+                AppButton(
+                  label: "Iniciar Sesión",
+                  onPressed: provider.login,
+                  isLoading: state.isLoading,
+                ),
                 state.error == null
                     ? const SizedBox.shrink()
                     : Text(state.error!),

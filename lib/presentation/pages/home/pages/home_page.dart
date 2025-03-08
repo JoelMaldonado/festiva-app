@@ -27,6 +27,7 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HomeProvider>(context, listen: false).init();
       Provider.of<ArtistProvider>(context, listen: false).getArtists();
       Provider.of<ClubProvider>(context, listen: false).getClubs();
       Provider.of<EventProvider>(context, listen: false).getEvents();
@@ -70,32 +71,20 @@ class _HomePageState extends State<HomePage> {
                     title: "Categorías",
                   ),
                   const SizedBox(height: 8),
-                  Row(
-                    children: [
-                      _chipCategory(
-                        text: "Todas",
-                        isSelected: provider.categorySelected == 0,
-                        onPressed: () {
-                          provider.setCategorySelected(0);
-                        },
-                      ),
-                      const SizedBox(width: 8),
-                      _chipCategory(
-                        text: "Conciertos",
-                        isSelected: provider.categorySelected == 1,
-                        onPressed: () {
-                          provider.setCategorySelected(1);
-                        },
-                      ),
-                      const SizedBox(width: 8),
-                      _chipCategory(
-                        text: "Festivales",
-                        isSelected: provider.categorySelected == 2,
-                        onPressed: () {
-                          provider.setCategorySelected(2);
-                        },
-                      ),
-                    ],
+                  SingleChildScrollView(
+                    scrollDirection: Axis.horizontal,
+                    child: Row(
+                      spacing: 8,
+                      children: provider.catEvents.map((e) {
+                        return _chipCategory(
+                          text: e.name,
+                          isSelected: provider.categorySelected == e.id,
+                          onPressed: () {
+                            provider.setCategorySelected(e.id);
+                          },
+                        );
+                      }).toList(),
+                    ),
                   ),
                   const SizedBox(height: 16),
                   _section(
@@ -210,7 +199,7 @@ class _HomePageState extends State<HomePage> {
             ],
           ),
         ),
-        CustomFloatingActionButton(
+        AppFloatingActionButton(
           onPressed: () {},
           icon: Icons.logout,
         ),

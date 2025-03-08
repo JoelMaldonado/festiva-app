@@ -17,7 +17,11 @@ Future<void> providerModule(GetIt getIt) async {
   getIt.registerFactory(() => MenuProvider());
 
   // Home
-  getIt.registerFactory(() => HomeProvider());
+  getIt.registerFactory(
+    () => HomeProvider(
+      getIt<CommonRepository>(),
+    ),
+  );
   getIt.registerFactory(
     () => HomeSearchProvider(
       getIt<CommonRepository>(),

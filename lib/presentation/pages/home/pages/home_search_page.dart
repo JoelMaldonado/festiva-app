@@ -29,7 +29,7 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
       child: Column(
         spacing: 16,
         children: [
-          CustomTextField(
+          AppTextField(
             placeholder: "Buscar",
             controller: provider.searchController,
             focusNode: provider.searchFocusNode,
