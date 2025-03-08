@@ -13,7 +13,7 @@ class EventProvider extends ChangeNotifier {
 
   getEvents() async {
     try {
-      events = [];
+      if (events.isNotEmpty) return;
       isLoadingEvents = true;
       notifyListeners();
       await Future.delayed(Duration(milliseconds: 300));

@@ -16,13 +16,18 @@ class HomeSearchProvider extends ChangeNotifier {
   final searchFocusNode = FocusNode();
   Timer? _debounce;
 
+  List<SearchItem> searchItems = [];
+
   init() {
+    searchController.clear();
+    searchItems = List.empty();
     searchFocusNode.requestFocus();
+    notifyListeners();
   }
 
   _onSearchChanged() {
     if (_debounce?.isActive ?? false) _debounce!.cancel();
-    _debounce = Timer(const Duration(milliseconds: 1500), () {
+    _debounce = Timer(const Duration(milliseconds: 800), () {
       final query = searchController.text.trim();
       if (query.isNotEmpty) {
         _performSearch(query);
@@ -30,20 +35,13 @@ class HomeSearchProvider extends ChangeNotifier {
     });
   }
 
-  List<SearchItem> searchItems = [];
-
-  bool isLoading = false;
-
   Future<void> _performSearch(String query) async {
     try {
-      isLoading = true;
-      notifyListeners();
       final res = await _commonRepository.search(query);
-      searchItems = res;
+      searchItems = List.from(res);
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     } finally {
-      isLoading = false;
       notifyListeners();
     }
   }

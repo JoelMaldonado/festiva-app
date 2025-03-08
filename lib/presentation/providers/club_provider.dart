@@ -14,7 +14,7 @@ class ClubProvider extends ChangeNotifier {
 
   getClubs() async {
     try {
-      clubs = [];
+      if (clubs.isNotEmpty) return;
       isLoadingArtists = true;
       notifyListeners();
       await Future.delayed(Duration(milliseconds: 300));

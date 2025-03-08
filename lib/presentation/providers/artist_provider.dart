@@ -13,7 +13,7 @@ class ArtistProvider extends ChangeNotifier {
 
   getArtists() async {
     try {
-      artists = [];
+      if (artists.isNotEmpty) return;
       isLoadingArtists = true;
       notifyListeners();
       await Future.delayed(Duration(milliseconds: 300));

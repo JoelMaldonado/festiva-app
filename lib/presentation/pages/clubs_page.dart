@@ -23,15 +23,19 @@ class _ClubsPageState extends State<ClubsPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ClubProvider>(context);
-    return ListView.builder(
-      itemCount: provider.clubs.length,
-      itemBuilder: (context, index) {
-        final club = provider.clubs[index];
-        return CardClub(
-          club: club,
-          onPressed: () {},
-        );
-      },
+    return Padding(
+      padding: const EdgeInsets.all(24),
+      child: ListView.separated(
+        itemCount: provider.clubs.length,
+        itemBuilder: (context, index) {
+          final club = provider.clubs[index];
+          return CardClub(
+            club: club,
+            onPressed: () {},
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(height: 16),
+      ),
     );
   }
 }

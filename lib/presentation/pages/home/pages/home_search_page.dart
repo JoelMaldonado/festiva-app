@@ -17,21 +17,17 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) {
-        final provider =
-            Provider.of<HomeSearchProvider>(context, listen: false);
-        provider.init();
-      },
-    );
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<HomeSearchProvider>(context, listen: false).init();
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<HomeSearchProvider>(context);
     return AppScaffold(
-      isLoadingScreen: provider.isLoading,
       child: Column(
+        spacing: 16,
         children: [
           CustomTextField(
             placeholder: "Buscar",
@@ -39,60 +35,61 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
             focusNode: provider.searchFocusNode,
             prefixIcon: Icon(Icons.search),
             suffixIcon: GestureDetector(
-              onTap: () {
-                provider.searchController.clear();
-                Navigator.pop(context);
-              },
+              onTap: () => Navigator.pop(context),
               child: Icon(Icons.close),
             ),
           ),
-          Expanded(
-            child: ListView.separated(
-              itemBuilder: (context, index) {
-                final item = provider.searchItems[index];
-                return ListTile(
-                  title: Text(item.detail),
-                  onTap: () {
-                    Navigator.pop(context);
-                    switch (item.type) {
-                      case "A":
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => DetailArtistPage(
-                              idArtist: item.id,
+          if (provider.searchItems.isEmpty &&
+              provider.searchController.text.isNotEmpty)
+            const Text("No se encontraron resultados")
+          else
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  final item = provider.searchItems[index];
+                  return ListTile(
+                    title: Text(item.detail),
+                    onTap: () {
+                      Navigator.pop(context);
+                      switch (item.type) {
+                        case "A":
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => DetailArtistPage(
+                                idArtist: item.id,
+                              ),
                             ),
-                          ),
-                        );
-                        break;
+                          );
+                          break;
 
-                      case "C":
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const DetailClubPage(),
-                          ),
-                        );
-                        break;
-
-                      case "E":
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => DetailEventPage(
-                              idEvent: item.id,
+                        case "C":
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => const DetailClubPage(),
                             ),
-                          ),
-                        );
-                        break;
-                    }
-                  },
-                );
-              },
-              separatorBuilder: (_, __) => const SizedBox(height: 8),
-              itemCount: provider.searchItems.length,
-            ),
-          )
+                          );
+                          break;
+
+                        case "E":
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => DetailEventPage(
+                                idEvent: item.id,
+                              ),
+                            ),
+                          );
+                          break;
+                      }
+                    },
+                  );
+                },
+                separatorBuilder: (_, __) => const SizedBox(height: 8),
+                itemCount: provider.searchItems.length,
+              ),
+            )
         ],
       ),
     );
