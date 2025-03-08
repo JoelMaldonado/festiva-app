@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:festiva_flutter/domain/model/search_item.dart';
 import 'package:festiva_flutter/domain/repository/common_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeSearchProvider extends ChangeNotifier {
   final CommonRepository _commonRepository;
@@ -31,13 +32,18 @@ class HomeSearchProvider extends ChangeNotifier {
 
   List<SearchItem> searchItems = [];
 
+  bool isLoading = false;
+
   Future<void> _performSearch(String query) async {
     try {
+      isLoading = true;
+      notifyListeners();
       final res = await _commonRepository.search(query);
       searchItems = res;
     } catch (e) {
-      print(e);
+      Fluttertoast.showToast(msg: e.toString());
     } finally {
+      isLoading = false;
       notifyListeners();
     }
   }

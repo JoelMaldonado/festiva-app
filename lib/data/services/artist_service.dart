@@ -12,4 +12,9 @@ class ArtistService {
         .map((artist) => ArtistDto.fromJson(artist))
         .toList();
   }
+
+  Future<ArtistDto> fetch(int id) async {
+    final call = await _dio.get(url: '/artista/$id');
+    return ArtistDto.fromJson(call.data);
+  }
 }

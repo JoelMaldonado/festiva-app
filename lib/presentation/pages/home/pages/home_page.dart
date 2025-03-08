@@ -1,20 +1,45 @@
 import 'package:festiva_flutter/presentation/components/card_artist.dart';
-import 'package:festiva_flutter/presentation/components/components.dart';
-import 'package:festiva_flutter/presentation/pages/detail_club/detail_club_page.dart';
+import 'package:festiva_flutter/presentation/components/card_club.dart';
+import 'package:festiva_flutter/presentation/components/card_event.dart';
+import 'package:festiva_flutter/presentation/pages/artists_page.dart';
+import 'package:festiva_flutter/presentation/pages/detail_club_page.dart';
+import 'package:festiva_flutter/presentation/pages/events_page.dart';
 import 'package:festiva_flutter/presentation/pages/home/components/home_button_search.dart';
 import 'package:festiva_flutter/presentation/pages/home/providers/home_provider.dart';
 import 'package:festiva_flutter/presentation/pages/home/pages/home_search_page.dart';
+import 'package:festiva_flutter/presentation/providers/artist_provider.dart';
+import 'package:festiva_flutter/presentation/providers/club_provider.dart';
+import 'package:festiva_flutter/presentation/providers/event_provider.dart';
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:festiva_flutter/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ArtistProvider>(context, listen: false).getArtists();
+      Provider.of<ClubProvider>(context, listen: false).getClubs();
+      Provider.of<EventProvider>(context, listen: false).getEvents();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<HomeProvider>(context);
+    final artistProvider = Provider.of<ArtistProvider>(context);
+    final clubProvider = Provider.of<ClubProvider>(context);
+    final eventProvider = Provider.of<EventProvider>(context);
+
     return Padding(
       padding: const EdgeInsets.only(
         left: 24,
@@ -82,52 +107,75 @@ class HomePage extends StatelessWidget {
                     height: 220,
                     child: PageView.builder(
                       scrollDirection: Axis.horizontal,
+                      itemCount: clubProvider.clubs.length,
                       itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(right: 16),
-                          child: CardClub(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => DetailClubPage(),
-                                ),
-                              );
-                            },
-                          ),
+                        final item = clubProvider.clubs[index];
+                        return CardClub(
+                          club: item,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => DetailClubPage(),
+                              ),
+                            );
+                          },
                         );
                       },
-                      itemCount: 2,
                     ),
                   ),
                   const SizedBox(height: 16),
                   _section(
                     title: "Eventos",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => EventsPage(),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(
                     width: double.infinity,
                     height: 180,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 8,
+                      itemCount: eventProvider.events.length,
                       separatorBuilder: (context, index) => SizedBox(width: 16),
-                      itemBuilder: (context, index) => CardEvent(),
+                      itemBuilder: (context, index) {
+                        final item = eventProvider.events[index];
+                        return CardEvent(
+                          event: item,
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(height: 16),
                   _section(
                     title: "Artistas",
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => ArtistsPage(),
+                        ),
+                      );
+                    },
                   ),
                   SizedBox(
                     width: double.infinity,
                     height: 100,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
-                      itemCount: 8,
+                      itemCount: artistProvider.artists.length,
                       separatorBuilder: (context, index) => SizedBox(width: 16),
-                      itemBuilder: (context, index) => CardArtist(),
+                      itemBuilder: (context, index) {
+                        final item = artistProvider.artists[index];
+                        return CardArtist(
+                          artist: item,
+                        );
+                      },
                     ),
                   ),
                 ],

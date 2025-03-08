@@ -10,4 +10,9 @@ class ClubService {
     final call = await _dio.get(url: '/discoteca');
     return (call.data as List).map((club) => ClubDto.fromJson(club)).toList();
   }
+
+  Future<ClubDto> fetch(int id) async {
+    final call = await _dio.get(url: '/discoteca/$id');
+    return ClubDto.fromJson(call.data);
+  }
 }

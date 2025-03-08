@@ -4,4 +4,5 @@ import 'package:festiva_flutter/domain/model/artist.dart';
 
 abstract class ArtistRepository {
   Future<Either<Failure, List<Artist>>> allArtists();
+  Future<Either<Failure, Artist>> get(int id);
 }

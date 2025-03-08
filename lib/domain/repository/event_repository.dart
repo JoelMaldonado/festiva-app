@@ -4,4 +4,5 @@ import 'package:festiva_flutter/domain/model/event.dart';
 
 abstract class EventRepository {
   Future<Either<Failure, List<Event>>> allEvents();
+  Future<Either<Failure, Event>> get(int id);
 }

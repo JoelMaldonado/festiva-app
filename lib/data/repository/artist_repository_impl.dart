@@ -19,4 +19,14 @@ class ArtistRepositoryImpl implements ArtistRepository {
       return Left(Failure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, Artist>> get(int id) async {
+    try {
+      final artist = await _service.fetch(id);
+      return Right(artist.toDomain());
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
 }

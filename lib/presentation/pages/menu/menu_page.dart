@@ -1,5 +1,5 @@
 import 'package:festiva_flutter/domain/enum/menu_enum.dart';
-import 'package:festiva_flutter/presentation/pages/clubs/clubs_page.dart';
+import 'package:festiva_flutter/presentation/pages/clubs_page.dart';
 import 'package:festiva_flutter/presentation/pages/home/pages/home_page.dart';
 import 'package:festiva_flutter/presentation/pages/menu/components/menu_bottom.dart';
 import 'package:festiva_flutter/presentation/pages/menu/menu_provider.dart';

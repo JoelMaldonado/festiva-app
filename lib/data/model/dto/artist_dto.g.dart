@@ -13,8 +13,8 @@ ArtistDto _$ArtistDtoFromJson(Map<String, dynamic> json) => ArtistDto(
       descrip: json['descrip'] as String?,
       biografia: json['biografia'] as String?,
       tags: json['tags'] as String?,
-      urlFoto: json['urlFoto'] as String?,
-      urlFoto2: json['urlFoto2'] as String?,
+      urlFoto: json['url_foto'] as String?,
+      urlFoto2: json['url_foto2'] as String?,
       socialReds: (json['redes'] as List<dynamic>?)
           ?.map((e) => ArtistSocialRedDto.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -27,8 +27,8 @@ Map<String, dynamic> _$ArtistDtoToJson(ArtistDto instance) => <String, dynamic>{
       'descrip': instance.descrip,
       'biografia': instance.biografia,
       'tags': instance.tags,
-      'urlFoto': instance.urlFoto,
-      'urlFoto2': instance.urlFoto2,
+      'url_foto': instance.urlFoto,
+      'url_foto2': instance.urlFoto2,
       'redes': instance.socialReds,
     };
 

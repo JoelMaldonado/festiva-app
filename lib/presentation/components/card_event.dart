@@ -1,10 +1,16 @@
-import 'package:festiva_flutter/presentation/pages/detail_event/detail_event_page.dart';
+import 'package:festiva_flutter/domain/model/event.dart';
+import 'package:festiva_flutter/presentation/pages/detail_event_page.dart';
 import 'package:festiva_flutter/presentation/theme/colors.dart';
 import 'package:festiva_flutter/presentation/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CardEvent extends StatelessWidget {
-  const CardEvent({super.key});
+  final Event event;
+
+  const CardEvent({
+    super.key,
+    required this.event,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +19,9 @@ class CardEvent extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => DetailEventPage(),
+            builder: (_) => DetailEventPage(
+              idEvent: event.id,
+            ),
           ),
         );
       },
@@ -35,7 +43,7 @@ class CardEvent extends StatelessWidget {
                       topRight: Radius.circular(16),
                     ),
                     child: Image.network(
-                      "https://www.infobae.com/resizer/v2/UMAXX7NK7NCKPOC22TCFTGRRAA.jpg?auth=f1aabba022d02dd8671969c31bcebf474d220664c364366fcd44d7a3038464b6&smart=true&width=350&height=467&quality=85",
+                      event.urlFoto,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: double.infinity,
@@ -101,7 +109,7 @@ class CardEvent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Latin Fest - Lima",
+                    event.titulo,
                     style: AppTextStyles.footnote.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.colorT1,

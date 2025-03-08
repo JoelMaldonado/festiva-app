@@ -1,9 +1,15 @@
-import 'package:festiva_flutter/presentation/pages/detail_artist/detail_artist_page.dart';
+import 'package:festiva_flutter/domain/model/artist.dart';
+import 'package:festiva_flutter/presentation/pages/detail_artist_page.dart';
 import 'package:festiva_flutter/presentation/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class CardArtist extends StatelessWidget {
-  const CardArtist({super.key});
+  final Artist artist;
+
+  const CardArtist({
+    super.key,
+    required this.artist,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +18,9 @@ class CardArtist extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => DetailArtistPage(),
+            builder: (_) => DetailArtistPage(
+              idArtist: artist.id,
+            ),
           ),
         );
       },
@@ -23,7 +31,7 @@ class CardArtist extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
               child: Image.network(
-                "https://www.infobae.com/resizer/v2/UMAXX7NK7NCKPOC22TCFTGRRAA.jpg?auth=f1aabba022d02dd8671969c31bcebf474d220664c364366fcd44d7a3038464b6&smart=true&width=350&height=467&quality=85",
+                artist.urlFoto,
                 width: 72,
                 height: 72,
                 fit: BoxFit.cover,
@@ -31,7 +39,7 @@ class CardArtist extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              "Planetshakers",
+              artist.nombre,
               style: AppTextStyles.caption2,
               maxLines: 1,
             ),

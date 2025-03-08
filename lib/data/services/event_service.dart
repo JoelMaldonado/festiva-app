@@ -12,4 +12,9 @@ class EventService {
         .map((event) => EventDto.fromJson(event))
         .toList();
   }
+
+  Future<EventDto> fetch(int id) async {
+    final call = await _dio.get(url: '/evento/$id');
+    return EventDto.fromJson(call.data);
+  }
 }

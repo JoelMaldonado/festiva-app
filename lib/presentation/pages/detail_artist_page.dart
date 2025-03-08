@@ -1,13 +1,35 @@
+import 'package:festiva_flutter/presentation/providers/artist_provider.dart';
 import 'package:festiva_flutter/presentation/theme/colors.dart';
 import 'package:festiva_flutter/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class DetailArtistPage extends StatelessWidget {
-  const DetailArtistPage({super.key});
+class DetailArtistPage extends StatefulWidget {
+  final int idArtist;
+  const DetailArtistPage({
+    super.key,
+    required this.idArtist,
+  });
+
+  @override
+  State<DetailArtistPage> createState() => _DetailArtistPageState();
+}
+
+class _DetailArtistPageState extends State<DetailArtistPage> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ArtistProvider>(context, listen: false)
+          .getArtist(widget.idArtist);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    final provider = Provider.of<ArtistProvider>(context);
     return AppScaffold(
+      isLoadingScreen: provider.isLoadingArtist,
       child: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(
@@ -25,7 +47,7 @@ class DetailArtistPage extends StatelessWidget {
               ),
               child: ClipOval(
                 child: Image.network(
-                  "https://s2.abcstatics.com/abc/www/multimedia/gente/2024/01/17/ariana-grande-kVxG-U601140978351bzB-1200x840@abc.jpg",
+                  provider.artist?.urlFoto ?? "",
                   fit: BoxFit.cover,
                 ),
               ),
@@ -38,7 +60,7 @@ class DetailArtistPage extends StatelessWidget {
                   spacing: 12,
                   children: [
                     Text(
-                      "Ariana Grande",
+                      provider.artist?.nombre ?? "Sin Nombre",
                       style: TextStyle(
                         fontSize: 20,
                         color: AppColors.colorT1,
@@ -46,14 +68,14 @@ class DetailArtistPage extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      "Cantante",
+                      provider.artist?.tipo ?? "Sin Tipo",
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.colorT2,
                       ),
                     ),
                     Text(
-                      "Cantante, compositora y actriz estadounidense, estilo único y su impacto en la cultura pop 🎸🤘",
+                      provider.artist?.descrip ?? "Sin Descripción",
                       style: TextStyle(
                         fontSize: 12,
                         color: AppColors.colorT2,
@@ -83,7 +105,7 @@ class DetailArtistPage extends StatelessWidget {
                     child: Stack(
                       children: [
                         Image.network(
-                          "https://img2.rtve.es/i/?w=1600&i=1625047846393.jpg",
+                          provider.artist?.urlFoto2 ?? "",
                           fit: BoxFit.cover,
                           width: double.infinity,
                           height: double.infinity,
@@ -119,7 +141,7 @@ class DetailArtistPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(16),
                     child: Text(
-                      "Ariana Grande, nacida el 26 de junio de 1993 en Boca Ratón, Florida, es una cantante, actriz y compositora estadounidense. Comenzó su carrera en el mundo del espectáculo en Broadway, interpretando el papel de Charlotte en la obra musical 13 en 2008",
+                      provider.artist?.biografia ?? "Sin Biografía",
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.colorT2,

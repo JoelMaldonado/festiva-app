@@ -19,4 +19,14 @@ class ClubRepositoryImpl implements ClubRepository {
       return Left(Failure(e.toString()));
     }
   }
+
+  @override
+  Future<Either<Failure, Club>> get(int id) async {
+    try {
+      final club = await _service.fetch(id);
+      return Right(club.toDomain());
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
 }

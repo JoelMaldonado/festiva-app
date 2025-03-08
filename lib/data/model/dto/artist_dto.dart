@@ -23,10 +23,10 @@ class ArtistDto {
   @JsonKey(name: 'tags')
   final String? tags;
 
-  @JsonKey(name: 'urlFoto')
+  @JsonKey(name: 'url_foto')
   final String? urlFoto;
 
-  @JsonKey(name: 'urlFoto2')
+  @JsonKey(name: 'url_foto2')
   final String? urlFoto2;
 
   @JsonKey(name: 'redes')
