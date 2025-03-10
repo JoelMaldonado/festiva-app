@@ -10,12 +10,12 @@ class ClubProvider extends ChangeNotifier {
 
   List<Club> clubs = [];
 
-  bool isLoadingArtists = false;
+  bool isLoadingClubs = false;
 
   getClubs() async {
     try {
       if (clubs.isNotEmpty) return;
-      isLoadingArtists = true;
+      isLoadingClubs = true;
       notifyListeners();
       await Future.delayed(Duration(milliseconds: 300));
       final res = await _repo.allClubs();
@@ -26,26 +26,37 @@ class ClubProvider extends ChangeNotifier {
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     } finally {
-      isLoadingArtists = false;
+      isLoadingClubs = false;
       notifyListeners();
     }
   }
 
   Club? club;
   bool isLoadingClub = false;
+  String? errorMessage;
 
   getClub(int id) async {
     try {
       isLoadingClub = true;
+      errorMessage = null;
       notifyListeners();
+
       await Future.delayed(Duration(milliseconds: 300));
+
       final res = await _repo.get(id);
       res.fold(
-        (l) {},
-        (r) => club = r,
+        (l) {
+          errorMessage = l.message;
+          club = null;
+        },
+        (r) {
+          errorMessage = null;
+          club = r;
+        },
       );
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
+      club = null;
     } finally {
       isLoadingClub = false;
       notifyListeners();

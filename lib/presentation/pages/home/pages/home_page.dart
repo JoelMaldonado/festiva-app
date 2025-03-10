@@ -105,7 +105,9 @@ class _HomePageState extends State<HomePage> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => DetailClubPage(),
+                                builder: (_) => DetailClubPage(
+                                  idClub: item.id,
+                                ),
                               ),
                             );
                           },

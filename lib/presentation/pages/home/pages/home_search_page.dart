@@ -67,7 +67,9 @@ class _HomeSearchPageState extends State<HomeSearchPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const DetailClubPage(),
+                              builder: (_) => DetailClubPage(
+                                idClub: item.id,
+                              ),
                             ),
                           );
                           break;
