@@ -1,6 +1,7 @@
 import 'package:festiva_flutter/domain/enum/menu_enum.dart';
 import 'package:festiva_flutter/presentation/pages/clubs_page.dart';
 import 'package:festiva_flutter/presentation/pages/home/pages/home_page.dart';
+import 'package:festiva_flutter/presentation/pages/maps/maps_page.dart';
 import 'package:festiva_flutter/presentation/pages/menu/components/menu_bottom.dart';
 import 'package:festiva_flutter/presentation/pages/menu/menu_provider.dart';
 import 'package:festiva_flutter/presentation/theme/theme.dart';
@@ -29,7 +30,7 @@ class MenuPage extends StatelessWidget {
           children: [
             Expanded(
               child: switch (provider.menuSelected) {
-                MenuEnum.maps => Text("data"),
+                MenuEnum.maps => MapsPage(),
                 MenuEnum.events => Text("Prueba"),
                 MenuEnum.home => HomePage(),
                 MenuEnum.clubs => ClubsPage(),
