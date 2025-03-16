@@ -1,4 +1,6 @@
-import 'package:festiva_flutter/domain/model/club.dart';
+import 'package:festiva_flutter/domain/model/club/club.dart';
+import 'package:festiva_flutter/domain/model/club/club_location.dart';
+import 'package:festiva_flutter/domain/model/club/club_summary.dart';
 import 'package:festiva_flutter/domain/repository/club_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -6,9 +8,11 @@ import 'package:fluttertoast/fluttertoast.dart';
 class ClubProvider extends ChangeNotifier {
   final ClubRepository _repo;
 
-  ClubProvider(this._repo);
+  ClubProvider(this._repo) {
+    getCubsLocations();
+  }
 
-  List<Club> clubs = [];
+  List<ClubSummary> clubs = [];
 
   bool isLoadingClubs = false;
 
@@ -18,7 +22,7 @@ class ClubProvider extends ChangeNotifier {
       isLoadingClubs = true;
       notifyListeners();
       await Future.delayed(Duration(milliseconds: 300));
-      final res = await _repo.allClubs();
+      final res = await _repo.allSummary();
       res.fold(
         (l) {},
         (r) => clubs = r,
@@ -60,6 +64,20 @@ class ClubProvider extends ChangeNotifier {
     } finally {
       isLoadingClub = false;
       notifyListeners();
+    }
+  }
+
+  List<ClubLocation> locations = [];
+
+  Future<void> getCubsLocations() async {
+    try {
+      final res = await _repo.getLocations();
+      res.fold(
+        (l) => Fluttertoast.showToast(msg: l.message),
+        (r) => locations = r,
+      );
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
     }
   }
 }

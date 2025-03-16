@@ -1,9 +1,9 @@
-import 'package:festiva_flutter/domain/model/club.dart';
+import 'package:festiva_flutter/domain/model/club/club_summary.dart';
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CardClub extends StatelessWidget {
-  final Club club;
+  final ClubSummary club;
   final VoidCallback onPressed;
   const CardClub({
     super.key,
@@ -38,7 +38,7 @@ class CardClub extends StatelessWidget {
                         topRight: Radius.circular(16),
                       ),
                       child: Image.network(
-                        club.urlPortada,
+                        club.logoUrl,
                         width: double.infinity,
                         height: 140,
                         fit: BoxFit.fitWidth,
@@ -66,7 +66,7 @@ class CardClub extends StatelessWidget {
                   child: Row(
                     children: [
                       Image.network(
-                        club.urlLogo,
+                        club.logoUrl,
                         width: 36,
                         height: 36,
                         fit: BoxFit.cover,
@@ -76,7 +76,7 @@ class CardClub extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            club.nombre,
+                            club.name,
                             style: AppTextStyles.callout.copyWith(
                               fontWeight: FontWeight.w900,
                               color: AppColors.colorT1,
