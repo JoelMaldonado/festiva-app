@@ -10,6 +10,7 @@ import 'package:festiva_flutter/presentation/pages/menu/menu_provider.dart';
 import 'package:festiva_flutter/presentation/providers/artist_provider.dart';
 import 'package:festiva_flutter/presentation/providers/club_provider.dart';
 import 'package:festiva_flutter/presentation/providers/event_provider.dart';
+import 'package:festiva_flutter/presentation/pages/clubs_map/clubs_map_provider.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> providerModule(GetIt getIt) async {
@@ -46,6 +47,12 @@ Future<void> providerModule(GetIt getIt) async {
   getIt.registerFactory(
     () => EventProvider(
       getIt<EventRepository>(),
+    ),
+  );
+
+  getIt.registerFactory(
+    () => ClubsMapProvider(
+      getIt<ClubRepository>(),
     ),
   );
 }

@@ -6,6 +6,7 @@ import 'package:festiva_flutter/presentation/pages/menu/menu_provider.dart';
 import 'package:festiva_flutter/presentation/providers/artist_provider.dart';
 import 'package:festiva_flutter/presentation/providers/club_provider.dart';
 import 'package:festiva_flutter/presentation/providers/event_provider.dart';
+import 'package:festiva_flutter/presentation/pages/clubs_map/clubs_map_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -37,6 +38,10 @@ List<SingleChildWidget> appProviders() {
     // Event Provider
     ChangeNotifierProvider(
       create: (_) => getIt<EventProvider>(),
+    ),
+
+    ChangeNotifierProvider(
+      create: (_) => getIt<ClubsMapProvider>(),
     ),
   ];
 }

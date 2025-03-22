@@ -1,67 +1,55 @@
 import 'dart:async';
-
-import 'package:festiva_flutter/presentation/providers/club_provider.dart';
+import 'package:festiva_flutter/domain/model/club/club_location.dart';
+import 'package:festiva_flutter/domain/model/club/club_summary.dart';
+import 'package:festiva_flutter/domain/repository/club_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart' as gl;
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mp;
-import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 import 'package:image/image.dart' as img;
 
-class MapsPage extends StatefulWidget {
-  const MapsPage({super.key});
+class ClubsMapProvider extends ChangeNotifier {
+  final ClubRepository _repo;
 
-  @override
-  State<MapsPage> createState() => _MapsPageState();
-}
+  ClubsMapProvider(this._repo);
 
-class _MapsPageState extends State<MapsPage> {
   mp.MapboxMap? mapboxMap;
   StreamSubscription? userPositionStream;
 
-  @override
-  void initState() {
-    super.initState();
-    _setupPositionTracking();
-  }
-
-  @override
-  void dispose() {
-    userPositionStream?.cancel();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final pr = Provider.of<ClubProvider>(context, listen: false);
-    return Stack(
-      children: [
-        mp.MapWidget(
-          onMapCreated: (controller) {
-            _onMapCreated(controller, pr);
-          },
-          styleUri: mp.MapboxStyles.DARK,
-        ),
-      ],
-    );
-  }
-
-  void _onMapCreated(
+  void onMapCreated(
     mp.MapboxMap controller,
-    ClubProvider pr,
   ) async {
-    setState(() {
-      mapboxMap = controller;
-    });
-
+    mapboxMap = controller;
     mapboxMap?.location.updateSettings(
       mp.LocationComponentSettings(
         enabled: true,
         pulsingEnabled: true,
       ),
     );
-    for (var e in pr.locations) {
+
+    await getClubsLocations();
+  }
+
+  ClubSummary? clubSelected;
+
+  Future<void> getClubsLocations() async {
+    try {
+      final res = await _repo.getLocations();
+      return res.fold(
+        (l) => Fluttertoast.showToast(msg: l.message),
+        (r) => setClubsMarker(r),
+      );
+    } catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+    } finally {
+      notifyListeners();
+    }
+  }
+
+  Future<void> setClubsMarker(List<ClubLocation> list) async {
+    for (var e in list) {
       final pam = await mapboxMap?.annotations.createPointAnnotationManager();
       final Uint8List imageData = await loadImage(e.logoUrl);
       final pointAnnotationOptions = mp.PointAnnotationOptions(
@@ -75,12 +63,26 @@ class _MapsPageState extends State<MapsPage> {
         ),
       );
       pam?.create(pointAnnotationOptions);
-      final myListener = MyPointAnnotationClickListener(prueba: "Hola");
+      final myListener = MyPointAnnotationClickListener(
+        clubLocation: e,
+        onPressed: getClubById,
+      );
       pam?.addOnPointAnnotationClickListener(myListener);
     }
   }
 
-  Future<void> _setupPositionTracking() async {
+  Future<void> getClubById(ClubLocation clubLocation) async {
+    final res = await _repo.allSummary();
+    res.fold(
+      (l) => Fluttertoast.showToast(msg: l.message),
+      (r) {
+        clubSelected = r.firstWhere((e) => e.id == clubLocation.idClub);
+      },
+    );
+    notifyListeners();
+  }
+
+  Future<void> setupPositionTracking() async {
     bool serviceEnabled;
     gl.LocationPermission permission;
     serviceEnabled = await gl.Geolocator.isLocationServiceEnabled();
@@ -151,17 +153,25 @@ class _MapsPageState extends State<MapsPage> {
       return byteData.buffer.asUint8List();
     }
   }
+
+  @override
+  void dispose() {
+    userPositionStream?.cancel();
+    super.dispose();
+  }
 }
 
 class MyPointAnnotationClickListener extends mp.OnPointAnnotationClickListener {
-  final String prueba;
+  final ClubLocation clubLocation;
+  final Function(ClubLocation) onPressed;
 
   MyPointAnnotationClickListener({
-    required this.prueba,
+    required this.clubLocation,
+    required this.onPressed,
   });
 
   @override
   void onPointAnnotationClick(mp.PointAnnotation annotation) {
-    print('Annotation clicked $prueba: ${annotation.id}');
+    onPressed.call(clubLocation);
   }
 }
