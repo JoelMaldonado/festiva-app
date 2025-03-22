@@ -52,7 +52,7 @@ class _DetailClubPageState extends State<DetailClubPage> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
-                              club.urlPortada,
+                              club.coverUrl,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -67,7 +67,7 @@ class _DetailClubPageState extends State<DetailClubPage> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
                             child: Image.network(
-                              club.urlLogo,
+                              club.logoUrl,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -80,7 +80,7 @@ class _DetailClubPageState extends State<DetailClubPage> {
                     children: [
                       Expanded(
                         child: Text(
-                          club.nombre,
+                          club.name,
                           style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.w900,
@@ -113,7 +113,7 @@ class _DetailClubPageState extends State<DetailClubPage> {
                   _itemDetail(
                     icon: Icons.explore_outlined,
                     title: "Ubicación",
-                    value: club.direc,
+                    value: club.address,
                   ),
                   Row(
                     spacing: 12,

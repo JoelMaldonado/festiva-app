@@ -8,39 +8,39 @@ class ClubDto {
   @JsonKey(name: 'id')
   final int? id;
 
-  @JsonKey(name: 'nombre')
-  final String? nombre;
+  @JsonKey(name: 'name')
+  final String? name;
 
-  @JsonKey(name: 'descrip')
+  @JsonKey(name: 'description')
   final String? descrip;
 
-  @JsonKey(name: 'url_logo')
-  final String? urlLogo;
+  @JsonKey(name: 'phone')
+  final String? phone;
 
-  @JsonKey(name: 'url_portada')
-  final String? urlPortada;
+  @JsonKey(name: 'logoUrl')
+  final String? logoUrl;
 
-  @JsonKey(name: 'direc')
-  final String? direc;
+  @JsonKey(name: 'coverUrl')
+  final String? coverUrl;
 
-  @JsonKey(name: 'url_maps')
-  final String? urlMaps;
+  @JsonKey(name: 'address')
+  final String? address;
 
-  @JsonKey(name: 'telf')
-  final String? telf;
+  @JsonKey(name: 'mapsUrl')
+  final String? mapsUrl;
 
-  @JsonKey(name: 'discotecaRedes')
+  @JsonKey(name: 'socialReds')
   final List<ClubSocialRedDto>? socialReds;
 
   ClubDto({
     required this.id,
-    required this.nombre,
+    required this.name,
     required this.descrip,
-    required this.urlLogo,
-    required this.urlPortada,
-    required this.direc,
-    required this.urlMaps,
-    required this.telf,
+    required this.phone,
+    required this.logoUrl,
+    required this.coverUrl,
+    required this.address,
+    required this.mapsUrl,
     required this.socialReds,
   });
 
@@ -52,13 +52,13 @@ class ClubDto {
   Club toDomain() {
     return Club(
       id: id ?? 0,
-      nombre: nombre ?? '',
+      name: name ?? '',
       descrip: descrip ?? '',
-      urlLogo: urlLogo ?? '',
-      urlPortada: urlPortada ?? '',
-      direc: direc ?? '',
-      urlMaps: urlMaps ?? '',
-      telf: telf ?? '',
+      phone: phone ?? '',
+      logoUrl: logoUrl ?? '',
+      coverUrl: coverUrl ?? '',
+      address: address ?? '',
+      mapsUrl: mapsUrl ?? '',
       socialReds: socialReds?.map((e) => e.toDomain()).toList() ?? [],
     );
   }
@@ -66,23 +66,19 @@ class ClubDto {
 
 @JsonSerializable()
 class ClubSocialRedDto {
-  @JsonKey(name: 'url')
+  @JsonKey(name: 'id')
+  final int? id;
+
+  @JsonKey(name: 'name')
+  final String? name;
+
+  @JsonKey(name: 'logoUrl')
   final String? url;
 
-  @JsonKey(name: 'red')
-  final String? red;
-
-  @JsonKey(name: 'cod')
-  final String? cod;
-
-  @JsonKey(name: 'logo')
-  final String? logo;
-
   ClubSocialRedDto({
+    required this.id,
+    required this.name,
     required this.url,
-    required this.red,
-    required this.cod,
-    required this.logo,
   });
 
   factory ClubSocialRedDto.fromJson(Map<String, dynamic> json) =>
@@ -92,10 +88,9 @@ class ClubSocialRedDto {
 
   ClubSocialRed toDomain() {
     return ClubSocialRed(
+      id: id ?? 0,
+      name: name ?? '',
       url: url ?? '',
-      red: red ?? '',
-      cod: cod ?? '',
-      logo: logo ?? '',
     );
   }
 }

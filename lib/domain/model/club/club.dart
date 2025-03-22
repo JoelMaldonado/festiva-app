@@ -1,37 +1,35 @@
 class Club {
   final int id;
-  final String nombre;
+  final String name;
   final String descrip;
-  final String urlLogo;
-  final String urlPortada;
-  final String direc;
-  final String urlMaps;
-  final String telf;
+  final String phone;
+  final String logoUrl;
+  final String coverUrl;
+  final String address;
+  final String mapsUrl;
   final List<ClubSocialRed> socialReds;
 
   Club({
     required this.id,
-    required this.nombre,
+    required this.name,
     required this.descrip,
-    required this.urlLogo,
-    required this.urlPortada,
-    required this.direc,
-    required this.urlMaps,
-    required this.telf,
+    required this.phone,
+    required this.logoUrl,
+    required this.coverUrl,
+    required this.address,
+    required this.mapsUrl,
     required this.socialReds,
   });
 }
 
 class ClubSocialRed {
+  final int id;
+  final String name;
   final String url;
-  final String red;
-  final String cod;
-  final String logo;
 
   ClubSocialRed({
+    required this.id,
+    required this.name,
     required this.url,
-    required this.red,
-    required this.cod,
-    required this.logo,
   });
 }

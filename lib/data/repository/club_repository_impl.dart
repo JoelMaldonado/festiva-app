@@ -29,8 +29,17 @@ class ClubRepositoryImpl implements ClubRepository {
   @override
   Future<Either<Failure, Club>> get(int id) async {
     try {
-      final club = await _service.fetch(id);
-      return Right(club.toDomain());
+      final res = await _service.fetch(id);
+      if (res.isSuccess) {
+        final club = res.data?.toDomain();
+        if (club != null) {
+          return Right(club);
+        } else {
+          return Left(Failure('Club not found'));
+        }
+      } else {
+        return Left(Failure(res.message));
+      }
     } catch (e) {
       return Left(Failure(e.toString()));
     }

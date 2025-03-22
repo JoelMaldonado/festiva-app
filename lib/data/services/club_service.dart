@@ -21,9 +21,13 @@ class ClubService {
     return response;
   }
 
-  Future<ClubDto> fetch(int id) async {
-    final call = await _dio.get(url: '/discoteca/$id');
-    return ClubDto.fromJson(call.data);
+  Future<ApiResponse<ClubDto>> fetch(int id) async {
+    final call = await _dio.get(url: '/club/detail/$id');
+    final response = ApiResponse<ClubDto>.fromJson(
+      call.data,
+      (json) => ClubDto.fromJson(json as Map<String, dynamic>),
+    );
+    return response;
   }
 
   Future<ApiResponse<List<ClubLocationDto>>> fetchLocations() async {
