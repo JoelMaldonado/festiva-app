@@ -71,19 +71,23 @@ class _HomePageState extends State<HomePage> {
                     title: "Categorías",
                   ),
                   const SizedBox(height: 8),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
-                      spacing: 8,
-                      children: provider.eventCategories.map((e) {
+                  SizedBox(
+                    width: double.infinity,
+                    height: 24,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: provider.eventCategories.length,
+                      itemBuilder: (context, index) {
+                        final item = provider.eventCategories[index];
                         return _chipCategory(
-                          text: e.title,
-                          isSelected: provider.categorySelected == e.id,
+                          text: item.title,
+                          isSelected: provider.categorySelected == item.id,
                           onPressed: () {
-                            provider.setCategorySelected(e.id);
+                            provider.setCategorySelected(item.id);
                           },
                         );
-                      }).toList(),
+                      },
+                      separatorBuilder: (_, __) => const SizedBox(width: 8),
                     ),
                   ),
                   const SizedBox(height: 16),

@@ -4,6 +4,7 @@ import 'package:festiva_flutter/presentation/pages/clubs_page.dart';
 import 'package:festiva_flutter/presentation/pages/home/pages/home_page.dart';
 import 'package:festiva_flutter/presentation/pages/menu/components/menu_bottom.dart';
 import 'package:festiva_flutter/presentation/pages/menu/menu_provider.dart';
+import 'package:festiva_flutter/presentation/pages/preferences/preferences_page.dart';
 import 'package:festiva_flutter/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -34,7 +35,7 @@ class MenuPage extends StatelessWidget {
                 MenuEnum.events => Text("Prueba"),
                 MenuEnum.home => HomePage(),
                 MenuEnum.clubs => ClubsPage(),
-                MenuEnum.preferences => Text("data"),
+                MenuEnum.preferences => PreferencesPage(),
               },
             ),
             MenuBottom(
