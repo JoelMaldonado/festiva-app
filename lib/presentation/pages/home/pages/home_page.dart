@@ -75,9 +75,9 @@ class _HomePageState extends State<HomePage> {
                     scrollDirection: Axis.horizontal,
                     child: Row(
                       spacing: 8,
-                      children: provider.catEvents.map((e) {
+                      children: provider.eventCategories.map((e) {
                         return _chipCategory(
-                          text: e.name,
+                          text: e.title,
                           isSelected: provider.categorySelected == e.id,
                           onPressed: () {
                             provider.setCategorySelected(e.id);

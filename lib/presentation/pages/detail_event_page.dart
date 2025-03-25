@@ -1,6 +1,7 @@
 import 'package:festiva_flutter/presentation/providers/event_provider.dart';
 import 'package:festiva_flutter/presentation/theme/colors.dart';
 import 'package:festiva_flutter/presentation/widgets/widgets.dart';
+import 'package:festiva_flutter/util/date_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -44,10 +45,12 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   width: double.infinity,
                   child: AspectRatio(
                     aspectRatio: 1,
-                    child: Image.network(
-                      provider.event?.urlFoto ?? "",
-                      fit: BoxFit.cover,
-                    ),
+                    child: provider.event?.imageUrl != null
+                        ? Image.network(
+                            provider.event!.imageUrl,
+                            fit: BoxFit.cover,
+                          )
+                        : SizedBox.shrink(),
                   ),
                 ),
               ),
@@ -57,7 +60,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
               children: [
                 Expanded(
                   child: Text(
-                    provider.event?.titulo ?? "",
+                    provider.event?.title ?? "",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w900,
@@ -76,7 +79,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
               ],
             ),
             Text(
-              provider.event?.descrip ?? "",
+              provider.event?.description ?? "",
               style: TextStyle(
                 fontSize: 14,
                 color: AppColors.colorT2,
@@ -90,7 +93,8 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   child: _itemDetail(
                     icon: Icons.calendar_month_outlined,
                     title: "Fecha",
-                    value: provider.event?.fecha ?? "",
+                    value: formatDate(provider.event?.eventDatetime) ??
+                        "Sin Fecha",
                   ),
                 ),
                 Expanded(
@@ -98,7 +102,9 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   child: _itemDetail(
                     icon: Icons.schedule_outlined,
                     title: "Horario",
-                    value: provider.event?.hora ?? "",
+                    value: formatDate(provider.event?.eventDatetime,
+                            format: 'HH:mm') ??
+                        "Sin Hora",
                   ),
                 ),
               ],

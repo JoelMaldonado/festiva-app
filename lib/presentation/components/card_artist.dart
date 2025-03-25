@@ -30,12 +30,14 @@ class CardArtist extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: Image.network(
-                artist.urlFoto,
-                width: 72,
-                height: 72,
-                fit: BoxFit.cover,
-              ),
+              child: artist.urlFoto != null
+                  ? Image.network(
+                      artist.urlFoto!,
+                      width: 72,
+                      height: 72,
+                      fit: BoxFit.cover,
+                    )
+                  : SizedBox.shrink(),
             ),
             const SizedBox(height: 4),
             Text(

@@ -12,9 +12,13 @@ class ArtistRepositoryImpl implements ArtistRepository {
   @override
   Future<Either<Failure, List<Artist>>> allArtists() async {
     try {
-      final artists = await _service.fetchAll();
-      final map = artists.map((e) => e.toDomain()).toList();
-      return Right(map);
+      final res = await _service.fetchAll();
+      if (res.isSuccess) {
+        final map = res.data?.map((e) => e.toDomain()).toList();
+        return Right(map ?? []);
+      } else {
+        return Left(Failure(res.message));
+      }
     } catch (e) {
       return Left(Failure(e.toString()));
     }
@@ -23,8 +27,12 @@ class ArtistRepositoryImpl implements ArtistRepository {
   @override
   Future<Either<Failure, Artist>> get(int id) async {
     try {
-      final artist = await _service.fetch(id);
-      return Right(artist.toDomain());
+      final res = await _service.fetch(id);
+      if (res.isSuccess) {
+        return Right(res.data!.toDomain());
+      } else {
+        return Left(Failure(res.message));
+      }
     } catch (e) {
       return Left(Failure(e.toString()));
     }

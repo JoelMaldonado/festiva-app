@@ -1,20 +1,29 @@
 import 'package:festiva_flutter/core/network/dio_config.dart';
 import 'package:festiva_flutter/data/model/dto/artist_dto.dart';
+import 'package:festiva_flutter/data/model/response/api_response.dart';
 
 class ArtistService {
   final DioConfig _dio;
 
   ArtistService(this._dio);
 
-  Future<List<ArtistDto>> fetchAll() async {
-    final call = await _dio.get(url: '/artista');
-    return (call.data as List)
-        .map((artist) => ArtistDto.fromJson(artist))
-        .toList();
+  Future<ApiResponse<List<ArtistDto>>> fetchAll() async {
+    final call = await _dio.get(url: '/artist');
+    final response = ApiResponse<List<ArtistDto>>.fromJson(
+      call.data,
+      (json) => (json as List<dynamic>)
+          .map((e) => ArtistDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+    return response;
   }
 
-  Future<ArtistDto> fetch(int id) async {
-    final call = await _dio.get(url: '/artista/$id');
-    return ArtistDto.fromJson(call.data);
+  Future<ApiResponse<ArtistDto>> fetch(int id) async {
+    final call = await _dio.get(url: '/artist/$id');
+    final response = ApiResponse<ArtistDto>.fromJson(
+      call.data,
+      (json) => ArtistDto.fromJson(json as Map<String, dynamic>),
+    );
+    return response;
   }
 }

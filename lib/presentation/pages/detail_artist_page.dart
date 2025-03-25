@@ -46,10 +46,12 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                 ),
               ),
               child: ClipOval(
-                child: Image.network(
-                  provider.artist?.urlFoto ?? "",
-                  fit: BoxFit.cover,
-                ),
+                child: provider.artist?.urlFoto != null
+                    ? Image.network(
+                        provider.artist!.urlFoto!,
+                        fit: BoxFit.cover,
+                      )
+                    : SizedBox.shrink(),
               ),
             ),
             Card(
@@ -104,12 +106,14 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                     height: 200,
                     child: Stack(
                       children: [
-                        Image.network(
-                          provider.artist?.urlFoto2 ?? "",
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: double.infinity,
-                        ),
+                        provider.artist?.urlFoto2 != null
+                            ? Image.network(
+                                provider.artist?.urlFoto2 ?? "",
+                                fit: BoxFit.cover,
+                                width: double.infinity,
+                                height: double.infinity,
+                              )
+                            : SizedBox.shrink(),
                         Container(
                           constraints: BoxConstraints.expand(),
                           decoration: BoxDecoration(

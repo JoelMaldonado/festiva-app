@@ -43,7 +43,7 @@ class CardEvent extends StatelessWidget {
                       topRight: Radius.circular(16),
                     ),
                     child: Image.network(
-                      event.urlFoto,
+                      event.imageUrl,
                       fit: BoxFit.cover,
                       width: double.infinity,
                       height: double.infinity,
@@ -109,7 +109,7 @@ class CardEvent extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    event.titulo,
+                    event.title,
                     style: AppTextStyles.footnote.copyWith(
                       fontWeight: FontWeight.bold,
                       color: AppColors.colorT1,

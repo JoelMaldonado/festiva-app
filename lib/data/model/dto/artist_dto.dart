@@ -8,28 +8,28 @@ class ArtistDto {
   @JsonKey(name: 'id')
   final int? id;
 
-  @JsonKey(name: 'nombre')
+  @JsonKey(name: 'name')
   final String? nombre;
 
-  @JsonKey(name: 'tipo')
+  @JsonKey(name: 'artistType')
   final String? tipo;
 
-  @JsonKey(name: 'descrip')
+  @JsonKey(name: 'description')
   final String? descrip;
 
-  @JsonKey(name: 'biografia')
+  @JsonKey(name: 'biography')
   final String? biografia;
 
   @JsonKey(name: 'tags')
   final String? tags;
 
-  @JsonKey(name: 'url_foto')
+  @JsonKey(name: 'profileUrl')
   final String? urlFoto;
 
-  @JsonKey(name: 'url_foto2')
+  @JsonKey(name: 'profileCoverUrl')
   final String? urlFoto2;
 
-  @JsonKey(name: 'redes')
+  @JsonKey(name: 'socialNetworks')
   final List<ArtistSocialRedDto>? socialReds;
 
   ArtistDto({
@@ -57,8 +57,8 @@ class ArtistDto {
       descrip: descrip ?? '',
       biografia: biografia ?? '',
       tags: tags ?? '',
-      urlFoto: urlFoto ?? '',
-      urlFoto2: urlFoto2 ?? '',
+      urlFoto: urlFoto,
+      urlFoto2: urlFoto2,
       socialReds: socialReds?.map((e) => e.toDomain()).toList() ?? [],
     );
   }

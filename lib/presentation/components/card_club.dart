@@ -37,12 +37,14 @@ class CardClub extends StatelessWidget {
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
                     ),
-                    child: Image.network(
-                      club.logoUrl,
-                      width: double.infinity,
-                      height: 132,
-                      fit: BoxFit.fitWidth,
-                    ),
+                    child: club.logoUrl != null
+                        ? Image.network(
+                            club.logoUrl!,
+                            width: double.infinity,
+                            height: 132,
+                            fit: BoxFit.fitWidth,
+                          )
+                        : SizedBox.shrink(),
                   ),
                   Positioned(
                     top: 16,
@@ -66,12 +68,14 @@ class CardClub extends StatelessWidget {
                 child: Row(
                   spacing: 8,
                   children: [
-                    Image.network(
-                      club.logoUrl,
-                      width: 36,
-                      height: 36,
-                      fit: BoxFit.cover,
-                    ),
+                    club.logoUrl != null
+                        ? Image.network(
+                            club.logoUrl!,
+                            width: 36,
+                            height: 36,
+                            fit: BoxFit.cover,
+                          )
+                        : SizedBox.shrink(),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

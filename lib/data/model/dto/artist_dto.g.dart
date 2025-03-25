@@ -8,28 +8,28 @@ part of 'artist_dto.dart';
 
 ArtistDto _$ArtistDtoFromJson(Map<String, dynamic> json) => ArtistDto(
       id: (json['id'] as num?)?.toInt(),
-      nombre: json['nombre'] as String?,
-      tipo: json['tipo'] as String?,
-      descrip: json['descrip'] as String?,
-      biografia: json['biografia'] as String?,
+      nombre: json['name'] as String?,
+      tipo: json['artistType'] as String?,
+      descrip: json['description'] as String?,
+      biografia: json['biography'] as String?,
       tags: json['tags'] as String?,
-      urlFoto: json['url_foto'] as String?,
-      urlFoto2: json['url_foto2'] as String?,
-      socialReds: (json['redes'] as List<dynamic>?)
+      urlFoto: json['profileUrl'] as String?,
+      urlFoto2: json['profileCoverUrl'] as String?,
+      socialReds: (json['socialNetworks'] as List<dynamic>?)
           ?.map((e) => ArtistSocialRedDto.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$ArtistDtoToJson(ArtistDto instance) => <String, dynamic>{
       'id': instance.id,
-      'nombre': instance.nombre,
-      'tipo': instance.tipo,
-      'descrip': instance.descrip,
-      'biografia': instance.biografia,
+      'name': instance.nombre,
+      'artistType': instance.tipo,
+      'description': instance.descrip,
+      'biography': instance.biografia,
       'tags': instance.tags,
-      'url_foto': instance.urlFoto,
-      'url_foto2': instance.urlFoto2,
-      'redes': instance.socialReds,
+      'profileUrl': instance.urlFoto,
+      'profileCoverUrl': instance.urlFoto2,
+      'socialNetworks': instance.socialReds,
     };
 
 ArtistSocialRedDto _$ArtistSocialRedDtoFromJson(Map<String, dynamic> json) =>

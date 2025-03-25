@@ -42,7 +42,7 @@ class ClubSummaryDto {
       id: id ?? 0,
       name: name ?? '',
       description: description ?? '',
-      logoUrl: logoUrl ?? '',
+      logoUrl: logoUrl,
       createdAt: createdAt ?? '',
       updatedAt: updatedAt ?? '',
     );

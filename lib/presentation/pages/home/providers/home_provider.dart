@@ -1,28 +1,29 @@
-import 'package:festiva_flutter/domain/model/cat_event.dart';
-import 'package:festiva_flutter/domain/repository/common_repository.dart';
+import 'package:festiva_flutter/domain/model/event_category.dart';
+import 'package:festiva_flutter/domain/repository/event_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 class HomeProvider extends ChangeNotifier {
-  final CommonRepository _repo;
+  final EventRepository _repo;
 
   HomeProvider(this._repo);
 
   int? categorySelected;
-  List<CatEvent> catEvents = [];
+  List<EventCategory> eventCategories = [];
 
   init() {
     getCatEvents();
   }
 
   getCatEvents() async {
-    if (catEvents.isNotEmpty) return;
-    final res = await _repo.getCatEvents();
+    if (eventCategories.isNotEmpty) return;
+    final res = await _repo.allEventCategories();
     res.fold(
-      (l) => Fluttertoast.showToast(msg: "No se pudo obtener los eventos"),
+      (l) => Fluttertoast.showToast(msg: "No se pudo obtener las categorias"),
       (r) {
-        r.insert(0, CatEvent(id: null, name: 'Todos'));
-        catEvents.addAll(r);
+        r.insert(0, EventCategory(id: null, title: 'Todos'));
+        eventCategories.addAll(r);
+
         notifyListeners();
       },
     );

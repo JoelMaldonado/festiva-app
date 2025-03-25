@@ -1,19 +1,19 @@
 class Event {
   final int id;
-  final String titulo;
-  final String descrip;
-  final String urlFoto;
-  final String fecha;
-  final String hora;
+  final String title;
+  final String description;
+  final String imageUrl;
+  final DateTime? eventDatetime;
   final String createdAt;
+  final String updatedAt;
 
   Event({
     required this.id,
-    required this.titulo,
-    required this.descrip,
-    required this.urlFoto,
-    required this.fecha,
-    required this.hora,
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    required this.eventDatetime,
     required this.createdAt,
+    required this.updatedAt,
   });
 }

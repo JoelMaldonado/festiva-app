@@ -5,8 +5,8 @@ class Artist {
   final String descrip;
   final String biografia;
   final String tags;
-  final String urlFoto;
-  final String urlFoto2;
+  final String? urlFoto;
+  final String? urlFoto2;
   final List<ArtistSocialRed> socialReds;
 
   Artist({

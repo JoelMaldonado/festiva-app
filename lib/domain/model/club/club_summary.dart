@@ -2,7 +2,7 @@ class ClubSummary {
   final int id;
   final String name;
   final String description;
-  final String logoUrl;
+  final String? logoUrl;
   final String createdAt;
   final String updatedAt;
 

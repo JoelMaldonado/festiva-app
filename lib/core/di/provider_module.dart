@@ -20,7 +20,7 @@ Future<void> providerModule(GetIt getIt) async {
   // Home
   getIt.registerFactory(
     () => HomeProvider(
-      getIt<CommonRepository>(),
+      getIt<EventRepository>(),
     ),
   );
   getIt.registerFactory(

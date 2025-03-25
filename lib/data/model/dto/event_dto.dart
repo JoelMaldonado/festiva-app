@@ -1,4 +1,5 @@
 import 'package:festiva_flutter/domain/model/event.dart';
+import 'package:festiva_flutter/util/date_functions.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'event_dto.g.dart';
@@ -8,32 +9,32 @@ class EventDto {
   @JsonKey(name: 'id')
   final int? id;
 
-  @JsonKey(name: 'titulo')
-  final String? titulo;
+  @JsonKey(name: 'title')
+  final String? title;
 
-  @JsonKey(name: 'descrip')
-  final String? descrip;
+  @JsonKey(name: 'description')
+  final String? description;
 
-  @JsonKey(name: 'url_foto')
-  final String? urlFoto;
+  @JsonKey(name: 'imageUrl')
+  final String? imageUrl;
 
-  @JsonKey(name: 'fecha')
-  final String? fecha;
-
-  @JsonKey(name: 'hora')
-  final String? hora;
+  @JsonKey(name: 'eventDatetime')
+  final String? eventDatetime;
 
   @JsonKey(name: 'createdAt')
   final String? createdAt;
 
+  @JsonKey(name: 'updatedAt')
+  final String? updatedAt;
+
   EventDto({
     required this.id,
-    required this.titulo,
-    required this.descrip,
-    required this.urlFoto,
-    required this.fecha,
-    required this.hora,
+    required this.title,
+    required this.description,
+    required this.imageUrl,
+    required this.eventDatetime,
     required this.createdAt,
+    required this.updatedAt,
   });
 
   factory EventDto.fromJson(Map<String, dynamic> json) =>
@@ -44,12 +45,12 @@ class EventDto {
   Event toDomain() {
     return Event(
       id: id ?? 0,
-      titulo: titulo ?? '',
-      descrip: descrip ?? '',
-      urlFoto: urlFoto ?? '',
-      fecha: fecha ?? '',
-      hora: hora ?? '',
+      title: title ?? '',
+      description: description ?? '',
+      imageUrl: imageUrl ?? '',
+      eventDatetime: parseDatetime(eventDatetime),
       createdAt: createdAt ?? '',
+      updatedAt: updatedAt ?? '',
     );
   }
 }
