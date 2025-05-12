@@ -1,12 +1,13 @@
 import 'package:festiva_flutter/data/model/dto/search_item_dto.dart';
 import 'package:festiva_flutter/core/network/dio_config.dart';
+import 'package:festiva_flutter/data/model/response/api_response.dart';
 
 class CommonService {
   final DioConfig api;
 
   CommonService(this.api);
 
-  Future<List<SearchItemDto>> search(String query) async {
+  Future<ApiResponse<List<SearchItemDto>>> search(String query) async {
     final queryParameters = {
       'q': query,
     };
@@ -14,7 +15,10 @@ class CommonService {
       url: '/common/search',
       queryParameters: queryParameters,
     );
-    final response = call.data as List;
-    return response.map((e) => SearchItemDto.fromJson(e)).toList();
+    final response = ApiResponse.fromJson(
+      call.data,
+      (json) => (json as List).map((e) => SearchItemDto.fromJson(e)).toList(),
+    );
+    return response;
   }
 }

@@ -1,7 +1,7 @@
 import 'package:festiva_flutter/presentation/components/card_club.dart';
 import 'package:festiva_flutter/presentation/pages/clubs_map/clubs_map_provider.dart';
 import 'package:festiva_flutter/presentation/pages/clubs_map/components/maps_page.dart';
-import 'package:festiva_flutter/presentation/pages/detail_club_page.dart';
+import 'package:festiva_flutter/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +30,7 @@ class _ClubsMapPageState extends State<ClubsMapPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (_) => DetailClubPage(
+                      builder: (_) => ClubDetailPage(
                         idClub: provider.clubSelected!.id,
                       ),
                     ),

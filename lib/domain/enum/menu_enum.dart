@@ -12,15 +12,15 @@ extension MenuEnumExtension on MenuEnum {
   IconData get icon {
     switch (this) {
       case MenuEnum.maps:
-        return Icons.map;
+        return Icons.location_on;
       case MenuEnum.events:
-        return Icons.event;
+        return Icons.celebration;
       case MenuEnum.home:
         return Icons.home;
       case MenuEnum.clubs:
-        return Icons.group;
+        return Icons.apartment;
       case MenuEnum.preferences:
-        return Icons.settings;
+        return Icons.manage_accounts;
     }
   }
 }

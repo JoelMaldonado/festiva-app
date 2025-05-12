@@ -5,11 +5,13 @@ class AppButton extends StatelessWidget {
   final String label;
   final VoidCallback onPressed;
   final bool isLoading;
+  final bool isEnabled;
   const AppButton({
     super.key,
     required this.label,
     required this.onPressed,
     this.isLoading = false,
+    this.isEnabled = true,
   });
 
   @override
@@ -22,7 +24,7 @@ class AppButton extends StatelessWidget {
               child: CircularProgressIndicator(),
             )
           : ElevatedButton(
-              onPressed: onPressed,
+              onPressed: isEnabled ? onPressed : null,
               child: Text(
                 label,
                 style: AppTextStyles.headline.copyWith(

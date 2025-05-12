@@ -2,8 +2,7 @@ import 'package:festiva_flutter/presentation/components/card_artist.dart';
 import 'package:festiva_flutter/presentation/components/card_club.dart';
 import 'package:festiva_flutter/presentation/components/card_event.dart';
 import 'package:festiva_flutter/presentation/pages/artists_page.dart';
-import 'package:festiva_flutter/presentation/pages/detail_club_page.dart';
-import 'package:festiva_flutter/presentation/pages/events_page.dart';
+import 'package:festiva_flutter/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:festiva_flutter/presentation/pages/home/components/home_button_search.dart';
 import 'package:festiva_flutter/presentation/pages/home/providers/home_provider.dart';
 import 'package:festiva_flutter/presentation/pages/home/pages/home_search_page.dart';
@@ -16,7 +15,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final VoidCallback toClubs;
+  final VoidCallback toEvents;
+
+  const HomePage({
+    super.key,
+    required this.toClubs,
+    required this.toEvents,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -47,137 +53,128 @@ class _HomePageState extends State<HomePage> {
         right: 24,
         top: 24,
       ),
-      child: Column(
-        children: [
-          _top(),
-          const SizedBox(height: 16),
-          Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Column(
-                children: [
-                  HomeButtonSearch(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => HomeSearchPage(),
-                        ),
+      child: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Column(
+          children: [
+            _top(),
+            const SizedBox(height: 16),
+            Column(
+              children: [
+                HomeButtonSearch(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => HomeSearchPage(),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                _section(
+                  title: "Categorías",
+                ),
+                const SizedBox(height: 8),
+                SizedBox(
+                  width: double.infinity,
+                  height: 24,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: provider.eventCategories.length,
+                    itemBuilder: (context, index) {
+                      final item = provider.eventCategories[index];
+                      return _chipCategory(
+                        text: item.title,
+                        isSelected: provider.categorySelected == item.id,
+                        onPressed: () {
+                          provider.setCategorySelected(item.id);
+                        },
                       );
                     },
+                    separatorBuilder: (_, __) => const SizedBox(width: 8),
                   ),
-                  const SizedBox(height: 16),
-                  _section(
-                    title: "Categorías",
-                  ),
-                  const SizedBox(height: 8),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 24,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: provider.eventCategories.length,
-                      itemBuilder: (context, index) {
-                        final item = provider.eventCategories[index];
-                        return _chipCategory(
-                          text: item.title,
-                          isSelected: provider.categorySelected == item.id,
-                          onPressed: () {
-                            provider.setCategorySelected(item.id);
-                          },
-                        );
-                      },
-                      separatorBuilder: (_, __) => const SizedBox(width: 8),
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _section(
-                    title: "Clubs",
-                    onPressed: () {},
-                  ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 220,
-                    child: PageView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: clubProvider.clubs.length,
-                      itemBuilder: (context, index) {
-                        final item = clubProvider.clubs[index];
-                        return CardClub(
-                          club: item,
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) => DetailClubPage(
-                                  idClub: item.id,
-                                ),
+                ),
+                const SizedBox(height: 16),
+                _section(
+                  title: "Clubs",
+                  onPressed: widget.toClubs,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 220,
+                  child: PageView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: clubProvider.clubs.length,
+                    itemBuilder: (context, index) {
+                      final item = clubProvider.clubs[index];
+                      return CardClub(
+                        club: item,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => ClubDetailPage(
+                                idClub: item.id,
                               ),
-                            );
-                          },
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _section(
-                    title: "Eventos",
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => EventsPage(),
-                        ),
+                            ),
+                          );
+                        },
                       );
                     },
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 180,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: eventProvider.events.length,
-                      separatorBuilder: (context, index) => SizedBox(width: 16),
-                      itemBuilder: (context, index) {
-                        final item = eventProvider.events[index];
-                        return CardEvent(
-                          event: item,
-                        );
-                      },
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  _section(
-                    title: "Artistas",
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => ArtistsPage(),
-                        ),
+                ),
+                const SizedBox(height: 16),
+                _section(
+                  title: "Eventos",
+                  onPressed: widget.toEvents,
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 180,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: eventProvider.events.length,
+                    separatorBuilder: (context, index) => SizedBox(width: 16),
+                    itemBuilder: (context, index) {
+                      final item = eventProvider.events[index];
+                      return CardEvent(
+                        event: item,
                       );
                     },
                   ),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 100,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: artistProvider.artists.length,
-                      separatorBuilder: (context, index) => SizedBox(width: 16),
-                      itemBuilder: (context, index) {
-                        final item = artistProvider.artists[index];
-                        return CardArtist(
-                          artist: item,
-                        );
-                      },
-                    ),
+                ),
+                const SizedBox(height: 16),
+                _section(
+                  title: "Artistas",
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ArtistsPage(),
+                      ),
+                    );
+                  },
+                ),
+                SizedBox(
+                  width: double.infinity,
+                  height: 100,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: artistProvider.artists.length,
+                    separatorBuilder: (context, index) => SizedBox(width: 16),
+                    itemBuilder: (context, index) {
+                      final item = artistProvider.artists[index];
+                      return CardArtist(
+                        artist: item,
+                      );
+                    },
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

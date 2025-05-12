@@ -9,39 +9,103 @@ part of 'club_dto.dart';
 ClubDto _$ClubDtoFromJson(Map<String, dynamic> json) => ClubDto(
       id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
-      descrip: json['description'] as String?,
-      phone: json['phone'] as String?,
+      description: json['description'] as String?,
+      emails:
+          (json['emails'] as List<dynamic>).map((e) => e as String).toList(),
+      phones:
+          (json['phones'] as List<dynamic>).map((e) => e as String).toList(),
       logoUrl: json['logoUrl'] as String?,
-      coverUrl: json['coverUrl'] as String?,
-      address: json['address'] as String?,
-      mapsUrl: json['mapsUrl'] as String?,
-      socialReds: (json['socialReds'] as List<dynamic>?)
-          ?.map((e) => ClubSocialRedDto.fromJson(e as Map<String, dynamic>))
+      covers:
+          (json['covers'] as List<dynamic>).map((e) => e as String).toList(),
+      address: (json['address'] as List<dynamic>)
+          .map((e) => ClubAddressDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      schedules: (json['schedules'] as List<dynamic>)
+          .map((e) => ClubScheduleDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      socialNetworks: (json['socialNetworks'] as List<dynamic>)
+          .map((e) => ClubSocialNetworkDto.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$ClubDtoToJson(ClubDto instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'description': instance.descrip,
-      'phone': instance.phone,
+      'description': instance.description,
+      'emails': instance.emails,
+      'phones': instance.phones,
       'logoUrl': instance.logoUrl,
-      'coverUrl': instance.coverUrl,
+      'covers': instance.covers,
       'address': instance.address,
-      'mapsUrl': instance.mapsUrl,
-      'socialReds': instance.socialReds,
+      'schedules': instance.schedules,
+      'socialNetworks': instance.socialNetworks,
     };
 
-ClubSocialRedDto _$ClubSocialRedDtoFromJson(Map<String, dynamic> json) =>
-    ClubSocialRedDto(
+ClubAddressDto _$ClubAddressDtoFromJson(Map<String, dynamic> json) =>
+    ClubAddressDto(
       id: (json['id'] as num?)?.toInt(),
-      name: json['name'] as String?,
-      url: json['logoUrl'] as String?,
+      address: json['address'] as String?,
+      mapsUrl: json['mapsUrl'] as String?,
+      latitude: (json['latitude'] as num?)?.toDouble(),
+      longitude: (json['longitude'] as num?)?.toDouble(),
     );
 
-Map<String, dynamic> _$ClubSocialRedDtoToJson(ClubSocialRedDto instance) =>
+Map<String, dynamic> _$ClubAddressDtoToJson(ClubAddressDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'address': instance.address,
+      'mapsUrl': instance.mapsUrl,
+      'latitude': instance.latitude,
+      'longitude': instance.longitude,
+    };
+
+ClubScheduleDto _$ClubScheduleDtoFromJson(Map<String, dynamic> json) =>
+    ClubScheduleDto(
+      id: (json['id'] as num?)?.toInt(),
+      dayOfWeek: (json['dayOfWeek'] as num?)?.toInt(),
+      name: json['name'] as String?,
+      openingTime: json['openingTime'] as String?,
+      closingTime: json['closingTime'] as String?,
+    );
+
+Map<String, dynamic> _$ClubScheduleDtoToJson(ClubScheduleDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'dayOfWeek': instance.dayOfWeek,
+      'name': instance.name,
+      'openingTime': instance.openingTime,
+      'closingTime': instance.closingTime,
+    };
+
+ClubSocialNetworkDto _$ClubSocialNetworkDtoFromJson(
+        Map<String, dynamic> json) =>
+    ClubSocialNetworkDto(
+      id: (json['id'] as num?)?.toInt(),
+      url: json['url'] as String?,
+      socialNetwork: json['socialNetwork'] == null
+          ? null
+          : SocialNetwork.fromJson(
+              json['socialNetwork'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$ClubSocialNetworkDtoToJson(
+        ClubSocialNetworkDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'url': instance.url,
+      'socialNetwork': instance.socialNetwork,
+    };
+
+SocialNetwork _$SocialNetworkFromJson(Map<String, dynamic> json) =>
+    SocialNetwork(
+      id: (json['id'] as num).toInt(),
+      name: json['name'] as String,
+      logoUrl: json['logoUrl'] as String,
+    );
+
+Map<String, dynamic> _$SocialNetworkToJson(SocialNetwork instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'logoUrl': instance.url,
+      'logoUrl': instance.logoUrl,
     };

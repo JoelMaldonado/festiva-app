@@ -38,7 +38,10 @@ class HomeSearchProvider extends ChangeNotifier {
   Future<void> _performSearch(String query) async {
     try {
       final res = await _commonRepository.search(query);
-      searchItems = List.from(res);
+      res.fold(
+        (l) => Fluttertoast.showToast(msg: l.message),
+        (r) => searchItems = List.of(r),
+      );
     } catch (e) {
       Fluttertoast.showToast(msg: e.toString());
     } finally {

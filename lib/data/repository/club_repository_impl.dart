@@ -1,5 +1,6 @@
 import 'package:dartz/dartz.dart';
 import 'package:festiva_flutter/core/error/failure.dart';
+import 'package:festiva_flutter/data/model/mappers/club.mapper.dart';
 import 'package:festiva_flutter/data/services/club_service.dart';
 import 'package:festiva_flutter/domain/model/club/club.dart';
 import 'package:festiva_flutter/domain/model/club/club_location.dart';

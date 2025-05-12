@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
+  final String? title;
   final bool isLoadingScreen;
   final String? errorMessage;
 
   const AppScaffold({
     super.key,
     required this.child,
+    this.title,
     this.isLoadingScreen = false,
     this.errorMessage,
   });
@@ -16,6 +18,20 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: title != null
+          ? AppBar(
+              title: Text(
+                title!,
+                style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w900,
+                  color: AppColors.colorT1,
+                ),
+              ),
+              centerTitle: true,
+              backgroundColor: Colors.transparent,
+            )
+          : null,
       body: isLoadingScreen
           ? _buildloadingScreen()
           : errorMessage != null
@@ -27,7 +43,7 @@ class AppScaffold extends StatelessWidget {
   Widget _buildPage() {
     return SafeArea(
       child: Padding(
-        padding: const EdgeInsets.all(24),
+        padding: const EdgeInsets.only(left: 24, right: 24, top: 16),
         child: child,
       ),
     );

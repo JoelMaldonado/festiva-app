@@ -1,22 +1,23 @@
+import 'package:festiva_flutter/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva_flutter/presentation/providers/club_provider.dart';
 import 'package:festiva_flutter/presentation/theme/colors.dart';
 import 'package:festiva_flutter/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class DetailClubPage extends StatefulWidget {
+class ClubDetailPage extends StatefulWidget {
   final int idClub;
 
-  const DetailClubPage({
+  const ClubDetailPage({
     super.key,
     required this.idClub,
   });
 
   @override
-  State<DetailClubPage> createState() => _DetailClubPageState();
+  State<ClubDetailPage> createState() => _ClubDetailPageState();
 }
 
-class _DetailClubPageState extends State<DetailClubPage> {
+class _ClubDetailPageState extends State<ClubDetailPage> {
   @override
   void initState() {
     super.initState();
@@ -45,17 +46,19 @@ class _DetailClubPageState extends State<DetailClubPage> {
                 children: [
                   Stack(
                     children: [
-                      SizedBox(
-                        width: double.infinity,
-                        child: AspectRatio(
-                          aspectRatio: 1,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Image.network(
-                              club.coverUrl,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
+                      AspectRatio(
+                        aspectRatio: 1,
+                        child: PageView.builder(
+                          itemCount: club.covers.length,
+                          itemBuilder: (c, i) {
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                club.covers[i],
+                                fit: BoxFit.cover,
+                              ),
+                            );
+                          },
                         ),
                       ),
                       Positioned(
@@ -99,7 +102,7 @@ class _DetailClubPageState extends State<DetailClubPage> {
                     ],
                   ),
                   Text(
-                    club.descrip,
+                    club.description,
                     style: TextStyle(
                       fontSize: 14,
                       color: AppColors.colorT2,
@@ -109,11 +112,18 @@ class _DetailClubPageState extends State<DetailClubPage> {
                     icon: Icons.calendar_month,
                     title: "Horario de Atención",
                     value: "Lunes - Sábado 8:00 - 22:00",
+                    onTap: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (_) {
+                        return ClubSchedulePage(
+                          schedules: club.schedules,
+                        );
+                      }));
+                    },
                   ),
                   _itemDetail(
                     icon: Icons.explore_outlined,
                     title: "Ubicación",
-                    value: club.address,
+                    value: club.address.firstOrNull?.address ?? '',
                   ),
                   Row(
                     spacing: 12,
@@ -148,55 +158,62 @@ class _DetailClubPageState extends State<DetailClubPage> {
     );
   }
 
-  Container _itemDetail({
+  Widget _itemDetail({
     required IconData icon,
     required String title,
     required String value,
+    VoidCallback? onTap,
   }) {
-    return Container(
+    return Ink(
       width: double.infinity,
       decoration: BoxDecoration(
         color: AppColors.colorB3,
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 4,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            spacing: 8,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.all(8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            spacing: 4,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Icon(
-                icon,
-                size: 20,
-                color: AppColors.colorT1,
-              ),
-              Expanded(
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w900,
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                spacing: 8,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Icon(
+                    icon,
+                    size: 20,
                     color: AppColors.colorT1,
                   ),
+                  Expanded(
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w900,
+                        color: AppColors.colorT1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Text(
+                value,
+                style: TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w400,
+                  color: AppColors.colorT2,
                 ),
+                maxLines: 1,
               ),
             ],
           ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: AppColors.colorT2,
-            ),
-            maxLines: 1,
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -1,4 +1,6 @@
 import 'package:festiva_flutter/presentation/components/components.dart';
+import 'package:festiva_flutter/presentation/pages/club_detail/club_detail_page.dart';
+import 'package:festiva_flutter/presentation/pages/menu/components/menu_scaffold.dart';
 import 'package:festiva_flutter/presentation/providers/club_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,18 +25,34 @@ class _ClubsPageState extends State<ClubsPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ClubProvider>(context);
-    return Padding(
-      padding: const EdgeInsets.all(24),
-      child: ListView.separated(
-        itemCount: provider.clubs.length,
-        itemBuilder: (context, index) {
-          final club = provider.clubs[index];
-          return CardClub(
-            club: club,
-            onPressed: () {},
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(height: 16),
+    return MenuScaffold(
+      title: 'Clubs',
+      subtitle: 'Más cerca de ti',
+      child: Column(
+        children: [
+          Expanded(
+            child: ListView.separated(
+              itemCount: provider.clubs.length,
+              itemBuilder: (context, index) {
+                final club = provider.clubs[index];
+                return CardClub(
+                  club: club,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ClubDetailPage(
+                          idClub: club.id,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+            ),
+          ),
+        ],
       ),
     );
   }

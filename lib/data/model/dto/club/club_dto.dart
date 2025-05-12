@@ -1,4 +1,3 @@
-import 'package:festiva_flutter/domain/model/club/club.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'club_dto.g.dart';
@@ -12,85 +11,124 @@ class ClubDto {
   final String? name;
 
   @JsonKey(name: 'description')
-  final String? descrip;
+  final String? description;
 
-  @JsonKey(name: 'phone')
-  final String? phone;
+  @JsonKey(name: 'emails')
+  final List<String> emails;
+
+  @JsonKey(name: 'phones')
+  final List<String> phones;
 
   @JsonKey(name: 'logoUrl')
   final String? logoUrl;
 
-  @JsonKey(name: 'coverUrl')
-  final String? coverUrl;
+  @JsonKey(name: 'covers')
+  final List<String> covers;
 
   @JsonKey(name: 'address')
-  final String? address;
+  final List<ClubAddressDto> address;
 
-  @JsonKey(name: 'mapsUrl')
-  final String? mapsUrl;
+  @JsonKey(name: 'schedules')
+  final List<ClubScheduleDto> schedules;
 
-  @JsonKey(name: 'socialReds')
-  final List<ClubSocialRedDto>? socialReds;
+  @JsonKey(name: 'socialNetworks')
+  final List<ClubSocialNetworkDto> socialNetworks;
 
   ClubDto({
     required this.id,
     required this.name,
-    required this.descrip,
-    required this.phone,
+    required this.description,
+    required this.emails,
+    required this.phones,
     required this.logoUrl,
-    required this.coverUrl,
+    required this.covers,
     required this.address,
-    required this.mapsUrl,
-    required this.socialReds,
+    required this.schedules,
+    required this.socialNetworks,
   });
 
   factory ClubDto.fromJson(Map<String, dynamic> json) =>
       _$ClubDtoFromJson(json);
 
   Map<String, dynamic> toJson() => _$ClubDtoToJson(this);
-
-  Club toDomain() {
-    return Club(
-      id: id ?? 0,
-      name: name ?? '',
-      descrip: descrip ?? '',
-      phone: phone ?? '',
-      logoUrl: logoUrl ?? '',
-      coverUrl: coverUrl ?? '',
-      address: address ?? '',
-      mapsUrl: mapsUrl ?? '',
-      socialReds: socialReds?.map((e) => e.toDomain()).toList() ?? [],
-    );
-  }
 }
 
 @JsonSerializable()
-class ClubSocialRedDto {
-  @JsonKey(name: 'id')
+class ClubAddressDto {
   final int? id;
+  final String? address;
+  final String? mapsUrl;
+  final double? latitude;
+  final double? longitude;
 
-  @JsonKey(name: 'name')
-  final String? name;
-
-  @JsonKey(name: 'logoUrl')
-  final String? url;
-
-  ClubSocialRedDto({
+  ClubAddressDto({
     required this.id,
-    required this.name,
-    required this.url,
+    required this.address,
+    required this.mapsUrl,
+    required this.latitude,
+    required this.longitude,
   });
 
-  factory ClubSocialRedDto.fromJson(Map<String, dynamic> json) =>
-      _$ClubSocialRedDtoFromJson(json);
+  factory ClubAddressDto.fromJson(Map<String, dynamic> json) =>
+      _$ClubAddressDtoFromJson(json);
 
-  Map<String, dynamic> toJson() => _$ClubSocialRedDtoToJson(this);
+  Map<String, dynamic> toJson() => _$ClubAddressDtoToJson(this);
+}
 
-  ClubSocialRed toDomain() {
-    return ClubSocialRed(
-      id: id ?? 0,
-      name: name ?? '',
-      url: url ?? '',
-    );
-  }
+@JsonSerializable()
+class ClubScheduleDto {
+  final int? id;
+  final int? dayOfWeek;
+  final String? name;
+  final String? openingTime;
+  final String? closingTime;
+
+  ClubScheduleDto({
+    required this.id,
+    required this.dayOfWeek,
+    required this.name,
+    required this.openingTime,
+    required this.closingTime,
+  });
+
+  factory ClubScheduleDto.fromJson(Map<String, dynamic> json) =>
+      _$ClubScheduleDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ClubScheduleDtoToJson(this);
+}
+
+@JsonSerializable()
+class ClubSocialNetworkDto {
+  final int? id;
+  final String? url;
+  final SocialNetwork? socialNetwork;
+
+  ClubSocialNetworkDto({
+    required this.id,
+    required this.url,
+    required this.socialNetwork,
+  });
+
+  factory ClubSocialNetworkDto.fromJson(Map<String, dynamic> json) =>
+      _$ClubSocialNetworkDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ClubSocialNetworkDtoToJson(this);
+}
+
+@JsonSerializable()
+class SocialNetwork {
+  final int id;
+  final String name;
+  final String logoUrl;
+
+  SocialNetwork({
+    required this.id,
+    required this.name,
+    required this.logoUrl,
+  });
+
+  factory SocialNetwork.fromJson(Map<String, dynamic> json) =>
+      _$SocialNetworkFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SocialNetworkToJson(this);
 }
