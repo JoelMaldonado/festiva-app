@@ -1,6 +1,6 @@
-import 'package:festiva_flutter/presentation/components/components.dart';
-import 'package:festiva_flutter/presentation/pages/menu/components/menu_scaffold.dart';
-import 'package:festiva_flutter/presentation/providers/event_provider.dart';
+import 'package:festiva/presentation/components/components.dart';
+import 'package:festiva/presentation/pages/menu/components/menu_scaffold.dart';
+import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

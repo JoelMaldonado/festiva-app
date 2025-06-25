@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/app/app.dart';
+import 'package:festiva/app/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 

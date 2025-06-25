@@ -1,8 +1,8 @@
-import 'package:festiva_flutter/presentation/pages/detail_artist_page.dart';
-import 'package:festiva_flutter/presentation/pages/club_detail/club_detail_page.dart';
-import 'package:festiva_flutter/presentation/pages/detail_event_page.dart';
-import 'package:festiva_flutter/presentation/pages/home/providers/home_search_provider.dart';
-import 'package:festiva_flutter/presentation/widgets/widgets.dart';
+import 'package:festiva/presentation/pages/detail_artist_page.dart';
+import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
+import 'package:festiva/presentation/pages/detail_event_page.dart';
+import 'package:festiva/presentation/pages/home/providers/home_search_provider.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

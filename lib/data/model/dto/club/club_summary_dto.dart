@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/domain/model/club/club_summary.dart';
+import 'package:festiva/domain/model/club/club_summary.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'club_summary_dto.g.dart';

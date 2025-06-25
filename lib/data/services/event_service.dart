@@ -1,7 +1,7 @@
-import 'package:festiva_flutter/core/network/dio_config.dart';
-import 'package:festiva_flutter/data/model/dto/event_category_dto.dart';
-import 'package:festiva_flutter/data/model/dto/event_dto.dart';
-import 'package:festiva_flutter/data/model/response/api_response.dart';
+import 'package:festiva/core/network/dio_config.dart';
+import 'package:festiva/data/model/dto/event_category_dto.dart';
+import 'package:festiva/data/model/dto/event_dto.dart';
+import 'package:festiva/data/model/response/api_response.dart';
 
 class EventService {
   final DioConfig _dio;

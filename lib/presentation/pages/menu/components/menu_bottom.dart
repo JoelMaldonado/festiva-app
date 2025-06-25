@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/domain/enum/menu_enum.dart';
-import 'package:festiva_flutter/presentation/theme/theme.dart';
+import 'package:festiva/domain/enum/menu_enum.dart';
+import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class MenuBottom extends StatefulWidget {

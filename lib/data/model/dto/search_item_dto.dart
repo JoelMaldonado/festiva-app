@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/domain/model/search_item.dart';
+import 'package:festiva/domain/model/search_item.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'search_item_dto.g.dart';

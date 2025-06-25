@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/presentation/pages/preferences/components/item_preferences.dart';
-import 'package:festiva_flutter/presentation/widgets/widgets.dart';
+import 'package:festiva/presentation/pages/preferences/components/item_preferences.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class SupportPage extends StatelessWidget {

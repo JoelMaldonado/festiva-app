@@ -1,8 +1,8 @@
-import 'package:festiva_flutter/presentation/pages/preferences/components/item_preferences.dart';
-import 'package:festiva_flutter/presentation/pages/preferences/screens/profile_page.dart';
-import 'package:festiva_flutter/presentation/pages/preferences/screens/support_page.dart';
-import 'package:festiva_flutter/presentation/theme/colors.dart';
-import 'package:festiva_flutter/presentation/theme/text_styles.dart';
+import 'package:festiva/presentation/pages/preferences/components/item_preferences.dart';
+import 'package:festiva/presentation/pages/preferences/screens/profile_page.dart';
+import 'package:festiva/presentation/pages/preferences/screens/support_page.dart';
+import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class PreferencesPage extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/data/model/dto/club/club_dto.dart';
+import 'package:festiva/data/model/dto/club/club_dto.dart';
 
 class Club {
   final int? id;

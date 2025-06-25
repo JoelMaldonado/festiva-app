@@ -1,6 +1,6 @@
-import 'package:festiva_flutter/presentation/theme/colors.dart';
-import 'package:festiva_flutter/presentation/theme/text_styles.dart';
-import 'package:festiva_flutter/presentation/widgets/app_floating_action_button.dart';
+import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/theme/text_styles.dart';
+import 'package:festiva/presentation/widgets/app_floating_action_button.dart';
 import 'package:flutter/material.dart';
 
 class MenuScaffold extends StatelessWidget {

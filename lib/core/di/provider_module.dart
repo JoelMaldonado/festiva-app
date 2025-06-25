@@ -1,16 +1,16 @@
-import 'package:festiva_flutter/domain/repository/artist_repository.dart';
-import 'package:festiva_flutter/domain/repository/auth_repository.dart';
-import 'package:festiva_flutter/domain/repository/club_repository.dart';
-import 'package:festiva_flutter/domain/repository/common_repository.dart';
-import 'package:festiva_flutter/domain/repository/event_repository.dart';
-import 'package:festiva_flutter/presentation/pages/home/providers/home_provider.dart';
-import 'package:festiva_flutter/presentation/pages/home/providers/home_search_provider.dart';
-import 'package:festiva_flutter/presentation/pages/login/login_provider.dart';
-import 'package:festiva_flutter/presentation/pages/menu/menu_provider.dart';
-import 'package:festiva_flutter/presentation/providers/artist_provider.dart';
-import 'package:festiva_flutter/presentation/providers/club_provider.dart';
-import 'package:festiva_flutter/presentation/providers/event_provider.dart';
-import 'package:festiva_flutter/presentation/pages/clubs_map/clubs_map_provider.dart';
+import 'package:festiva/domain/repository/artist_repository.dart';
+import 'package:festiva/domain/repository/auth_repository.dart';
+import 'package:festiva/domain/repository/club_repository.dart';
+import 'package:festiva/domain/repository/common_repository.dart';
+import 'package:festiva/domain/repository/event_repository.dart';
+import 'package:festiva/presentation/pages/home/providers/home_provider.dart';
+import 'package:festiva/presentation/pages/home/providers/home_search_provider.dart';
+import 'package:festiva/presentation/pages/login/login_provider.dart';
+import 'package:festiva/presentation/pages/menu/menu_provider.dart';
+import 'package:festiva/presentation/providers/artist_provider.dart';
+import 'package:festiva/presentation/providers/club_provider.dart';
+import 'package:festiva/presentation/providers/event_provider.dart';
+import 'package:festiva/presentation/pages/clubs_map/clubs_map_provider.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> providerModule(GetIt getIt) async {

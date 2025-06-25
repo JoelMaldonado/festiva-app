@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/presentation/theme/theme.dart';
+import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends StatelessWidget {

@@ -1,7 +1,7 @@
-import 'package:festiva_flutter/presentation/components/card_club.dart';
-import 'package:festiva_flutter/presentation/pages/clubs_map/clubs_map_provider.dart';
-import 'package:festiva_flutter/presentation/pages/clubs_map/components/maps_page.dart';
-import 'package:festiva_flutter/presentation/pages/club_detail/club_detail_page.dart';
+import 'package:festiva/presentation/components/card_club.dart';
+import 'package:festiva/presentation/pages/clubs_map/clubs_map_provider.dart';
+import 'package:festiva/presentation/pages/clubs_map/components/maps_page.dart';
+import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

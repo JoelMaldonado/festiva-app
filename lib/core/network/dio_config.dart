@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:festiva_flutter/core/network/auth_interceptor.dart';
-import 'package:festiva_flutter/data/model/response/api_exception.dart';
+import 'package:festiva/core/network/auth_interceptor.dart';
+import 'package:festiva/data/model/response/api_exception.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 

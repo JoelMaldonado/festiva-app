@@ -1,9 +1,9 @@
 import 'package:dartz/dartz.dart';
-import 'package:festiva_flutter/core/error/failure.dart';
-import 'package:festiva_flutter/data/services/event_service.dart';
-import 'package:festiva_flutter/domain/model/event.dart';
-import 'package:festiva_flutter/domain/model/event_category.dart';
-import 'package:festiva_flutter/domain/repository/event_repository.dart';
+import 'package:festiva/core/error/failure.dart';
+import 'package:festiva/data/services/event_service.dart';
+import 'package:festiva/domain/model/event.dart';
+import 'package:festiva/domain/model/event_category.dart';
+import 'package:festiva/domain/repository/event_repository.dart';
 
 class EventRepositoryImpl implements EventRepository {
   final EventService _service;

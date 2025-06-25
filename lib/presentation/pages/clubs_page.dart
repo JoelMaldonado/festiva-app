@@ -1,7 +1,7 @@
-import 'package:festiva_flutter/presentation/components/components.dart';
-import 'package:festiva_flutter/presentation/pages/club_detail/club_detail_page.dart';
-import 'package:festiva_flutter/presentation/pages/menu/components/menu_scaffold.dart';
-import 'package:festiva_flutter/presentation/providers/club_provider.dart';
+import 'package:festiva/presentation/components/components.dart';
+import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
+import 'package:festiva/presentation/pages/menu/components/menu_scaffold.dart';
+import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

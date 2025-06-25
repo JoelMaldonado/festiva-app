@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/data/model/dto/club/club_dto.dart';
-import 'package:festiva_flutter/domain/model/club/club.dart';
+import 'package:festiva/data/model/dto/club/club_dto.dart';
+import 'package:festiva/domain/model/club/club.dart';
 
 extension ClubDtoMapper on ClubDto {
   Club toDomain() {

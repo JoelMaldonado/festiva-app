@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/domain/model/club/club.dart';
-import 'package:festiva_flutter/presentation/widgets/widgets.dart';
+import 'package:festiva/domain/model/club/club.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ClubSchedulePage extends StatelessWidget {

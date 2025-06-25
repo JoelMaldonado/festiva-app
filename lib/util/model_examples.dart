@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/domain/model/club/club_summary.dart';
+import 'package:festiva/domain/model/club/club_summary.dart';
 
 class ModelExamples {
   static final exampleClubSummary = ClubSummary(

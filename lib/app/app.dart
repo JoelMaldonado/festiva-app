@@ -1,7 +1,7 @@
-import 'package:festiva_flutter/core/storage/prefs.dart';
-import 'package:festiva_flutter/app/routes.dart';
-import 'package:festiva_flutter/core/di/di.dart';
-import 'package:festiva_flutter/presentation/theme/theme.dart';
+import 'package:festiva/core/storage/prefs.dart';
+import 'package:festiva/app/routes.dart';
+import 'package:festiva/core/di/di.dart';
+import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 

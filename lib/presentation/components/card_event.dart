@@ -1,7 +1,8 @@
-import 'package:festiva_flutter/domain/model/event.dart';
-import 'package:festiva_flutter/presentation/pages/detail_event_page.dart';
-import 'package:festiva_flutter/presentation/theme/colors.dart';
-import 'package:festiva_flutter/presentation/theme/text_styles.dart';
+import 'package:festiva/domain/model/event.dart';
+import 'package:festiva/presentation/pages/detail_event_page.dart';
+import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/theme/text_styles.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CardEvent extends StatelessWidget {
@@ -42,11 +43,11 @@ class CardEvent extends StatelessWidget {
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
                     ),
-                    child: Image.network(
-                      event.imageUrl,
-                      fit: BoxFit.cover,
+                    child: AppImageNetwork(
+                      imageUrl: event.imageUrl,
                       width: double.infinity,
                       height: double.infinity,
+                      fit: BoxFit.cover,
                     ),
                   ),
                   Positioned(

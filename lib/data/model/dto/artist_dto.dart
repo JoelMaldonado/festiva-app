@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/domain/model/artist.dart';
+import 'package:festiva/domain/model/artist.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'artist_dto.g.dart';

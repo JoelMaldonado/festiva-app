@@ -1,7 +1,7 @@
-import 'package:festiva_flutter/presentation/pages/club_schedule/club_schedule_page.dart';
-import 'package:festiva_flutter/presentation/providers/club_provider.dart';
-import 'package:festiva_flutter/presentation/theme/colors.dart';
-import 'package:festiva_flutter/presentation/widgets/widgets.dart';
+import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
+import 'package:festiva/presentation/providers/club_provider.dart';
+import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

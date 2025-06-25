@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/presentation/pages/clubs_map/clubs_map_provider.dart';
+import 'package:festiva/presentation/pages/clubs_map/clubs_map_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart' as mp;
 import 'package:provider/provider.dart';

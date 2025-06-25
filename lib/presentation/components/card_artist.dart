@@ -1,6 +1,7 @@
-import 'package:festiva_flutter/domain/model/artist.dart';
-import 'package:festiva_flutter/presentation/pages/detail_artist_page.dart';
-import 'package:festiva_flutter/presentation/theme/text_styles.dart';
+import 'package:festiva/domain/model/artist.dart';
+import 'package:festiva/presentation/pages/detail_artist_page.dart';
+import 'package:festiva/presentation/theme/text_styles.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CardArtist extends StatelessWidget {
@@ -30,14 +31,12 @@ class CardArtist extends StatelessWidget {
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(16),
-              child: artist.urlFoto != null
-                  ? Image.network(
-                      artist.urlFoto!,
-                      width: 72,
-                      height: 72,
-                      fit: BoxFit.cover,
-                    )
-                  : SizedBox.shrink(),
+              child: AppImageNetwork(
+                imageUrl: artist.urlFoto,
+                width: 72,
+                height: 72,
+                fit: BoxFit.cover,
+              ),
             ),
             const SizedBox(height: 4),
             Text(

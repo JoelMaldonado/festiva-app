@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/presentation/theme/colors.dart';
-import 'package:festiva_flutter/presentation/widgets/widgets.dart';
+import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatelessWidget {

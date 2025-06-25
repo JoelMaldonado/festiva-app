@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/domain/model/artist.dart';
-import 'package:festiva_flutter/domain/repository/artist_repository.dart';
+import 'package:festiva/domain/model/artist.dart';
+import 'package:festiva/domain/repository/artist_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

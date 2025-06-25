@@ -1,7 +1,10 @@
-import 'package:festiva_flutter/presentation/pages/login/login_provider.dart';
-import 'package:festiva_flutter/presentation/theme/theme.dart';
-import 'package:festiva_flutter/presentation/widgets/widgets.dart';
+import 'package:festiva/presentation/pages/login/login_provider.dart';
+import 'package:festiva/presentation/theme/theme.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatelessWidget {
@@ -128,7 +131,12 @@ class LoginPage extends StatelessWidget {
             borderRadius: BorderRadius.circular(50),
           ),
         ),
-        onPressed: () {},
+        onPressed: () async {
+          final userCredential = await signInWithGoogle();
+          if (userCredential != null) {
+            Fluttertoast.showToast(msg: "Sesión iniciada correctamente");
+          }
+        },
         child: Center(
           child: Row(
             mainAxisSize: MainAxisSize.min,
@@ -149,5 +157,28 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  Future<UserCredential?> signInWithGoogle() async {
+    try {
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      if (googleUser == null) return null;
+
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+
+      // Get credentials
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      // Sign in with Firebase
+      return await FirebaseAuth.instance.signInWithCredential(credential);
+    } catch (e) {
+      print('Error al iniciar sesión: $e');
+      return null;
+    }
   }
 }

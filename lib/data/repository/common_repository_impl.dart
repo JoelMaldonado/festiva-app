@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:festiva_flutter/core/error/failure.dart';
-import 'package:festiva_flutter/data/services/common_service.dart';
-import 'package:festiva_flutter/domain/model/search_item.dart';
-import 'package:festiva_flutter/domain/repository/common_repository.dart';
+import 'package:festiva/core/error/failure.dart';
+import 'package:festiva/data/services/common_service.dart';
+import 'package:festiva/domain/model/search_item.dart';
+import 'package:festiva/domain/repository/common_repository.dart';
 
 class CommonRepositoryImpl implements CommonRepository {
   final CommonService _service;

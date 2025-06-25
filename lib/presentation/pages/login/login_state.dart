@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/data/model/request/login_request.dart';
+import 'package:festiva/data/model/request/login_request.dart';
 import 'package:flutter/material.dart';
 
 class LoginState {

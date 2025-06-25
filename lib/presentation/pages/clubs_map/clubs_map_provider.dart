@@ -1,7 +1,7 @@
 import 'dart:async';
-import 'package:festiva_flutter/domain/model/club/club_location.dart';
-import 'package:festiva_flutter/domain/model/club/club_summary.dart';
-import 'package:festiva_flutter/domain/repository/club_repository.dart';
+import 'package:festiva/domain/model/club/club_location.dart';
+import 'package:festiva/domain/model/club/club_summary.dart';
+import 'package:festiva/domain/repository/club_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';

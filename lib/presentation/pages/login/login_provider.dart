@@ -1,6 +1,6 @@
-import 'package:festiva_flutter/data/model/response/api_exception.dart';
-import 'package:festiva_flutter/domain/repository/auth_repository.dart';
-import 'package:festiva_flutter/presentation/pages/login/login_state.dart';
+import 'package:festiva/data/model/response/api_exception.dart';
+import 'package:festiva/domain/repository/auth_repository.dart';
+import 'package:festiva/presentation/pages/login/login_state.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

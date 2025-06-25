@@ -1,4 +1,4 @@
-package com.festiva.festiva_flutter
+package com.festiva.core
 
 import io.flutter.embedding.android.FlutterActivity
 

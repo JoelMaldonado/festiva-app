@@ -1,7 +1,7 @@
-import 'package:festiva_flutter/presentation/providers/event_provider.dart';
-import 'package:festiva_flutter/presentation/theme/colors.dart';
-import 'package:festiva_flutter/presentation/widgets/widgets.dart';
-import 'package:festiva_flutter/util/date_functions.dart';
+import 'package:festiva/presentation/providers/event_provider.dart';
+import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
+import 'package:festiva/util/date_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,7 +1,7 @@
 import 'dart:async';
 
-import 'package:festiva_flutter/domain/model/search_item.dart';
-import 'package:festiva_flutter/domain/repository/common_repository.dart';
+import 'package:festiva/domain/model/search_item.dart';
+import 'package:festiva/domain/repository/common_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

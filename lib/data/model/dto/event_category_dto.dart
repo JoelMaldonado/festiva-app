@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/domain/model/event_category.dart';
+import 'package:festiva/domain/model/event_category.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'event_category_dto.g.dart';

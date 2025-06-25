@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/domain/model/club/club_summary.dart';
-import 'package:festiva_flutter/presentation/theme/theme.dart';
+import 'package:festiva/domain/model/club/club_summary.dart';
+import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CardClub extends StatelessWidget {

@@ -38,19 +38,20 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAOUeYQaWexn1Hjj-u-SAR18JDqnU1dNgU',
-    appId: '1:983409623466:android:de7fcc63a5c7413b696bd3',
-    messagingSenderId: '983409623466',
-    projectId: 'festiva-548e2',
-    storageBucket: 'festiva-548e2.firebasestorage.app',
+    apiKey: 'AIzaSyDz1QFuHvckOlLH4VxhBDVSn5zgI2nMI08',
+    appId: '1:1015648741340:android:868bc300a0f05f16475119',
+    messagingSenderId: '1015648741340',
+    projectId: 'festiva-331ad',
+    storageBucket: 'festiva-331ad.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCH4OuOTiIGn7vECFFnm75fWpO0WSfkp0o',
-    appId: '1:983409623466:ios:f9d104d5a0b1466e696bd3',
-    messagingSenderId: '983409623466',
-    projectId: 'festiva-548e2',
-    storageBucket: 'festiva-548e2.firebasestorage.app',
-    iosBundleId: 'com.festiva.festivaFlutter',
+    apiKey: 'AIzaSyA20EmhiPQYT6lh-LqrO1CHrBGAPxV082M',
+    appId: '1:1015648741340:ios:247fddbacbc9fbb6475119',
+    messagingSenderId: '1015648741340',
+    projectId: 'festiva-331ad',
+    storageBucket: 'festiva-331ad.firebasestorage.app',
+    iosBundleId: 'com.festiva.core',
   );
+
 }

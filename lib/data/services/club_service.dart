@@ -1,8 +1,8 @@
-import 'package:festiva_flutter/core/network/dio_config.dart';
-import 'package:festiva_flutter/data/model/dto/club/club_dto.dart';
-import 'package:festiva_flutter/data/model/dto/club/club_location_dto.dart';
-import 'package:festiva_flutter/data/model/dto/club/club_summary_dto.dart';
-import 'package:festiva_flutter/data/model/response/api_response.dart';
+import 'package:festiva/core/network/dio_config.dart';
+import 'package:festiva/data/model/dto/club/club_dto.dart';
+import 'package:festiva/data/model/dto/club/club_location_dto.dart';
+import 'package:festiva/data/model/dto/club/club_summary_dto.dart';
+import 'package:festiva/data/model/response/api_response.dart';
 
 class ClubService {
   final DioConfig _dio;

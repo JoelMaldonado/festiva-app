@@ -1,6 +1,6 @@
-import 'package:festiva_flutter/domain/model/club/club.dart';
-import 'package:festiva_flutter/domain/model/club/club_summary.dart';
-import 'package:festiva_flutter/domain/repository/club_repository.dart';
+import 'package:festiva/domain/model/club/club.dart';
+import 'package:festiva/domain/model/club/club_summary.dart';
+import 'package:festiva/domain/repository/club_repository.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

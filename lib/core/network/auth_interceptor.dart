@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:festiva_flutter/core/storage/secure_storage.dart';
+import 'package:festiva/core/storage/secure_storage.dart';
 
 class AuthInterceptor extends Interceptor {
   final SecureStorage _secureStorage = SecureStorage();

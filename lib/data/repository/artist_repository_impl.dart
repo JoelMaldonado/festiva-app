@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
-import 'package:festiva_flutter/core/error/failure.dart';
-import 'package:festiva_flutter/data/services/artist_service.dart';
-import 'package:festiva_flutter/domain/model/artist.dart';
-import 'package:festiva_flutter/domain/repository/artist_repository.dart';
+import 'package:festiva/core/error/failure.dart';
+import 'package:festiva/data/services/artist_service.dart';
+import 'package:festiva/domain/model/artist.dart';
+import 'package:festiva/domain/repository/artist_repository.dart';
 
 class ArtistRepositoryImpl implements ArtistRepository {
   final ArtistService _service;

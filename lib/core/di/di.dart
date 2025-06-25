@@ -1,7 +1,7 @@
-import 'package:festiva_flutter/core/network/dio_config.dart';
-import 'package:festiva_flutter/core/di/provider_module.dart';
-import 'package:festiva_flutter/core/di/repository_module.dart';
-import 'package:festiva_flutter/core/di/service_module.dart';
+import 'package:festiva/core/network/dio_config.dart';
+import 'package:festiva/core/di/provider_module.dart';
+import 'package:festiva/core/di/repository_module.dart';
+import 'package:festiva/core/di/service_module.dart';
 import 'package:get_it/get_it.dart';
 
 final GetIt getIt = GetIt.instance;

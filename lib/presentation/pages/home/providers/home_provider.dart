@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/domain/model/event_category.dart';
-import 'package:festiva_flutter/domain/repository/event_repository.dart';
+import 'package:festiva/domain/model/event_category.dart';
+import 'package:festiva/domain/repository/event_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 

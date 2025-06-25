@@ -1,4 +1,4 @@
-import 'package:festiva_flutter/domain/enum/menu_enum.dart';
+import 'package:festiva/domain/enum/menu_enum.dart';
 import 'package:flutter/material.dart';
 
 class MenuProvider extends ChangeNotifier {

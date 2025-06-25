@@ -1,18 +1,18 @@
-import 'package:festiva_flutter/data/repository/artist_repository_impl.dart';
-import 'package:festiva_flutter/data/repository/auth_repository_impl.dart';
-import 'package:festiva_flutter/data/repository/club_repository_impl.dart';
-import 'package:festiva_flutter/data/repository/common_repository_impl.dart';
-import 'package:festiva_flutter/data/repository/event_repository_impl.dart';
-import 'package:festiva_flutter/data/services/artist_service.dart';
-import 'package:festiva_flutter/data/services/auth_service.dart';
-import 'package:festiva_flutter/data/services/club_service.dart';
-import 'package:festiva_flutter/data/services/common_service.dart';
-import 'package:festiva_flutter/data/services/event_service.dart';
-import 'package:festiva_flutter/domain/repository/artist_repository.dart';
-import 'package:festiva_flutter/domain/repository/auth_repository.dart';
-import 'package:festiva_flutter/domain/repository/club_repository.dart';
-import 'package:festiva_flutter/domain/repository/common_repository.dart';
-import 'package:festiva_flutter/domain/repository/event_repository.dart';
+import 'package:festiva/data/repository/artist_repository_impl.dart';
+import 'package:festiva/data/repository/auth_repository_impl.dart';
+import 'package:festiva/data/repository/club_repository_impl.dart';
+import 'package:festiva/data/repository/common_repository_impl.dart';
+import 'package:festiva/data/repository/event_repository_impl.dart';
+import 'package:festiva/data/services/artist_service.dart';
+import 'package:festiva/data/services/auth_service.dart';
+import 'package:festiva/data/services/club_service.dart';
+import 'package:festiva/data/services/common_service.dart';
+import 'package:festiva/data/services/event_service.dart';
+import 'package:festiva/domain/repository/artist_repository.dart';
+import 'package:festiva/domain/repository/auth_repository.dart';
+import 'package:festiva/domain/repository/club_repository.dart';
+import 'package:festiva/domain/repository/common_repository.dart';
+import 'package:festiva/domain/repository/event_repository.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> repositoryModule(GetIt getIt) async {

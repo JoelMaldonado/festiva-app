@@ -1,6 +1,6 @@
-import 'package:festiva_flutter/data/model/dto/search_item_dto.dart';
-import 'package:festiva_flutter/core/network/dio_config.dart';
-import 'package:festiva_flutter/data/model/response/api_response.dart';
+import 'package:festiva/data/model/dto/search_item_dto.dart';
+import 'package:festiva/core/network/dio_config.dart';
+import 'package:festiva/data/model/response/api_response.dart';
 
 class CommonService {
   final DioConfig api;

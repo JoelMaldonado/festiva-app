@@ -1,10 +1,10 @@
-import 'package:festiva_flutter/core/storage/prefs.dart';
-import 'package:festiva_flutter/core/network/dio_config.dart';
-import 'package:festiva_flutter/data/services/artist_service.dart';
-import 'package:festiva_flutter/data/services/auth_service.dart';
-import 'package:festiva_flutter/data/services/club_service.dart';
-import 'package:festiva_flutter/data/services/common_service.dart';
-import 'package:festiva_flutter/data/services/event_service.dart';
+import 'package:festiva/core/storage/prefs.dart';
+import 'package:festiva/core/network/dio_config.dart';
+import 'package:festiva/data/services/artist_service.dart';
+import 'package:festiva/data/services/auth_service.dart';
+import 'package:festiva/data/services/club_service.dart';
+import 'package:festiva/data/services/common_service.dart';
+import 'package:festiva/data/services/event_service.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

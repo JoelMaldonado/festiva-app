@@ -1,5 +1,5 @@
-import 'package:festiva_flutter/domain/model/event.dart';
-import 'package:festiva_flutter/util/date_functions.dart';
+import 'package:festiva/domain/model/event.dart';
+import 'package:festiva/util/date_functions.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'event_dto.g.dart';

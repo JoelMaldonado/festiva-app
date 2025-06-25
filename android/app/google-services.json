@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "983409623466",
-    "project_id": "festiva-548e2",
-    "storage_bucket": "festiva-548e2.firebasestorage.app"
+    "project_number": "1015648741340",
+    "project_id": "festiva-331ad",
+    "storage_bucket": "festiva-331ad.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:983409623466:android:de7fcc63a5c7413b696bd3",
+        "mobilesdk_app_id": "1:1015648741340:android:868bc300a0f05f16475119",
         "android_client_info": {
-          "package_name": "com.festiva.festiva_flutter"
+          "package_name": "com.festiva.core"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAOUeYQaWexn1Hjj-u-SAR18JDqnU1dNgU"
+          "current_key": "AIzaSyDz1QFuHvckOlLH4VxhBDVSn5zgI2nMI08"
         }
       ],
       "services": {
