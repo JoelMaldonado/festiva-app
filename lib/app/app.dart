@@ -1,6 +1,4 @@
-import 'package:festiva/core/storage/prefs.dart';
-import 'package:festiva/app/routes.dart';
-import 'package:festiva/core/di/di.dart';
+import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -12,10 +10,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Prefs prefs = getIt<Prefs>();
-    String initialRoute =
-        prefs.getOnboarding() == true ? '/login' : '/onboarding';
-
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
         statusBarColor: Colors.transparent,
@@ -26,12 +20,11 @@ class MyApp extends StatelessWidget {
       ),
     );
 
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Festiva',
       debugShowCheckedModeBanner: false,
       theme: appTheme,
-      initialRoute: initialRoute,
-      routes: appRoutes,
+      routerConfig: appRouter,
     );
   }
 }

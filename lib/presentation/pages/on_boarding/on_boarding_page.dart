@@ -1,17 +1,19 @@
+import 'package:festiva/app/router.dart';
 import 'package:festiva/core/storage/prefs.dart';
 import 'package:festiva/core/di/di.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class OnBoardingScreen extends StatefulWidget {
-  const OnBoardingScreen({super.key});
+class OnBoardingPage extends StatefulWidget {
+  const OnBoardingPage({super.key});
 
   @override
-  State<OnBoardingScreen> createState() => _OnBoardingScreenState();
+  State<OnBoardingPage> createState() => _OnBoardingPageState();
 }
 
-class _OnBoardingScreenState extends State<OnBoardingScreen> {
+class _OnBoardingPageState extends State<OnBoardingPage> {
   final PageController _pageController = PageController(initialPage: 0);
   int _currentPage = 0;
 
@@ -29,6 +31,10 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
         curve: Curves.easeInOut,
       );
     }
+  }
+
+  void toLogin() {
+    GoRouter.of(context).pushReplacement(AppRoutes.login);
   }
 
   @override
@@ -80,9 +86,9 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           )
                         : AppButton(
                             label: "Continuar",
-                            onPressed: () {
-                              _saveOnBoarding();
-                              Navigator.pushReplacementNamed(context, '/login');
+                            onPressed: () async {
+                              await _save();
+                              toLogin();
                             },
                           )
                   ],
@@ -95,12 +101,8 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     );
   }
 
-  void _saveOnBoarding() {
+  Future<void> _save() async {
     final prefs = getIt<Prefs>();
-    save(prefs);
-  }
-
-  Future<void> save(Prefs prefs) async {
     await prefs.saveOnboarding(true);
   }
 

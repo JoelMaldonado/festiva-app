@@ -6,6 +6,8 @@ class AppScaffold extends StatelessWidget {
   final String? title;
   final bool isLoadingScreen;
   final String? errorMessage;
+  final EdgeInsets padding;
+  final bool safeArea;
 
   const AppScaffold({
     super.key,
@@ -13,6 +15,8 @@ class AppScaffold extends StatelessWidget {
     this.title,
     this.isLoadingScreen = false,
     this.errorMessage,
+    this.padding = const EdgeInsets.only(left: 24, right: 24, top: 16),
+    this.safeArea = true,
   });
 
   @override
@@ -42,8 +46,12 @@ class AppScaffold extends StatelessWidget {
 
   Widget _buildPage() {
     return SafeArea(
+      bottom: safeArea,
+      top: safeArea,
+      left: safeArea,
+      right: safeArea,
       child: Padding(
-        padding: const EdgeInsets.only(left: 24, right: 24, top: 16),
+        padding: padding,
         child: child,
       ),
     );

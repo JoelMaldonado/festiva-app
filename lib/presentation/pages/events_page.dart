@@ -27,20 +27,13 @@ class _EventsPageState extends State<EventsPage> {
     return MenuScaffold(
       title: "Eventos",
       subtitle: "¿Qúe planes realizamos?",
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: provider.events.length,
-              itemBuilder: (context, index) {
-                final event = provider.events[index];
-                return CardEvent(
-                  event: event,
-                );
-              },
-            ),
-          )
-        ],
+      child: ListView.separated(
+        itemCount: provider.events.length,
+        itemBuilder: (context, index) {
+          final event = provider.events[index];
+          return CardEvent(event: event);
+        },
+        separatorBuilder: (c, i) => const SizedBox(height: 16),
       ),
     );
   }

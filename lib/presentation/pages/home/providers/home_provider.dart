@@ -11,10 +11,6 @@ class HomeProvider extends ChangeNotifier {
   int? categorySelected;
   List<EventCategory> eventCategories = [];
 
-  init() {
-    getCatEvents();
-  }
-
   getCatEvents() async {
     if (eventCategories.isNotEmpty) return;
     final res = await _repo.allEventCategories();

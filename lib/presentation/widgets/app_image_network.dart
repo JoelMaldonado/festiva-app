@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -39,12 +37,9 @@ class AppImageNetwork extends StatelessWidget {
       decoration: BoxDecoration(
         color: AppColors.colorB2,
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Image.asset(
-          fallbackAsset,
-          fit: BoxFit.fitWidth,
-        ),
+      padding: const EdgeInsets.all(24),
+      child: Image.asset(
+        fallbackAsset,
       ),
     );
   }

@@ -15,5 +15,5 @@ class Prefs {
 
   Future<void> saveOnboarding(bool onboarding) async =>
       await _prefs.setBool(_onboardingKey, onboarding);
-  bool? getOnboarding() => _prefs.getBool(_onboardingKey);
+  bool getOnboarding() => _prefs.getBool(_onboardingKey) ?? false;
 }

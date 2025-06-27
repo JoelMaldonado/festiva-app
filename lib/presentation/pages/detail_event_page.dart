@@ -93,8 +93,8 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   child: _itemDetail(
                     icon: Icons.calendar_month_outlined,
                     title: "Fecha",
-                    value: formatDate(provider.event?.eventDatetime) ??
-                        "Sin Fecha",
+                    value:
+                        provider.event?.eventDatetime?.format() ?? "Sin Fecha",
                   ),
                 ),
                 Expanded(
@@ -102,8 +102,8 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   child: _itemDetail(
                     icon: Icons.schedule_outlined,
                     title: "Horario",
-                    value: formatDate(provider.event?.eventDatetime,
-                            format: 'HH:mm') ??
+                    value: provider.event?.eventDatetime
+                            ?.format(pattern: 'HH:mm') ??
                         "Sin Hora",
                   ),
                 ),

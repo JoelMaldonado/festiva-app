@@ -3,6 +3,7 @@ import 'package:festiva/presentation/pages/preferences/screens/profile_page.dart
 import 'package:festiva/presentation/pages/preferences/screens/support_page.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class PreferencesPage extends StatelessWidget {
@@ -34,45 +35,50 @@ class PreferencesPage extends StatelessWidget {
               ),
             ],
           ),
-          ItemPreferences(
-            icon: Icons.person_outline,
-            title: "Usuario",
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ProfilePage(),
-                ),
-              );
-            },
-          ),
-          ItemPreferences(
-            icon: Icons.language_outlined,
-            title: "Idioma",
-            onTap: () {},
-          ),
-          ItemPreferences(
-            icon: Icons.message_outlined,
-            title: "Centro de mensajes",
-            onTap: () {},
-          ),
-          ItemPreferences(
-            icon: Icons.help_outline,
-            title: "Ayuda y soporte",
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => SupportPage(),
-                ),
-              );
-            },
-          ),
-          ItemPreferences(
-            icon: Icons.star_outline,
-            title: "Calificar App",
-            onTap: () {},
-          ),
+          if (kDebugMode)
+            ItemPreferences(
+              icon: Icons.person_outline,
+              title: "Usuario",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ProfilePage(),
+                  ),
+                );
+              },
+            ),
+          if (kDebugMode)
+            ItemPreferences(
+              icon: Icons.language_outlined,
+              title: "Idioma",
+              onTap: () {},
+            ),
+          if (kDebugMode)
+            ItemPreferences(
+              icon: Icons.message_outlined,
+              title: "Centro de mensajes",
+              onTap: () {},
+            ),
+          if (kDebugMode)
+            ItemPreferences(
+              icon: Icons.help_outline,
+              title: "Ayuda y soporte",
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => SupportPage(),
+                  ),
+                );
+              },
+            ),
+          if (kDebugMode)
+            ItemPreferences(
+              icon: Icons.star_outline,
+              title: "Calificar App",
+              onTap: () {},
+            ),
           ItemPreferences(
             icon: Icons.book_outlined,
             title: "Términos y condiciones",

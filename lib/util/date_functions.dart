@@ -1,9 +1,11 @@
 import 'package:intl/intl.dart';
 
-String? formatDate(DateTime? date, {String format = 'dd/MM/yyyy'}) {
-  if (date == null) return null;
-  final formatter = DateFormat(format);
-  return formatter.format(date);
+extension DateTimeExtension on DateTime {
+  String format({
+    String pattern = 'dd/MM/yyyy',
+  }) {
+    return DateFormat(pattern).format(this);
+  }
 }
 
 DateTime? parseDatetime(String? datetime) {
