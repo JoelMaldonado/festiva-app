@@ -1,9 +1,11 @@
+import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/pages/login/login_provider.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:go_router/go_router.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:provider/provider.dart';
 
@@ -16,8 +18,9 @@ class LoginPage extends StatelessWidget {
     final state = provider.state;
 
     state.onSuccess = () {
-      Navigator.pushReplacementNamed(context, '/menu');
+      GoRouter.of(context).pushReplacement(AppRoutes.menu);
     };
+
     return Scaffold(
       backgroundColor: AppColors.colorB1,
       body: SingleChildScrollView(

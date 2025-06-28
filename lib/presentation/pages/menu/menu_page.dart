@@ -36,7 +36,7 @@ class MenuPage extends StatelessWidget {
               toEvents: () => provider.setMenuSelected(MenuEnum.events),
             ),
           MenuEnum.clubs => ClubsPage(),
-          MenuEnum.preferences => PreferencesPage(),
+          //MenuEnum.preferences => PreferencesPage(),
         },
       ),
       bottomNavigationBar: MenuBottom(

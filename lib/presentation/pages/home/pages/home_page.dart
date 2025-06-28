@@ -180,10 +180,10 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          AppFloatingActionButton(
-            onPressed: () {},
-            icon: Icons.logout,
-          ),
+          //AppFloatingActionButton(
+          //  onPressed: () {},
+          //  icon: Icons.logout,
+          //),
         ],
       ),
     );

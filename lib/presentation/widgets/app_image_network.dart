@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -21,12 +22,15 @@ class AppImageNetwork extends StatelessWidget {
   Widget build(BuildContext context) {
     return imageUrl == null || imageUrl!.trim().isEmpty
         ? _getImageNotFound()
-        : Image.network(
-            imageUrl!,
+        : CachedNetworkImage(
+            imageUrl: imageUrl!,
             fit: fit,
             width: width,
             height: height,
-            errorBuilder: (context, error, stackTrace) => _getImageNotFound(),
+            placeholder: (context, url) => const Center(
+              child: CircularProgressIndicator(),
+            ),
+            errorWidget: (context, url, error) => _getImageNotFound(),
           );
   }
 
@@ -40,6 +44,7 @@ class AppImageNetwork extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       child: Image.asset(
         fallbackAsset,
+        fit: fit,
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:festiva/domain/model/club/club_summary.dart';
 import 'package:festiva/presentation/theme/theme.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CardClub extends StatelessWidget {
@@ -37,14 +38,12 @@ class CardClub extends StatelessWidget {
                       topLeft: Radius.circular(16),
                       topRight: Radius.circular(16),
                     ),
-                    child: club.logoUrl != null
-                        ? Image.network(
-                            club.logoUrl!,
-                            width: double.infinity,
-                            height: 132,
-                            fit: BoxFit.fitWidth,
-                          )
-                        : SizedBox.shrink(),
+                    child: AppImageNetwork(
+                      imageUrl: club.logoUrl,
+                      width: double.infinity,
+                      height: 132,
+                      fit: BoxFit.fitWidth,
+                    ),
                   ),
                   Positioned(
                     top: 16,
@@ -68,14 +67,12 @@ class CardClub extends StatelessWidget {
                 child: Row(
                   spacing: 8,
                   children: [
-                    club.logoUrl != null
-                        ? Image.network(
-                            club.logoUrl!,
-                            width: 36,
-                            height: 36,
-                            fit: BoxFit.cover,
-                          )
-                        : SizedBox.shrink(),
+                    AppImageNetwork(
+                      imageUrl: club.logoUrl,
+                      width: 42,
+                      height: 42,
+                      fit: BoxFit.cover,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

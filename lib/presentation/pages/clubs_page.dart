@@ -28,31 +28,26 @@ class _ClubsPageState extends State<ClubsPage> {
     return MenuScaffold(
       title: 'Clubs',
       subtitle: 'Más cerca de ti',
-      child: Column(
-        children: [
-          Expanded(
-            child: ListView.separated(
-              itemCount: provider.clubs.length,
-              itemBuilder: (context, index) {
-                final club = provider.clubs[index];
-                return CardClub(
-                  club: club,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ClubDetailPage(
-                          idClub: club.id,
-                        ),
-                      ),
-                    );
-                  },
-                );
-              },
-              separatorBuilder: (context, index) => const SizedBox(height: 16),
-            ),
-          ),
-        ],
+      child: ListView.separated(
+        itemCount: provider.clubs.length,
+        itemBuilder: (context, index) {
+          final club = provider.clubs[index];
+          return CardClub(
+            key: Key(club.id.toString()),
+            club: club,
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ClubDetailPage(
+                    idClub: club.id,
+                  ),
+                ),
+              );
+            },
+          );
+        },
+        separatorBuilder: (context, index) => const SizedBox(height: 16),
       ),
     );
   }

@@ -35,55 +35,50 @@ class PreferencesPage extends StatelessWidget {
               ),
             ],
           ),
-          if (kDebugMode)
-            ItemPreferences(
-              icon: Icons.person_outline,
-              title: "Usuario",
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ProfilePage(),
-                  ),
-                );
-              },
-            ),
-          if (kDebugMode)
-            ItemPreferences(
-              icon: Icons.language_outlined,
-              title: "Idioma",
-              onTap: () {},
-            ),
-          if (kDebugMode)
-            ItemPreferences(
-              icon: Icons.message_outlined,
-              title: "Centro de mensajes",
-              onTap: () {},
-            ),
-          if (kDebugMode)
-            ItemPreferences(
-              icon: Icons.help_outline,
-              title: "Ayuda y soporte",
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => SupportPage(),
-                  ),
-                );
-              },
-            ),
-          if (kDebugMode)
-            ItemPreferences(
-              icon: Icons.star_outline,
-              title: "Calificar App",
-              onTap: () {},
-            ),
-          ItemPreferences(
-            icon: Icons.book_outlined,
-            title: "Términos y condiciones",
-            onTap: () {},
-          ),
+          //ItemPreferences(
+          //  icon: Icons.person_outline,
+          //  title: "Usuario",
+          //  onTap: () {
+          //    Navigator.push(
+          //      context,
+          //      MaterialPageRoute(
+          //        builder: (_) => ProfilePage(),
+          //      ),
+          //    );
+          //  },
+          //),
+          //ItemPreferences(
+          //  icon: Icons.language_outlined,
+          //  title: "Idioma",
+          //  onTap: () {},
+          //),
+          //ItemPreferences(
+          //  icon: Icons.message_outlined,
+          //  title: "Centro de mensajes",
+          //  onTap: () {},
+          //),
+          //ItemPreferences(
+          //  icon: Icons.help_outline,
+          //  title: "Ayuda y soporte",
+          //  onTap: () {
+          //    Navigator.push(
+          //      context,
+          //      MaterialPageRoute(
+          //        builder: (_) => SupportPage(),
+          //      ),
+          //    );
+          //  },
+          //),
+          //ItemPreferences(
+          //  icon: Icons.star_outline,
+          //  title: "Calificar App",
+          //  onTap: () {},
+          //),
+          //ItemPreferences(
+          //  icon: Icons.book_outlined,
+          //  title: "Términos y condiciones",
+          //  onTap: () {},
+          //),
         ],
       ),
     );

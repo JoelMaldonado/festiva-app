@@ -36,22 +36,13 @@ class _DetailEventPageState extends State<DetailEventPage> {
         child: Column(
           spacing: 12,
           children: [
-            Material(
-              elevation: 12,
+            ClipRRect(
               borderRadius: BorderRadius.circular(20),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: SizedBox(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: AppImageNetwork(
+                  imageUrl: provider.event?.imageUrl,
                   width: double.infinity,
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: provider.event?.imageUrl != null
-                        ? Image.network(
-                            provider.event!.imageUrl,
-                            fit: BoxFit.cover,
-                          )
-                        : SizedBox.shrink(),
-                  ),
                 ),
               ),
             ),
