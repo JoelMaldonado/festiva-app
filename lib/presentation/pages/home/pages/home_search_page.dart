@@ -1,6 +1,6 @@
-import 'package:festiva/presentation/pages/detail_artist_page.dart';
+import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
-import 'package:festiva/presentation/pages/detail_event_page.dart';
+import 'package:festiva/presentation/pages/event_detail/detail_event_page.dart';
 import 'package:festiva/presentation/pages/home/providers/home_search_provider.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';

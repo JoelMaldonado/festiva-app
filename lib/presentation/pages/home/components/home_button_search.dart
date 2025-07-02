@@ -33,7 +33,7 @@ class HomeButtonSearch extends StatelessWidget {
                   size: 20,
                 ),
                 Text(
-                  "Buscar",
+                  "Search",
                   style: AppTextStyles.subhead.copyWith(
                     color: AppColors.colorT2,
                   ),

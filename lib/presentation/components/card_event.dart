@@ -1,7 +1,5 @@
-import 'dart:math';
-
 import 'package:festiva/domain/model/event.dart';
-import 'package:festiva/presentation/pages/detail_event_page.dart';
+import 'package:festiva/presentation/pages/event_detail/detail_event_page.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';

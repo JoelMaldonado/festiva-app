@@ -1,7 +1,7 @@
 import 'package:festiva/presentation/components/card_artist.dart';
 import 'package:festiva/presentation/components/card_club.dart';
 import 'package:festiva/presentation/components/card_event.dart';
-import 'package:festiva/presentation/pages/artists_page.dart';
+import 'package:festiva/presentation/pages/artists/artists_page.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:festiva/presentation/pages/home/components/home_button_search.dart';
 import 'package:festiva/presentation/pages/home/pages/home_search_page.dart';
@@ -9,7 +9,6 @@ import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/theme.dart';
-import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -100,7 +99,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 16),
               _section(
-                title: "Eventos",
+                title: "Events",
                 onPressed: widget.toEvents,
               ),
               SizedBox(
@@ -121,7 +120,7 @@ class _HomePageState extends State<HomePage> {
               ),
               const SizedBox(height: 16),
               _section(
-                title: "Artistas",
+                title: "Artists",
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -172,7 +171,7 @@ class _HomePageState extends State<HomePage> {
                   fit: BoxFit.fitWidth,
                 ),
                 Text(
-                  "¿A dónde iremos hoy?",
+                  "Where are we going today?",
                   style: AppTextStyles.callout.copyWith(
                     color: AppColors.colorT2,
                   ),

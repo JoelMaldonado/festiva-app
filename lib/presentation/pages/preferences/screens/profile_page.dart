@@ -1,4 +1,5 @@
 import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Usuario',
+      appBar: CustomAppBar(title: "Usuario"),
       child: Column(
         spacing: 16,
         children: [

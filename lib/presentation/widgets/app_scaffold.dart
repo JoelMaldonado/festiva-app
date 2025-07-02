@@ -1,9 +1,10 @@
 import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
-  final String? title;
+  final CustomAppBar? appBar;
   final bool isLoadingScreen;
   final String? errorMessage;
   final EdgeInsets padding;
@@ -12,7 +13,7 @@ class AppScaffold extends StatelessWidget {
   const AppScaffold({
     super.key,
     required this.child,
-    this.title,
+    this.appBar,
     this.isLoadingScreen = false,
     this.errorMessage,
     this.padding = const EdgeInsets.only(left: 24, right: 24, top: 16),
@@ -22,20 +23,7 @@ class AppScaffold extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: title != null
-          ? AppBar(
-              title: Text(
-                title!,
-                style: TextStyle(
-                  fontSize: 17,
-                  fontWeight: FontWeight.w900,
-                  color: AppColors.colorT1,
-                ),
-              ),
-              centerTitle: true,
-              backgroundColor: Colors.transparent,
-            )
-          : null,
+      appBar: appBar,
       body: isLoadingScreen
           ? _buildloadingScreen()
           : errorMessage != null

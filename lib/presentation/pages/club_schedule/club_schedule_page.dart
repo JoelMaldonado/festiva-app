@@ -1,4 +1,5 @@
 import 'package:festiva/domain/model/club/club.dart';
+import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class ClubSchedulePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: "Schedule",
+      appBar: CustomAppBar(title: "Schedule"),
       child: Column(
         spacing: 8,
         children: [

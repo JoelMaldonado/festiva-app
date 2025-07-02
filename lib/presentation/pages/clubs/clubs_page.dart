@@ -2,6 +2,8 @@ import 'package:festiva/presentation/components/components.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:festiva/presentation/pages/menu/components/menu_scaffold.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
+import 'package:festiva/presentation/widgets/custom_app_bar.dart';
+import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -25,9 +27,12 @@ class _ClubsPageState extends State<ClubsPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ClubProvider>(context);
-    return MenuScaffold(
-      title: 'Clubs',
-      subtitle: 'Más cerca de ti',
+    return AppScaffold(
+      appBar: CustomAppBar(
+        title: "Clubs",
+        detail: "Closer to you",
+        hideBackButton: true,
+      ),
       child: ListView.separated(
         itemCount: provider.clubs.length,
         itemBuilder: (context, index) {

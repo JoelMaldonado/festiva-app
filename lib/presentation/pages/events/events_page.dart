@@ -25,8 +25,8 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     final provider = Provider.of<EventProvider>(context);
     return MenuScaffold(
-      title: "Eventos",
-      subtitle: "¿Qúe planes realizamos?",
+      title: "Events",
+      subtitle: "What plans do we have?",
       child: ListView.separated(
         itemCount: provider.events.length,
         itemBuilder: (context, index) {

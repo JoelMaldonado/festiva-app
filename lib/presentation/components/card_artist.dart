@@ -1,5 +1,5 @@
 import 'package:festiva/domain/model/artist.dart';
-import 'package:festiva/presentation/pages/detail_artist_page.dart';
+import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';

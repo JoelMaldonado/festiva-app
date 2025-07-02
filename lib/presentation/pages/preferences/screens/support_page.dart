@@ -1,4 +1,5 @@
 import 'package:festiva/presentation/pages/preferences/components/item_preferences.dart';
+import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ class SupportPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
-      title: 'Ayuda y soporte',
+      appBar: CustomAppBar(title: "Ayuda y soporte"),
       child: Column(
         spacing: 16,
         children: [

@@ -34,7 +34,7 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   }
 
   void toLogin() {
-    GoRouter.of(context).pushReplacement(AppRoutes.login);
+    GoRouter.of(context).pushReplacement(AppRoutes.menu);
   }
 
   @override
@@ -81,11 +81,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
                                 foregroundColor: AppColors.colorP1,
                                 textStyle: AppTextStyles.headline,
                               ),
-                              child: Text("Siguiente"),
+                              child: Text("Next"),
                             ),
                           )
                         : AppButton(
-                            label: "Continuar",
+                            label: "Get Started",
                             onPressed: () async {
                               await _save();
                               toLogin();
@@ -109,11 +109,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   String _getTitle() {
     switch (_currentPage) {
       case 0:
-        return "EVENTOS CERCA DE TI";
+        return "EVENTS NEAR YOU";
       case 1:
-        return "UBICA FÁCILMENTE LA DIVERSIÓN ";
+        return "FIND FUN SPOTS EASILY";
       case 2:
-        return "GUARDA TUS FAVORITOS";
+        return "SAVE YOUR FAVORITES";
       default:
         return "";
     }
@@ -122,11 +122,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   String _getDetail() {
     switch (_currentPage) {
       case 0:
-        return "Descubre los mejores eventos cerca de ti, con la información precisa de horario y ubicación para que disfrutes cualquier día de la semana. Actualizamos para ti, cada día, los próximos eventos que te pueden gustar.";
+        return "Discover the best events happening near you, with up-to-date details on schedules and locations so you can enjoy any day of the week. We keep you in the loop with new events you’ll love, every day.";
       case 1:
-        return "Ubica los mejores lugares para divertirte cerca de ti, encuentra discotecas y otros lugares de esparcimiento para disfrutar de planes y eventos realizados exclusivamente para ti.";
+        return "Find the hottest places to have fun nearby — clubs, bars, and other great spots with special events just for you. Plan your night out easily.";
       case 2:
-        return "Conoce más sobre los lugares que visitaste, deja tu feedback y convierte algunos espacios en tus favoritos, de la misma forma selecciona tus eventos favoritos y mantente al tanto de todo!";
+        return "Keep track of the places you’ve visited, share your feedback, and save your favorite spots. Pick your favorite events too and never miss out on what’s happening!";
       default:
         return "";
     }
