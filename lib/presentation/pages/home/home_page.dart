@@ -8,6 +8,7 @@ import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -155,10 +156,24 @@ class _HomePageState extends State<HomePage> {
               spacing: 8,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Image.asset(
-                  "assets/images/logo_large.png",
-                  width: 140,
-                  fit: BoxFit.fitWidth,
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 8,
+                  children: [
+                    kDebugMode
+                        ? Text(
+                            "Festiva Debug",
+                            style: TextStyle(
+                              fontSize: 28,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          )
+                        : Image.asset(
+                            "assets/images/logo_large.png",
+                            width: 140,
+                            fit: BoxFit.fitWidth,
+                          ),
+                  ],
                 ),
                 Text(
                   "Where are we going today?",

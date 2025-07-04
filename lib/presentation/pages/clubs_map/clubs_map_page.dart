@@ -1,6 +1,6 @@
 import 'package:festiva/presentation/components/card_club.dart';
 import 'package:festiva/presentation/pages/clubs_map/clubs_map_provider.dart';
-import 'package:festiva/presentation/pages/clubs_map/components/maps_page.dart';
+import 'package:festiva/presentation/pages/clubs_map/components/map_component.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +18,7 @@ class _ClubsMapPageState extends State<ClubsMapPage> {
     final provider = Provider.of<ClubsMapProvider>(context);
     return Stack(
       children: [
-        MapsPage(),
+        MapComponent(),
         if (provider.clubSelected != null)
           Align(
             alignment: Alignment.bottomCenter,
