@@ -1,6 +1,6 @@
 import 'package:festiva/presentation/components/components.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
-import 'package:festiva/presentation/pages/menu/components/menu_scaffold.dart';
+import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
@@ -33,26 +33,34 @@ class _ClubsPageState extends State<ClubsPage> {
         detail: "Closer to you",
         hideBackButton: true,
       ),
-      child: ListView.separated(
-        itemCount: provider.clubs.length,
-        itemBuilder: (context, index) {
-          final club = provider.clubs[index];
-          return CardClub(
-            key: Key(club.id.toString()),
-            club: club,
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ClubDetailPage(
-                    idClub: club.id,
-                  ),
-                ),
-              );
-            },
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(height: 16),
+      child: Column(
+        spacing: 16,
+        children: [
+          SearchComponent(),
+          Expanded(
+            child: ListView.separated(
+              itemCount: provider.clubs.length,
+              itemBuilder: (context, index) {
+                final club = provider.clubs[index];
+                return CardClub(
+                  key: Key(club.id.toString()),
+                  club: club,
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ClubDetailPage(
+                          idClub: club.id,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
+            ),
+          ),
+        ],
       ),
     );
   }

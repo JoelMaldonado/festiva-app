@@ -1,30 +1,30 @@
 import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:festiva/presentation/pages/event_detail/detail_event_page.dart';
-import 'package:festiva/presentation/pages/home/providers/home_search_provider.dart';
+import 'package:festiva/presentation/pages/search/search_provider.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeSearchPage extends StatefulWidget {
-  const HomeSearchPage({super.key});
+class SearchPage extends StatefulWidget {
+  const SearchPage({super.key});
 
   @override
-  State<HomeSearchPage> createState() => _HomeSearchPageState();
+  State<SearchPage> createState() => _SearchPageState();
 }
 
-class _HomeSearchPageState extends State<HomeSearchPage> {
+class _SearchPageState extends State<SearchPage> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<HomeSearchProvider>(context, listen: false).init();
+      Provider.of<SearchProvider>(context, listen: false).init();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<HomeSearchProvider>(context);
+    final provider = Provider.of<SearchProvider>(context);
     return AppScaffold(
       child: Column(
         spacing: 16,

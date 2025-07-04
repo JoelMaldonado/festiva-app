@@ -1,6 +1,6 @@
 import 'package:festiva/core/di/di.dart';
-import 'package:festiva/presentation/pages/home/providers/home_provider.dart';
-import 'package:festiva/presentation/pages/home/providers/home_search_provider.dart';
+import 'package:festiva/presentation/pages/home/home_provider.dart';
+import 'package:festiva/presentation/pages/search/search_provider.dart';
 import 'package:festiva/presentation/pages/login/login_provider.dart';
 import 'package:festiva/presentation/pages/menu/menu_provider.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
@@ -22,7 +22,7 @@ List<SingleChildWidget> appProviders() {
       create: (_) => getIt<HomeProvider>(),
     ),
     ChangeNotifierProvider(
-      create: (_) => getIt<HomeSearchProvider>(),
+      create: (_) => getIt<SearchProvider>(),
     ),
 
     // Artist Provider

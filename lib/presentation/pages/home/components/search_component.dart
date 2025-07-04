@@ -1,11 +1,10 @@
+import 'package:festiva/presentation/pages/search/search_page.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 
-class HomeButtonSearch extends StatelessWidget {
-  final VoidCallback onPressed;
-  const HomeButtonSearch({
+class SearchComponent extends StatelessWidget {
+  const SearchComponent({
     super.key,
-    required this.onPressed,
   });
 
   @override
@@ -18,7 +17,14 @@ class HomeButtonSearch extends StatelessWidget {
           borderRadius: BorderRadius.circular(50),
         ),
         child: InkWell(
-          onTap: onPressed,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SearchPage(),
+              ),
+            );
+          },
           borderRadius: BorderRadius.circular(50),
           child: Container(
             width: double.infinity,

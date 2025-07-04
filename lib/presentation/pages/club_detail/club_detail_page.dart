@@ -2,6 +2,7 @@ import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -91,14 +92,16 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                           ),
                         ),
                       ),
-                      AppFloatingActionButton(
-                        onPressed: () {},
-                        icon: Icons.favorite_outline,
-                      ),
-                      AppFloatingActionButton(
-                        onPressed: () {},
-                        icon: Icons.share_outlined,
-                      ),
+                      if (kDebugMode)
+                        AppFloatingActionButton(
+                          onPressed: () {},
+                          icon: Icons.favorite_outline,
+                        ),
+                      if (kDebugMode)
+                        AppFloatingActionButton(
+                          onPressed: () {},
+                          icon: Icons.share_outlined,
+                        ),
                     ],
                   ),
                   Text(
@@ -110,8 +113,8 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                   ),
                   _itemDetail(
                     icon: Icons.calendar_month,
-                    title: "Horario de Atención",
-                    value: "Lunes - Sábado 8:00 - 22:00",
+                    title: "Opening Hours",
+                    value: "Monday - Saturdar 8:00 - 22:00",
                     onTap: () {
                       Navigator.push(context, MaterialPageRoute(builder: (_) {
                         return ClubSchedulePage(
@@ -122,36 +125,38 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                   ),
                   _itemDetail(
                     icon: Icons.explore_outlined,
-                    title: "Ubicación",
+                    title: "Address",
                     value: club.address.firstOrNull?.address ?? '',
                   ),
-                  Row(
-                    spacing: 12,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: _itemDetail(
-                          icon: Icons.star_outline,
-                          title: "Calificación",
-                          value: "5.0",
+                  if (kDebugMode)
+                    Row(
+                      spacing: 12,
+                      children: [
+                        Expanded(
+                          flex: 2,
+                          child: _itemDetail(
+                            icon: Icons.star_outline,
+                            title: "Rating",
+                            value: "5.0",
+                          ),
                         ),
-                      ),
-                      FloatingActionButton(
-                        onPressed: () {},
-                        backgroundColor: AppColors.colorBlue,
-                        foregroundColor: AppColors.colorT1,
-                        shape: CircleBorder(),
-                        child: Icon(Icons.message_outlined),
-                      ),
-                      FloatingActionButton(
-                        onPressed: () {},
-                        backgroundColor: AppColors.colorGreen,
-                        foregroundColor: AppColors.colorT1,
-                        shape: CircleBorder(),
-                        child: Icon(Icons.workspace_premium),
-                      ),
-                    ],
-                  ),
+                        FloatingActionButton(
+                          onPressed: () {},
+                          backgroundColor: AppColors.colorBlue,
+                          foregroundColor: AppColors.colorT1,
+                          shape: CircleBorder(),
+                          child: Icon(Icons.message_outlined),
+                        ),
+                        FloatingActionButton(
+                          onPressed: () {},
+                          backgroundColor: AppColors.colorGreen,
+                          foregroundColor: AppColors.colorT1,
+                          shape: CircleBorder(),
+                          child: Icon(Icons.workspace_premium),
+                        ),
+                      ],
+                    ),
+                  const SizedBox(height: 16),
                 ],
               ),
             ),

@@ -2,7 +2,7 @@ import 'package:festiva/domain/enum/menu_enum.dart';
 import 'package:festiva/presentation/pages/clubs_map/clubs_map_page.dart';
 import 'package:festiva/presentation/pages/clubs/clubs_page.dart';
 import 'package:festiva/presentation/pages/events/events_page.dart';
-import 'package:festiva/presentation/pages/home/pages/home_page.dart';
+import 'package:festiva/presentation/pages/home/home_page.dart';
 import 'package:festiva/presentation/pages/menu/components/menu_bottom.dart';
 import 'package:festiva/presentation/pages/menu/menu_provider.dart';
 import 'package:festiva/presentation/theme/theme.dart';

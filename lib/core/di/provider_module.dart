@@ -3,8 +3,8 @@ import 'package:festiva/domain/repository/auth_repository.dart';
 import 'package:festiva/domain/repository/club_repository.dart';
 import 'package:festiva/domain/repository/common_repository.dart';
 import 'package:festiva/domain/repository/event_repository.dart';
-import 'package:festiva/presentation/pages/home/providers/home_provider.dart';
-import 'package:festiva/presentation/pages/home/providers/home_search_provider.dart';
+import 'package:festiva/presentation/pages/home/home_provider.dart';
+import 'package:festiva/presentation/pages/search/search_provider.dart';
 import 'package:festiva/presentation/pages/login/login_provider.dart';
 import 'package:festiva/presentation/pages/menu/menu_provider.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
@@ -24,7 +24,7 @@ Future<void> providerModule(GetIt getIt) async {
     ),
   );
   getIt.registerFactory(
-    () => HomeSearchProvider(
+    () => SearchProvider(
       getIt<CommonRepository>(),
     ),
   );

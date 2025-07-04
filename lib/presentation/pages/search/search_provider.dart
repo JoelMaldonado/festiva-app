@@ -5,10 +5,10 @@ import 'package:festiva/domain/repository/common_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class HomeSearchProvider extends ChangeNotifier {
+class SearchProvider extends ChangeNotifier {
   final CommonRepository _commonRepository;
 
-  HomeSearchProvider(this._commonRepository) {
+  SearchProvider(this._commonRepository) {
     searchController.addListener(_onSearchChanged);
   }
 

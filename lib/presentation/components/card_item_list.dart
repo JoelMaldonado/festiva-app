@@ -7,12 +7,14 @@ class CardItemList extends StatelessWidget {
   final String? imageUrl;
   final String label;
   final String detail;
+  final VoidCallback onTap;
 
   const CardItemList({
     super.key,
     this.imageUrl,
     required this.label,
     required this.detail,
+    required this.onTap,
   });
 
   @override
@@ -20,7 +22,7 @@ class CardItemList extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () {},
+        onTap: onTap,
         borderRadius: BorderRadius.circular(10),
         child: Ink(
           decoration: BoxDecoration(

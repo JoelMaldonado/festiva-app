@@ -1,4 +1,4 @@
-import 'package:festiva/presentation/pages/home/providers/home_provider.dart';
+import 'package:festiva/presentation/pages/home/home_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:flutter/material.dart';

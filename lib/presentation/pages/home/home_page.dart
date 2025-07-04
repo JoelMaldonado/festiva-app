@@ -3,8 +3,7 @@ import 'package:festiva/presentation/components/card_club.dart';
 import 'package:festiva/presentation/components/card_event.dart';
 import 'package:festiva/presentation/pages/artists/artists_page.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
-import 'package:festiva/presentation/pages/home/components/home_button_search.dart';
-import 'package:festiva/presentation/pages/home/pages/home_search_page.dart';
+import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
@@ -53,16 +52,7 @@ class _HomePageState extends State<HomePage> {
             children: [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
-                child: HomeButtonSearch(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => HomeSearchPage(),
-                      ),
-                    );
-                  },
-                ),
+                child: SearchComponent(),
               ),
               //HomeCategories(),
               const SizedBox(height: 16),
@@ -213,7 +203,7 @@ class _HomePageState extends State<HomePage> {
                     foregroundColor: AppColors.colorT2,
                     textStyle: AppTextStyles.footnote,
                   ),
-                  child: Text("Ver más"),
+                  child: Text("More"),
                 ),
         ],
       ),

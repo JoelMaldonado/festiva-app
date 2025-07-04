@@ -1,4 +1,6 @@
 import 'package:festiva/presentation/components/card_item_list.dart';
+import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
+import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
@@ -30,17 +32,35 @@ class _ArtistsPageState extends State<ArtistsPage> {
         title: "Artists",
         detail: "Get to know them better here",
       ),
-      child: ListView.separated(
-        itemCount: provider.artists.length,
-        itemBuilder: (context, index) {
-          final artist = provider.artists[index];
-          return CardItemList(
-            imageUrl: artist.urlFoto,
-            label: artist.nombre,
-            detail: artist.tipo,
-          );
-        },
-        separatorBuilder: (context, index) => const SizedBox(height: 12),
+      child: Column(
+        spacing: 16,
+        children: [
+          SearchComponent(),
+          Expanded(
+            child: ListView.separated(
+              itemCount: provider.artists.length,
+              itemBuilder: (context, index) {
+                final artist = provider.artists[index];
+                return CardItemList(
+                  imageUrl: artist.urlFoto,
+                  label: artist.nombre,
+                  detail: artist.tipo,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => DetailArtistPage(
+                          idArtist: artist.id,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 12),
+            ),
+          ),
+        ],
       ),
     );
   }
