@@ -14,11 +14,24 @@ class ClubsMapPage extends StatefulWidget {
 
 class _ClubsMapPageState extends State<ClubsMapPage> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<ClubsMapProvider>(
+        context,
+        listen: false,
+      ).getClubLocations();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ClubsMapProvider>(context);
     return Stack(
       children: [
-        MapComponent(),
+        provider.locations.isEmpty
+            ? Center(child: CircularProgressIndicator())
+            : MapComponent(locations: provider.locations),
         if (provider.clubSelected != null)
           Align(
             alignment: Alignment.bottomCenter,

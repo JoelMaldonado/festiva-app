@@ -1,8 +1,7 @@
-import 'package:festiva/presentation/components/card_artist.dart';
-import 'package:festiva/presentation/components/card_club.dart';
-import 'package:festiva/presentation/components/card_event.dart';
 import 'package:festiva/presentation/pages/artists/artists_page.dart';
-import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
+import 'package:festiva/presentation/pages/home/components/carousel_artists_component.dart';
+import 'package:festiva/presentation/pages/home/components/carousel_clubs_component.dart';
+import 'package:festiva/presentation/pages/home/components/carousel_events_component.dart';
 import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
@@ -31,16 +30,16 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<ArtistProvider>(context, listen: false).getArtists();
       Provider.of<ClubProvider>(context, listen: false).getClubs();
+      Provider.of<ArtistProvider>(context, listen: false).getArtists();
       Provider.of<EventProvider>(context, listen: false).getEvents();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final artistProvider = Provider.of<ArtistProvider>(context);
     final clubProvider = Provider.of<ClubProvider>(context);
+    final artistProvider = Provider.of<ArtistProvider>(context);
     final eventProvider = Provider.of<EventProvider>(context);
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
@@ -61,53 +60,19 @@ class _HomePageState extends State<HomePage> {
                 title: "Clubs",
                 onPressed: widget.toClubs,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 220,
-                child: PageView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: clubProvider.clubs.length,
-                  itemBuilder: (context, index) {
-                    final item = clubProvider.clubs[index];
-                    return Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 24),
-                      child: CardClub(
-                        club: item,
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => ClubDetailPage(
-                                idClub: item.id,
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                    );
-                  },
-                ),
+              CarouselClubsComponent(
+                key: const Key("carousel_clubs"),
+                clubs: clubProvider.clubs,
+                durationInSeconds: 8,
               ),
               const SizedBox(height: 16),
               _section(
                 title: "Events",
                 onPressed: widget.toEvents,
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 180,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  itemCount: eventProvider.events.length,
-                  separatorBuilder: (context, index) => SizedBox(width: 16),
-                  itemBuilder: (context, index) {
-                    final item = eventProvider.events[index];
-                    return CardEvent(
-                      event: item,
-                    );
-                  },
-                ),
+              CarouselEventsComponent(
+                key: const Key("carousel_events"),
+                events: [...eventProvider.events, ...eventProvider.events],
               ),
               const SizedBox(height: 16),
               _section(
@@ -121,22 +86,11 @@ class _HomePageState extends State<HomePage> {
                   );
                 },
               ),
-              SizedBox(
-                width: double.infinity,
-                height: 100,
-                child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: artistProvider.artists.length,
-                  padding: const EdgeInsets.symmetric(horizontal: 24),
-                  separatorBuilder: (context, index) => SizedBox(width: 16),
-                  itemBuilder: (context, index) {
-                    final item = artistProvider.artists[index];
-                    return CardArtist(
-                      artist: item,
-                    );
-                  },
+              if (artistProvider.artists.isNotEmpty)
+                CarouselArtistsComponent(
+                  key: const Key("carousel_artists"),
+                  artists: artistProvider.artists,
                 ),
-              ),
               const SizedBox(height: 24),
             ],
           ),
@@ -195,7 +149,7 @@ class _HomePageState extends State<HomePage> {
 
   Widget _section({
     required String title,
-    VoidCallback? onPressed,
+    required VoidCallback onPressed,
   }) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 24),
@@ -210,16 +164,14 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          onPressed == null
-              ? SizedBox.shrink()
-              : TextButton(
-                  onPressed: onPressed,
-                  style: TextButton.styleFrom(
-                    foregroundColor: AppColors.colorT2,
-                    textStyle: AppTextStyles.footnote,
-                  ),
-                  child: Text("More"),
-                ),
+          TextButton(
+            onPressed: onPressed,
+            style: TextButton.styleFrom(
+              foregroundColor: AppColors.colorT2,
+              textStyle: AppTextStyles.footnote,
+            ),
+            child: Text("See all"),
+          ),
         ],
       ),
     );

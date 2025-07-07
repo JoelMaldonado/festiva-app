@@ -15,10 +15,8 @@ class ClubProvider extends ChangeNotifier {
 
   getClubs() async {
     try {
-      if (clubs.isNotEmpty) return;
       isLoadingClubs = true;
       notifyListeners();
-      await Future.delayed(Duration(milliseconds: 300));
       final res = await _repo.allSummary();
       res.fold(
         (l) {},
@@ -41,8 +39,6 @@ class ClubProvider extends ChangeNotifier {
       isLoadingClub = true;
       errorMessage = null;
       notifyListeners();
-
-      await Future.delayed(Duration(milliseconds: 300));
 
       final res = await _repo.get(id);
       res.fold(

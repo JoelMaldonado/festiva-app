@@ -15,6 +15,57 @@ class ClubsMapProvider extends ChangeNotifier {
 
   ClubsMapProvider(this._repo);
 
+// Nuevo
+
+  final List<mp.PointAnnotationOptions> locations = [];
+
+  Future<void> getClubLocations() async {
+    if (locations.isNotEmpty) {
+      return;
+    }
+    locations.clear();
+    notifyListeners();
+    final res = await _repo.getLocations();
+    res.fold(
+      (l) {},
+      (clubs) async {
+        List<mp.PointAnnotationOptions> points = [];
+        for (final club in clubs) {
+          final bytes = await NetworkAssetBundle(
+            Uri.parse(club.logoUrl),
+          ).load("");
+
+          final imgData = bytes.buffer.asUint8List();
+
+          final resized = await resizeImage(imgData, 150);
+
+          final geometry = mp.Point(
+            coordinates: mp.Position(
+              club.longitude,
+              club.latitude,
+            ),
+          );
+          final point = mp.PointAnnotationOptions(
+            geometry: geometry,
+            image: resized,
+            iconSize: 1.0,
+          );
+          points.add(point);
+        }
+        locations.addAll(points);
+        notifyListeners();
+      },
+    );
+  }
+
+  Future<Uint8List> resizeImage(Uint8List bytes, int size) async {
+    final original = img.decodeImage(bytes)!;
+    final resized = img.copyResize(original, width: size, height: size);
+    return Uint8List.fromList(img.encodePng(resized));
+  }
+
+// Nuevo
+
   mp.MapboxMap? mapboxMap;
   StreamSubscription? userPositionStream;
 

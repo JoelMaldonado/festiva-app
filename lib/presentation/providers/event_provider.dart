@@ -16,7 +16,6 @@ class EventProvider extends ChangeNotifier {
       if (events.isNotEmpty) return;
       isLoadingEvents = true;
       notifyListeners();
-      await Future.delayed(Duration(milliseconds: 300));
       final res = await _repo.allEvents();
       res.fold(
         (l) {},
@@ -37,7 +36,6 @@ class EventProvider extends ChangeNotifier {
     try {
       isLoadingEvent = true;
       notifyListeners();
-      await Future.delayed(Duration(milliseconds: 300));
       final res = await _repo.get(id);
       res.fold(
         (l) {},
