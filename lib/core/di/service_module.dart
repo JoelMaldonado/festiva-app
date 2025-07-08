@@ -10,6 +10,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> serviceModule(GetIt getIt) async {
   final prefs = await SharedPreferences.getInstance();
+
   getIt.registerLazySingleton(() => Prefs(prefs));
   getIt.registerLazySingleton<AuthService>(() => AuthService(getIt()));
   getIt.registerLazySingleton<CommonService>(

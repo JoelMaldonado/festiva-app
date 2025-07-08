@@ -11,6 +11,7 @@ import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/pages/clubs_map/clubs_map_provider.dart';
+import 'package:festiva/util/functions.dart';
 import 'package:get_it/get_it.dart';
 
 Future<void> providerModule(GetIt getIt) async {
@@ -52,7 +53,8 @@ Future<void> providerModule(GetIt getIt) async {
 
   getIt.registerFactory(
     () => ClubsMapProvider(
-      getIt<ClubRepository>(),
+      repo: getIt<ClubRepository>(),
+      imageCacheService: getIt<ImageCacheService>(),
     ),
   );
 }

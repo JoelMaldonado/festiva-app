@@ -56,40 +56,57 @@ class _HomePageState extends State<HomePage> {
               ),
               //HomeCategories(),
               const SizedBox(height: 16),
-              _section(
-                title: "Clubs",
-                onPressed: widget.toClubs,
-              ),
-              CarouselClubsComponent(
-                key: const Key("carousel_clubs"),
-                clubs: clubProvider.clubs,
-                durationInSeconds: 8,
-              ),
-              const SizedBox(height: 16),
-              _section(
-                title: "Events",
-                onPressed: widget.toEvents,
-              ),
-              CarouselEventsComponent(
-                key: const Key("carousel_events"),
-                events: [...eventProvider.events, ...eventProvider.events],
-              ),
-              const SizedBox(height: 16),
-              _section(
-                title: "Artists",
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ArtistsPage(),
+              if (clubProvider.clubs.isNotEmpty)
+                Column(
+                  children: [
+                    _section(
+                      title: "Clubs",
+                      onPressed: widget.toClubs,
                     ),
-                  );
-                },
-              ),
+                    CarouselClubsComponent(
+                      key: const Key("carousel_clubs"),
+                      clubs: clubProvider.clubs,
+                      durationInSeconds: 8,
+                    ),
+                  ],
+                ),
+              const SizedBox(height: 16),
+              if (eventProvider.events.isNotEmpty)
+                Column(
+                  children: [
+                    _section(
+                      title: "Events",
+                      onPressed: widget.toEvents,
+                    ),
+                    CarouselEventsComponent(
+                      key: const Key("carousel_events"),
+                      events: [
+                        ...eventProvider.events,
+                        ...eventProvider.events
+                      ],
+                    ),
+                  ],
+                ),
+              const SizedBox(height: 16),
               if (artistProvider.artists.isNotEmpty)
-                CarouselArtistsComponent(
-                  key: const Key("carousel_artists"),
-                  artists: artistProvider.artists,
+                Column(
+                  children: [
+                    _section(
+                      title: "Artists",
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => ArtistsPage(),
+                          ),
+                        );
+                      },
+                    ),
+                    CarouselArtistsComponent(
+                      key: const Key("carousel_artists"),
+                      artists: artistProvider.artists,
+                    ),
+                  ],
                 ),
               const SizedBox(height: 24),
             ],

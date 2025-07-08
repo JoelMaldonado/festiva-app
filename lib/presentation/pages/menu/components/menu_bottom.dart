@@ -21,7 +21,7 @@ class _MenuBottomState extends State<MenuBottom> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 60,
+      height: 72,
       color: AppColors.colorB3,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,

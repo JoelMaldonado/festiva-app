@@ -1,1 +1,30 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"festiva-331ad","appId":"1:1015648741340:android:868bc300a0f05f16475119","fileOutput":"android/app/google-services.json"}},"ios":{"default":{"projectId":"festiva-331ad","appId":"1:1015648741340:ios:247fddbacbc9fbb6475119","uploadDebugSymbols":false,"fileOutput":"ios/Runner/GoogleService-Info.plist"}},"dart":{"lib/firebase_options.dart":{"projectId":"festiva-331ad","configurations":{"android":"1:1015648741340:android:868bc300a0f05f16475119","ios":"1:1015648741340:ios:247fddbacbc9fbb6475119"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "festiva-331ad",
+          "appId": "1:1015648741340:android:868bc300a0f05f16475119",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "festiva-331ad",
+          "appId": "1:1015648741340:ios:247fddbacbc9fbb6475119",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "festiva-331ad",
+          "configurations": {
+            "android": "1:1015648741340:android:868bc300a0f05f16475119",
+            "ios": "1:1015648741340:ios:247fddbacbc9fbb6475119"
+          }
+        }
+      }
+    }
+  }
+}

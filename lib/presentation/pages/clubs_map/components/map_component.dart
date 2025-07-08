@@ -26,6 +26,10 @@ class _MapComponentState extends State<MapComponent> {
       children: [
         MapWidget(
           styleUri: MapboxStyles.DARK,
+          cameraOptions: CameraOptions(
+            center: Point(coordinates: latestPosition ?? Position(0, 0)),
+            zoom: 17,
+          ),
           onMapCreated: (controller) async {
             if (mapboxMap == null) {
               mapboxMap = controller;
@@ -60,14 +64,14 @@ class _MapComponentState extends State<MapComponent> {
       setState(() => isTracking = false);
       return;
     }
+    final position = Position(
+      myLocation.longitude,
+      myLocation.latitude,
+    );
+    latestPosition = position;
     await mapboxMap?.flyTo(
       CameraOptions(
-        center: Point(
-          coordinates: Position(
-            myLocation.longitude,
-            myLocation.latitude,
-          ),
-        ),
+        center: Point(coordinates: position),
         zoom: 17,
       ),
       MapAnimationOptions(
@@ -77,3 +81,5 @@ class _MapComponentState extends State<MapComponent> {
     setState(() => isTracking = false);
   }
 }
+
+Position? latestPosition;
