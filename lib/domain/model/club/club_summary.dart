@@ -3,15 +3,13 @@ class ClubSummary {
   final String name;
   final String description;
   final String? logoUrl;
-  final String createdAt;
-  final String updatedAt;
+  final String? coverUrl;
 
   ClubSummary({
     required this.id,
     required this.name,
     required this.description,
     required this.logoUrl,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.coverUrl,
   });
 }

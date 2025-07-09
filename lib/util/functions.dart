@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:festiva/main.dart';
 import 'package:flutter/services.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:image/image.dart' as img;
@@ -59,8 +60,10 @@ class ImageCacheService {
   Future<Uint8List> getCachedOrDownload(String url, String filename) async {
     final file = File('${dir.path}/$filename');
     if (await file.exists()) {
+      tagito.i("Imagen encontrada: $filename");
       return await file.readAsBytes();
     } else {
+      tagito.i("Descargando imagen: $filename");
       return (await downloadAndCacheImage(url, filename)).readAsBytes();
     }
   }

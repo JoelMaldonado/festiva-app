@@ -28,6 +28,7 @@ dependencies:
   image: ^4.5.3
   intl: ^0.20.2
   json_annotation: ^4.9.0
+  logger: ^2.6.0
   mapbox_maps_flutter: ^2.9.0
   path_provider: ^2.1.5
   pretty_dio_logger: ^1.4.0

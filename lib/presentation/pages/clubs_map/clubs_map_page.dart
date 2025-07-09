@@ -16,7 +16,10 @@ class _ClubsMapPageState extends State<ClubsMapPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<ClubsMapProvider>(context, listen: false).getClubLocations();
+      Provider.of<ClubsMapProvider>(
+        context,
+        listen: false,
+      ).getClubLocations();
     });
   }
 

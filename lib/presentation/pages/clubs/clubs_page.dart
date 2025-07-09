@@ -34,12 +34,13 @@ class _ClubsPageState extends State<ClubsPage> {
         hideBackButton: true,
       ),
       child: Column(
-        spacing: 16,
+        spacing: 8,
         children: [
           SearchComponent(),
           Expanded(
             child: ListView.separated(
               itemCount: provider.clubs.length,
+              padding: EdgeInsets.symmetric(vertical: 24),
               itemBuilder: (context, index) {
                 final club = provider.clubs[index];
                 return CardClub(

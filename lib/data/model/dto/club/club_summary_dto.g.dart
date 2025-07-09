@@ -12,8 +12,7 @@ ClubSummaryDto _$ClubSummaryDtoFromJson(Map<String, dynamic> json) =>
       name: json['name'] as String?,
       description: json['description'] as String?,
       logoUrl: json['logoUrl'] as String?,
-      createdAt: json['createdAt'] as String?,
-      updatedAt: json['updatedAt'] as String?,
+      coverUrl: json['coverUrl'] as String?,
     );
 
 Map<String, dynamic> _$ClubSummaryDtoToJson(ClubSummaryDto instance) =>
@@ -22,6 +21,5 @@ Map<String, dynamic> _$ClubSummaryDtoToJson(ClubSummaryDto instance) =>
       'name': instance.name,
       'description': instance.description,
       'logoUrl': instance.logoUrl,
-      'createdAt': instance.createdAt,
-      'updatedAt': instance.updatedAt,
+      'coverUrl': instance.coverUrl,
     };

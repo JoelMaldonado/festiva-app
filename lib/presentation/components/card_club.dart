@@ -39,7 +39,7 @@ class CardClub extends StatelessWidget {
                       topRight: Radius.circular(16),
                     ),
                     child: AppImageNetwork(
-                      imageUrl: club.logoUrl,
+                      imageUrl: club.coverUrl,
                       width: double.infinity,
                       height: 132,
                       fit: BoxFit.fitWidth,

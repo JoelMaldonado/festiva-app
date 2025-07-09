@@ -17,19 +17,15 @@ class ClubSummaryDto {
   @JsonKey(name: 'logoUrl')
   final String? logoUrl;
 
-  @JsonKey(name: 'createdAt')
-  final String? createdAt;
-
-  @JsonKey(name: 'updatedAt')
-  final String? updatedAt;
+  @JsonKey(name: 'coverUrl')
+  final String? coverUrl;
 
   ClubSummaryDto({
     required this.id,
     required this.name,
     required this.description,
     required this.logoUrl,
-    required this.createdAt,
-    required this.updatedAt,
+    required this.coverUrl,
   });
 
   factory ClubSummaryDto.fromJson(Map<String, dynamic> json) =>
@@ -43,8 +39,7 @@ class ClubSummaryDto {
       name: name ?? '',
       description: description ?? '',
       logoUrl: logoUrl,
-      createdAt: createdAt ?? '',
-      updatedAt: updatedAt ?? '',
+      coverUrl: coverUrl,
     );
   }
 }

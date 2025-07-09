@@ -36,6 +36,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
     return AppScaffold(
       isLoadingScreen: provider.isLoadingClub,
       errorMessage: provider.errorMessage,
+      padding: EdgeInsets.zero,
       child: club == null
           ? Center(
               child: Text("No se encontro el club"),
@@ -52,19 +53,22 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                         child: PageView.builder(
                           itemCount: club.covers.length,
                           itemBuilder: (c, i) {
-                            return ClipRRect(
-                              borderRadius: BorderRadius.circular(12),
-                              child: Image.network(
-                                club.covers[i],
-                                fit: BoxFit.cover,
+                            return Padding(
+                              padding: const EdgeInsets.all(24),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(12),
+                                child: Image.network(
+                                  club.covers[i],
+                                  fit: BoxFit.cover,
+                                ),
                               ),
                             );
                           },
                         ),
                       ),
                       Positioned(
-                        left: 16,
-                        bottom: 16,
+                        left: 40,
+                        bottom: 40,
                         child: SizedBox(
                           width: 80,
                           height: 80,
@@ -79,83 +83,92 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                       ),
                     ],
                   ),
-                  Row(
-                    spacing: 12,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          club.name,
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w900,
-                            color: AppColors.colorT1,
-                          ),
-                        ),
-                      ),
-                      if (kDebugMode)
-                        AppFloatingActionButton(
-                          onPressed: () {},
-                          icon: Icons.favorite_outline,
-                        ),
-                      if (kDebugMode)
-                        AppFloatingActionButton(
-                          onPressed: () {},
-                          icon: Icons.share_outlined,
-                        ),
-                    ],
-                  ),
-                  Text(
-                    club.description,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: AppColors.colorT2,
-                    ),
-                  ),
-                  _itemDetail(
-                    icon: Icons.calendar_month,
-                    title: "Opening Hours",
-                    value: "Monday - Saturdar 8:00 - 22:00",
-                    onTap: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (_) {
-                        return ClubSchedulePage(
-                          schedules: club.schedules,
-                        );
-                      }));
-                    },
-                  ),
-                  _itemDetail(
-                    icon: Icons.explore_outlined,
-                    title: "Address",
-                    value: club.address.firstOrNull?.address ?? '',
-                  ),
-                  if (kDebugMode)
-                    Row(
-                      spacing: 12,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                    child: Column(
+                      spacing: 16,
                       children: [
-                        Expanded(
-                          flex: 2,
-                          child: _itemDetail(
-                            icon: Icons.star_outline,
-                            title: "Rating",
-                            value: "5.0",
+                        Row(
+                          spacing: 12,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                club.name,
+                                style: TextStyle(
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w900,
+                                  color: AppColors.colorT1,
+                                ),
+                              ),
+                            ),
+                            if (kDebugMode)
+                              AppFloatingActionButton(
+                                onPressed: () {},
+                                icon: Icons.favorite_outline,
+                              ),
+                            if (kDebugMode)
+                              AppFloatingActionButton(
+                                onPressed: () {},
+                                icon: Icons.share_outlined,
+                              ),
+                          ],
+                        ),
+                        Text(
+                          club.description,
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.colorT2,
                           ),
                         ),
-                        FloatingActionButton(
-                          onPressed: () {},
-                          backgroundColor: AppColors.colorBlue,
-                          foregroundColor: AppColors.colorT1,
-                          shape: CircleBorder(),
-                          child: Icon(Icons.message_outlined),
+                        _itemDetail(
+                          icon: Icons.calendar_month,
+                          title: "Opening Hours",
+                          value: "Monday - Saturdar 8:00 - 22:00",
+                          onTap: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) {
+                              return ClubSchedulePage(
+                                schedules: club.schedules,
+                              );
+                            }));
+                          },
                         ),
-                        FloatingActionButton(
-                          onPressed: () {},
-                          backgroundColor: AppColors.colorGreen,
-                          foregroundColor: AppColors.colorT1,
-                          shape: CircleBorder(),
-                          child: Icon(Icons.workspace_premium),
+                        _itemDetail(
+                          icon: Icons.explore_outlined,
+                          title: "Address",
+                          value: club.address.firstOrNull?.address ?? '',
                         ),
+                        if (kDebugMode)
+                          Row(
+                            spacing: 12,
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: _itemDetail(
+                                  icon: Icons.star_outline,
+                                  title: "Rating",
+                                  value: "5.0",
+                                ),
+                              ),
+                              FloatingActionButton(
+                                onPressed: () {},
+                                backgroundColor: AppColors.colorBlue,
+                                foregroundColor: AppColors.colorT1,
+                                shape: CircleBorder(),
+                                child: Icon(Icons.message_outlined),
+                              ),
+                              FloatingActionButton(
+                                onPressed: () {},
+                                backgroundColor: AppColors.colorGreen,
+                                foregroundColor: AppColors.colorT1,
+                                shape: CircleBorder(),
+                                child: Icon(Icons.workspace_premium),
+                              ),
+                            ],
+                          ),
                       ],
                     ),
+                  ),
                   const SizedBox(height: 16),
                 ],
               ),

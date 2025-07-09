@@ -24,20 +24,30 @@ class MenuPage extends StatelessWidget {
       ),
     );
 
+    final pages = [
+      ClubsMapPage(), // index 0
+      EventsPage(), // index 1
+      HomePage(
+        toClubs: () => provider.setMenuSelected(MenuEnum.clubs),
+        toEvents: () => provider.setMenuSelected(MenuEnum.events),
+      ), // index 2
+      ClubsPage(), // index 3
+    ];
+
+    final selectedIndex = switch (provider.menuSelected) {
+      MenuEnum.maps => 0,
+      MenuEnum.events => 1,
+      MenuEnum.home => 2,
+      MenuEnum.clubs => 3,
+    };
+
     return Scaffold(
       backgroundColor: AppColors.colorB1,
       body: SafeArea(
-        child: switch (provider.menuSelected) {
-          MenuEnum.maps => ClubsMapPage(),
-          MenuEnum.events => EventsPage(),
-          MenuEnum.home => HomePage(
-              toClubs: () => provider.setMenuSelected(MenuEnum.clubs),
-              toEvents: () => provider.setMenuSelected(MenuEnum.events),
-            ),
-          MenuEnum.clubs => ClubsPage(),
-          //MenuEnum.preferences => PreferencesPage(),
-        },
-      ),
+          child: IndexedStack(
+        index: selectedIndex,
+        children: pages,
+      )),
       bottomNavigationBar: MenuBottom(
         selected: provider.menuSelected,
         onSelected: provider.setMenuSelected,
