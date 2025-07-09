@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/custom_shimmer.dart';
 import 'package:flutter/material.dart';
 
 class AppImageNetwork extends StatelessWidget {
@@ -27,8 +28,9 @@ class AppImageNetwork extends StatelessWidget {
             fit: fit,
             width: width,
             height: height,
-            placeholder: (context, url) => const Center(
-              child: CircularProgressIndicator(),
+            placeholder: (context, url) => CustomShimmer(
+              width: width,
+              height: height,
             ),
             errorWidget: (context, url, error) => _getImageNotFound(),
           );

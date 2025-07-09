@@ -1,3 +1,6 @@
+import 'package:festiva/presentation/components/card_artist.dart';
+import 'package:festiva/presentation/components/card_artist_shimmer.dart';
+import 'package:festiva/presentation/components/card_club_shimmer.dart';
 import 'package:festiva/presentation/pages/artists/artists_page.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_artists_component.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_clubs_component.dart';
@@ -56,18 +59,23 @@ class _HomePageState extends State<HomePage> {
               ),
               //HomeCategories(),
               const SizedBox(height: 16),
-              if (clubProvider.clubs.isNotEmpty)
+              if (clubProvider.clubs.isNotEmpty || clubProvider.isLoadingClubs)
                 Column(
                   children: [
                     _section(
                       title: "Clubs",
                       onPressed: widget.toClubs,
                     ),
-                    CarouselClubsComponent(
-                      key: const Key("carousel_clubs"),
-                      clubs: clubProvider.clubs,
-                      durationInSeconds: 8,
-                    ),
+                    clubProvider.isLoadingClubs
+                        ? Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 24),
+                            child: CardClubShimmer(),
+                          )
+                        : CarouselClubsComponent(
+                            key: const Key("carousel_clubs"),
+                            clubs: clubProvider.clubs,
+                            durationInSeconds: 8,
+                          ),
                   ],
                 ),
               const SizedBox(height: 16),
@@ -101,6 +109,15 @@ class _HomePageState extends State<HomePage> {
                           ),
                         );
                       },
+                    ),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 100,
+                      child: ListView.builder(
+                        itemCount: 4,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) => CardClubShimmer(),
+                      ),
                     ),
                     CarouselArtistsComponent(
                       key: const Key("carousel_artists"),

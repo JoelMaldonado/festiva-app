@@ -14,23 +14,24 @@ class CardArtist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (_) => DetailArtistPage(
-              idArtist: artist.id,
-            ),
-          ),
-        );
-      },
-      child: SizedBox(
-        width: 72,
-        child: Column(
-          children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(16),
+    return SizedBox(
+      width: 72,
+      child: Column(
+        spacing: 6,
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DetailArtistPage(
+                    idArtist: artist.id,
+                  ),
+                ),
+              );
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
               child: AppImageNetwork(
                 imageUrl: artist.urlFoto,
                 width: 72,
@@ -38,14 +39,13 @@ class CardArtist extends StatelessWidget {
                 fit: BoxFit.cover,
               ),
             ),
-            const SizedBox(height: 4),
-            Text(
-              artist.nombre,
-              style: AppTextStyles.caption2,
-              maxLines: 1,
-            ),
-          ],
-        ),
+          ),
+          Text(
+            artist.nombre,
+            style: AppTextStyles.caption2,
+            maxLines: 1,
+          ),
+        ],
       ),
     );
   }

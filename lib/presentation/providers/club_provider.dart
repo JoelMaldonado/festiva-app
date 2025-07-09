@@ -17,6 +17,8 @@ class ClubProvider extends ChangeNotifier {
     try {
       isLoadingClubs = true;
       notifyListeners();
+      await Future.delayed(
+          const Duration(milliseconds: 500)); // Simulate loading delay
       final res = await _repo.allSummary();
       res.fold(
         (l) {},
