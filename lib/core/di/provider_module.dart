@@ -3,6 +3,7 @@ import 'package:festiva/domain/repository/auth_repository.dart';
 import 'package:festiva/domain/repository/club_repository.dart';
 import 'package:festiva/domain/repository/common_repository.dart';
 import 'package:festiva/domain/repository/event_repository.dart';
+import 'package:festiva/domain/repository/ui_repository.dart';
 import 'package:festiva/domain/usecase/get_all_club_locations_use_case.dart';
 import 'package:festiva/presentation/pages/home/home_provider.dart';
 import 'package:festiva/presentation/pages/search/search_provider.dart';
@@ -40,7 +41,8 @@ Future<void> providerModule(GetIt getIt) async {
   // Club Provider
   getIt.registerFactory(
     () => ClubProvider(
-      getIt<ClubRepository>(),
+      repo: getIt<ClubRepository>(),
+      uiRepo: getIt<UiRepository>(),
     ),
   );
 

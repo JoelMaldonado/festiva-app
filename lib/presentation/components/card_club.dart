@@ -1,15 +1,21 @@
-import 'package:festiva/domain/model/club/club_summary.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CardClub extends StatelessWidget {
-  final ClubSummary club;
+  final String name;
+  final String? coverUrl;
+  final String? logoUrl;
+  final String type;
+
   final VoidCallback onPressed;
 
   const CardClub({
     super.key,
-    required this.club,
+    required this.name,
+    required this.coverUrl,
+    required this.logoUrl,
+    required this.type,
     required this.onPressed,
   });
 
@@ -39,7 +45,7 @@ class CardClub extends StatelessWidget {
                       topRight: Radius.circular(16),
                     ),
                     child: AppImageNetwork(
-                      imageUrl: club.coverUrl,
+                      imageUrl: coverUrl,
                       width: double.infinity,
                       height: 132,
                       fit: BoxFit.fitWidth,
@@ -68,7 +74,7 @@ class CardClub extends StatelessWidget {
                   spacing: 8,
                   children: [
                     AppImageNetwork(
-                      imageUrl: club.logoUrl,
+                      imageUrl: logoUrl,
                       width: 42,
                       height: 42,
                       fit: BoxFit.cover,
@@ -77,14 +83,14 @@ class CardClub extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          club.name,
+                          name,
                           style: AppTextStyles.callout.copyWith(
                             fontWeight: FontWeight.w900,
                             color: AppColors.colorT1,
                           ),
                         ),
                         Text(
-                          "Discoteca",
+                          type,
                           style: AppTextStyles.footnote.copyWith(
                             color: AppColors.colorT2,
                           ),

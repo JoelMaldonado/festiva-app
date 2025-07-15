@@ -39,13 +39,15 @@ class _ClubsPageState extends State<ClubsPage> {
           SearchComponent(),
           Expanded(
             child: ListView.separated(
-              itemCount: provider.clubs.length,
+              itemCount: provider.listUiClubs.length,
               padding: EdgeInsets.symmetric(vertical: 24),
               itemBuilder: (context, index) {
-                final club = provider.clubs[index];
+                final club = provider.listUiClubs[index];
                 return CardClub(
-                  key: Key(club.id.toString()),
-                  club: club,
+                  name: club.name,
+                  coverUrl: club.coverUrl,
+                  logoUrl: club.logoUrl,
+                  type: club.type,
                   onPressed: () {
                     Navigator.push(
                       context,

@@ -1,10 +1,12 @@
-import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
+import 'package:festiva/main.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/custom_floating_action_button.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ClubDetailPage extends StatefulWidget {
   final int idClub;
@@ -74,8 +76,8 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                           height: 80,
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(12),
-                            child: Image.network(
-                              club.logoUrl,
+                            child: AppImageNetwork(
+                              imageUrl: club.logoUrl,
                               fit: BoxFit.cover,
                             ),
                           ),
@@ -86,6 +88,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: 16,
                       children: [
                         Row(
@@ -101,16 +104,14 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                                 ),
                               ),
                             ),
-                            if (kDebugMode)
-                              AppFloatingActionButton(
-                                onPressed: () {},
-                                icon: Icons.favorite_outline,
-                              ),
-                            if (kDebugMode)
-                              AppFloatingActionButton(
-                                onPressed: () {},
-                                icon: Icons.share_outlined,
-                              ),
+                            //AppFloatingActionButton(
+                            //  onPressed: () {},
+                            //  icon: Icons.favorite_outline,
+                            //),
+                            //AppFloatingActionButton(
+                            //  onPressed: () {},
+                            //  icon: Icons.share_outlined,
+                            //),
                           ],
                         ),
                         Text(
@@ -120,52 +121,91 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             color: AppColors.colorT2,
                           ),
                         ),
-                        _itemDetail(
-                          icon: Icons.calendar_month,
-                          title: "Opening Hours",
-                          value: "Monday - Saturdar 8:00 - 22:00",
-                          onTap: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (_) {
-                              return ClubSchedulePage(
-                                schedules: club.schedules,
-                              );
-                            }));
-                          },
-                        ),
-                        _itemDetail(
-                          icon: Icons.explore_outlined,
-                          title: "Address",
-                          value: club.address.firstOrNull?.address ?? '',
-                        ),
-                        if (kDebugMode)
-                          Row(
-                            spacing: 12,
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: _itemDetail(
-                                  icon: Icons.star_outline,
-                                  title: "Rating",
-                                  value: "5.0",
-                                ),
-                              ),
-                              FloatingActionButton(
-                                onPressed: () {},
-                                backgroundColor: AppColors.colorBlue,
-                                foregroundColor: AppColors.colorT1,
-                                shape: CircleBorder(),
-                                child: Icon(Icons.message_outlined),
-                              ),
-                              FloatingActionButton(
-                                onPressed: () {},
-                                backgroundColor: AppColors.colorGreen,
-                                foregroundColor: AppColors.colorT1,
-                                shape: CircleBorder(),
-                                child: Icon(Icons.workspace_premium),
-                              ),
-                            ],
+                        //_itemDetail(
+                        //  icon: Icons.calendar_month,
+                        //  title: "Opening Hours",
+                        //  value: "Monday - Saturdar 8:00 - 22:00",
+                        //  onTap: () {
+                        //    Navigator.push(context,
+                        //        MaterialPageRoute(builder: (_) {
+                        //      return ClubSchedulePage(
+                        //        schedules: club.schedules,
+                        //      );
+                        //    }));
+                        //  },
+                        //),
+                        //_itemDetail(
+                        //  icon: Icons.explore_outlined,
+                        //  title: "Address",
+                        //  value: club.address.firstOrNull?.address ?? '',
+                        //),
+                        //Row(
+                        //  spacing: 12,
+                        //  children: [
+                        //    Expanded(
+                        //      flex: 2,
+                        //      child: _itemDetail(
+                        //        icon: Icons.star_outline,
+                        //        title: "Rating",
+                        //        value: "5.0",
+                        //      ),
+                        //    ),
+                        //    CustomFloatingActionButton(
+                        //      icon: Icons.mail_outline,
+                        //      backgroundColor: AppColors.colorBlue,
+                        //      onPressed: () {},
+                        //    ),
+                        //    CustomFloatingActionButton(
+                        //      icon: Icons.call_outlined,
+                        //      backgroundColor: AppColors.colorGreen,
+                        //      onPressed: () {},
+                        //    ),
+                        //  ],
+                        //),
+
+                        Text(
+                          "Social Networks",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.colorT1,
                           ),
+                        ),
+
+                        SizedBox(
+                          height: 42,
+                          child: ListView.separated(
+                            scrollDirection: Axis.horizontal,
+                            itemCount: club.socialNetworks.length,
+                            itemBuilder: (c, i) {
+                              final socialNetwork = club.socialNetworks[i];
+                              return Material(
+                                color: Colors.transparent,
+                                child: InkWell(
+                                  onTap: () => _openLink(socialNetwork.url),
+                                  customBorder: CircleBorder(),
+                                  child: Ink(
+                                    width: 42,
+                                    height: 42,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.colorB3,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    child: Center(
+                                      child: AppImageNetwork(
+                                        imageUrl: socialNetwork.logoUrl,
+                                        width: 24,
+                                        height: 24,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            separatorBuilder: (c, i) =>
+                                const SizedBox(width: 8),
+                          ),
+                        )
                       ],
                     ),
                   ),
@@ -174,6 +214,17 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
               ),
             ),
     );
+  }
+
+  void _openLink(String url) async {
+    try {
+      final uri = Uri.parse(url);
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+        tagito.e("Could not launch $url");
+      }
+    } catch (e) {
+      tagito.e("Error opening link: $url");
+    }
   }
 
   Widget _itemDetail({

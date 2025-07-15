@@ -1,0 +1,144 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'ui_response.g.dart';
+
+@JsonSerializable()
+class FetchUiClubsResponse {
+  @JsonKey(name: 'items')
+  final List<UiClub> items;
+
+  @JsonKey(name: 'meta')
+  final UiMeta meta;
+
+  FetchUiClubsResponse({
+    required this.items,
+    required this.meta,
+  });
+
+  factory FetchUiClubsResponse.fromJson(Map<String, dynamic> json) =>
+      _$FetchUiClubsResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FetchUiClubsResponseToJson(this);
+}
+
+@JsonSerializable()
+class UiMeta {
+  @JsonKey(name: 'page')
+  final int page;
+
+  @JsonKey(name: 'limit')
+  final int limit;
+
+  @JsonKey(name: 'total')
+  final int total;
+
+  @JsonKey(name: 'totalPages')
+  final int totalPages;
+
+  @JsonKey(name: 'hasNextPage')
+  final bool hasNextPage;
+
+  @JsonKey(name: 'hasPreviousPage')
+  final bool hasPreviousPage;
+
+  UiMeta({
+    required this.page,
+    required this.limit,
+    required this.total,
+    required this.totalPages,
+    required this.hasNextPage,
+    required this.hasPreviousPage,
+  });
+
+  factory UiMeta.fromJson(Map<String, dynamic> json) => _$UiMetaFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UiMetaToJson(this);
+}
+
+@JsonSerializable()
+class UiClub {
+  @JsonKey(name: 'id')
+  final int id;
+
+  @JsonKey(name: 'name')
+  final String name;
+
+  @JsonKey(name: 'logoUrl')
+  final String? logoUrl;
+
+  @JsonKey(name: 'coverUrl')
+  final String? coverUrl;
+
+  @JsonKey(name: 'type')
+  final String type;
+
+  UiClub({
+    required this.id,
+    required this.name,
+    required this.logoUrl,
+    required this.coverUrl,
+    required this.type,
+  });
+
+  factory UiClub.fromJson(Map<String, dynamic> json) => _$UiClubFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UiClubToJson(this);
+}
+
+@JsonSerializable()
+class UiClubDetail {
+  @JsonKey(name: 'id')
+  final int id;
+
+  @JsonKey(name: 'name')
+  final String name;
+
+  @JsonKey(name: 'description')
+  final String description;
+
+  @JsonKey(name: 'logoUrl')
+  final String? logoUrl;
+
+  @JsonKey(name: 'covers')
+  final List<String> covers;
+
+  @JsonKey(name: 'socialNetworks')
+  final List<UiClubSocialNetwork> socialNetworks;
+
+  UiClubDetail({
+    required this.id,
+    required this.name,
+    required this.description,
+    this.logoUrl,
+    required this.covers,
+    required this.socialNetworks,
+  });
+
+  factory UiClubDetail.fromJson(Map<String, dynamic> json) =>
+      _$UiClubDetailFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UiClubDetailToJson(this);
+}
+
+@JsonSerializable()
+class UiClubSocialNetwork {
+  @JsonKey(name: 'url')
+  final String url;
+
+  @JsonKey(name: 'name')
+  final String name;
+
+  @JsonKey(name: 'logoUrl')
+  final String logoUrl;
+
+  UiClubSocialNetwork({
+    required this.url,
+    required this.name,
+    required this.logoUrl,
+  });
+
+  factory UiClubSocialNetwork.fromJson(Map<String, dynamic> json) =>
+      _$UiClubSocialNetworkFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UiClubSocialNetworkToJson(this);
+}

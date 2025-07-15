@@ -1,6 +1,4 @@
-import 'package:festiva/presentation/components/card_artist.dart';
 import 'package:festiva/presentation/components/card_artist_shimmer.dart';
-import 'package:festiva/presentation/components/card_club_shimmer.dart';
 import 'package:festiva/presentation/pages/artists/artists_page.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_artists_component.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_clubs_component.dart';
@@ -33,7 +31,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<ClubProvider>(context, listen: false).getClubs();
       Provider.of<ArtistProvider>(context, listen: false).getArtists();
       Provider.of<EventProvider>(context, listen: false).getEvents();
     });
@@ -41,9 +38,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final clubProvider = Provider.of<ClubProvider>(context);
     final artistProvider = Provider.of<ArtistProvider>(context);
     final eventProvider = Provider.of<EventProvider>(context);
+    final clubProvider = Provider.of<ClubProvider>(context);
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
@@ -59,25 +56,17 @@ class _HomePageState extends State<HomePage> {
               ),
               //HomeCategories(),
               const SizedBox(height: 16),
-              if (clubProvider.clubs.isNotEmpty || clubProvider.isLoadingClubs)
-                Column(
-                  children: [
-                    _section(
-                      title: "Clubs",
-                      onPressed: widget.toClubs,
-                    ),
-                    clubProvider.isLoadingClubs
-                        ? Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 24),
-                            child: CardClubShimmer(),
-                          )
-                        : CarouselClubsComponent(
-                            key: const Key("carousel_clubs"),
-                            clubs: clubProvider.clubs,
-                            durationInSeconds: 8,
-                          ),
-                  ],
-                ),
+              Column(
+                children: [
+                  _section(
+                    title: "Clubs ${clubProvider.listUiClubs.length}",
+                    onPressed: widget.toClubs,
+                  ),
+                  CarouselClubsComponent(
+                    durationInSeconds: 2,
+                  ),
+                ],
+              ),
               const SizedBox(height: 16),
               if (eventProvider.events.isNotEmpty)
                 Column(
@@ -88,15 +77,13 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CarouselEventsComponent(
                       key: const Key("carousel_events"),
-                      events: [
-                        ...eventProvider.events,
-                        ...eventProvider.events
-                      ],
+                      events: eventProvider.events,
                     ),
                   ],
                 ),
               const SizedBox(height: 16),
-              if (artistProvider.artists.isNotEmpty)
+              if (artistProvider.artists.isNotEmpty ||
+                  artistProvider.isLoadingArtists)
                 Column(
                   children: [
                     _section(
@@ -110,19 +97,18 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 100,
-                      child: ListView.builder(
-                        itemCount: 4,
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: (context, index) => CardClubShimmer(),
-                      ),
-                    ),
-                    CarouselArtistsComponent(
-                      key: const Key("carousel_artists"),
-                      artists: artistProvider.artists,
-                    ),
+                    artistProvider.isLoadingArtists
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: List.generate(
+                              4,
+                              (_) => const CardArtistShimmer(),
+                            ),
+                          )
+                        : CarouselArtistsComponent(
+                            key: const Key("carousel_artists"),
+                            artists: artistProvider.artists,
+                          ),
                   ],
                 ),
               const SizedBox(height: 24),

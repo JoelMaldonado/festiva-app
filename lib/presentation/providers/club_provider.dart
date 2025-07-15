@@ -1,64 +1,84 @@
-import 'package:festiva/domain/model/club/club.dart';
-import 'package:festiva/domain/model/club/club_summary.dart';
+import 'package:festiva/data/model/response/ui_response.dart';
 import 'package:festiva/domain/repository/club_repository.dart';
+import 'package:festiva/domain/repository/ui_repository.dart';
 import 'package:flutter/foundation.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class ClubProvider extends ChangeNotifier {
-  final ClubRepository _repo;
+  final ClubRepository repo;
+  final UiRepository uiRepo;
 
-  ClubProvider(this._repo);
+  ClubProvider({
+    required this.repo,
+    required this.uiRepo,
+  });
 
-  List<ClubSummary> clubs = [];
+  bool hasMoreClubs = true;
 
-  bool isLoadingClubs = false;
+  List<UiClub> listUiClubs = [];
+  bool isLoadingUiClubs = false;
+  bool isLoadingMoreUiClubs = false;
+
+  int page = 1;
+  final limit = 5;
 
   getClubs() async {
-    try {
-      isLoadingClubs = true;
-      notifyListeners();
-      await Future.delayed(
-          const Duration(milliseconds: 500)); // Simulate loading delay
-      final res = await _repo.allSummary();
-      res.fold(
-        (l) {},
-        (r) => clubs = r,
-      );
-    } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
-    } finally {
-      isLoadingClubs = false;
-      notifyListeners();
-    }
+    isLoadingUiClubs = true;
+    notifyListeners();
+    await Future.delayed(const Duration(milliseconds: 500));
+    final res = await uiRepo.fetchClubs(page, limit);
+    res.fold(
+      (l) {},
+      (r) {
+        listUiClubs = List.of(r.items);
+        page++;
+        hasMoreClubs = r.meta.hasNextPage;
+      },
+    );
+    isLoadingUiClubs = false;
+    notifyListeners();
   }
 
-  Club? club;
+  getMoreClubs() async {
+    if (isLoadingMoreUiClubs || !hasMoreClubs) return;
+
+    isLoadingMoreUiClubs = true;
+    notifyListeners();
+
+    final res = await uiRepo.fetchClubs(page, limit);
+    res.fold(
+      (l) {},
+      (r) {
+        page++;
+        hasMoreClubs = r.meta.hasNextPage;
+        listUiClubs.addAll(r.items);
+      },
+    );
+
+    isLoadingMoreUiClubs = false;
+    notifyListeners();
+  }
+
+  UiClubDetail? club;
   bool isLoadingClub = false;
   String? errorMessage;
 
   getClub(int id) async {
-    try {
-      isLoadingClub = true;
-      errorMessage = null;
-      notifyListeners();
+    isLoadingClub = true;
+    errorMessage = null;
+    notifyListeners();
 
-      final res = await _repo.get(id);
-      res.fold(
-        (l) {
-          errorMessage = l.message;
-          club = null;
-        },
-        (r) {
-          errorMessage = null;
-          club = r;
-        },
-      );
-    } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
-      club = null;
-    } finally {
-      isLoadingClub = false;
-      notifyListeners();
-    }
+    final res = await uiRepo.fetchClubDetail(id);
+    res.fold(
+      (l) {
+        errorMessage = l.message;
+        isLoadingClub = false;
+        notifyListeners();
+      },
+      (r) {
+        club = r;
+        isLoadingClub = false;
+        notifyListeners();
+      },
+    );
   }
 }

@@ -16,6 +16,7 @@ class ArtistProvider extends ChangeNotifier {
       if (artists.isNotEmpty) return;
       isLoadingArtists = true;
       notifyListeners();
+      await Future.delayed(const Duration(milliseconds: 500));
       final res = await _repo.allArtists();
       res.fold(
         (l) {},
