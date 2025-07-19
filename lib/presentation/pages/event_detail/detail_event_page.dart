@@ -1,8 +1,12 @@
+import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/custom_floating_action_button.dart';
+import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:festiva/util/date_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class DetailEventPage extends StatefulWidget {
@@ -36,14 +40,32 @@ class _DetailEventPageState extends State<DetailEventPage> {
         child: Column(
           spacing: 12,
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: AspectRatio(
-                aspectRatio: 1,
-                child: AppImageNetwork(
-                  imageUrl: provider.event?.imageUrl,
-                  width: double.infinity,
-                ),
+            AspectRatio(
+              aspectRatio: 1,
+              child: Stack(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: AppImageNetwork(
+                      imageUrl: provider.event?.imageUrl,
+                      width: double.infinity,
+                    ),
+                  ),
+                  if (provider.event?.imageUrl != null)
+                    Positioned(
+                      top: 12,
+                      right: 12,
+                      child: CustomIconButton(
+                        icon: Icons.fullscreen,
+                        onPressed: () {
+                          GoRouter.of(context).push(
+                            AppRoutes.fullScreenImage,
+                            extra: provider.event!.imageUrl,
+                          );
+                        },
+                      ),
+                    ),
+                ],
               ),
             ),
             Row(
@@ -116,19 +138,15 @@ class _DetailEventPageState extends State<DetailEventPage> {
                     value: "13/06/2025",
                   ),
                 ),
-                FloatingActionButton(
-                  onPressed: () {},
+                CustomFloatingActionButton(
+                  icon: Icons.message_outlined,
                   backgroundColor: AppColors.colorBlue,
-                  foregroundColor: AppColors.colorT1,
-                  shape: CircleBorder(),
-                  child: Icon(Icons.message_outlined),
-                ),
-                FloatingActionButton(
                   onPressed: () {},
+                ),
+                CustomFloatingActionButton(
+                  icon: Icons.workspace_premium,
                   backgroundColor: AppColors.colorGreen,
-                  foregroundColor: AppColors.colorT1,
-                  shape: CircleBorder(),
-                  child: Icon(Icons.workspace_premium),
+                  onPressed: () {},
                 ),
               ],
             ),

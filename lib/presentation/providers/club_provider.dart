@@ -12,49 +12,19 @@ class ClubProvider extends ChangeNotifier {
     required this.uiRepo,
   });
 
-  bool hasMoreClubs = true;
-
   List<UiClub> listUiClubs = [];
   bool isLoadingUiClubs = false;
-  bool isLoadingMoreUiClubs = false;
-
-  int page = 1;
-  final limit = 5;
 
   getClubs() async {
     isLoadingUiClubs = true;
     notifyListeners();
     await Future.delayed(const Duration(milliseconds: 500));
-    final res = await uiRepo.fetchClubs(page, limit);
+    final res = await uiRepo.fetchClubs(1, 100);
     res.fold(
       (l) {},
-      (r) {
-        listUiClubs = List.of(r.items);
-        page++;
-        hasMoreClubs = r.meta.hasNextPage;
-      },
+      (r) => listUiClubs = List.of(r.items),
     );
     isLoadingUiClubs = false;
-    notifyListeners();
-  }
-
-  getMoreClubs() async {
-    if (isLoadingMoreUiClubs || !hasMoreClubs) return;
-
-    isLoadingMoreUiClubs = true;
-    notifyListeners();
-
-    final res = await uiRepo.fetchClubs(page, limit);
-    res.fold(
-      (l) {},
-      (r) {
-        page++;
-        hasMoreClubs = r.meta.hasNextPage;
-        listUiClubs.addAll(r.items);
-      },
-    );
-
-    isLoadingMoreUiClubs = false;
     notifyListeners();
   }
 

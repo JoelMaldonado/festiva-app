@@ -1,8 +1,4 @@
 import 'dart:async';
-
-// ignore: unused_import
-import 'package:festiva/data/model/response/ui_response.dart';
-import 'package:festiva/main.dart';
 import 'package:festiva/presentation/components/card_club.dart';
 import 'package:festiva/presentation/components/card_club_shimmer.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
@@ -80,14 +76,7 @@ class _CarouselClubsComponentState extends State<CarouselClubsComponent> {
         controller: _pageController,
         scrollDirection: Axis.horizontal,
         itemCount: provider.listUiClubs.length,
-        onPageChanged: (index) {
-          _currentPage = index;
-          final remaining = provider.listUiClubs.length - index;
-          if (remaining <= 3) {
-            tagito.d("Fetching more clubs, remaining: $remaining");
-            provider.getMoreClubs();
-          }
-        },
+        onPageChanged: (index) => _currentPage = index,
         itemBuilder: (context, index) {
           final item = provider.listUiClubs[index];
           return Padding(

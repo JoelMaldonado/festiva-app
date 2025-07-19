@@ -1,5 +1,6 @@
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
+import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -35,9 +36,9 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               spacing: 12,
               children: [
                 if (!hideBackButton)
-                  _iconButton(
-                    onPressed: () => Navigator.of(context).pop(),
+                  CustomIconButton(
                     icon: Icons.arrow_back,
+                    onPressed: () => Navigator.of(context).pop(),
                   ),
                 Text(
                   title,
@@ -55,38 +56,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
           ],
-        ),
-      ),
-    );
-  }
-
-  Material _iconButton({
-    required VoidCallback onPressed,
-    required IconData icon,
-  }) {
-    return Material(
-      color: Colors.transparent,
-      child: InkWell(
-        onTap: onPressed,
-        customBorder: CircleBorder(),
-        child: Ink(
-          width: 42,
-          height: 42,
-          decoration: BoxDecoration(
-            color: AppColors.colorB3,
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: AppColors.colorB4,
-              width: 2,
-            ),
-          ),
-          child: Center(
-            child: Icon(
-              icon,
-              color: Colors.white,
-              size: 24,
-            ),
-          ),
         ),
       ),
     );

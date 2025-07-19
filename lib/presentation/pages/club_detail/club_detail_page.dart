@@ -1,10 +1,13 @@
+import 'package:festiva/app/router.dart';
+import 'package:festiva/domain/model/club/club.dart';
 import 'package:festiva/main.dart';
+import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
-import 'package:festiva/presentation/widgets/custom_floating_action_button.dart';
+import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -57,12 +60,29 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                           itemBuilder: (c, i) {
                             return Padding(
                               padding: const EdgeInsets.all(24),
-                              child: ClipRRect(
-                                borderRadius: BorderRadius.circular(12),
-                                child: Image.network(
-                                  club.covers[i],
-                                  fit: BoxFit.cover,
-                                ),
+                              child: Stack(
+                                children: [
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(12),
+                                    child: Image.network(
+                                      club.covers[i],
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: 12,
+                                    right: 12,
+                                    child: CustomIconButton(
+                                      icon: Icons.fullscreen,
+                                      onPressed: () {
+                                        GoRouter.of(context).push(
+                                          AppRoutes.fullScreenImage,
+                                          extra: club.covers[i],
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           },
@@ -121,19 +141,30 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             color: AppColors.colorT2,
                           ),
                         ),
-                        //_itemDetail(
-                        //  icon: Icons.calendar_month,
-                        //  title: "Opening Hours",
-                        //  value: "Monday - Saturdar 8:00 - 22:00",
-                        //  onTap: () {
-                        //    Navigator.push(context,
-                        //        MaterialPageRoute(builder: (_) {
-                        //      return ClubSchedulePage(
-                        //        schedules: club.schedules,
-                        //      );
-                        //    }));
-                        //  },
-                        //),
+                        _itemDetail(
+                          icon: Icons.calendar_month,
+                          title: "Opening Hours",
+                          value: "Monday - Saturdar 8:00 - 22:00",
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) {
+                                  return ClubSchedulePage(
+                                    schedules: [
+                                      ClubSchedule(
+                                          id: 1,
+                                          dayOfWeek: 1,
+                                          name: "Lunes",
+                                          openingTime: "08:00",
+                                          closingTime: "22:00"),
+                                    ],
+                                  );
+                                },
+                              ),
+                            );
+                          },
+                        ),
                         //_itemDetail(
                         //  icon: Icons.explore_outlined,
                         //  title: "Address",

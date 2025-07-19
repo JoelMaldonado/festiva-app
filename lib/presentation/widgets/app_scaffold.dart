@@ -1,10 +1,9 @@
 import 'package:festiva/presentation/theme/colors.dart';
-import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:flutter/material.dart';
 
 class AppScaffold extends StatelessWidget {
   final Widget child;
-  final CustomAppBar? appBar;
+  final PreferredSizeWidget? appBar;
   final bool isLoadingScreen;
   final String? errorMessage;
   final EdgeInsets padding;

@@ -131,7 +131,7 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                           bottom: 12,
                           left: 12,
                           child: Text(
-                            "Acerca del artista",
+                            "About the Artist",
                             style: TextStyle(
                               fontSize: 16,
                               color: AppColors.colorT1,
