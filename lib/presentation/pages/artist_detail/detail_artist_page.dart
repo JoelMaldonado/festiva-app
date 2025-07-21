@@ -1,5 +1,6 @@
 import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -144,8 +145,8 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                   ),
                   Padding(
                     padding: const EdgeInsets.all(16),
-                    child: Text(
-                      provider.artist?.biografia ?? "Sin Biografía",
+                    child: CustomExpandableText(
+                      text: provider.artist?.biografia ?? "Sin Biografía",
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.colorT2,

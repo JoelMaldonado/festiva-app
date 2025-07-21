@@ -122,23 +122,25 @@ class CardEvent extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: AppColors.colorT1,
                       ),
+                      maxLines: 2,
                     ),
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.location_pin,
-                          color: AppColors.colorT2,
-                          size: 14,
-                        ),
-                        SizedBox(width: 4),
-                        Text(
-                          "Ibiza Discoteca",
-                          style: AppTextStyles.caption1.copyWith(
+                    if (event.location != null)
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.location_pin,
                             color: AppColors.colorT2,
+                            size: 14,
                           ),
-                        ),
-                      ],
-                    )
+                          SizedBox(width: 4),
+                          Text(
+                            event.location!,
+                            style: AppTextStyles.caption1.copyWith(
+                              color: AppColors.colorT2,
+                            ),
+                          ),
+                        ],
+                      )
                   ],
                 ),
               )

@@ -98,44 +98,44 @@ class _DetailEventPageState extends State<DetailEventPage> {
                 color: AppColors.colorT2,
               ),
             ),
+            if (provider.event?.eventDatetime != null)
+              Row(
+                spacing: 12,
+                children: [
+                  Expanded(
+                    flex: 1,
+                    child: _itemDetail(
+                      icon: Icons.calendar_month_outlined,
+                      title: "Date",
+                      value: provider.event!.eventDatetime!.format(),
+                    ),
+                  ),
+                  Expanded(
+                    flex: 2,
+                    child: _itemDetail(
+                      icon: Icons.schedule_outlined,
+                      title: "Time",
+                      value: provider.event!.eventDatetime!
+                          .format(pattern: 'HH:mm'),
+                    ),
+                  ),
+                ],
+              ),
+            if (provider.event?.location != null)
+              _itemDetail(
+                icon: Icons.explore_outlined,
+                title: "Location",
+                value: provider.event!.location!,
+              ),
             Row(
               spacing: 12,
               children: [
                 Expanded(
                   flex: 1,
                   child: _itemDetail(
-                    icon: Icons.calendar_month_outlined,
-                    title: "Fecha",
-                    value:
-                        provider.event?.eventDatetime?.format() ?? "Sin Fecha",
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: _itemDetail(
-                    icon: Icons.schedule_outlined,
-                    title: "Horario",
-                    value: provider.event?.eventDatetime
-                            ?.format(pattern: 'HH:mm') ??
-                        "Sin Hora",
-                  ),
-                ),
-              ],
-            ),
-            _itemDetail(
-              icon: Icons.explore_outlined,
-              title: "Ubicación",
-              value: "Av. Los Pinos 123, Lima, Perú",
-            ),
-            Row(
-              spacing: 12,
-              children: [
-                Expanded(
-                  flex: 2,
-                  child: _itemDetail(
-                    icon: Icons.calendar_month_outlined,
-                    title: "Fecha",
-                    value: "13/06/2025",
+                    icon: Icons.category_outlined,
+                    title: "Category",
+                    value: provider.event?.eventCategoryTitle ?? "No Category",
                   ),
                 ),
                 CustomFloatingActionButton(

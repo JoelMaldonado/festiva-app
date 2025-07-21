@@ -1,5 +1,6 @@
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CardClub extends StatelessWidget {
@@ -51,21 +52,22 @@ class CardClub extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  Positioned(
-                    top: 16,
-                    left: 16,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: AppColors.colorGreen,
-                        borderRadius: BorderRadius.circular(4),
+                  if (kDebugMode)
+                    Positioned(
+                      top: 16,
+                      left: 16,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: AppColors.colorGreen,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 2,
+                        ),
+                        child: Text("Abierto"),
                       ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 2,
-                      ),
-                      child: Text("Abierto"),
                     ),
-                  ),
                 ],
               ),
               Padding(
