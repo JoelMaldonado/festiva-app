@@ -1,13 +1,11 @@
-import 'package:festiva/app/router.dart';
 import 'package:festiva/domain/model/club/club.dart';
 import 'package:festiva/main.dart';
 import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
-import 'package:festiva/presentation/widgets/custom_icon_button.dart';
+import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -51,59 +49,42 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
               child: Column(
                 spacing: 16,
                 children: [
-                  Stack(
-                    children: [
-                      AspectRatio(
-                        aspectRatio: 1,
-                        child: PageView.builder(
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: Stack(
+                      children: [
+                        PageView.builder(
                           itemCount: club.covers.length,
                           itemBuilder: (c, i) {
                             return Padding(
                               padding: const EdgeInsets.all(24),
-                              child: Stack(
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(12),
-                                    child: Image.network(
-                                      club.covers[i],
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: 12,
-                                    right: 12,
-                                    child: CustomIconButton(
-                                      icon: Icons.fullscreen,
-                                      onPressed: () {
-                                        GoRouter.of(context).push(
-                                          AppRoutes.fullScreenImage,
-                                          extra: club.covers[i],
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                ],
+                              child: CustomImageNetwork(
+                                imageUrl: club.covers[i],
+                                borderRadius: 12,
+                                width: double.infinity,
+                                height: double.infinity,
+                                isExpandable: true,
                               ),
                             );
                           },
                         ),
-                      ),
-                      Positioned(
-                        left: 40,
-                        bottom: 40,
-                        child: SizedBox(
-                          width: 80,
-                          height: 80,
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: AppImageNetwork(
-                              imageUrl: club.logoUrl,
-                              fit: BoxFit.cover,
+                        Positioned(
+                          left: 40,
+                          bottom: 40,
+                          child: SizedBox(
+                            width: 80,
+                            height: 80,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: AppImageNetwork(
+                                imageUrl: club.logoUrl,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),

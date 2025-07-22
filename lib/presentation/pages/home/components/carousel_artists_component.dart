@@ -31,7 +31,7 @@ class _CarouselArtistsComponentState extends State<CarouselArtistsComponent> {
   }
 
   void _startAutoScroll() {
-    const tick = Duration(milliseconds: 30); // ~60 FPS
+    const tick = Duration(milliseconds: 20); // ~60 FPS
     const distance = 1.0;
 
     _timer?.cancel(); // Evitar timers duplicados

@@ -100,7 +100,7 @@ class CardEvent extends StatelessWidget {
                           vertical: 2,
                         ),
                         child: Text(
-                          "Concert",
+                          event.nameEventCategory ?? "No Category",
                           style: AppTextStyles.caption1,
                         ),
                       ),
@@ -108,23 +108,25 @@ class CardEvent extends StatelessWidget {
                   ],
                 ),
               ),
-              Padding(
+              Container(
+                width: double.infinity,
+                height: 56,
                 padding: const EdgeInsets.symmetric(
                   horizontal: 12,
-                  vertical: 8,
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      event.title,
-                      style: AppTextStyles.footnote.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: AppColors.colorT1,
+                child: Center(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        event.title,
+                        style: AppTextStyles.footnote.copyWith(
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.colorT1,
+                        ),
+                        maxLines: 1,
                       ),
-                      maxLines: 2,
-                    ),
-                    if (event.location != null)
                       Row(
                         children: [
                           Icon(
@@ -134,14 +136,15 @@ class CardEvent extends StatelessWidget {
                           ),
                           SizedBox(width: 4),
                           Text(
-                            event.location!,
+                            event.nameClub ?? "Unknown",
                             style: AppTextStyles.caption1.copyWith(
                               color: AppColors.colorT2,
                             ),
                           ),
                         ],
                       )
-                  ],
+                    ],
+                  ),
                 ),
               )
             ],

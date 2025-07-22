@@ -21,11 +21,14 @@ class EventDto {
   @JsonKey(name: 'eventDatetime')
   final String? eventDatetime;
 
-  @JsonKey(name: 'eventCategoryTitle')
-  final String? eventCategoryTitle;
+  @JsonKey(name: 'nameEventCategory')
+  final String? nameEventCategory;
 
   @JsonKey(name: 'location')
   final String? location;
+
+  @JsonKey(name: 'nameClub')
+  final String? nameClub;
 
   EventDto({
     required this.id,
@@ -33,8 +36,9 @@ class EventDto {
     required this.description,
     required this.imageUrl,
     required this.eventDatetime,
-    required this.eventCategoryTitle,
+    required this.nameEventCategory,
     required this.location,
+    required this.nameClub,
   });
 
   factory EventDto.fromJson(Map<String, dynamic> json) =>
@@ -49,8 +53,9 @@ class EventDto {
       description: description ?? '',
       imageUrl: imageUrl ?? '',
       eventDatetime: parseDatetime(eventDatetime),
-      eventCategoryTitle: eventCategoryTitle,
+      nameEventCategory: nameEventCategory,
       location: location,
+      nameClub: nameClub,
     );
   }
 }

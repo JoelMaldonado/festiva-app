@@ -1,6 +1,7 @@
 import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
+import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -107,14 +108,11 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                     height: 200,
                     child: Stack(
                       children: [
-                        provider.artist?.urlFoto2 != null
-                            ? Image.network(
-                                provider.artist?.urlFoto2 ?? "",
-                                fit: BoxFit.cover,
-                                width: double.infinity,
-                                height: double.infinity,
-                              )
-                            : SizedBox.shrink(),
+                        CustomImageNetwork(
+                          imageUrl: provider.artist?.urlFoto2,
+                          width: double.infinity,
+                          height: double.infinity,
+                        ),
                         Container(
                           constraints: BoxConstraints.expand(),
                           decoration: BoxDecoration(
@@ -147,15 +145,17 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                     padding: const EdgeInsets.all(16),
                     child: CustomExpandableText(
                       text: provider.artist?.biografia ?? "Sin Biografía",
+                      maxLines: 10,
                       style: TextStyle(
                         fontSize: 14,
                         color: AppColors.colorT2,
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
-            )
+            ),
+            const SizedBox(height: 16),
           ],
         ),
       ),

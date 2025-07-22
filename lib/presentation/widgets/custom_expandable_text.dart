@@ -7,12 +7,12 @@ class CustomExpandableText extends StatefulWidget {
   final Duration animationDuration;
 
   const CustomExpandableText({
-    Key? key,
+    super.key,
     required this.text,
     this.maxLines = 5,
     this.style,
     this.animationDuration = const Duration(milliseconds: 200),
-  }) : super(key: key);
+  });
 
   @override
   State<CustomExpandableText> createState() => _CustomExpandableTextState();
@@ -45,13 +45,20 @@ class _CustomExpandableTextState extends State<CustomExpandableText>
               child: ConstrainedBox(
                 constraints: expanded
                     ? const BoxConstraints()
-                    : BoxConstraints(maxHeight: tp.height),
+                    : BoxConstraints(
+                        maxHeight: (widget.style?.fontSize ??
+                                DefaultTextStyle.of(context).style.fontSize ??
+                                14) *
+                            (widget.style?.height ?? 1.0) *
+                            widget.maxLines,
+                      ),
                 child: Text(
                   widget.text,
                   style: widget.style,
                   softWrap: true,
                   overflow:
                       expanded ? TextOverflow.visible : TextOverflow.ellipsis,
+                  maxLines: expanded ? null : widget.maxLines,
                 ),
               ),
             ),

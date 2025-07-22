@@ -1,12 +1,10 @@
-import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_floating_action_button.dart';
-import 'package:festiva/presentation/widgets/custom_icon_button.dart';
+import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:festiva/util/date_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class DetailEventPage extends StatefulWidget {
@@ -42,30 +40,11 @@ class _DetailEventPageState extends State<DetailEventPage> {
           children: [
             AspectRatio(
               aspectRatio: 1,
-              child: Stack(
-                children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(20),
-                    child: AppImageNetwork(
-                      imageUrl: provider.event?.imageUrl,
-                      width: double.infinity,
-                    ),
-                  ),
-                  if (provider.event?.imageUrl != null)
-                    Positioned(
-                      top: 12,
-                      right: 12,
-                      child: CustomIconButton(
-                        icon: Icons.fullscreen,
-                        onPressed: () {
-                          GoRouter.of(context).push(
-                            AppRoutes.fullScreenImage,
-                            extra: provider.event!.imageUrl,
-                          );
-                        },
-                      ),
-                    ),
-                ],
+              child: CustomImageNetwork(
+                imageUrl: provider.event?.imageUrl,
+                isExpandable: true,
+                width: double.infinity,
+                height: double.infinity,
               ),
             ),
             Row(
@@ -135,7 +114,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   child: _itemDetail(
                     icon: Icons.category_outlined,
                     title: "Category",
-                    value: provider.event?.eventCategoryTitle ?? "No Category",
+                    value: provider.event?.nameEventCategory ?? "No Category",
                   ),
                 ),
                 CustomFloatingActionButton(

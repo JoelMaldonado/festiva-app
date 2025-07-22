@@ -5,7 +5,6 @@ import 'package:festiva/presentation/pages/home/components/carousel_clubs_compon
 import 'package:festiva/presentation/pages/home/components/carousel_events_component.dart';
 import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
-import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/foundation.dart';
@@ -40,7 +39,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     final artistProvider = Provider.of<ArtistProvider>(context);
     final eventProvider = Provider.of<EventProvider>(context);
-    final clubProvider = Provider.of<ClubProvider>(context);
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
@@ -59,11 +57,11 @@ class _HomePageState extends State<HomePage> {
               Column(
                 children: [
                   _section(
-                    title: "Clubs ${clubProvider.listUiClubs.length}",
+                    title: "Clubs",
                     onPressed: widget.toClubs,
                   ),
                   CarouselClubsComponent(
-                    durationInSeconds: 2,
+                    durationInSeconds: 5,
                   ),
                 ],
               ),

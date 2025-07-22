@@ -4,8 +4,9 @@ class Event {
   final String description;
   final String imageUrl;
   final DateTime? eventDatetime;
-  final String? eventCategoryTitle;
+  final String? nameEventCategory;
   final String? location;
+  final String? nameClub;
 
   Event({
     required this.id,
@@ -13,7 +14,8 @@ class Event {
     required this.description,
     required this.imageUrl,
     required this.eventDatetime,
-    required this.eventCategoryTitle,
+    required this.nameEventCategory,
     required this.location,
+    required this.nameClub,
   });
 }
