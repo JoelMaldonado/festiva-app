@@ -47,7 +47,8 @@ class _ClubsPageState extends State<ClubsPage> {
                   name: club.name,
                   coverUrl: club.coverUrl,
                   logoUrl: club.logoUrl,
-                  type: club.type,
+                  address: club.address,
+                  isOpen: club.isOpen,
                   onPressed: () {
                     Navigator.push(
                       context,

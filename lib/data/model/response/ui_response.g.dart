@@ -45,7 +45,8 @@ UiClub _$UiClubFromJson(Map<String, dynamic> json) => UiClub(
       name: json['name'] as String,
       logoUrl: json['logoUrl'] as String?,
       coverUrl: json['coverUrl'] as String?,
-      type: json['type'] as String,
+      address: json['address'] as String?,
+      isOpen: json['isOpen'] as bool,
     );
 
 Map<String, dynamic> _$UiClubToJson(UiClub instance) => <String, dynamic>{
@@ -53,7 +54,8 @@ Map<String, dynamic> _$UiClubToJson(UiClub instance) => <String, dynamic>{
       'name': instance.name,
       'logoUrl': instance.logoUrl,
       'coverUrl': instance.coverUrl,
-      'type': instance.type,
+      'address': instance.address,
+      'isOpen': instance.isOpen,
     };
 
 UiClubDetail _$UiClubDetailFromJson(Map<String, dynamic> json) => UiClubDetail(

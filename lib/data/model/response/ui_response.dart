@@ -69,15 +69,19 @@ class UiClub {
   @JsonKey(name: 'coverUrl')
   final String? coverUrl;
 
-  @JsonKey(name: 'type')
-  final String type;
+  @JsonKey(name: 'address')
+  final String? address;
+
+  @JsonKey(name: 'isOpen')
+  final bool isOpen;
 
   UiClub({
     required this.id,
     required this.name,
     required this.logoUrl,
     required this.coverUrl,
-    required this.type,
+    required this.address,
+    required this.isOpen,
   });
 
   factory UiClub.fromJson(Map<String, dynamic> json) => _$UiClubFromJson(json);

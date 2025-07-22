@@ -85,7 +85,8 @@ class _CarouselClubsComponentState extends State<CarouselClubsComponent> {
               name: item.name,
               coverUrl: item.coverUrl,
               logoUrl: item.logoUrl,
-              type: item.type,
+              address: item.address,
+              isOpen: item.isOpen,
               onPressed: () {
                 Navigator.push(
                   context,

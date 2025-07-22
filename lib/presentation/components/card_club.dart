@@ -1,13 +1,13 @@
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CardClub extends StatelessWidget {
   final String name;
   final String? coverUrl;
   final String? logoUrl;
-  final String type;
+  final String? address;
+  final bool isOpen;
 
   final VoidCallback onPressed;
 
@@ -16,7 +16,8 @@ class CardClub extends StatelessWidget {
     required this.name,
     required this.coverUrl,
     required this.logoUrl,
-    required this.type,
+    required this.address,
+    required this.isOpen,
     required this.onPressed,
   });
 
@@ -52,22 +53,21 @@ class CardClub extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  if (kDebugMode)
-                    Positioned(
-                      top: 16,
-                      left: 16,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.colorGreen,
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 2,
-                        ),
-                        child: Text("Abierto"),
+                  Positioned(
+                    top: 16,
+                    left: 16,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: AppColors.colorGreen,
+                        borderRadius: BorderRadius.circular(4),
                       ),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 2,
+                      ),
+                      child: Text(isOpen ? "Open" : "Closed"),
                     ),
+                  ),
                 ],
               ),
               Padding(
@@ -92,7 +92,7 @@ class CardClub extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          type,
+                          address ?? 'Unknown',
                           style: AppTextStyles.footnote.copyWith(
                             color: AppColors.colorT2,
                           ),
