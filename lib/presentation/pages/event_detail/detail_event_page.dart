@@ -60,14 +60,14 @@ class _DetailEventPageState extends State<DetailEventPage> {
                     ),
                   ),
                 ),
-                AppFloatingActionButton(
-                  onPressed: () {},
-                  icon: Icons.favorite_outline,
-                ),
-                AppFloatingActionButton(
-                  onPressed: () {},
-                  icon: Icons.share_outlined,
-                ),
+                //AppFloatingActionButton(
+                //  onPressed: () {},
+                //  icon: Icons.favorite_outline,
+                //),
+                //AppFloatingActionButton(
+                //  onPressed: () {},
+                //  icon: Icons.share_outlined,
+                //),
               ],
             ),
             Text(
@@ -117,18 +117,19 @@ class _DetailEventPageState extends State<DetailEventPage> {
                     value: provider.event?.nameEventCategory ?? "No Category",
                   ),
                 ),
-                CustomFloatingActionButton(
-                  icon: Icons.message_outlined,
-                  backgroundColor: AppColors.colorBlue,
-                  onPressed: () {},
-                ),
-                CustomFloatingActionButton(
-                  icon: Icons.workspace_premium,
-                  backgroundColor: AppColors.colorGreen,
-                  onPressed: () {},
-                ),
+                //CustomFloatingActionButton(
+                //  icon: Icons.message_outlined,
+                //  backgroundColor: AppColors.colorBlue,
+                //  onPressed: () {},
+                //),
+                //CustomFloatingActionButton(
+                //  icon: Icons.workspace_premium,
+                //  backgroundColor: AppColors.colorGreen,
+                //  onPressed: () {},
+                //),
               ],
             ),
+            const SizedBox(height: 12),
           ],
         ),
       ),

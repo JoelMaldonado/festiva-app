@@ -26,6 +26,8 @@ class _MapComponentState extends State<MapComponent> {
       children: [
         MapWidget(
           styleUri: MapboxStyles.DARK,
+          cameraOptions: CameraOptions(
+              center: Point(coordinates: Position(10.7522, 59.9139)), zoom: 10),
           onMapCreated: (controller) async {
             if (mapboxMap == null) {
               mapboxMap = controller;

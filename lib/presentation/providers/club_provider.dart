@@ -1,4 +1,5 @@
 import 'package:festiva/data/model/response/ui_response.dart';
+import 'package:festiva/domain/model/club/club_schedule.dart';
 import 'package:festiva/domain/repository/club_repository.dart';
 import 'package:festiva/domain/repository/ui_repository.dart';
 import 'package:flutter/foundation.dart';
@@ -49,6 +50,14 @@ class ClubProvider extends ChangeNotifier {
         isLoadingClub = false;
         notifyListeners();
       },
+    );
+  }
+
+  Future<List<ClubSchedule>> getClubSchedules(int clubId) async {
+    final res = await repo.getClubSchedules(clubId);
+    return res.fold(
+      (l) => [],
+      (r) => r,
     );
   }
 }

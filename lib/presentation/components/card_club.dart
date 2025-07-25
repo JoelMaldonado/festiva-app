@@ -58,7 +58,8 @@ class CardClub extends StatelessWidget {
                     left: 16,
                     child: Container(
                       decoration: BoxDecoration(
-                        color: AppColors.colorGreen,
+                        color:
+                            isOpen ? AppColors.colorGreen : AppColors.colorRed,
                         borderRadius: BorderRadius.circular(4),
                       ),
                       padding: EdgeInsets.symmetric(

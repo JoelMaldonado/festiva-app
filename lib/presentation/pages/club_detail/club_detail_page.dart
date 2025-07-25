@@ -1,4 +1,5 @@
 import 'package:festiva/domain/model/club/club.dart';
+import 'package:festiva/domain/model/club/club_schedule.dart';
 import 'package:festiva/main.dart';
 import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
@@ -125,32 +126,26 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                         _itemDetail(
                           icon: Icons.calendar_month,
                           title: "Opening Hours",
-                          value: "Monday - Saturdar 8:00 - 22:00",
+                          value: "See Schedule",
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                 builder: (_) {
                                   return ClubSchedulePage(
-                                    schedules: [
-                                      ClubSchedule(
-                                          id: 1,
-                                          dayOfWeek: 1,
-                                          name: "Lunes",
-                                          openingTime: "08:00",
-                                          closingTime: "22:00"),
-                                    ],
+                                    clubId: widget.idClub,
                                   );
                                 },
                               ),
                             );
                           },
                         ),
-                        //_itemDetail(
-                        //  icon: Icons.explore_outlined,
-                        //  title: "Address",
-                        //  value: club.address.firstOrNull?.address ?? '',
-                        //),
+                        if (club.address != null)
+                          _itemDetail(
+                            icon: Icons.explore_outlined,
+                            title: "Address",
+                            value: club.address!,
+                          ),
                         //Row(
                         //  spacing: 12,
                         //  children: [

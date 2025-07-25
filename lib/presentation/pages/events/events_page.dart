@@ -1,4 +1,5 @@
 import 'package:festiva/presentation/components/components.dart';
+import 'package:festiva/presentation/pages/home/components/home_categories.dart';
 import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/widgets/app_scaffold.dart';
@@ -27,6 +28,7 @@ class _EventsPageState extends State<EventsPage> {
   Widget build(BuildContext context) {
     final provider = Provider.of<EventProvider>(context);
     return AppScaffold(
+      padding: EdgeInsets.zero,
       appBar: CustomAppBar(
         title: "Events",
         detail: "What plans do we have?",
@@ -35,7 +37,11 @@ class _EventsPageState extends State<EventsPage> {
       child: Column(
         spacing: 16,
         children: [
-          SearchComponent(),
+          const SizedBox.shrink(),
+          Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: SearchComponent()),
+          HomeCategories(),
           Expanded(
             child: GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -44,6 +50,7 @@ class _EventsPageState extends State<EventsPage> {
                 mainAxisSpacing: 16,
                 childAspectRatio: 1,
               ),
+              padding: const EdgeInsets.symmetric(horizontal: 24),
               itemCount: provider.events.length,
               itemBuilder: (context, index) {
                 final event = provider.events[index];

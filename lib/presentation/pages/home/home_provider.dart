@@ -17,7 +17,7 @@ class HomeProvider extends ChangeNotifier {
     res.fold(
       (l) => Fluttertoast.showToast(msg: "No se pudo obtener las categorias"),
       (r) {
-        r.insert(0, EventCategory(id: null, title: 'Todos'));
+        r.insert(0, EventCategory(id: null, title: 'All'));
         eventCategories.addAll(r);
 
         notifyListeners();

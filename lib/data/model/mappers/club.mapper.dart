@@ -1,5 +1,7 @@
 import 'package:festiva/data/model/dto/club/club_dto.dart';
+import 'package:festiva/data/model/dto/club/club_schedule_dto.dart';
 import 'package:festiva/domain/model/club/club.dart';
+import 'package:festiva/domain/model/club/club_schedule.dart';
 
 extension ClubDtoMapper on ClubDto {
   Club toDomain() {

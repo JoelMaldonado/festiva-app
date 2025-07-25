@@ -103,6 +103,9 @@ class UiClubDetail {
   @JsonKey(name: 'logoUrl')
   final String? logoUrl;
 
+  @JsonKey(name: 'address')
+  final String? address;
+
   @JsonKey(name: 'covers')
   final List<String> covers;
 
@@ -113,7 +116,8 @@ class UiClubDetail {
     required this.id,
     required this.name,
     required this.description,
-    this.logoUrl,
+    required this.logoUrl,
+    required this.address,
     required this.covers,
     required this.socialNetworks,
   });

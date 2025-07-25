@@ -25,8 +25,11 @@ class _HomeCategoriesState extends State<HomeCategories> {
     final provider = Provider.of<HomeProvider>(context);
     return Column(
       children: [
-        _section(
-          title: "Categorías",
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: _section(
+            title: "Categories",
+          ),
         ),
         const SizedBox(height: 8),
         SizedBox(
@@ -45,6 +48,7 @@ class _HomeCategoriesState extends State<HomeCategories> {
                 },
               );
             },
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             separatorBuilder: (_, __) => const SizedBox(width: 8),
           ),
         ),

@@ -20,7 +20,7 @@ class EventService {
   }
 
   Future<ApiResponse<List<EventCategoryDto>>> fetchAllCategories() async {
-    final call = await _dio.get(url: '/event/category');
+    final call = await _dio.get(url: '/event-category');
     final response = ApiResponse<List<EventCategoryDto>>.fromJson(
       call.data,
       (json) => (json as List<dynamic>)

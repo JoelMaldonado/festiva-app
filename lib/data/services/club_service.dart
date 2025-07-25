@@ -1,6 +1,7 @@
 import 'package:festiva/core/network/dio_config.dart';
 import 'package:festiva/data/model/dto/club/club_dto.dart';
 import 'package:festiva/data/model/dto/club/club_location_dto.dart';
+import 'package:festiva/data/model/dto/club/club_schedule_dto.dart';
 import 'package:festiva/data/model/dto/club/club_summary_dto.dart';
 import 'package:festiva/data/model/response/api_response.dart';
 
@@ -49,6 +50,18 @@ class ClubService {
       (json) => ClubLocationDto.fromJson(json as Map<String, dynamic>),
     );
 
+    return response;
+  }
+
+  Future<ApiResponse<List<ClubScheduleDto>>> fetchClubSchedules(
+      int clubId) async {
+    final call = await _dio.get(url: '/club-schedule/$clubId');
+    final response = ApiResponse<List<ClubScheduleDto>>.fromJson(
+      call.data,
+      (json) => (json as List<dynamic>)
+          .map((e) => ClubScheduleDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
     return response;
   }
 }

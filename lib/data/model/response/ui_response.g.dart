@@ -63,6 +63,7 @@ UiClubDetail _$UiClubDetailFromJson(Map<String, dynamic> json) => UiClubDetail(
       name: json['name'] as String,
       description: json['description'] as String,
       logoUrl: json['logoUrl'] as String?,
+      address: json['address'] as String?,
       covers:
           (json['covers'] as List<dynamic>).map((e) => e as String).toList(),
       socialNetworks: (json['socialNetworks'] as List<dynamic>)
@@ -76,6 +77,7 @@ Map<String, dynamic> _$UiClubDetailToJson(UiClubDetail instance) =>
       'name': instance.name,
       'description': instance.description,
       'logoUrl': instance.logoUrl,
+      'address': instance.address,
       'covers': instance.covers,
       'socialNetworks': instance.socialNetworks,
     };

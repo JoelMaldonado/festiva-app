@@ -1,16 +1,41 @@
-import 'package:festiva/domain/model/club/club.dart';
+import 'package:festiva/domain/model/club/club_schedule.dart';
+import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ClubSchedulePage extends StatelessWidget {
-  final List<ClubSchedule> schedules;
+class ClubSchedulePage extends StatefulWidget {
+  final int clubId;
 
   const ClubSchedulePage({
     super.key,
-    required this.schedules,
+    required this.clubId,
   });
+
+  @override
+  State<ClubSchedulePage> createState() => _ClubSchedulePageState();
+}
+
+class _ClubSchedulePageState extends State<ClubSchedulePage> {
+  List<ClubSchedule> schedules = [];
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      fetchClubSchedules();
+    });
+  }
+
+  Future<void> fetchClubSchedules() async {
+    final provider = Provider.of<ClubProvider>(context, listen: false);
+    final list = await provider.getClubSchedules(widget.clubId);
+    setState(() {
+      schedules = list;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +85,7 @@ class ClubSchedulePage extends StatelessWidget {
               itemBuilder: (context, index) {
                 final schedule = schedules[index];
                 return item(
-                  name: schedule.name,
+                  name: getNameDay(schedule.dayOfWeek),
                   text1: schedule.openingTime,
                   text2: schedule.closingTime,
                 );
@@ -71,6 +96,27 @@ class ClubSchedulePage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  String getNameDay(int dayOfWeek) {
+    switch (dayOfWeek) {
+      case 1:
+        return "Monday";
+      case 2:
+        return "Tuesday";
+      case 3:
+        return "Wednesday";
+      case 4:
+        return "Thursday";
+      case 5:
+        return "Friday";
+      case 6:
+        return "Saturday";
+      case 7:
+        return "Sunday";
+      default:
+        return "Unknown";
+    }
   }
 
   Widget item({

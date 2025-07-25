@@ -3,6 +3,7 @@ import 'package:festiva/presentation/pages/artists/artists_page.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_artists_component.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_clubs_component.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_events_component.dart';
+import 'package:festiva/presentation/pages/home/components/home_categories.dart';
 import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
@@ -52,7 +53,6 @@ class _HomePageState extends State<HomePage> {
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: SearchComponent(),
               ),
-              //HomeCategories(),
               const SizedBox(height: 16),
               Column(
                 children: [
