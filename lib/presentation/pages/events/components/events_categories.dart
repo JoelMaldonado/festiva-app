@@ -1,28 +1,28 @@
-import 'package:festiva/presentation/pages/home/home_provider.dart';
+import 'package:festiva/presentation/pages/events/events_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class HomeCategories extends StatefulWidget {
-  const HomeCategories({super.key});
+class EventsCategories extends StatefulWidget {
+  const EventsCategories({super.key});
 
   @override
-  State<HomeCategories> createState() => _HomeCategoriesState();
+  State<EventsCategories> createState() => _EventsCategoriesState();
 }
 
-class _HomeCategoriesState extends State<HomeCategories> {
+class _EventsCategoriesState extends State<EventsCategories> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<HomeProvider>(context, listen: false).getCatEvents();
+      Provider.of<EventsProvider>(context, listen: false).getCatEvents();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<HomeProvider>(context);
+    final provider = Provider.of<EventsProvider>(context);
     return Column(
       children: [
         Padding(

@@ -1,16 +1,15 @@
+import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomExpandableText extends StatefulWidget {
   final String text;
   final int maxLines;
-  final TextStyle? style;
   final Duration animationDuration;
 
   const CustomExpandableText({
     super.key,
     required this.text,
     this.maxLines = 5,
-    this.style,
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
@@ -26,7 +25,7 @@ class _CustomExpandableTextState extends State<CustomExpandableText>
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final span = TextSpan(text: widget.text, style: widget.style);
+        final span = TextSpan(text: widget.text);
         final tp = TextPainter(
           text: span,
           maxLines: widget.maxLines,
@@ -43,18 +42,10 @@ class _CustomExpandableTextState extends State<CustomExpandableText>
               curve: Curves.easeInOut,
               alignment: Alignment.topCenter,
               child: ConstrainedBox(
-                constraints: expanded
-                    ? const BoxConstraints()
-                    : BoxConstraints(
-                        maxHeight: (widget.style?.fontSize ??
-                                DefaultTextStyle.of(context).style.fontSize ??
-                                14) *
-                            (widget.style?.height ?? 1.0) *
-                            widget.maxLines,
-                      ),
+                constraints: const BoxConstraints(),
                 child: Text(
                   widget.text,
-                  style: widget.style,
+                  style: TextStyle(fontSize: 14, color: AppColors.colorT2),
                   softWrap: true,
                   overflow:
                       expanded ? TextOverflow.visible : TextOverflow.ellipsis,
@@ -71,7 +62,7 @@ class _CustomExpandableTextState extends State<CustomExpandableText>
                     expanded ? "Show less" : "Show more",
                     style: TextStyle(
                       color: Colors.white,
-                      fontSize: widget.style?.fontSize ?? 14,
+                      fontSize: 14,
                       fontWeight: FontWeight.w500,
                     ),
                   ),

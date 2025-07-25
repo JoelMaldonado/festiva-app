@@ -5,6 +5,7 @@ import 'package:festiva/domain/repository/common_repository.dart';
 import 'package:festiva/domain/repository/event_repository.dart';
 import 'package:festiva/domain/repository/ui_repository.dart';
 import 'package:festiva/domain/usecase/get_all_club_locations_use_case.dart';
+import 'package:festiva/presentation/pages/events/events_provider.dart';
 import 'package:festiva/presentation/pages/home/home_provider.dart';
 import 'package:festiva/presentation/pages/search/search_provider.dart';
 import 'package:festiva/presentation/pages/login/login_provider.dart';
@@ -56,6 +57,12 @@ Future<void> providerModule(GetIt getIt) async {
   getIt.registerFactory(
     () => ClubsMapProvider(
       getAllClubLocationsUseCase: getIt<GetAllClubLocationsUseCase>(),
+    ),
+  );
+
+  getIt.registerFactory(
+    () => EventsProvider(
+      repo: getIt<EventRepository>(),
     ),
   );
 }

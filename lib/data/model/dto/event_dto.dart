@@ -21,6 +21,9 @@ class EventDto {
   @JsonKey(name: 'eventDatetime')
   final String? eventDatetime;
 
+  @JsonKey(name: 'idEventCategory')
+  final int? idEventCategory;
+
   @JsonKey(name: 'nameEventCategory')
   final String? nameEventCategory;
 
@@ -36,6 +39,7 @@ class EventDto {
     required this.description,
     required this.imageUrl,
     required this.eventDatetime,
+    required this.idEventCategory,
     required this.nameEventCategory,
     required this.location,
     required this.nameClub,
@@ -53,6 +57,7 @@ class EventDto {
       description: description ?? '',
       imageUrl: imageUrl ?? '',
       eventDatetime: parseDatetime(eventDatetime),
+      idEventCategory: idEventCategory,
       nameEventCategory: nameEventCategory,
       location: location,
       nameClub: nameClub,

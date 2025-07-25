@@ -1,6 +1,6 @@
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
-import 'package:festiva/presentation/widgets/custom_floating_action_button.dart';
+import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:festiva/util/date_functions.dart';
@@ -70,13 +70,9 @@ class _DetailEventPageState extends State<DetailEventPage> {
                 //),
               ],
             ),
-            Text(
-              provider.event?.description ?? "",
-              style: TextStyle(
-                fontSize: 14,
-                color: AppColors.colorT2,
-              ),
-            ),
+            CustomExpandableText(text: provider.event?.description ?? ""),
+            if (provider.event?.nameEventCategory != null)
+              _categoryEvent(provider.event!.nameEventCategory!),
             if (provider.event?.eventDatetime != null)
               Row(
                 spacing: 12,
@@ -100,21 +96,15 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   ),
                 ],
               ),
-            if (provider.event?.location != null)
-              _itemDetail(
-                icon: Icons.explore_outlined,
-                title: "Location",
-                value: provider.event!.location!,
-              ),
             Row(
               spacing: 12,
               children: [
                 Expanded(
                   flex: 1,
                   child: _itemDetail(
-                    icon: Icons.category_outlined,
-                    title: "Category",
-                    value: provider.event?.nameEventCategory ?? "No Category",
+                    icon: Icons.explore_outlined,
+                    title: "Location",
+                    value: provider.event?.location ?? "Unknown",
                   ),
                 ),
                 //CustomFloatingActionButton(
@@ -132,6 +122,25 @@ class _DetailEventPageState extends State<DetailEventPage> {
             const SizedBox(height: 12),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _categoryEvent(String category) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        padding: EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 2,
+        ),
+        decoration: BoxDecoration(
+            border: Border.all(
+              color: AppColors.colorP1,
+              width: 1.5,
+            ),
+            borderRadius: BorderRadius.circular(16)),
+        child: Text(category),
       ),
     );
   }

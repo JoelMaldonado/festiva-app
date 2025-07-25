@@ -146,10 +146,6 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                     child: CustomExpandableText(
                       text: provider.artist?.biografia ?? "Sin Biografía",
                       maxLines: 10,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.colorT2,
-                      ),
                     ),
                   ),
                 ],

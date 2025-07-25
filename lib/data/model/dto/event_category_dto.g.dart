@@ -8,7 +8,7 @@ part of 'event_category_dto.dart';
 
 EventCategoryDto _$EventCategoryDtoFromJson(Map<String, dynamic> json) =>
     EventCategoryDto(
-      id: (json['id'] as num?)?.toInt(),
+      id: (json['id'] as num).toInt(),
       title: json['title'] as String,
     );
 

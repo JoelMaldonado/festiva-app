@@ -1,5 +1,5 @@
 class EventCategory {
-  final int? id;
+  final int id;
   final String title;
 
   EventCategory({
