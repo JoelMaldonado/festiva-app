@@ -4,8 +4,7 @@ import 'package:festiva/presentation/pages/home/components/carousel_artists_comp
 import 'package:festiva/presentation/pages/home/components/carousel_clubs_component.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_events_component.dart';
 import 'package:festiva/presentation/pages/home/components/search_component.dart';
-import 'package:festiva/presentation/providers/artist_provider.dart';
-import 'package:festiva/presentation/providers/event_provider.dart';
+import 'package:festiva/presentation/pages/home/home_provider.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -30,15 +29,13 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<ArtistProvider>(context, listen: false).getArtists();
-      Provider.of<EventProvider>(context, listen: false).getEvents();
+      Provider.of<HomeProvider>(context, listen: false).loadData();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final artistProvider = Provider.of<ArtistProvider>(context);
-    final eventProvider = Provider.of<EventProvider>(context);
+    final provider = Provider.of<HomeProvider>(context);
     return SingleChildScrollView(
       scrollDirection: Axis.vertical,
       child: Column(
@@ -60,12 +57,14 @@ class _HomePageState extends State<HomePage> {
                     onPressed: widget.toClubs,
                   ),
                   CarouselClubsComponent(
+                    clubs: provider.listClubs,
+                    isLoading: provider.isLoading,
                     durationInSeconds: 5,
                   ),
                 ],
               ),
               const SizedBox(height: 16),
-              if (eventProvider.events.isNotEmpty)
+              if (provider.listEvents.isNotEmpty)
                 Column(
                   children: [
                     _section(
@@ -74,13 +73,12 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CarouselEventsComponent(
                       key: const Key("carousel_events"),
-                      events: eventProvider.events,
+                      events: provider.listEvents,
                     ),
                   ],
                 ),
               const SizedBox(height: 16),
-              if (artistProvider.artists.isNotEmpty ||
-                  artistProvider.isLoadingArtists)
+              if (provider.listArtists.isNotEmpty || provider.isLoading)
                 Column(
                   children: [
                     _section(
@@ -94,7 +92,7 @@ class _HomePageState extends State<HomePage> {
                         );
                       },
                     ),
-                    artistProvider.isLoadingArtists
+                    provider.isLoading
                         ? Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: List.generate(
@@ -104,7 +102,7 @@ class _HomePageState extends State<HomePage> {
                           )
                         : CarouselArtistsComponent(
                             key: const Key("carousel_artists"),
-                            artists: artistProvider.artists,
+                            artists: provider.listArtists,
                           ),
                   ],
                 ),

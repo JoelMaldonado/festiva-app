@@ -2,8 +2,8 @@ class ClubSchedule {
   final int id;
   final int dayOfWeek;
   final String name;
-  final String openingTime;
-  final String closingTime;
+  final DateTime openingTime;
+  final DateTime closingTime;
 
   ClubSchedule({
     required this.id,

@@ -1,14 +1,16 @@
-import 'package:festiva/domain/model/club/club.dart';
-import 'package:festiva/domain/model/club/club_schedule.dart';
-import 'package:festiva/main.dart';
+import 'package:festiva/presentation/components/button_social_network.dart';
+import 'package:festiva/presentation/components/item_detail.dart';
+import 'package:festiva/presentation/pages/club_detail/components/carousel_club_covers.dart';
 import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class ClubDetailPage extends StatefulWidget {
   final int idClub;
@@ -23,6 +25,7 @@ class ClubDetailPage extends StatefulWidget {
 }
 
 class _ClubDetailPageState extends State<ClubDetailPage> {
+  final _pageController = PageController();
   @override
   void initState() {
     super.initState();
@@ -31,6 +34,12 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
         widget.idClub,
       );
     });
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -48,13 +57,13 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
           : SingleChildScrollView(
               scrollDirection: Axis.vertical,
               child: Column(
-                spacing: 16,
                 children: [
                   AspectRatio(
                     aspectRatio: 1,
                     child: Stack(
                       children: [
                         PageView.builder(
+                          controller: _pageController,
                           itemCount: club.covers.length,
                           itemBuilder: (c, i) {
                             return Padding(
@@ -87,6 +96,17 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                       ],
                     ),
                   ),
+                  if (club.covers.length > 1)
+                    SmoothPageIndicator(
+                      controller: _pageController,
+                      count: club.covers.length,
+                      effect: ExpandingDotsEffect(
+                        dotHeight: 8,
+                        dotWidth: 8,
+                        activeDotColor: AppColors.colorP1,
+                        dotColor: AppColors.colorT2,
+                      ),
+                    ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 24),
                     child: Column(
@@ -116,14 +136,8 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             //),
                           ],
                         ),
-                        Text(
-                          club.description,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: AppColors.colorT2,
-                          ),
-                        ),
-                        _itemDetail(
+                        CustomExpandableText(text: club.description),
+                        ItemDetail(
                           icon: Icons.calendar_month,
                           title: "Opening Hours",
                           value: "See Schedule",
@@ -141,10 +155,14 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                           },
                         ),
                         if (club.address != null)
-                          _itemDetail(
-                            icon: Icons.explore_outlined,
+                          ItemDetail(
+                            icon: Icons.location_pin,
                             title: "Address",
                             value: club.address!,
+                            onTap: () {
+                              Fluttertoast.showToast(
+                                  msg: "Text copied to clipboard");
+                            },
                           ),
                         //Row(
                         //  spacing: 12,
@@ -186,27 +204,9 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             itemCount: club.socialNetworks.length,
                             itemBuilder: (c, i) {
                               final socialNetwork = club.socialNetworks[i];
-                              return Material(
-                                color: Colors.transparent,
-                                child: InkWell(
-                                  onTap: () => _openLink(socialNetwork.url),
-                                  customBorder: CircleBorder(),
-                                  child: Ink(
-                                    width: 42,
-                                    height: 42,
-                                    decoration: BoxDecoration(
-                                      color: AppColors.colorB3,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    child: Center(
-                                      child: AppImageNetwork(
-                                        imageUrl: socialNetwork.logoUrl,
-                                        width: 24,
-                                        height: 24,
-                                      ),
-                                    ),
-                                  ),
-                                ),
+                              return ButtonSocialNetwork(
+                                code: socialNetwork.code,
+                                url: socialNetwork.url,
                               );
                             },
                             separatorBuilder: (c, i) =>
@@ -220,77 +220,6 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                 ],
               ),
             ),
-    );
-  }
-
-  void _openLink(String url) async {
-    try {
-      final uri = Uri.parse(url);
-      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-        tagito.e("Could not launch $url");
-      }
-    } catch (e) {
-      tagito.e("Error opening link: $url");
-    }
-  }
-
-  Widget _itemDetail({
-    required IconData icon,
-    required String title,
-    required String value,
-    VoidCallback? onTap,
-  }) {
-    return Ink(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.colorB3,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: InkWell(
-        onTap: onTap,
-        borderRadius: BorderRadius.circular(12),
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            spacing: 4,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                spacing: 8,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(
-                    icon,
-                    size: 20,
-                    color: AppColors.colorT1,
-                  ),
-                  Expanded(
-                    child: Text(
-                      title,
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w900,
-                        color: AppColors.colorT1,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Text(
-                value,
-                style: TextStyle(
-                  fontSize: 14,
-                  fontWeight: FontWeight.w400,
-                  color: AppColors.colorT2,
-                ),
-                maxLines: 1,
-              ),
-            ],
-          ),
-        ),
-      ),
     );
   }
 }

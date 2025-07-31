@@ -1,3 +1,6 @@
+import 'package:add_2_calendar/add_2_calendar.dart';
+import 'package:festiva/presentation/components/item_detail.dart';
+import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
@@ -5,6 +8,8 @@ import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:festiva/util/date_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 
 class DetailEventPage extends StatefulWidget {
@@ -79,15 +84,20 @@ class _DetailEventPageState extends State<DetailEventPage> {
                 children: [
                   Expanded(
                     flex: 1,
-                    child: _itemDetail(
+                    child: ItemDetail(
                       icon: Icons.calendar_month_outlined,
                       title: "Date",
                       value: provider.event!.eventDatetime!.format(),
+                      onLongPress: () {
+                        final event = buildEvent(
+                            DateTime.now().add(Duration(days: 1))); // ejemplo
+                        Add2Calendar.addEvent2Cal(event);
+                      },
                     ),
                   ),
                   Expanded(
                     flex: 2,
-                    child: _itemDetail(
+                    child: ItemDetail(
                       icon: Icons.schedule_outlined,
                       title: "Time",
                       value: provider.event!.eventDatetime!
@@ -96,28 +106,31 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   ),
                 ],
               ),
-            Row(
-              spacing: 12,
-              children: [
-                Expanded(
-                  flex: 1,
-                  child: _itemDetail(
-                    icon: Icons.explore_outlined,
-                    title: "Location",
-                    value: provider.event?.location ?? "Unknown",
+            ItemDetail(
+              icon: Icons.location_pin,
+              title: "Address",
+              value: provider.event?.location ?? "Unknown",
+              onLongPress: () {
+                if (provider.event?.location == null) return;
+                Fluttertoast.showToast(msg: "Text copied to clipboard");
+                Clipboard.setData(
+                  ClipboardData(text: provider.event!.location!),
+                );
+              },
+            ),
+            ItemDetail(
+              icon: Icons.explore_outlined,
+              title: "Venue",
+              value: provider.event?.location ?? "Unknown",
+              iconAction: Icons.chevron_right,
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => ClubDetailPage(idClub: 4),
                   ),
-                ),
-                //CustomFloatingActionButton(
-                //  icon: Icons.message_outlined,
-                //  backgroundColor: AppColors.colorBlue,
-                //  onPressed: () {},
-                //),
-                //CustomFloatingActionButton(
-                //  icon: Icons.workspace_premium,
-                //  backgroundColor: AppColors.colorGreen,
-                //  onPressed: () {},
-                //),
-              ],
+                );
+              },
             ),
             const SizedBox(height: 12),
           ],
@@ -144,57 +157,15 @@ class _DetailEventPageState extends State<DetailEventPage> {
       ),
     );
   }
+}
 
-  Container _itemDetail({
-    required IconData icon,
-    required String title,
-    required String value,
-  }) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        color: AppColors.colorB3,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      padding: EdgeInsets.all(8),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 4,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            spacing: 8,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Icon(
-                icon,
-                size: 20,
-                color: AppColors.colorT1,
-              ),
-              Expanded(
-                child: Text(
-                  title,
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.w900,
-                    color: AppColors.colorT1,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          Text(
-            value,
-            style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w400,
-              color: AppColors.colorT2,
-            ),
-            maxLines: 1,
-          ),
-        ],
-      ),
-    );
-  }
+// Duración del evento
+Event buildEvent(DateTime startTime) {
+  return Event(
+    title: 'Mi Evento',
+    description: 'Descripción opcional del evento',
+    location: 'Ubicación opcional',
+    startDate: startTime,
+    endDate: startTime.add(Duration(hours: 2)),
+  );
 }

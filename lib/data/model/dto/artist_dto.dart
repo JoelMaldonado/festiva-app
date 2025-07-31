@@ -72,9 +72,17 @@ class ArtistSocialRedDto {
   @JsonKey(name: 'url')
   final String? url;
 
+  @JsonKey(name: 'code')
+  final String? code;
+
+  @JsonKey(name: 'name')
+  final String? name;
+
   ArtistSocialRedDto({
     required this.id,
     required this.url,
+    required this.code,
+    required this.name,
   });
 
   factory ArtistSocialRedDto.fromJson(Map<String, dynamic> json) =>
@@ -86,6 +94,8 @@ class ArtistSocialRedDto {
     return ArtistSocialRed(
       id: id ?? 0,
       url: url ?? '',
+      code: code ?? '',
+      name: name ?? '',
     );
   }
 }

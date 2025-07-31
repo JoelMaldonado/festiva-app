@@ -73,7 +73,7 @@ class UiClub {
   final String? address;
 
   @JsonKey(name: 'isOpen')
-  final bool isOpen;
+  final bool? isOpen;
 
   UiClub({
     required this.id,
@@ -133,16 +133,16 @@ class UiClubSocialNetwork {
   @JsonKey(name: 'url')
   final String url;
 
+  @JsonKey(name: 'code')
+  final String code;
+
   @JsonKey(name: 'name')
   final String name;
 
-  @JsonKey(name: 'logoUrl')
-  final String logoUrl;
-
   UiClubSocialNetwork({
     required this.url,
+    required this.code,
     required this.name,
-    required this.logoUrl,
   });
 
   factory UiClubSocialNetwork.fromJson(Map<String, dynamic> json) =>

@@ -1,24 +1,24 @@
+import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class CardClub extends StatelessWidget {
+  final int id;
   final String name;
   final String? coverUrl;
   final String? logoUrl;
   final String? address;
-  final bool isOpen;
-
-  final VoidCallback onPressed;
+  final bool? isOpen;
 
   const CardClub({
     super.key,
+    required this.id,
     required this.name,
     required this.coverUrl,
     required this.logoUrl,
     required this.address,
     required this.isOpen,
-    required this.onPressed,
   });
 
   @override
@@ -33,7 +33,14 @@ class CardClub extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
         ),
         child: InkWell(
-          onTap: onPressed,
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ClubDetailPage(idClub: id),
+              ),
+            );
+          },
           borderRadius: BorderRadius.circular(16),
           splashColor: Colors.white.withValues(alpha: .2),
           highlightColor: Colors.transparent,
@@ -53,22 +60,24 @@ class CardClub extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  Positioned(
-                    top: 16,
-                    left: 16,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color:
-                            isOpen ? AppColors.colorGreen : AppColors.colorRed,
-                        borderRadius: BorderRadius.circular(4),
+                  if (isOpen != null)
+                    Positioned(
+                      top: 16,
+                      left: 16,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: isOpen!
+                              ? AppColors.colorGreen
+                              : AppColors.colorRed,
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12,
+                          vertical: 2,
+                        ),
+                        child: Text(isOpen! ? "Open" : "Closed"),
                       ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 12,
-                        vertical: 2,
-                      ),
-                      child: Text(isOpen ? "Open" : "Closed"),
                     ),
-                  ),
                 ],
               ),
               Padding(

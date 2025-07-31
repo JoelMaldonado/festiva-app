@@ -25,9 +25,13 @@ class Artist {
 class ArtistSocialRed {
   final int id;
   final String url;
+  final String code;
+  final String name;
 
   ArtistSocialRed({
     required this.id,
     required this.url,
+    required this.code,
+    required this.name,
   });
 }

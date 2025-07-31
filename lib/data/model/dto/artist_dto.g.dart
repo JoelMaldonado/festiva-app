@@ -36,10 +36,14 @@ ArtistSocialRedDto _$ArtistSocialRedDtoFromJson(Map<String, dynamic> json) =>
     ArtistSocialRedDto(
       id: (json['id'] as num?)?.toInt(),
       url: json['url'] as String?,
+      code: json['code'] as String?,
+      name: json['name'] as String?,
     );
 
 Map<String, dynamic> _$ArtistSocialRedDtoToJson(ArtistSocialRedDto instance) =>
     <String, dynamic>{
       'id': instance.id,
       'url': instance.url,
+      'code': instance.code,
+      'name': instance.name,
     };

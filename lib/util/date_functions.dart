@@ -8,6 +8,21 @@ extension DateTimeExtension on DateTime {
   }
 }
 
+extension StringExtension on String {
+  DateTime toTodayDateTime() {
+    final now = DateTime.now();
+    final parsed = DateFormat.Hms().parse(this);
+    return DateTime(
+      now.year,
+      now.month,
+      now.day,
+      parsed.hour,
+      parsed.minute,
+      parsed.second,
+    );
+  }
+}
+
 DateTime? parseDatetime(String? datetime) {
   if (datetime == null) return null;
   return DateTime.parse(datetime); //.toLocal();

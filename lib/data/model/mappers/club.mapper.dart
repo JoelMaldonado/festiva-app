@@ -2,6 +2,7 @@ import 'package:festiva/data/model/dto/club/club_dto.dart';
 import 'package:festiva/data/model/dto/club/club_schedule_dto.dart';
 import 'package:festiva/domain/model/club/club.dart';
 import 'package:festiva/domain/model/club/club_schedule.dart';
+import 'package:festiva/util/date_functions.dart';
 
 extension ClubDtoMapper on ClubDto {
   Club toDomain() {
@@ -38,8 +39,8 @@ extension ClubScheduleDtoMapper on ClubScheduleDto {
       id: id ?? 0,
       dayOfWeek: dayOfWeek ?? 0,
       name: name ?? '',
-      openingTime: openingTime ?? '',
-      closingTime: closingTime ?? '',
+      openingTime: openingTime?.toTodayDateTime() ?? DateTime.now(),
+      closingTime: closingTime?.toTodayDateTime() ?? DateTime.now(),
     );
   }
 }

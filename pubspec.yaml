@@ -8,6 +8,7 @@ environment:
   sdk: ^3.6.1
 
 dependencies:
+  add_2_calendar: ^3.0.1
   cached_network_image: ^3.4.1
   change_app_package_name: ^1.5.0
   cupertino_icons: ^1.0.8
@@ -35,6 +36,7 @@ dependencies:
   provider: ^6.1.2
   shared_preferences: ^2.5.1
   shimmer: ^3.0.0
+  smooth_page_indicator: ^1.2.1
   url_launcher: ^6.3.1
 
 dev_dependencies:

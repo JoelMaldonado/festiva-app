@@ -1,5 +1,4 @@
 import 'package:festiva/presentation/components/components.dart';
-import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/widgets/custom_app_bar.dart';
@@ -19,8 +18,7 @@ class _ClubsPageState extends State<ClubsPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      final pr = Provider.of<ClubProvider>(context, listen: false);
-      pr.getClubs();
+      Provider.of<ClubProvider>(context, listen: false).getClubs();
     });
   }
 
@@ -44,21 +42,12 @@ class _ClubsPageState extends State<ClubsPage> {
               itemBuilder: (context, index) {
                 final club = provider.listUiClubs[index];
                 return CardClub(
+                  id: club.id,
                   name: club.name,
                   coverUrl: club.coverUrl,
                   logoUrl: club.logoUrl,
                   address: club.address,
                   isOpen: club.isOpen,
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => ClubDetailPage(
-                          idClub: club.id,
-                        ),
-                      ),
-                    );
-                  },
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 16),

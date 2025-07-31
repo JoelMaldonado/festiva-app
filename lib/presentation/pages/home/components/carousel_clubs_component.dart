@@ -1,16 +1,18 @@
 import 'dart:async';
+import 'package:festiva/data/model/response/ui_response.dart';
 import 'package:festiva/presentation/components/card_club.dart';
 import 'package:festiva/presentation/components/card_club_shimmer.dart';
-import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
-import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CarouselClubsComponent extends StatefulWidget {
+  final List<UiClub> clubs;
+  final bool isLoading;
   final int durationInSeconds;
 
   const CarouselClubsComponent({
     super.key,
+    required this.clubs,
+    required this.isLoading,
     required this.durationInSeconds,
   });
 
@@ -27,19 +29,15 @@ class _CarouselClubsComponentState extends State<CarouselClubsComponent> {
   void initState() {
     super.initState();
     _startAutoSlide();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<ClubProvider>(context, listen: false).getClubs();
-    });
   }
 
   void _startAutoSlide() {
-    final provider = Provider.of<ClubProvider>(context, listen: false);
     _timer = Timer.periodic(
       Duration(seconds: widget.durationInSeconds),
       (timer) {
         if (_pageController.hasClients) {
           final nextPage = _currentPage + 1;
-          if (nextPage < provider.listUiClubs.length) {
+          if (nextPage < widget.clubs.length) {
             _currentPage = nextPage;
           } else {
             _currentPage = 0;
@@ -63,8 +61,7 @@ class _CarouselClubsComponentState extends State<CarouselClubsComponent> {
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<ClubProvider>(context);
-    if (provider.isLoadingUiClubs) {
+    if (widget.isLoading) {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: CardClubShimmer(),
@@ -75,26 +72,19 @@ class _CarouselClubsComponentState extends State<CarouselClubsComponent> {
       child: PageView.builder(
         controller: _pageController,
         scrollDirection: Axis.horizontal,
-        itemCount: provider.listUiClubs.length,
+        itemCount: widget.clubs.length,
         onPageChanged: (index) => _currentPage = index,
         itemBuilder: (context, index) {
-          final item = provider.listUiClubs[index];
+          final item = widget.clubs[index];
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
             child: CardClub(
+              id: item.id,
               name: item.name,
               coverUrl: item.coverUrl,
               logoUrl: item.logoUrl,
               address: item.address,
               isOpen: item.isOpen,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ClubDetailPage(idClub: item.id),
-                  ),
-                );
-              },
             ),
           );
         },

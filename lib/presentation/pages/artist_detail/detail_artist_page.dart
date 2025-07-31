@@ -1,6 +1,8 @@
+import 'package:festiva/presentation/components/button_social_network.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
+import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -37,24 +39,35 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
         child: Column(
           spacing: 16,
           children: [
-            Container(
-              width: 120,
-              height: 120,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                border: Border.all(
-                  color: AppColors.colorP1,
-                  width: 3,
+            Column(
+              children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: CustomIconButton(
+                    icon: Icons.chevron_left,
+                    onPressed: () => Navigator.of(context).pop(),
+                  ),
                 ),
-              ),
-              child: ClipOval(
-                child: provider.artist?.urlFoto != null
-                    ? Image.network(
-                        provider.artist!.urlFoto!,
-                        fit: BoxFit.cover,
-                      )
-                    : SizedBox.shrink(),
-              ),
+                Container(
+                  width: 120,
+                  height: 120,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    border: Border.all(
+                      color: AppColors.colorP1,
+                      width: 3,
+                    ),
+                  ),
+                  child: ClipOval(
+                    child: provider.artist?.urlFoto != null
+                        ? Image.network(
+                            provider.artist!.urlFoto!,
+                            fit: BoxFit.cover,
+                          )
+                        : SizedBox.shrink(),
+                  ),
+                ),
+              ],
             ),
             Card(
               color: AppColors.colorB4,
@@ -86,15 +99,17 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    Row(
-                      mainAxisSize: MainAxisSize.min,
-                      spacing: 4,
-                      children: [
-                        _redSocial("assets/images/instagram.png"),
-                        _redSocial("assets/images/facebook.png"),
-                        _redSocial("assets/images/snapchat.png"),
-                      ],
-                    )
+                    if (provider.artist?.socialReds.isNotEmpty ?? false)
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        spacing: 4,
+                        children: provider.artist!.socialReds.map((e) {
+                          return ButtonSocialNetwork(
+                            code: e.code,
+                            url: e.url,
+                          );
+                        }).toList(),
+                      )
                   ],
                 ),
               ),
@@ -153,34 +168,6 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
             ),
             const SizedBox(height: 16),
           ],
-        ),
-      ),
-    );
-  }
-
-  Widget _redSocial(
-    String asset,
-  ) {
-    return Material(
-      shape: CircleBorder(),
-      color: Colors.transparent,
-      child: Ink(
-        width: 42,
-        height: 42,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          color: AppColors.colorB3,
-        ),
-        child: InkWell(
-          borderRadius: BorderRadius.circular(24),
-          onTap: () {},
-          child: Padding(
-            padding: EdgeInsets.all(8),
-            child: Image.asset(
-              asset,
-              fit: BoxFit.contain,
-            ),
-          ),
         ),
       ),
     );

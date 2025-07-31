@@ -3,6 +3,7 @@ import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
+import 'package:festiva/util/date_functions.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -85,9 +86,13 @@ class _ClubSchedulePageState extends State<ClubSchedulePage> {
               itemBuilder: (context, index) {
                 final schedule = schedules[index];
                 return item(
-                  name: getNameDay(schedule.dayOfWeek),
-                  text1: schedule.openingTime,
-                  text2: schedule.closingTime,
+                  name: schedule.name,
+                  text1: schedule.openingTime.format(
+                    pattern: 'HH:mm',
+                  ),
+                  text2: schedule.closingTime.format(
+                    pattern: 'HH:mm',
+                  ),
                 );
               },
               separatorBuilder: (c, i) => const SizedBox(height: 8),
@@ -96,27 +101,6 @@ class _ClubSchedulePageState extends State<ClubSchedulePage> {
         ],
       ),
     );
-  }
-
-  String getNameDay(int dayOfWeek) {
-    switch (dayOfWeek) {
-      case 1:
-        return "Monday";
-      case 2:
-        return "Tuesday";
-      case 3:
-        return "Wednesday";
-      case 4:
-        return "Thursday";
-      case 5:
-        return "Friday";
-      case 6:
-        return "Saturday";
-      case 7:
-        return "Sunday";
-      default:
-        return "Unknown";
-    }
   }
 
   Widget item({
