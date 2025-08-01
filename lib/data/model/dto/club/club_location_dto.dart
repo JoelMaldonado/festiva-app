@@ -11,9 +11,6 @@ class ClubLocationDto {
   @JsonKey(name: "club")
   final String? club;
 
-  @JsonKey(name: "logoUrl")
-  final String? logoUrl;
-
   @JsonKey(name: "address")
   final String? address;
 
@@ -23,17 +20,20 @@ class ClubLocationDto {
   @JsonKey(name: "longitude")
   final double? longitude;
 
-  @JsonKey(name: "mapsUrl")
-  final String? mapsUrl;
+  @JsonKey(name: "logoUrl")
+  final String? logoUrl;
+
+  @JsonKey(name: "coverUrl")
+  final String? coverUrl;
 
   ClubLocationDto({
     required this.idClub,
     required this.club,
-    required this.logoUrl,
     required this.address,
     required this.latitude,
     required this.longitude,
-    required this.mapsUrl,
+    required this.logoUrl,
+    required this.coverUrl,
   });
 
   factory ClubLocationDto.fromJson(Map<String, dynamic> json) =>
@@ -41,13 +41,15 @@ class ClubLocationDto {
 
   Map<String, dynamic> toJson() => _$ClubLocationDtoToJson(this);
 
-  ClubLocation toDomain() => ClubLocation(
-        idClub: idClub ?? 0,
-        club: club ?? "",
-        logoUrl: logoUrl ?? "",
-        address: address ?? "",
-        latitude: latitude ?? 0.0,
-        longitude: longitude ?? 0.0,
-        mapsUrl: mapsUrl ?? "",
-      );
+  ClubLocation toDomain() {
+    return ClubLocation(
+      idClub: idClub ?? 0,
+      club: club ?? "",
+      address: address ?? "",
+      latitude: latitude ?? 0.0,
+      longitude: longitude ?? 0.0,
+      logoUrl: logoUrl,
+      coverUrl: coverUrl,
+    );
+  }
 }

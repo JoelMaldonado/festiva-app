@@ -32,7 +32,7 @@ class ClubService {
   }
 
   Future<ApiResponse<List<ClubLocationDto>>> fetchLocations() async {
-    final call = await _dio.get(url: '/club/address');
+    final call = await _dio.get(url: '/club/locations');
     final response = ApiResponse<List<ClubLocationDto>>.fromJson(
       call.data,
       (json) => (json as List<dynamic>)

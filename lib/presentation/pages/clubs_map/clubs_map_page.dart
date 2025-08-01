@@ -1,4 +1,5 @@
 import 'package:festiva/domain/model/club/club_location.dart';
+import 'package:festiva/presentation/components/card_club.dart';
 import 'package:festiva/presentation/pages/clubs_map/clubs_map_provider.dart';
 import 'package:festiva/presentation/pages/clubs_map/components/map_component.dart';
 import 'package:flutter/material.dart';
@@ -26,14 +27,12 @@ class _ClubsMapPageState extends State<ClubsMapPage> {
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<ClubsMapProvider>(context);
-    if (provider.locations.isEmpty) {
-      return Center(child: CircularProgressIndicator());
-    }
+    //if (provider.locations.isEmpty) {
+    //  return Center(child: CircularProgressIndicator());
+    //}
     return Stack(
       children: [
-        MapComponent(
-          locations: provider.locations,
-        ),
+        if (provider.locations.isNotEmpty) MapComponent(),
         if (provider.clubSelected != null)
           _clubSelected(
             provider.clubSelected!,
@@ -47,7 +46,14 @@ class _ClubsMapPageState extends State<ClubsMapPage> {
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: Text(club.club),
+        child: CardClub(
+          id: club.idClub,
+          name: club.club,
+          coverUrl: club.coverUrl,
+          logoUrl: club.logoUrl,
+          address: club.address,
+          isOpen: null,
+        ),
       ),
     );
   }
