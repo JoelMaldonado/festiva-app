@@ -7,6 +7,7 @@ import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:festiva/util/date_functions.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -89,9 +90,11 @@ class _DetailEventPageState extends State<DetailEventPage> {
                       title: "Date",
                       value: provider.event!.eventDatetime!.format(),
                       onLongPress: () {
-                        final event = buildEvent(
-                            DateTime.now().add(Duration(days: 1))); // ejemplo
-                        Add2Calendar.addEvent2Cal(event);
+                        if (kDebugMode) {
+                          final event =
+                              buildEvent(DateTime.now().add(Duration(days: 1)));
+                          Add2Calendar.addEvent2Cal(event);
+                        }
                       },
                     ),
                   ),
@@ -110,28 +113,32 @@ class _DetailEventPageState extends State<DetailEventPage> {
               icon: Icons.location_pin,
               title: "Address",
               value: provider.event?.location ?? "Unknown",
-              onLongPress: () {
-                if (provider.event?.location == null) return;
-                Fluttertoast.showToast(msg: "Text copied to clipboard");
-                Clipboard.setData(
-                  ClipboardData(text: provider.event!.location!),
-                );
-              },
+              onLongPress: kDebugMode
+                  ? () {
+                      if (provider.event?.location == null) return;
+                      Fluttertoast.showToast(msg: "Text copied to clipboard");
+                      Clipboard.setData(
+                        ClipboardData(text: provider.event!.location!),
+                      );
+                    }
+                  : null,
             ),
-            ItemDetail(
-              icon: Icons.explore_outlined,
-              title: "Venue",
-              value: provider.event?.location ?? "Unknown",
-              iconAction: Icons.chevron_right,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => ClubDetailPage(idClub: 4),
-                  ),
-                );
-              },
-            ),
+            if (provider.event?.clubId != null)
+              ItemDetail(
+                icon: Icons.explore_outlined,
+                title: "Venue",
+                value: provider.event!.clubName!,
+                iconAction: Icons.chevron_right,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) =>
+                          ClubDetailPage(idClub: provider.event!.clubId!),
+                    ),
+                  );
+                },
+              ),
             const SizedBox(height: 12),
           ],
         ),

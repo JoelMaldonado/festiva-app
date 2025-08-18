@@ -94,8 +94,13 @@ class _MapComponentState extends State<MapComponent> {
   }
 
   Future<Uint8List> _loadImage(String path) async {
-    final ByteData bytes = await rootBundle.load(path);
-    return bytes.buffer.asUint8List();
+    try {
+      final ByteData bytes = await rootBundle.load(path);
+      return bytes.buffer.asUint8List();
+    } on FlutterError {
+      final ByteData bytes = await rootBundle.load("assets/clubs/0.png");
+      return bytes.buffer.asUint8List();
+    }
   }
 
   Future<void> findMyLocation() async {

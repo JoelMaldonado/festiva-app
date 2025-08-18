@@ -16,6 +16,8 @@ EventDto _$EventDtoFromJson(Map<String, dynamic> json) => EventDto(
       nameEventCategory: json['nameEventCategory'] as String?,
       location: json['location'] as String?,
       nameClub: json['nameClub'] as String?,
+      clubId: (json['clubId'] as num?)?.toInt(),
+      clubName: json['clubName'] as String?,
     );
 
 Map<String, dynamic> _$EventDtoToJson(EventDto instance) => <String, dynamic>{
@@ -28,4 +30,6 @@ Map<String, dynamic> _$EventDtoToJson(EventDto instance) => <String, dynamic>{
       'nameEventCategory': instance.nameEventCategory,
       'location': instance.location,
       'nameClub': instance.nameClub,
+      'clubId': instance.clubId,
+      'clubName': instance.clubName,
     };

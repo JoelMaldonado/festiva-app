@@ -2,6 +2,7 @@ import 'package:festiva/domain/model/club/club_location.dart';
 import 'package:festiva/presentation/components/card_club.dart';
 import 'package:festiva/presentation/pages/clubs_map/clubs_map_provider.dart';
 import 'package:festiva/presentation/pages/clubs_map/components/map_component.dart';
+import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -35,24 +36,43 @@ class _ClubsMapPageState extends State<ClubsMapPage> {
         if (provider.locations.isNotEmpty) MapComponent(),
         if (provider.clubSelected != null)
           _clubSelected(
-            provider.clubSelected!,
+            club: provider.clubSelected!,
+            onClose: () => provider.setClub(null),
           ),
       ],
     );
   }
 
-  Widget _clubSelected(ClubLocation club) {
+  Widget _clubSelected({
+    required ClubLocation club,
+    required VoidCallback onClose,
+  }) {
     return Align(
       alignment: Alignment.bottomCenter,
       child: Padding(
         padding: const EdgeInsets.all(16),
-        child: CardClub(
-          id: club.idClub,
-          name: club.club,
-          coverUrl: club.coverUrl,
-          logoUrl: club.logoUrl,
-          address: club.address,
-          isOpen: null,
+        child: SizedBox(
+          height: 200,
+          child: Stack(
+            children: [
+              CardClub(
+                id: club.idClub,
+                name: club.club,
+                coverUrl: club.coverUrl,
+                logoUrl: club.logoUrl,
+                address: club.address,
+                isOpen: null,
+              ),
+              Positioned(
+                top: 8,
+                right: 8,
+                child: CustomIconButton(
+                  icon: Icons.close,
+                  onPressed: onClose,
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

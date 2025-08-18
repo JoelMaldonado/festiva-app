@@ -8,6 +8,8 @@ class Event {
   final String? nameEventCategory;
   final String? location;
   final String? nameClub;
+  final int? clubId;
+  final String? clubName;
 
   Event({
     required this.id,
@@ -19,5 +21,7 @@ class Event {
     required this.nameEventCategory,
     required this.location,
     required this.nameClub,
+    required this.clubId,
+    required this.clubName,
   });
 }

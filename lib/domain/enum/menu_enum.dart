@@ -5,7 +5,7 @@ enum MenuEnum {
   events,
   home,
   clubs,
-  //preferences,
+  preferences,
 }
 
 extension MenuEnumExtension on MenuEnum {
@@ -19,8 +19,8 @@ extension MenuEnumExtension on MenuEnum {
         return Icons.home;
       case MenuEnum.clubs:
         return Icons.apartment;
-      //case MenuEnum.preferences:
-      //  return Icons.manage_accounts;
+      case MenuEnum.preferences:
+        return Icons.manage_accounts;
     }
   }
 }

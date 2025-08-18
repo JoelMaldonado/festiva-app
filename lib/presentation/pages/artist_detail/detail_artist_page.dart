@@ -76,20 +76,24 @@ class _DetailArtistPageState extends State<DetailArtistPage> {
                 child: Column(
                   spacing: 12,
                   children: [
-                    Text(
-                      provider.artist?.nombre ?? "Sin Nombre",
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: AppColors.colorT1,
-                        fontWeight: FontWeight.w900,
-                      ),
-                    ),
-                    Text(
-                      provider.artist?.tipo ?? "Sin Tipo",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: AppColors.colorT2,
-                      ),
+                    Column(
+                      children: [
+                        Text(
+                          provider.artist?.nombre ?? "Sin Nombre",
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: AppColors.colorT1,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                        Text(
+                          provider.artist?.tipo ?? "Sin Tipo",
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: AppColors.colorT2,
+                          ),
+                        ),
+                      ],
                     ),
                     Text(
                       provider.artist?.descrip ?? "Sin Descripción",

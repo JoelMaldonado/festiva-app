@@ -5,24 +5,32 @@ import 'package:festiva/presentation/pages/events/events_page.dart';
 import 'package:festiva/presentation/pages/home/home_page.dart';
 import 'package:festiva/presentation/pages/menu/components/menu_bottom.dart';
 import 'package:festiva/presentation/pages/menu/menu_provider.dart';
+import 'package:festiva/presentation/pages/preferences/preferences_page.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
-class MenuPage extends StatelessWidget {
+class MenuPage extends StatefulWidget {
   const MenuPage({super.key});
+
+  @override
+  State<MenuPage> createState() => _MenuPageState();
+}
+
+class _MenuPageState extends State<MenuPage> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      systemNavigationBarColor: AppColors.colorB3,
+      systemNavigationBarIconBrightness: Brightness.light,
+    ));
+  }
 
   @override
   Widget build(BuildContext context) {
     final provider = Provider.of<MenuProvider>(context);
-
-    SystemChrome.setSystemUIOverlayStyle(
-      const SystemUiOverlayStyle(
-        systemNavigationBarColor: AppColors.colorB3,
-        systemNavigationBarIconBrightness: Brightness.light,
-      ),
-    );
 
     final pages = [
       ClubsMapPage(), // index 0
@@ -32,6 +40,7 @@ class MenuPage extends StatelessWidget {
         toEvents: () => provider.setMenuSelected(MenuEnum.events),
       ), // index 2
       ClubsPage(), // index 3
+      PreferencesPage(),
     ];
 
     final selectedIndex = switch (provider.menuSelected) {
@@ -39,18 +48,23 @@ class MenuPage extends StatelessWidget {
       MenuEnum.events => 1,
       MenuEnum.home => 2,
       MenuEnum.clubs => 3,
+      MenuEnum.preferences => 4,
     };
 
     return Scaffold(
       backgroundColor: AppColors.colorB1,
       body: SafeArea(
-          child: IndexedStack(
-        index: selectedIndex,
-        children: pages,
-      )),
-      bottomNavigationBar: MenuBottom(
-        selected: provider.menuSelected,
-        onSelected: provider.setMenuSelected,
+        child: IndexedStack(index: selectedIndex, children: pages),
+      ),
+      bottomNavigationBar: SafeArea(
+        top: false,
+        left: false,
+        right: false,
+        bottom: true,
+        child: MenuBottom(
+          selected: provider.menuSelected,
+          onSelected: provider.setMenuSelected,
+        ),
       ),
     );
   }

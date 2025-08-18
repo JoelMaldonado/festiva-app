@@ -1,6 +1,10 @@
+import 'package:festiva/presentation/pages/preferences/components/item_preferences.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PreferencesPage extends StatelessWidget {
   const PreferencesPage({super.key});
@@ -17,18 +21,18 @@ class PreferencesPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Preferencias",
+                "Preferences",
                 style: AppTextStyles.largeTitle.copyWith(
                   fontWeight: FontWeight.bold,
                   color: AppColors.colorT1,
                 ),
               ),
-              Text(
-                "Selecciona una opción",
-                style: AppTextStyles.callout.copyWith(
-                  color: AppColors.colorT2,
-                ),
-              ),
+              //Text(
+              //  "Selecciona una opción",
+              //  style: AppTextStyles.callout.copyWith(
+              //    color: AppColors.colorT2,
+              //  ),
+              //),
             ],
           ),
           //ItemPreferences(
@@ -70,13 +74,22 @@ class PreferencesPage extends StatelessWidget {
           //  title: "Calificar App",
           //  onTap: () {},
           //),
-          //ItemPreferences(
-          //  icon: Icons.book_outlined,
-          //  title: "Términos y condiciones",
-          //  onTap: () {},
-          //),
+          ItemPreferences(
+            icon: Icons.book_outlined,
+            title: "Privacy Policy",
+            onTap: () => _openLink(dotenv.env['POLICY_URL']!),
+          ),
         ],
       ),
     );
+  }
+
+  void _openLink(String url) async {
+    try {
+      final uri = Uri.parse(url);
+      if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {}
+    } catch (e) {
+      Fluttertoast.showToast(msg: "Error opening link: $url");
+    }
   }
 }

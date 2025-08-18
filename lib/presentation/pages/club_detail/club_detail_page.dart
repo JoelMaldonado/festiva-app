@@ -1,6 +1,5 @@
 import 'package:festiva/presentation/components/button_social_network.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
-import 'package:festiva/presentation/pages/club_detail/components/carousel_club_covers.dart';
 import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
@@ -8,6 +7,7 @@ import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -159,9 +159,13 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             icon: Icons.location_pin,
                             title: "Address",
                             value: club.address!,
-                            onTap: () {
+                            onLongPress: () {
                               Fluttertoast.showToast(
-                                  msg: "Text copied to clipboard");
+                                msg: "Text copied to clipboard",
+                              );
+                              Clipboard.setData(
+                                ClipboardData(text: club.address!),
+                              );
                             },
                           ),
                         //Row(

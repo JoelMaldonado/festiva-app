@@ -33,6 +33,12 @@ class EventDto {
   @JsonKey(name: 'nameClub')
   final String? nameClub;
 
+  @JsonKey(name: 'clubId')
+  final int? clubId;
+
+  @JsonKey(name: 'clubName')
+  final String? clubName;
+
   EventDto({
     required this.id,
     required this.title,
@@ -43,6 +49,8 @@ class EventDto {
     required this.nameEventCategory,
     required this.location,
     required this.nameClub,
+    required this.clubId,
+    required this.clubName,
   });
 
   factory EventDto.fromJson(Map<String, dynamic> json) =>
@@ -61,6 +69,8 @@ class EventDto {
       nameEventCategory: nameEventCategory,
       location: location,
       nameClub: nameClub,
+      clubId: clubId,
+      clubName: clubName,
     );
   }
 }
