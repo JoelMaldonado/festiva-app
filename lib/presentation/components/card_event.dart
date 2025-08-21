@@ -71,11 +71,11 @@ class CardEvent extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                "${event.eventDatetime?.format(pattern: "MMM").toUpperCase()}",
+                                "${event.eventDate?.format(pattern: "MMM").toUpperCase()}",
                                 style: AppTextStyles.caption1,
                               ),
                               Text(
-                                "${event.eventDatetime?.format(pattern: "dd")}",
+                                "${event.eventDate?.format(pattern: "dd")}",
                                 style: AppTextStyles.title3.copyWith(
                                   fontWeight: FontWeight.bold,
                                 ),

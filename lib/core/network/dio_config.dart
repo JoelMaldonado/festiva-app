@@ -23,14 +23,16 @@ class DioConfig {
     );
 
     _dio.interceptors.add(AuthInterceptor());
-    _dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-      ),
-    );
+    if (kDebugMode) {
+      _dio.interceptors.add(
+        PrettyDioLogger(
+          requestHeader: true,
+          requestBody: true,
+          responseBody: true,
+          responseHeader: false,
+        ),
+      );
+    }
   }
 
   Future<Response<dynamic>> get({

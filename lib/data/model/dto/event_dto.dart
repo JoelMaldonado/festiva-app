@@ -18,8 +18,11 @@ class EventDto {
   @JsonKey(name: 'imageUrl')
   final String? imageUrl;
 
-  @JsonKey(name: 'eventDatetime')
-  final String? eventDatetime;
+  @JsonKey(name: 'eventDate')
+  final String? eventDate;
+
+  @JsonKey(name: 'startTime')
+  final String? startTime;
 
   @JsonKey(name: 'idEventCategory')
   final int? idEventCategory;
@@ -44,7 +47,8 @@ class EventDto {
     required this.title,
     required this.description,
     required this.imageUrl,
-    required this.eventDatetime,
+    required this.eventDate,
+    required this.startTime,
     required this.idEventCategory,
     required this.nameEventCategory,
     required this.location,
@@ -64,7 +68,8 @@ class EventDto {
       title: title ?? '',
       description: description ?? '',
       imageUrl: imageUrl ?? '',
-      eventDatetime: parseDatetime(eventDatetime),
+      eventDate: eventDate?.toDate(pattern: 'yyyy-MM-dd'),
+      startTime: startTime?.toDate(pattern: 'HH:mm:ss'),
       idEventCategory: idEventCategory,
       nameEventCategory: nameEventCategory,
       location: location,

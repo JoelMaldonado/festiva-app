@@ -79,7 +79,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
             CustomExpandableText(text: provider.event?.description ?? ""),
             if (provider.event?.nameEventCategory != null)
               _categoryEvent(provider.event!.nameEventCategory!),
-            if (provider.event?.eventDatetime != null)
+            if (provider.event?.eventDate != null)
               Row(
                 spacing: 12,
                 children: [
@@ -88,7 +88,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
                     child: ItemDetail(
                       icon: Icons.calendar_month_outlined,
                       title: "Date",
-                      value: provider.event!.eventDatetime!.format(),
+                      value: provider.event!.eventDate!.format(),
                       onLongPress: () {
                         if (kDebugMode) {
                           final event =
@@ -98,15 +98,16 @@ class _DetailEventPageState extends State<DetailEventPage> {
                       },
                     ),
                   ),
-                  Expanded(
-                    flex: 2,
-                    child: ItemDetail(
-                      icon: Icons.schedule_outlined,
-                      title: "Time",
-                      value: provider.event!.eventDatetime!
-                          .format(pattern: 'HH:mm'),
+                  if (provider.event?.startTime != null)
+                    Expanded(
+                      flex: 2,
+                      child: ItemDetail(
+                        icon: Icons.schedule_outlined,
+                        title: "Time",
+                        value:
+                            provider.event!.startTime!.format(pattern: 'HH:mm'),
+                      ),
                     ),
-                  ),
                 ],
               ),
             ItemDetail(

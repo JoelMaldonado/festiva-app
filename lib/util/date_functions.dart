@@ -21,6 +21,12 @@ extension StringExtension on String {
       parsed.second,
     );
   }
+
+  DateTime toDate({
+    String pattern = "yyyy-MM-ddTHH:mm:ss",
+  }) {
+    return DateFormat(pattern).parse(this);
+  }
 }
 
 DateTime? parseDatetime(String? datetime) {

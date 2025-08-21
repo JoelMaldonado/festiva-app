@@ -3,7 +3,8 @@ class Event {
   final String title;
   final String description;
   final String imageUrl;
-  final DateTime? eventDatetime;
+  final DateTime? eventDate;
+  final DateTime? startTime;
   final int? idEventCategory;
   final String? nameEventCategory;
   final String? location;
@@ -16,7 +17,8 @@ class Event {
     required this.title,
     required this.description,
     required this.imageUrl,
-    required this.eventDatetime,
+    required this.eventDate,
+    required this.startTime,
     required this.idEventCategory,
     required this.nameEventCategory,
     required this.location,

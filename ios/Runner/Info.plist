@@ -2,6 +2,39 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 	<dict>
+
+		<!-- Facebook: App ID y nombre para iOS -->
+		<key>FacebookAppID</key>
+		<string>2155606231614990</string>
+		<key>FacebookDisplayName</key>
+		<string>Festiva</string>
+
+		<!-- URL scheme: debe ser fb + APP_ID -->
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>fb2155606231614990</string>
+				</array>
+			</dict>
+		</array>
+
+		<!-- Recomendado para que iOS pueda abrir/consultar apps de Facebook -->
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>fbapi</string>
+			<string>fbauth2</string>
+			<string>fb-messenger-share-api</string>
+			<string>fbshareextension</string>
+		</array>
+
+		<!-- ATT (iOS 14+): texto del popup de rastreo -->
+		<key>NSUserTrackingUsageDescription</key>
+		<string>Usamos tu identificador de publicidad para medir instalaciones y mejorar la
+			experiencia.</string>
+
+
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true />
 		<key>CFBundleDevelopmentRegion</key>

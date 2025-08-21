@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:festiva/app/app.dart';
 import 'package:festiva/app/app_providers.dart';
 import 'package:festiva/core/di/di.dart';
@@ -9,8 +12,19 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:logger/web.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:app_tracking_transparency/app_tracking_transparency.dart';
 
 final tagito = Logger();
+final fbAppEvents = FacebookAppEvents();
+
+Future<void> initTracking() async {
+  if (Platform.isIOS) {
+    final status = await AppTrackingTransparency.requestTrackingAuthorization();
+    if (status == TrackingStatus.authorized) {
+      await fbAppEvents.setAdvertiserTracking(enabled: true);
+    }
+  }
+}
 
 Future<void> setup() async {
   await dotenv.load(fileName: ".env");
@@ -29,6 +43,8 @@ void main() async {
   );
 
   await setupDependencies();
+
+  await initTracking();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
