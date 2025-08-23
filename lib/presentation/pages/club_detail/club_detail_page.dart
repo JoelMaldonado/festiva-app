@@ -1,4 +1,6 @@
+import 'package:festiva/domain/model/event.dart';
 import 'package:festiva/presentation/components/button_social_network.dart';
+import 'package:festiva/presentation/components/components.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
 import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
@@ -8,6 +10,7 @@ import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -26,13 +29,12 @@ class ClubDetailPage extends StatefulWidget {
 
 class _ClubDetailPageState extends State<ClubDetailPage> {
   final _pageController = PageController();
+
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<ClubProvider>(context, listen: false).getClub(
-        widget.idClub,
-      );
+      Provider.of<ClubProvider>(context, listen: false).getClub(widget.idClub);
     });
   }
 
@@ -154,44 +156,54 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             );
                           },
                         ),
-                        if (club.address != null)
-                          ItemDetail(
-                            icon: Icons.location_pin,
-                            title: "Address",
-                            value: club.address!,
-                            onLongPress: () {
-                              Fluttertoast.showToast(
-                                msg: "Text copied to clipboard",
-                              );
-                              Clipboard.setData(
-                                ClipboardData(text: club.address!),
-                              );
-                            },
-                          ),
-                        //Row(
-                        //  spacing: 12,
-                        //  children: [
-                        //    Expanded(
-                        //      flex: 2,
-                        //      child: _itemDetail(
-                        //        icon: Icons.star_outline,
-                        //        title: "Rating",
-                        //        value: "5.0",
-                        //      ),
-                        //    ),
-                        //    CustomFloatingActionButton(
-                        //      icon: Icons.mail_outline,
-                        //      backgroundColor: AppColors.colorBlue,
-                        //      onPressed: () {},
-                        //    ),
-                        //    CustomFloatingActionButton(
-                        //      icon: Icons.call_outlined,
-                        //      backgroundColor: AppColors.colorGreen,
-                        //      onPressed: () {},
-                        //    ),
-                        //  ],
-                        //),
-
+                        Row(
+                          spacing: 12,
+                          children: [
+                            if (club.address != null)
+                              Expanded(
+                                child: ItemDetail(
+                                  icon: Icons.location_pin,
+                                  title: "Address",
+                                  value: club.address!,
+                                  onLongPress: () {
+                                    Fluttertoast.showToast(
+                                      msg: "Text copied to clipboard",
+                                    );
+                                    Clipboard.setData(
+                                      ClipboardData(text: club.address!),
+                                    );
+                                  },
+                                ),
+                              ),
+                            if (club.googleRating != null &&
+                                club.googleUserRatingsTotal != null)
+                              Expanded(
+                                child: ItemDetail(
+                                  icon: Icons.star,
+                                  title:
+                                      "Rating (${club.googleUserRatingsTotal})",
+                                  child: Row(
+                                    spacing: 4,
+                                    children: [
+                                      Text("${club.googleRating}"),
+                                      RatingBarIndicator(
+                                        rating: club.googleRating!,
+                                        itemBuilder: (context, index) {
+                                          return Icon(
+                                            Icons.star,
+                                            color: AppColors.colorYellow,
+                                          );
+                                        },
+                                        itemCount: 5,
+                                        itemSize: 20,
+                                        unratedColor: AppColors.colorT2,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
                         Text(
                           "Social Networks",
                           style: TextStyle(
@@ -200,7 +212,6 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             color: AppColors.colorT1,
                           ),
                         ),
-
                         SizedBox(
                           height: 42,
                           child: ListView.separated(
@@ -216,14 +227,45 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             separatorBuilder: (c, i) =>
                                 const SizedBox(width: 8),
                           ),
-                        )
+                        ),
+                        if (provider.listEventsByClub.isNotEmpty)
+                          _events(provider.listEventsByClub)
                       ],
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),
+    );
+  }
+
+  Widget _events(List<Event> events) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      spacing: 8,
+      children: [
+        Text(
+          "Events",
+          style: TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w900,
+            color: AppColors.colorT1,
+          ),
+        ),
+        SizedBox(
+          height: 180,
+          child: ListView.separated(
+            itemBuilder: (c, i) {
+              final event = events[i];
+              return CardEvent(event: event);
+            },
+            separatorBuilder: (c, i) => const SizedBox(width: 8),
+            itemCount: events.length,
+            scrollDirection: Axis.horizontal,
+          ),
+        )
+      ],
     );
   }
 }

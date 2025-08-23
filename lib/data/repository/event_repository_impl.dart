@@ -11,9 +11,9 @@ class EventRepositoryImpl implements EventRepository {
   EventRepositoryImpl(this._service);
 
   @override
-  Future<Either<Failure, List<Event>>> allEvents() async {
+  Future<Either<Failure, List<Event>>> allEvents({int? clubId}) async {
     try {
-      final res = await _service.fetchAll();
+      final res = await _service.fetchAll(clubId: clubId);
       if (res.isSuccess) {
         final map = res.data?.map((e) => e.toDomain()).toList();
         return Right(map ?? []);

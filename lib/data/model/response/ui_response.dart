@@ -109,6 +109,12 @@ class UiClubDetail {
   @JsonKey(name: 'covers')
   final List<String> covers;
 
+  @JsonKey(name: 'googleRating')
+  final double? googleRating;
+
+  @JsonKey(name: 'googleUserRatingsTotal')
+  final int? googleUserRatingsTotal;
+
   @JsonKey(name: 'socialNetworks')
   final List<UiClubSocialNetwork> socialNetworks;
 
@@ -119,6 +125,8 @@ class UiClubDetail {
     required this.logoUrl,
     required this.address,
     required this.covers,
+    required this.googleRating,
+    required this.googleUserRatingsTotal,
     required this.socialNetworks,
   });
 

@@ -8,8 +8,16 @@ class EventService {
 
   EventService(this._dio);
 
-  Future<ApiResponse<List<EventDto>>> fetchAll() async {
-    final call = await _dio.get(url: '/event');
+  Future<ApiResponse<List<EventDto>>> fetchAll({
+    int? clubId,
+  }) async {
+    final queryParameters = {
+      if (clubId != null) "clubId": clubId,
+    };
+    final call = await _dio.get(
+      url: '/event',
+      queryParameters: queryParameters,
+    );
     final response = ApiResponse<List<EventDto>>.fromJson(
       call.data,
       (json) => (json as List<dynamic>)

@@ -1,8 +1,11 @@
 import 'package:festiva/presentation/pages/full_screen_image/full_screen_image_page.dart';
+import 'package:festiva/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:festiva/presentation/pages/splash/splash_page.dart';
 import 'package:festiva/presentation/pages/on_boarding/on_boarding_page.dart';
 import 'package:festiva/presentation/pages/login/login_page.dart';
 import 'package:festiva/presentation/pages/menu/menu_page.dart';
+import 'package:festiva/presentation/widgets/app_button.dart';
+import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class AppRoutes {
@@ -11,9 +14,14 @@ class AppRoutes {
   static const login = '/login';
   static const menu = '/menu';
   static const fullScreenImage = '/full-screen-image';
+  static const signIn = '/sign-in';
 }
 
+final _rootNavigatorKey = GlobalKey<NavigatorState>();
+final _shellNavigatorKey = GlobalKey<NavigatorState>();
+
 final appRouter = GoRouter(
+  navigatorKey: _rootNavigatorKey,
   initialLocation: AppRoutes.splash,
   routes: [
     GoRoute(
@@ -39,6 +47,47 @@ final appRouter = GoRouter(
         return FullScreenImagePage(imageUrl: imageUrl);
       },
     ),
+    GoRoute(
+      path: AppRoutes.signIn,
+      builder: (context, state) {
+        return SignInPage();
+      },
+    ),
+    ShellRoute(
+      navigatorKey: _shellNavigatorKey,
+      builder: (context, state, child) {
+        return Scaffold(
+          appBar: AppBar(
+            title: Text("Shell Menu"),
+          ),
+          body: child,
+        );
+      },
+      routes: [
+        GoRoute(
+          path: '/uno',
+          builder: (context, state) {
+            return Column(
+              children: [
+                Center(child: Text('Uno')),
+                AppButton(
+                  label: "2",
+                  onPressed: () {
+                    GoRouter.of(context).push('/dos');
+                  },
+                )
+              ],
+            );
+          },
+        ),
+        GoRoute(
+          path: '/dos',
+          builder: (context, state) {
+            return Center(child: Text('Dos'));
+          },
+        ),
+      ],
+    )
   ],
 );
 

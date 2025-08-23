@@ -47,6 +47,7 @@ Future<void> providerModule(GetIt getIt) async {
     () => ClubProvider(
       repo: getIt<ClubRepository>(),
       uiRepo: getIt<UiRepository>(),
+      eventRepo: getIt<EventRepository>(),
     ),
   );
 

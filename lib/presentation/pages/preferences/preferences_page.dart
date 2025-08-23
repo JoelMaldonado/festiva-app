@@ -27,26 +27,42 @@ class PreferencesPage extends StatelessWidget {
                   color: AppColors.colorT1,
                 ),
               ),
-              //Text(
-              //  "Selecciona una opción",
-              //  style: AppTextStyles.callout.copyWith(
-              //    color: AppColors.colorT2,
-              //  ),
-              //),
+              Text(
+                "Select an option",
+                style: AppTextStyles.callout.copyWith(
+                  color: AppColors.colorT2,
+                ),
+              ),
             ],
           ),
-          //ItemPreferences(
-          //  icon: Icons.person_outline,
-          //  title: "Usuario",
-          //  onTap: () {
-          //    Navigator.push(
-          //      context,
-          //      MaterialPageRoute(
-          //        builder: (_) => ProfilePage(),
-          //      ),
-          //    );
-          //  },
-          //),
+          /*
+          ItemPreferences(
+            icon: Icons.person_outline,
+            title: "Profile",
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ProfilePage(),
+                ),
+              );
+            },
+          ),
+          ItemPreferences(
+            icon: Icons.login,
+            title: "Sign In 1",
+            onTap: () {
+              GoRouter.of(context).push('/uno');
+            },
+          ),
+          ItemPreferences(
+            icon: Icons.login,
+            title: "Sign In 2",
+            onTap: () {
+              GoRouter.of(context).push('/dos');
+            },
+          ),
+          */
           //ItemPreferences(
           //  icon: Icons.language_outlined,
           //  title: "Idioma",

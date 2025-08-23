@@ -5,6 +5,7 @@ class ItemDetail extends StatelessWidget {
   final IconData icon;
   final String title;
   final String value;
+  final Widget? child;
   final IconData? iconAction;
   final VoidCallback? onTap;
   final VoidCallback? onLongPress;
@@ -13,7 +14,8 @@ class ItemDetail extends StatelessWidget {
     super.key,
     required this.icon,
     required this.title,
-    required this.value,
+    this.value = "",
+    this.child,
     this.iconAction,
     this.onTap,
     this.onLongPress,
@@ -65,15 +67,17 @@ class ItemDetail extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Text(
-                        value,
-                        style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: AppColors.colorT2,
-                        ),
-                        maxLines: 1,
-                      ),
+                      child != null
+                          ? child!
+                          : Text(
+                              value,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.colorT2,
+                              ),
+                              maxLines: 1,
+                            ),
                     ],
                   ),
                 ),
