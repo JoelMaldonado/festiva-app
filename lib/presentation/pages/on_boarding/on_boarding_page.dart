@@ -109,11 +109,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   String _getTitle() {
     switch (_currentPage) {
       case 0:
-        return "EVENTS NEAR YOU";
+        return "Tired of endless scrolling?";
       case 1:
-        return "FIND FUN SPOTS EASILY";
+        return "What’s your vibe tonight?";
       case 2:
-        return "SAVE YOUR FAVORITES";
+        return "No FOMO. Just good nights";
       default:
         return "";
     }
@@ -122,11 +122,11 @@ class _OnBoardingPageState extends State<OnBoardingPage> {
   String _getDetail() {
     switch (_currentPage) {
       case 0:
-        return "Discover the best events happening near you, with up-to-date details on schedules and locations so you can enjoy any day of the week. We keep you in the loop with new events you’ll love, every day.";
+        return "Stop wasting nights hunting for plans. With one tap, see the best parties, concerts and events happening in Oslo";
       case 1:
-        return "Find the hottest places to have fun nearby — clubs, bars, and other great spots with special events just for you. Plan your night out easily.";
+        return "Latin beats, Afro grooves, Techno drops, or a student night out — pick your mood and we’ll show you exactly where the energy is";
       case 2:
-        return "Keep track of the places you’ve visited, share your feedback, and save your favorite spots. Pick your favorite events too and never miss out on what’s happening!";
+        return "Save your favorite spots, get alerts for can’t-miss events, and always know where the real party is. Your nights in Oslo will never be the same";
       default:
         return "";
     }

@@ -204,13 +204,27 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                               ),
                           ],
                         ),
-                        Text(
-                          "Social Networks",
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w900,
-                            color: AppColors.colorT1,
-                          ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Text(
+                                "Social Networks",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w900,
+                                  color: AppColors.colorT1,
+                                ),
+                              ),
+                            ),
+                            Text(
+                              "Powered by Google",
+                              style: TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                color: AppColors.colorT1,
+                              ),
+                            )
+                          ],
                         ),
                         SizedBox(
                           height: 42,

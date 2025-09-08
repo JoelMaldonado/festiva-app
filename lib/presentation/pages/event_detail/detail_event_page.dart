@@ -3,6 +3,7 @@ import 'package:festiva/presentation/components/item_detail.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
+import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';

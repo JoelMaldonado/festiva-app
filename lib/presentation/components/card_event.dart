@@ -55,34 +55,10 @@ class CardEvent extends StatelessWidget {
                       ),
                     ),
                     Positioned(
-                        left: 16,
-                        top: 16,
-                        child: Container(
-                          width: 48,
-                          height: 48,
-                          decoration: BoxDecoration(
-                            color: AppColors.colorB3,
-                            borderRadius: BorderRadius.circular(4),
-                            border: Border.all(
-                              color: AppColors.colorT1,
-                              width: 1,
-                            ),
-                          ),
-                          child: Column(
-                            children: [
-                              Text(
-                                "${event.eventDate?.format(pattern: "MMM").toUpperCase()}",
-                                style: AppTextStyles.caption1,
-                              ),
-                              Text(
-                                "${event.eventDate?.format(pattern: "dd")}",
-                                style: AppTextStyles.title3.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
+                      left: 16,
+                      top: 16,
+                      child: _date(event.eventDate),
+                    ),
                     Positioned(
                       left: 8,
                       bottom: 8,
@@ -150,6 +126,38 @@ class CardEvent extends StatelessWidget {
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _date(DateTime? date) {
+    if (date == null) {
+      return SizedBox.shrink();
+    }
+    return Container(
+      width: 48,
+      height: 48,
+      decoration: BoxDecoration(
+        color: AppColors.colorB3,
+        borderRadius: BorderRadius.circular(4),
+        border: Border.all(
+          color: AppColors.colorT1,
+          width: 1,
+        ),
+      ),
+      child: Column(
+        children: [
+          Text(
+            date.format(pattern: "MMM").toUpperCase(),
+            style: AppTextStyles.caption1,
+          ),
+          Text(
+            date.format(pattern: "dd"),
+            style: AppTextStyles.title3.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
       ),
     );
   }
