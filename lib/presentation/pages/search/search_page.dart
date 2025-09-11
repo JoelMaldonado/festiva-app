@@ -1,9 +1,10 @@
+import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
 import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
-import 'package:festiva/presentation/pages/event_detail/detail_event_page.dart';
 import 'package:festiva/presentation/pages/search/search_provider.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class SearchPage extends StatefulWidget {
@@ -75,13 +76,9 @@ class _SearchPageState extends State<SearchPage> {
                           break;
 
                         case "E":
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => DetailEventPage(
-                                idEvent: item.id,
-                              ),
-                            ),
+                          GoRouter.of(context).push(
+                            AppRoutes.eventDetail,
+                            extra: item.id.toString(),
                           );
                           break;
                       }

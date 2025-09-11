@@ -100,3 +100,19 @@ Map<String, dynamic> _$UiClubSocialNetworkToJson(
       'code': instance.code,
       'name': instance.name,
     };
+
+AppScreenFlagDto _$AppScreenFlagDtoFromJson(Map<String, dynamic> json) =>
+    AppScreenFlagDto(
+      id: (json['id'] as num).toInt(),
+      screenKey: json['screenKey'] as String,
+      isActive: (json['isActive'] as num).toInt(),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$AppScreenFlagDtoToJson(AppScreenFlagDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'screenKey': instance.screenKey,
+      'isActive': instance.isActive,
+      'updatedAt': instance.updatedAt.toIso8601String(),
+    };

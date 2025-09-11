@@ -32,7 +32,7 @@ class EventProvider extends ChangeNotifier {
   Event? event;
   bool isLoadingEvent = false;
 
-  getEvent(int id) async {
+  getEvent(String id) async {
     try {
       isLoadingEvent = true;
       notifyListeners();

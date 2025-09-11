@@ -1,10 +1,11 @@
+import 'package:festiva/app/router.dart';
 import 'package:festiva/domain/model/event.dart';
-import 'package:festiva/presentation/pages/event_detail/detail_event_page.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:festiva/util/date_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CardEvent extends StatelessWidget {
   final Event event;
@@ -20,14 +21,8 @@ class CardEvent extends StatelessWidget {
       color: Colors.transparent,
       child: InkWell(
         onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (_) => DetailEventPage(
-                idEvent: event.id,
-              ),
-            ),
-          );
+          GoRouter.of(context)
+              .push(AppRoutes.eventDetail, extra: event.id.toString());
         },
         borderRadius: BorderRadius.circular(16),
         child: Ink(

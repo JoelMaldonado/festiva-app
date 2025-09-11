@@ -39,33 +39,7 @@ class _EventsPageState extends State<EventsPage> {
         spacing: 16,
         children: [
           const SizedBox.shrink(),
-          /*
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "September 2025",
-                  style: AppTextStyles.headline.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: AppColors.colorT1,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Row(
-                  spacing: 16,
-                  children: [
-                    _date(DateTime.now()),
-                    _date(DateTime.now().add(const Duration(days: 1))),
-                    _date(DateTime.now().add(const Duration(days: 2))),
-                    _date(DateTime.now().add(const Duration(days: 3))),
-                  ],
-                ),
-              ],
-            ),
-          ),
-          */
+          //_calendar(),
           EventsCategories(),
           provider.listEventsFiltered.isEmpty
               ? Padding(
@@ -98,6 +72,34 @@ class _EventsPageState extends State<EventsPage> {
                     },
                   ),
                 )
+        ],
+      ),
+    );
+  }
+
+  Padding _calendar() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            DateTime.now().format(pattern: "MMMM yyyy"),
+            style: AppTextStyles.headline.copyWith(
+              fontWeight: FontWeight.bold,
+              color: AppColors.colorT1,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Row(
+            spacing: 16,
+            children: [
+              _date(DateTime.now()),
+              _date(DateTime.now().add(const Duration(days: 1))),
+              _date(DateTime.now().add(const Duration(days: 2))),
+              _date(DateTime.now().add(const Duration(days: 3))),
+            ],
+          ),
         ],
       ),
     );

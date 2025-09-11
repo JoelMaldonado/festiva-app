@@ -3,6 +3,7 @@ import 'package:festiva/presentation/pages/clubs_map/clubs_map_page.dart';
 import 'package:festiva/presentation/pages/clubs/clubs_page.dart';
 import 'package:festiva/presentation/pages/events/events_page.dart';
 import 'package:festiva/presentation/pages/home/home_page.dart';
+import 'package:festiva/presentation/pages/maintenance/maintenance_page.dart';
 import 'package:festiva/presentation/pages/menu/components/menu_bottom.dart';
 import 'package:festiva/presentation/pages/menu/menu_provider.dart';
 import 'package:festiva/presentation/pages/preferences/preferences_page.dart';
@@ -26,6 +27,9 @@ class _MenuPageState extends State<MenuPage> {
       systemNavigationBarColor: AppColors.colorB3,
       systemNavigationBarIconBrightness: Brightness.light,
     ));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Provider.of<MenuProvider>(context, listen: false).getAppScreenFlags();
+    });
   }
 
   @override
@@ -51,6 +55,13 @@ class _MenuPageState extends State<MenuPage> {
       MenuEnum.preferences => 4,
     };
 
+    if (provider.isMenuActive == false) {
+      return MaintenancePage(
+        onRetry: () {
+          provider.getAppScreenFlags();
+        },
+      );
+    }
     return Scaffold(
       backgroundColor: AppColors.colorB1,
       body: SafeArea(

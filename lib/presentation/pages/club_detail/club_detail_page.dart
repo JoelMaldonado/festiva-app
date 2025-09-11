@@ -1,11 +1,12 @@
-import 'package:festiva/domain/model/event.dart';
 import 'package:festiva/presentation/components/button_social_network.dart';
-import 'package:festiva/presentation/components/components.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
+import 'package:festiva/presentation/pages/club_detail/components/carousel_events.dart';
 import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
+import 'package:festiva/presentation/widgets/custom_floating_action_button.dart';
+import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -60,6 +61,18 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
               scrollDirection: Axis.vertical,
               child: Column(
                 children: [
+                  Padding(
+                    padding: const EdgeInsets.only(left: 24, top: 12),
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: CustomIconButton(
+                        icon: Icons.arrow_back,
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ),
                   AspectRatio(
                     aspectRatio: 1,
                     child: Stack(
@@ -69,7 +82,12 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                           itemCount: club.covers.length,
                           itemBuilder: (c, i) {
                             return Padding(
-                              padding: const EdgeInsets.all(24),
+                              padding: const EdgeInsets.only(
+                                left: 24,
+                                right: 24,
+                                bottom: 24,
+                                top: 12,
+                              ),
                               child: CustomImageNetwork(
                                 imageUrl: club.covers[i],
                                 borderRadius: 12,
@@ -242,8 +260,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                                 const SizedBox(width: 8),
                           ),
                         ),
-                        if (provider.listEventsByClub.isNotEmpty)
-                          _events(provider.listEventsByClub)
+                        CarouselEvents(events: provider.listEventsByClub),
                       ],
                     ),
                   ),
@@ -251,35 +268,6 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                 ],
               ),
             ),
-    );
-  }
-
-  Widget _events(List<Event> events) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 8,
-      children: [
-        Text(
-          "Events",
-          style: TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w900,
-            color: AppColors.colorT1,
-          ),
-        ),
-        SizedBox(
-          height: 180,
-          child: ListView.separated(
-            itemBuilder: (c, i) {
-              final event = events[i];
-              return CardEvent(event: event);
-            },
-            separatorBuilder: (c, i) => const SizedBox(width: 8),
-            itemCount: events.length,
-            scrollDirection: Axis.horizontal,
-          ),
-        )
-      ],
     );
   }
 }

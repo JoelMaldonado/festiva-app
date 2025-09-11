@@ -1,3 +1,4 @@
+import 'package:festiva/presentation/pages/event_detail/detail_event_page.dart';
 import 'package:festiva/presentation/pages/full_screen_image/full_screen_image_page.dart';
 import 'package:festiva/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:festiva/presentation/pages/splash/splash_page.dart';
@@ -15,6 +16,7 @@ class AppRoutes {
   static const menu = '/menu';
   static const fullScreenImage = '/full-screen-image';
   static const signIn = '/sign-in';
+  static const eventDetail = '/event-detail';
 }
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -51,6 +53,27 @@ final appRouter = GoRouter(
       path: AppRoutes.signIn,
       builder: (context, state) {
         return SignInPage();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.eventDetail,
+      builder: (context, state) {
+        final idEvent = state.extra as String;
+        return DetailEventPage(idEvent: idEvent);
+      },
+    ),
+    GoRoute(
+      path: '/app/event-detail/:idEvent',
+      builder: (context, state) {
+        final idEvent = state.pathParameters['idEvent'] ?? '';
+        return PopScope(
+          canPop: true,
+          onPopInvokedWithResult: (didPop, result) {
+            if (didPop) return;
+            GoRouter.of(context).go(AppRoutes.menu);
+          },
+          child: DetailEventPage(idEvent: idEvent),
+        );
       },
     ),
     ShellRoute(

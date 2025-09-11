@@ -38,7 +38,7 @@ class EventService {
     return response;
   }
 
-  Future<ApiResponse<EventDto>> fetch(int id) async {
+  Future<ApiResponse<EventDto>> fetch(String id) async {
     final call = await _dio.get(url: '/event/$id');
 
     final response = ApiResponse<EventDto>.fromJson(

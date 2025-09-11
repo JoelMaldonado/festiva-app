@@ -2,7 +2,7 @@ name: festiva
 description: "A new Flutter project."
 publish_to: "none"
 
-version: 2.0.5+35
+version: 2.0.9+40
 
 environment:
   sdk: ^3.6.1
@@ -23,6 +23,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
   flutter_rating_bar: ^4.0.1
   flutter_secure_storage: ^9.2.4
+  flutter_svg: ^2.2.1
   fluttertoast: ^8.2.10
   geolocator: ^13.0.2
   get_it: ^8.0.3

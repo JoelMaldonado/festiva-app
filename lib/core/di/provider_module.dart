@@ -18,7 +18,11 @@ import 'package:get_it/get_it.dart';
 
 Future<void> providerModule(GetIt getIt) async {
   getIt.registerFactory(() => LoginProvider(repo: getIt<AuthRepository>()));
-  getIt.registerFactory(() => MenuProvider());
+  getIt.registerFactory(
+    () => MenuProvider(
+      uiRepository: getIt<UiRepository>(),
+    ),
+  );
 
   // Home
   getIt.registerFactory(

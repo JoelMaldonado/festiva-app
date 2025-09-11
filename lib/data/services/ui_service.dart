@@ -9,6 +9,17 @@ class UiService {
     required this.dio,
   });
 
+  Future<ApiResponse<List<AppScreenFlagDto>>> fetchAppScreenFlags() async {
+    final call = await dio.get(url: '/ui/screens');
+    final response = ApiResponse<List<AppScreenFlagDto>>.fromJson(
+      call.data,
+      (json) => (json as List)
+          .map((e) => AppScreenFlagDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+    return response;
+  }
+
   Future<ApiResponse<FetchUiClubsResponse>> fetchClubs(
     int page,
     int limit,

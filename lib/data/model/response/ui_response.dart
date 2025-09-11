@@ -1,3 +1,4 @@
+import 'package:festiva/domain/model/app_screen_flag.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ui_response.g.dart';
@@ -157,4 +158,52 @@ class UiClubSocialNetwork {
       _$UiClubSocialNetworkFromJson(json);
 
   Map<String, dynamic> toJson() => _$UiClubSocialNetworkToJson(this);
+}
+
+@JsonSerializable()
+class AppScreenFlagDto {
+  @JsonKey(name: 'id')
+  final int id;
+
+  @JsonKey(name: 'screenKey')
+  final String screenKey;
+
+  @JsonKey(name: 'isActive')
+  final int isActive;
+
+  @JsonKey(name: 'updatedAt')
+  final DateTime updatedAt;
+
+  AppScreenFlagDto({
+    required this.id,
+    required this.screenKey,
+    required this.isActive,
+    required this.updatedAt,
+  });
+
+  AppScreenFlag toDomain() {
+    AppScreenKeys? screen;
+    switch (screenKey) {
+      case 'app':
+        screen = AppScreenKeys.app;
+        break;
+      case 'home':
+        screen = AppScreenKeys.home;
+        break;
+      default:
+        screen = null;
+    }
+
+    return AppScreenFlag(
+      id: id,
+      screen: screen,
+      isActive: isActive == 1,
+      updatedAt: updatedAt,
+    );
+  }
+
+  factory AppScreenFlagDto.fromJson(Map<String, dynamic> json) =>
+      _$AppScreenFlagDtoFromJson(json);
+
+  Map<String, dynamic> toJson() => _$AppScreenFlagDtoToJson(this);
 }
