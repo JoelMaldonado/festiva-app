@@ -72,13 +72,13 @@ class _DetailEventPageState extends State<DetailEventPage> {
                 //  onPressed: () {},
                 //  icon: Icons.favorite_outline,
                 //),
-                //AppFloatingActionButton(
-                //  onPressed: () {
-                //    SharePlus.instance
-                //        .share(ShareParams(text: 'https://www.festiva.no/'));
-                //  },
-                //  icon: Icons.share_outlined,
-                //),
+                AppFloatingActionButton(
+                  onPressed: () {
+                    SharePlus.instance
+                        .share(ShareParams(text: 'https://www.festiva.no/'));
+                  },
+                  icon: Icons.share_outlined,
+                ),
               ],
             ),
             CustomExpandableText(text: provider.event?.description ?? ""),
