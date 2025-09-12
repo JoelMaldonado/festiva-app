@@ -138,9 +138,6 @@ class _MaintenancePageState extends State<MaintenancePage>
   }
 }
 
-/// Widget para usar donde tenías tu if:
-/// if (!provider.isMenuActive) return const MaintenanceScreen();
-
 class _GlassCard extends StatelessWidget {
   final Widget child;
   const _GlassCard({required this.child});
@@ -192,8 +189,8 @@ class _PrimaryButton extends StatefulWidget {
 class _PrimaryButtonState extends State<_PrimaryButton> {
   bool _hover = false;
 
-  static const _accent = Color(0xFF7C3AED); // púrpura neon
-  static const _accent2 = Color(0xFF00D1FF); // cian neon
+  static const _accent = AppColors.colorP1;
+  static const _accent2 = Color(0xFF00E5FF);
 
   @override
   Widget build(BuildContext context) {

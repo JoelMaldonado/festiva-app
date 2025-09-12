@@ -1,6 +1,6 @@
 import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
-import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
+import 'package:festiva/presentation/pages/detail_club/detail_club_page.dart';
 import 'package:festiva/presentation/pages/search/search_provider.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -68,7 +68,7 @@ class _SearchPageState extends State<SearchPage> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => ClubDetailPage(
+                              builder: (_) => DetailClubPage(
                                 idClub: item.id,
                               ),
                             ),

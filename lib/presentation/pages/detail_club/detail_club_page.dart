@@ -1,11 +1,10 @@
 import 'package:festiva/presentation/components/button_social_network.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
-import 'package:festiva/presentation/pages/club_detail/components/carousel_events.dart';
+import 'package:festiva/presentation/pages/detail_club/components/carousel_events.dart';
 import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
-import 'package:festiva/presentation/widgets/custom_floating_action_button.dart';
 import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
@@ -16,19 +15,19 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-class ClubDetailPage extends StatefulWidget {
+class DetailClubPage extends StatefulWidget {
   final int idClub;
 
-  const ClubDetailPage({
+  const DetailClubPage({
     super.key,
     required this.idClub,
   });
 
   @override
-  State<ClubDetailPage> createState() => _ClubDetailPageState();
+  State<DetailClubPage> createState() => _DetailClubPageState();
 }
 
-class _ClubDetailPageState extends State<ClubDetailPage> {
+class _DetailClubPageState extends State<DetailClubPage> {
   final _pageController = PageController();
 
   @override
@@ -62,14 +61,39 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(left: 24, top: 12),
-                    child: Align(
-                      alignment: Alignment.topLeft,
-                      child: CustomIconButton(
-                        icon: Icons.arrow_back,
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
+                    padding:
+                        const EdgeInsets.only(left: 24, top: 12, right: 24),
+                    child: SizedBox(
+                      width: double.infinity,
+                      height: 42,
+                      child: Stack(
+                        children: [
+                          Align(
+                            alignment: Alignment.centerLeft,
+                            child: CustomIconButton(
+                              icon: Icons.arrow_back,
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: Text(
+                              club.name,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w900,
+                                color: AppColors.colorT1,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                          //AppFloatingActionButton(
+                          //  onPressed: () {},
+                          //  icon: Icons.share_outlined,
+                          //),
+                        ],
                       ),
                     ),
                   ),
@@ -133,6 +157,7 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: 16,
                       children: [
+                        /*
                         Row(
                           spacing: 12,
                           children: [
@@ -156,23 +181,35 @@ class _ClubDetailPageState extends State<ClubDetailPage> {
                             //),
                           ],
                         ),
+                        */
                         CustomExpandableText(text: club.description),
-                        ItemDetail(
-                          icon: Icons.calendar_month,
-                          title: "Opening Hours",
-                          value: "See Schedule",
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (_) {
-                                  return ClubSchedulePage(
-                                    clubId: widget.idClub,
+                        Row(
+                          spacing: 12,
+                          children: [
+                            Expanded(
+                              child: ItemDetail(
+                                icon: Icons.calendar_month,
+                                title: "Opening Hours",
+                                value: "See Schedule",
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) {
+                                        return ClubSchedulePage(
+                                          clubId: widget.idClub,
+                                        );
+                                      },
+                                    ),
                                   );
                                 },
                               ),
-                            );
-                          },
+                            ),
+                            //AppFloatingActionButton(
+                            //  onPressed: () {},
+                            //  icon: Icons.share_outlined,
+                            //),
+                          ],
                         ),
                         Row(
                           spacing: 12,

@@ -55,6 +55,16 @@ class _MenuPageState extends State<MenuPage> {
       MenuEnum.preferences => 4,
     };
 
+    if (provider.isMenuActive == null) {
+      return const Scaffold(
+        backgroundColor: AppColors.colorB1,
+        body: Center(
+          child: CircularProgressIndicator(
+            color: AppColors.colorP1,
+          ),
+        ),
+      );
+    }
     if (provider.isMenuActive == false) {
       return MaintenancePage(
         onRetry: () {

@@ -1,4 +1,4 @@
-import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
+import 'package:festiva/presentation/pages/detail_club/detail_club_page.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
@@ -37,7 +37,7 @@ class CardClub extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (_) => ClubDetailPage(idClub: id),
+                builder: (_) => DetailClubPage(idClub: id),
               ),
             );
           },

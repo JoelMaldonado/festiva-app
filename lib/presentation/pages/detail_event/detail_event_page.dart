@@ -1,9 +1,10 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
-import 'package:festiva/presentation/pages/club_detail/club_detail_page.dart';
+import 'package:festiva/presentation/pages/detail_club/detail_club_page.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
+import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:festiva/util/date_functions.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DetailEventPage extends StatefulWidget {
   final String idEvent;
@@ -71,7 +73,10 @@ class _DetailEventPageState extends State<DetailEventPage> {
                 //  icon: Icons.favorite_outline,
                 //),
                 //AppFloatingActionButton(
-                //  onPressed: () {},
+                //  onPressed: () {
+                //    SharePlus.instance
+                //        .share(ShareParams(text: 'https://www.festiva.no/'));
+                //  },
                 //  icon: Icons.share_outlined,
                 //),
               ],
@@ -135,7 +140,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
                     context,
                     MaterialPageRoute(
                       builder: (_) =>
-                          ClubDetailPage(idClub: provider.event!.clubId!),
+                          DetailClubPage(idClub: provider.event!.clubId!),
                     ),
                   );
                 },

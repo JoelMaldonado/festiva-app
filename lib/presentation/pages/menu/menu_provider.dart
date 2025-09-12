@@ -18,7 +18,7 @@ class MenuProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  bool isMenuActive = false;
+  bool? isMenuActive;
 
   getAppScreenFlags() async {
     final res = await uiRepository.fetchAppScreenFlags();

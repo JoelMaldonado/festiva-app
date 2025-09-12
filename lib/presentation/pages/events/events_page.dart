@@ -1,3 +1,4 @@
+import 'package:festiva/domain/model/event.dart';
 import 'package:festiva/presentation/components/components.dart';
 import 'package:festiva/presentation/pages/events/events_provider.dart';
 import 'package:festiva/presentation/pages/events/components/events_categories.dart';
@@ -7,6 +8,7 @@ import 'package:festiva/presentation/widgets/app_scaffold.dart';
 import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/util/date_functions.dart';
 import 'package:flutter/material.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 
 class EventsPage extends StatefulWidget {
@@ -17,6 +19,9 @@ class EventsPage extends StatefulWidget {
 }
 
 class _EventsPageState extends State<EventsPage> {
+  //final PagingController<int, Event> _pagingController =
+  //    PagingController(fetchPage: (pageKey) => Provider,);
+
   @override
   void initState() {
     super.initState();

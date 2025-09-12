@@ -1,4 +1,4 @@
-import 'package:festiva/presentation/pages/event_detail/detail_event_page.dart';
+import 'package:festiva/presentation/pages/detail_event/detail_event_page.dart';
 import 'package:festiva/presentation/pages/full_screen_image/full_screen_image_page.dart';
 import 'package:festiva/presentation/pages/sign_in/sign_in_page.dart';
 import 'package:festiva/presentation/pages/splash/splash_page.dart';
