@@ -1,6 +1,5 @@
 import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/widgets/app_image_network.dart';
-import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -31,27 +30,24 @@ class CustomImageNetwork extends StatelessWidget {
         children: [
           ClipRRect(
             borderRadius: BorderRadius.circular(borderRadius),
-            child: AppImageNetwork(
-              imageUrl: imageUrl,
-              width: width,
-              height: height,
-              fit: fit,
-            ),
-          ),
-          if (isExpandable && imageUrl != null)
-            Positioned(
-              top: 12,
-              right: 12,
-              child: CustomIconButton(
-                icon: Icons.fullscreen,
-                onPressed: () {
-                  GoRouter.of(context).push(
-                    AppRoutes.fullScreenImage,
-                    extra: imageUrl,
-                  );
-                },
+            child: InkWell(
+              onTap: isExpandable && imageUrl != null
+                  ? () {
+                      GoRouter.of(context).push(
+                        AppRoutes.fullScreenImage,
+                        extra: imageUrl,
+                      );
+                    }
+                  : null,
+              borderRadius: BorderRadius.circular(borderRadius),
+              child: AppImageNetwork(
+                imageUrl: imageUrl,
+                width: width,
+                height: height,
+                fit: fit,
               ),
             ),
+          ),
         ],
       ),
     );
