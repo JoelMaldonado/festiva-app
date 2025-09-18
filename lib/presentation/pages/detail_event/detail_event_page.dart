@@ -4,7 +4,6 @@ import 'package:festiva/presentation/pages/detail_club/detail_club_page.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
-import 'package:festiva/presentation/widgets/custom_icon_button.dart';
 import 'package:festiva/presentation/widgets/custom_image_network.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:festiva/util/date_functions.dart';
@@ -13,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class DetailEventPage extends StatefulWidget {
   final String idEvent;
