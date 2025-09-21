@@ -1,7 +1,7 @@
 import 'package:festiva/domain/enum/menu_enum.dart';
 import 'package:festiva/presentation/pages/clubs_map/clubs_map_page.dart';
 import 'package:festiva/presentation/pages/clubs/clubs_page.dart';
-import 'package:festiva/presentation/pages/events/events_page.dart';
+import 'package:festiva/presentation/pages/events_list/events_list_page.dart';
 import 'package:festiva/presentation/pages/home/home_page.dart';
 import 'package:festiva/presentation/pages/maintenance/maintenance_page.dart';
 import 'package:festiva/presentation/pages/menu/components/menu_bottom.dart';
@@ -38,7 +38,7 @@ class _MenuPageState extends State<MenuPage> {
 
     final pages = [
       ClubsMapPage(), // index 0
-      EventsPage(), // index 1
+      EventsListPage(), // index 1
       HomePage(
         toClubs: () => provider.setMenuSelected(MenuEnum.clubs),
         toEvents: () => provider.setMenuSelected(MenuEnum.events),

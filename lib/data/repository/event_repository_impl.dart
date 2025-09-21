@@ -26,6 +26,21 @@ class EventRepositoryImpl implements EventRepository {
   }
 
   @override
+  Future<Either<Failure, List<Event>>> allEventsPaged(int page) async {
+    try {
+      final res = await _service.fetchAllPaged(page);
+      if (res.isSuccess) {
+        final map = res.data?.events.map((e) => e.toDomain()).toList();
+        return Right(map ?? []);
+      } else {
+        return Left(Failure(res.message));
+      }
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, Event>> get(String id) async {
     try {
       final res = await _service.fetch(id);

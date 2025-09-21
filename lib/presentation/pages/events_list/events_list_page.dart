@@ -1,42 +1,37 @@
-import 'package:festiva/domain/model/event.dart';
-import 'package:festiva/presentation/components/components.dart';
-import 'package:festiva/presentation/pages/events/events_provider.dart';
-import 'package:festiva/presentation/pages/events/components/events_categories.dart';
+import 'package:festiva/presentation/components/card_event.dart';
+import 'package:festiva/presentation/pages/events_list/components/events_categories.dart';
+import 'package:festiva/presentation/pages/events_list/events_list_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:festiva/presentation/widgets/app_scaffold.dart';
 import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/util/date_functions.dart';
 import 'package:flutter/material.dart';
-import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:provider/provider.dart';
 
-class EventsPage extends StatefulWidget {
-  const EventsPage({super.key});
+class EventsListPage extends StatefulWidget {
+  const EventsListPage({super.key});
 
   @override
-  State<EventsPage> createState() => _EventsPageState();
+  State<EventsListPage> createState() => _EventsListPageState();
 }
 
-class _EventsPageState extends State<EventsPage> {
-  //final PagingController<int, Event> _pagingController =
-  //    PagingController(fetchPage: (pageKey) => Provider,);
-
+class _EventsListPageState extends State<EventsListPage> {
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<EventsProvider>(context, listen: false).getEvents();
+      Provider.of<EventsListProvider>(context, listen: false).init();
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<EventsProvider>(context);
+    final provider = Provider.of<EventsListProvider>(context);
     return AppScaffold(
       padding: EdgeInsets.zero,
       appBar: CustomAppBar(
-        title: "Events",
+        title: "Events ${provider.listEventsFiltered.length}",
         detail: "What plans do we have?",
         hideBackButton: true,
       ),
@@ -44,8 +39,12 @@ class _EventsPageState extends State<EventsPage> {
         spacing: 16,
         children: [
           const SizedBox.shrink(),
-          //_calendar(),
-          EventsCategories(),
+          _calendar(),
+          EventsCategories(
+            listCategories: provider.listCategories,
+            selectedCategory: provider.selectedCategory,
+            onCategorySelected: provider.setCategorySelected,
+          ),
           provider.listEventsFiltered.isEmpty
               ? Padding(
                   padding: const EdgeInsets.only(top: 24),

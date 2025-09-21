@@ -2,6 +2,7 @@ import 'package:festiva/core/network/dio_config.dart';
 import 'package:festiva/data/model/dto/event_category_dto.dart';
 import 'package:festiva/data/model/dto/event_dto.dart';
 import 'package:festiva/data/model/response/api_response.dart';
+import 'package:festiva/data/model/response/event_response.dart';
 
 class EventService {
   final DioConfig _dio;
@@ -23,6 +24,22 @@ class EventService {
       (json) => (json as List<dynamic>)
           .map((e) => EventDto.fromJson(e as Map<String, dynamic>))
           .toList(),
+    );
+    return response;
+  }
+
+  Future<ApiResponse<AllEventsPagedResponse>> fetchAllPaged(int page) async {
+    final queryParameters = {
+      "page": page,
+      "limit": 20,
+    };
+    final call = await _dio.get(
+      url: '/event/paged',
+      queryParameters: queryParameters,
+    );
+    final response = ApiResponse<AllEventsPagedResponse>.fromJson(
+      call.data,
+      (json) => AllEventsPagedResponse.fromJson(json as Map<String, dynamic>),
     );
     return response;
   }

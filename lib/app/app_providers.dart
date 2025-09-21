@@ -1,5 +1,5 @@
 import 'package:festiva/core/di/di.dart';
-import 'package:festiva/presentation/pages/events/events_provider.dart';
+import 'package:festiva/presentation/pages/events_list/events_list_provider.dart';
 import 'package:festiva/presentation/pages/home/home_provider.dart';
 import 'package:festiva/presentation/pages/search/search_provider.dart';
 import 'package:festiva/presentation/pages/login/login_provider.dart';
@@ -46,7 +46,7 @@ List<SingleChildWidget> appProviders() {
     ),
 
     ChangeNotifierProvider(
-      create: (_) => getIt<EventsProvider>(),
+      create: (_) => getIt<EventsListProvider>(),
     )
   ];
 }

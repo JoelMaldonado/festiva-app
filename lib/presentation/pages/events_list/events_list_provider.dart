@@ -3,16 +3,24 @@ import 'package:festiva/domain/model/event_category.dart';
 import 'package:festiva/domain/repository/event_repository.dart';
 import 'package:flutter/material.dart';
 
-class EventsProvider extends ChangeNotifier {
+class EventsListProvider extends ChangeNotifier {
   final EventRepository repo;
 
-  EventsProvider({
+  EventsListProvider({
     required this.repo,
   });
 
   List<Event> listEvents = [];
   List<Event> listEventsFiltered = [];
   bool isLoadingEvents = false;
+
+  List<EventCategory> listCategories = [];
+  EventCategory? selectedCategory;
+
+  init() {
+    getCategories();
+    getEvents();
+  }
 
   getEvents() async {
     isLoadingEvents = true;
@@ -29,31 +37,27 @@ class EventsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  int categorySelected = 0;
-  List<EventCategory> eventCategories = [];
+  setCategorySelected(EventCategory? category) {
+    selectedCategory = category;
+    if (selectedCategory == null) {
+      listEventsFiltered = List.of(listEvents);
+    } else {
+      listEventsFiltered = listEvents
+          .where((e) => e.idEventCategory == selectedCategory!.id)
+          .toList();
+    }
+    notifyListeners();
+  }
 
-  getCatEvents() async {
-    if (eventCategories.isNotEmpty) return;
+  getCategories() async {
+    if (listCategories.isNotEmpty) return;
     final res = await repo.allEventCategories();
     res.fold(
       (l) {},
       (r) {
-        r.insert(0, EventCategory(id: 0, title: 'All'));
-        eventCategories.addAll(r);
+        listCategories.addAll(r);
         notifyListeners();
       },
     );
-  }
-
-  setCategorySelected(int index) {
-    categorySelected = index;
-    if (index == 0) {
-      listEventsFiltered = List.of(listEvents);
-    } else {
-      listEventsFiltered = listEvents
-          .where((e) => e.idEventCategory == eventCategories[index].id)
-          .toList();
-    }
-    notifyListeners();
   }
 }

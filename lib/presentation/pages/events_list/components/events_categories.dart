@@ -1,28 +1,22 @@
-import 'package:festiva/presentation/pages/events/events_provider.dart';
+import 'package:festiva/domain/model/event_category.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-class EventsCategories extends StatefulWidget {
-  const EventsCategories({super.key});
+class EventsCategories extends StatelessWidget {
+  final List<EventCategory> listCategories;
+  final EventCategory? selectedCategory;
+  final Function(EventCategory?) onCategorySelected;
 
-  @override
-  State<EventsCategories> createState() => _EventsCategoriesState();
-}
-
-class _EventsCategoriesState extends State<EventsCategories> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<EventsProvider>(context, listen: false).getCatEvents();
-    });
-  }
+  const EventsCategories({
+    super.key,
+    required this.listCategories,
+    required this.selectedCategory,
+    required this.onCategorySelected,
+  });
 
   @override
   Widget build(BuildContext context) {
-    final provider = Provider.of<EventsProvider>(context);
     return Column(
       children: [
         Padding(
@@ -37,21 +31,27 @@ class _EventsCategoriesState extends State<EventsCategories> {
           height: 24,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: provider.eventCategories.length,
+            itemCount: listCategories.length + 1,
             itemBuilder: (context, index) {
-              final item = provider.eventCategories[index];
+              if (index == 0) {
+                return _chipCategory(
+                  text: 'All',
+                  isSelected: selectedCategory == null,
+                  onPressed: () => onCategorySelected(null),
+                );
+              }
+
+              final item = listCategories[index - 1];
               return _chipCategory(
                 text: item.title,
-                isSelected: provider.categorySelected == item.id,
-                onPressed: () {
-                  provider.setCategorySelected(item.id);
-                },
+                isSelected: selectedCategory == item,
+                onPressed: () => onCategorySelected(item),
               );
             },
             padding: const EdgeInsets.symmetric(horizontal: 24),
             separatorBuilder: (_, __) => const SizedBox(width: 8),
           ),
-        ),
+        )
       ],
     );
   }
