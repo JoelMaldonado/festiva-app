@@ -1,6 +1,7 @@
 import 'package:festiva/presentation/pages/preferences/components/item_preferences.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
+import 'package:festiva/widget_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -90,6 +91,19 @@ class PreferencesPage extends StatelessWidget {
           //  title: "Calificar App",
           //  onTap: () {},
           //),
+
+          ItemPreferences(
+            icon: Icons.widgets_outlined,
+            title: "Push Event to Widget",
+            onTap: () async {
+              await pushEventToWidget(
+                title: 'Hø.  Festival',
+                dateText: 'Lun 23 Sep • 12:00',
+                imageDrawableName: 'event_placeholder',
+              );
+            },
+          ),
+
           ItemPreferences(
             icon: Icons.book_outlined,
             title: "Privacy Policy",

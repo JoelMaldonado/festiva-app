@@ -9,6 +9,18 @@
         android:icon="@mipmap/ic_launcher"
         android:hardwareAccelerated="true">
 
+        <receiver
+            android:name=".widgets.EventWidgetProvider"
+            android:exported="true"
+            android:label="Festiva (Evento)">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/event_widget_info" />
+        </receiver>
+
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/facebook_app_id" />
