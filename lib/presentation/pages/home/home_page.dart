@@ -1,8 +1,5 @@
-import 'dart:io';
-
-import 'package:festiva/main.dart';
+import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/components/card_artist_shimmer.dart';
-import 'package:festiva/presentation/pages/artists/artists_page.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_artists_component.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_clubs_component.dart';
 import 'package:festiva/presentation/pages/home/components/carousel_events_component.dart';
@@ -11,6 +8,7 @@ import 'package:festiva/presentation/pages/home/home_provider.dart';
 import 'package:festiva/presentation/theme/theme.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,30 +26,12 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _sentActivate = false;
-
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) async {
-      await _sendActivate();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<HomeProvider>(context, listen: false).loadData();
     });
-  }
-
-  Future<void> _sendActivate() async {
-    if (_sentActivate) return;
-    if (kIsWeb) return;
-    if (!(Platform.isAndroid || Platform.isIOS)) return;
-    try {
-      tagito.d("SEND_META_EVENT_INIT");
-      await Future.delayed(const Duration(milliseconds: 150));
-      await fbAppEvents.logEvent(name: 'fb_mobile_activate_app');
-      _sentActivate = true;
-      tagito.d("SEND_META_EVENT_COMPLETE");
-    } catch (e) {
-      tagito.e("SEND_META_EVENT_ERROR: $e");
-    }
   }
 
   @override
@@ -105,12 +85,7 @@ class _HomePageState extends State<HomePage> {
                     _section(
                       title: "Artists",
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => ArtistsPage(),
-                          ),
-                        );
+                        GoRouter.of(context).push(AppRoutes.artistList);
                       },
                     ),
                     provider.isLoading

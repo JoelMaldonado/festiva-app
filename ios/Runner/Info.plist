@@ -6,6 +6,8 @@
 		<!-- Facebook: App ID y nombre para iOS -->
 		<key>FacebookAppID</key>
 		<string>2155606231614990</string>
+		<key>FacebookClientToken</key>
+		<string>4b22637f4c00d83c9787dcb2bb86f1eb</string>
 		<key>FacebookDisplayName</key>
 		<string>Festiva</string>
 

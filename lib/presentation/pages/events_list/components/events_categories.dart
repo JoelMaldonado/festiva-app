@@ -31,21 +31,19 @@ class EventsCategories extends StatelessWidget {
           height: 24,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
-            itemCount: listCategories.length + 1,
+            itemCount: listCategories.length,
             itemBuilder: (context, index) {
-              if (index == 0) {
-                return _chipCategory(
-                  text: 'All',
-                  isSelected: selectedCategory == null,
-                  onPressed: () => onCategorySelected(null),
-                );
-              }
-
-              final item = listCategories[index - 1];
+              final item = listCategories[index];
               return _chipCategory(
                 text: item.title,
                 isSelected: selectedCategory == item,
-                onPressed: () => onCategorySelected(item),
+                onPressed: () {
+                  if (selectedCategory == item) {
+                    onCategorySelected(null);
+                    return;
+                  }
+                  onCategorySelected(item);
+                },
               );
             },
             padding: const EdgeInsets.symmetric(horizontal: 24),

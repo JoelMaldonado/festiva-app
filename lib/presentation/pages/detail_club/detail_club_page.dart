@@ -89,10 +89,6 @@ class _DetailClubPageState extends State<DetailClubPage> {
                               textAlign: TextAlign.center,
                             ),
                           ),
-                          AppFloatingActionButton(
-                            onPressed: () {},
-                            icon: Icons.share_outlined,
-                          ),
                         ],
                       ),
                     ),

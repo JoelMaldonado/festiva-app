@@ -19,10 +19,16 @@ final fbAppEvents = FacebookAppEvents();
 
 Future<void> initTracking() async {
   if (Platform.isIOS) {
+    // 1) ATT
     final status = await AppTrackingTransparency.requestTrackingAuthorization();
-    if (status == TrackingStatus.authorized) {
-      await fbAppEvents.setAdvertiserTracking(enabled: true);
-    }
+
+    final authorized = status == TrackingStatus.authorized;
+
+    // 2) ATE (imprescindible en iOS 14+)
+    await fbAppEvents.setAdvertiserTracking(enabled: authorized);
+
+    // 3) Auto-log (para que el SDK envíe activate_app y otros)
+    await fbAppEvents.setAutoLogAppEventsEnabled(true);
   }
 }
 

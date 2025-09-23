@@ -1,5 +1,4 @@
 import 'package:festiva/app/router.dart';
-import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
 import 'package:festiva/presentation/pages/detail_club/detail_club_page.dart';
 import 'package:festiva/presentation/pages/search/search_provider.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
@@ -54,13 +53,9 @@ class _SearchPageState extends State<SearchPage> {
                       Navigator.pop(context);
                       switch (item.type) {
                         case "A":
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => DetailArtistPage(
-                                idArtist: item.id,
-                              ),
-                            ),
+                          GoRouter.of(context).push(
+                            AppRoutes.artistDetail,
+                            extra: item.id,
                           );
                           break;
 

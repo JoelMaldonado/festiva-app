@@ -1,3 +1,5 @@
+import 'package:festiva/presentation/pages/artist_detail/artist_detail_page.dart';
+import 'package:festiva/presentation/pages/artists/artists_page.dart';
 import 'package:festiva/presentation/pages/detail_event/detail_event_page.dart';
 import 'package:festiva/presentation/pages/full_screen_image/full_screen_image_page.dart';
 import 'package:festiva/presentation/pages/sign_in/sign_in_page.dart';
@@ -17,6 +19,8 @@ class AppRoutes {
   static const fullScreenImage = '/full-screen-image';
   static const signIn = '/sign-in';
   static const eventDetail = '/event-detail';
+  static const artistList = '/artist-list';
+  static const artistDetail = '/artist-detail';
 }
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -114,6 +118,19 @@ final appRouter = GoRouter(
           },
         ),
       ],
+    ),
+    GoRoute(
+      path: AppRoutes.artistList,
+      builder: (context, state) {
+        return ArtistsPage();
+      },
+    ),
+    GoRoute(
+      path: AppRoutes.artistDetail,
+      builder: (context, state) {
+        final idArtist = state.extra as int;
+        return ArtistDetailPage(idArtist: idArtist);
+      },
     )
   ],
 );

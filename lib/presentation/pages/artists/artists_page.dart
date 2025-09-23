@@ -1,10 +1,11 @@
+import 'package:festiva/app/router.dart';
 import 'package:festiva/presentation/components/card_item_list.dart';
-import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
 import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/providers/artist_provider.dart';
 import 'package:festiva/presentation/widgets/custom_app_bar.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class ArtistsPage extends StatefulWidget {
@@ -46,13 +47,9 @@ class _ArtistsPageState extends State<ArtistsPage> {
                   label: artist.nombre,
                   detail: artist.tipo,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => DetailArtistPage(
-                          idArtist: artist.id,
-                        ),
-                      ),
+                    GoRouter.of(context).push(
+                      AppRoutes.artistDetail,
+                      extra: artist.id,
                     );
                   },
                 );

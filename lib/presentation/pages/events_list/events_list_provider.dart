@@ -103,7 +103,7 @@ class EventsListProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  setDateSelected(DateTime date) {
+  setDateSelected(DateTime? date) {
     selectedDate = date;
     initialLoad();
     notifyListeners();

@@ -1,8 +1,9 @@
+import 'package:festiva/app/router.dart';
 import 'package:festiva/domain/model/artist.dart';
-import 'package:festiva/presentation/pages/artist_detail/detail_artist_page.dart';
 import 'package:festiva/presentation/theme/text_styles.dart';
 import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class CardArtist extends StatelessWidget {
   final Artist artist;
@@ -21,13 +22,9 @@ class CardArtist extends StatelessWidget {
         children: [
           GestureDetector(
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => DetailArtistPage(
-                    idArtist: artist.id,
-                  ),
-                ),
+              GoRouter.of(context).push(
+                AppRoutes.artistDetail,
+                extra: artist.id,
               );
             },
             child: ClipRRect(

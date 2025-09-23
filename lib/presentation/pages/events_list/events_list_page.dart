@@ -48,7 +48,7 @@ class _EventsListPageState extends State<EventsListPage> {
       padding: EdgeInsets.zero,
       appBar: CustomAppBar(
         title: "Events",
-        detail: "What plans do we have? ${provider.items.length}",
+        detail: "What plans do we have?",
         hideBackButton: true,
       ),
       child: Column(
@@ -68,31 +68,28 @@ class _EventsListPageState extends State<EventsListPage> {
           provider.items.isEmpty
               ? _notEventsFound()
               : Expanded(
-                  child: RefreshIndicator(
-                    onRefresh: provider.initialLoad,
-                    child: GridView.builder(
-                      controller: _scrollCtrl,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        childAspectRatio: 1,
-                      ),
-                      padding: const EdgeInsets.only(
-                        left: 24,
-                        right: 24,
-                        bottom: 24,
-                      ),
-                      itemCount: provider.items.length,
-                      itemBuilder: (context, index) {
-                        final event = provider.items[index];
-                        return CardEvent(
-                          event: event,
-                          showDate: provider.selectedDate == null,
-                        );
-                      },
+                  child: GridView.builder(
+                    controller: _scrollCtrl,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 1,
                     ),
+                    padding: const EdgeInsets.only(
+                      left: 24,
+                      right: 24,
+                      bottom: 24,
+                    ),
+                    itemCount: provider.items.length,
+                    itemBuilder: (context, index) {
+                      final event = provider.items[index];
+                      return CardEvent(
+                        event: event,
+                        showDate: provider.selectedDate == null,
+                      );
+                    },
                   ),
                 )
         ],
@@ -115,7 +112,7 @@ class _EventsListPageState extends State<EventsListPage> {
   Widget _calendar({
     required List<DateTime> dates,
     required DateTime? selectedDate,
-    required Function(DateTime date) onDateSelected,
+    required Function(DateTime? date) onDateSelected,
   }) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -155,10 +152,14 @@ class _EventsListPageState extends State<EventsListPage> {
   Widget _date(
     bool isSelected,
     DateTime date,
-    Function(DateTime date) onDateSelected,
+    Function(DateTime? date) onDateSelected,
   ) {
     return InkWell(
       onTap: () {
+        if (isSelected) {
+          onDateSelected(null);
+          return;
+        }
         onDateSelected(date);
       },
       child: Ink(
