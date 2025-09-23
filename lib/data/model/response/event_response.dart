@@ -5,7 +5,7 @@ part 'event_response.g.dart';
 
 @JsonSerializable()
 class AllEventsPagedResponse {
-  @JsonKey(name: 'events')
+  @JsonKey(name: 'items')
   final List<EventDto> events;
 
   @JsonKey(name: 'total')

@@ -27,6 +27,10 @@ final appRouter = GoRouter(
   initialLocation: AppRoutes.splash,
   routes: [
     GoRoute(
+      path: '/',
+      redirect: (context, state) => AppRoutes.splash,
+    ),
+    GoRoute(
       path: AppRoutes.splash,
       builder: (context, state) => SplashPage(),
     ),

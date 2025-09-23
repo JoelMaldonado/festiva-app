@@ -1,4 +1,11 @@
+import 'package:festiva/data/model/dto/artist_dto.dart';
+import 'package:festiva/data/model/dto/club/club_dto.dart';
+import 'package:festiva/data/model/dto/club/club_summary_dto.dart';
+import 'package:festiva/data/model/dto/event_dto.dart';
 import 'package:festiva/domain/model/app_screen_flag.dart';
+import 'package:festiva/domain/model/artist.dart';
+import 'package:festiva/domain/model/club/club_summary.dart';
+import 'package:festiva/domain/model/event.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ui_response.g.dart';
@@ -20,6 +27,29 @@ class FetchUiClubsResponse {
       _$FetchUiClubsResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$FetchUiClubsResponseToJson(this);
+}
+
+@JsonSerializable()
+class FetchUiHomeResponse {
+  @JsonKey(name: 'clubs')
+  final List<UiClub> clubs;
+
+  @JsonKey(name: 'events')
+  final List<EventDto> events;
+
+  @JsonKey(name: 'artists')
+  final List<ArtistDto> artists;
+
+  FetchUiHomeResponse({
+    required this.clubs,
+    required this.events,
+    required this.artists,
+  });
+
+  factory FetchUiHomeResponse.fromJson(Map<String, dynamic> json) =>
+      _$FetchUiHomeResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$FetchUiHomeResponseToJson(this);
 }
 
 @JsonSerializable()

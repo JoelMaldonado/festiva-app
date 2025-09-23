@@ -4,6 +4,7 @@ import 'package:festiva/data/services/event_service.dart';
 import 'package:festiva/domain/model/event.dart';
 import 'package:festiva/domain/model/event_category.dart';
 import 'package:festiva/domain/repository/event_repository.dart';
+import 'package:festiva/util/date_functions.dart';
 
 class EventRepositoryImpl implements EventRepository {
   final EventService _service;
@@ -26,9 +27,19 @@ class EventRepositoryImpl implements EventRepository {
   }
 
   @override
-  Future<Either<Failure, List<Event>>> allEventsPaged(int page) async {
+  Future<Either<Failure, List<Event>>> allEventsPaged({
+    required int page,
+    required int limit,
+    required int? categoryId,
+    required DateTime? date,
+  }) async {
     try {
-      final res = await _service.fetchAllPaged(page);
+      final res = await _service.fetchAllPaged(
+        page: page,
+        limit: limit,
+        categoryId: categoryId,
+        date: date?.format(pattern: 'yyyy-MM-dd'),
+      );
       if (res.isSuccess) {
         final map = res.data?.events.map((e) => e.toDomain()).toList();
         return Right(map ?? []);

@@ -1,5 +1,6 @@
 class Event {
   final int id;
+  final int eventId;
   final String title;
   final String description;
   final String imageUrl;
@@ -14,6 +15,7 @@ class Event {
 
   Event({
     required this.id,
+    required this.eventId,
     required this.title,
     required this.description,
     required this.imageUrl,

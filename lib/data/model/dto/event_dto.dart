@@ -9,6 +9,9 @@ class EventDto {
   @JsonKey(name: 'id')
   final int? id;
 
+  @JsonKey(name: 'eventId')
+  final int? eventId;
+
   @JsonKey(name: 'title')
   final String? title;
 
@@ -44,6 +47,7 @@ class EventDto {
 
   EventDto({
     required this.id,
+    required this.eventId,
     required this.title,
     required this.description,
     required this.imageUrl,
@@ -65,6 +69,7 @@ class EventDto {
   Event toDomain() {
     return Event(
       id: id ?? 0,
+      eventId: eventId ?? 0,
       title: title ?? '',
       description: description ?? '',
       imageUrl: imageUrl ?? '',

@@ -9,10 +9,12 @@ import 'package:go_router/go_router.dart';
 
 class CardEvent extends StatelessWidget {
   final Event event;
+  final bool showDate;
 
   const CardEvent({
     super.key,
     required this.event,
+    this.showDate = true,
   });
 
   @override
@@ -22,7 +24,7 @@ class CardEvent extends StatelessWidget {
       child: InkWell(
         onTap: () {
           GoRouter.of(context)
-              .push(AppRoutes.eventDetail, extra: event.id.toString());
+              .push(AppRoutes.eventDetail, extra: event.eventId.toString());
         },
         borderRadius: BorderRadius.circular(16),
         child: Ink(
@@ -49,11 +51,12 @@ class CardEvent extends StatelessWidget {
                         fit: BoxFit.cover,
                       ),
                     ),
-                    Positioned(
-                      left: 16,
-                      top: 16,
-                      child: _date(event.eventDate),
-                    ),
+                    if (showDate)
+                      Positioned(
+                        left: 16,
+                        top: 16,
+                        child: _date(event.eventDate),
+                      ),
                     Positioned(
                       left: 8,
                       bottom: 8,

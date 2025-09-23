@@ -27,9 +27,6 @@ Future<void> providerModule(GetIt getIt) async {
   // Home
   getIt.registerFactory(
     () => HomeProvider(
-      eventRepository: getIt<EventRepository>(),
-      clubRepository: getIt<ClubRepository>(),
-      artistRepository: getIt<ArtistRepository>(),
       uiRepo: getIt<UiRepository>(),
     ),
   );

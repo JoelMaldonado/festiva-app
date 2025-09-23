@@ -8,6 +8,7 @@ part of 'event_dto.dart';
 
 EventDto _$EventDtoFromJson(Map<String, dynamic> json) => EventDto(
       id: (json['id'] as num?)?.toInt(),
+      eventId: (json['eventId'] as num?)?.toInt(),
       title: json['title'] as String?,
       description: json['description'] as String?,
       imageUrl: json['imageUrl'] as String?,
@@ -23,6 +24,7 @@ EventDto _$EventDtoFromJson(Map<String, dynamic> json) => EventDto(
 
 Map<String, dynamic> _$EventDtoToJson(EventDto instance) => <String, dynamic>{
       'id': instance.id,
+      'eventId': instance.eventId,
       'title': instance.title,
       'description': instance.description,
       'imageUrl': instance.imageUrl,

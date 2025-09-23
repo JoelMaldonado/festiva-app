@@ -9,7 +9,6 @@ import 'package:festiva/presentation/pages/home/components/carousel_events_compo
 import 'package:festiva/presentation/pages/home/components/search_component.dart';
 import 'package:festiva/presentation/pages/home/home_provider.dart';
 import 'package:festiva/presentation/theme/theme.dart';
-import 'package:festiva/presentation/widgets/app_button.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +35,6 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       await _sendActivate();
-      // ignore: use_build_context_synchronously
       Provider.of<HomeProvider>(context, listen: false).loadData();
     });
   }
@@ -47,7 +45,6 @@ class _HomePageState extends State<HomePage> {
     if (!(Platform.isAndroid || Platform.isIOS)) return;
     try {
       tagito.d("SEND_META_EVENT_INIT");
-      // pequeña espera para asegurar inicialización nativa
       await Future.delayed(const Duration(milliseconds: 150));
       await fbAppEvents.logEvent(name: 'fb_mobile_activate_app');
       _sentActivate = true;

@@ -9,7 +9,7 @@ part of 'event_response.dart';
 AllEventsPagedResponse _$AllEventsPagedResponseFromJson(
         Map<String, dynamic> json) =>
     AllEventsPagedResponse(
-      events: (json['events'] as List<dynamic>)
+      events: (json['items'] as List<dynamic>)
           .map((e) => EventDto.fromJson(e as Map<String, dynamic>))
           .toList(),
       total: (json['total'] as num).toInt(),
@@ -20,7 +20,7 @@ AllEventsPagedResponse _$AllEventsPagedResponseFromJson(
 Map<String, dynamic> _$AllEventsPagedResponseToJson(
         AllEventsPagedResponse instance) =>
     <String, dynamic>{
-      'events': instance.events,
+      'items': instance.events,
       'total': instance.total,
       'page': instance.page,
       'limit': instance.limit,

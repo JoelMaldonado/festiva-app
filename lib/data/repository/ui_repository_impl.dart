@@ -13,6 +13,20 @@ class UiRepositoryImpl implements UiRepository {
   });
 
   @override
+  Future<Either<Failure, FetchUiHomeResponse>> fetchHomeData() async {
+    try {
+      final res = await service.fetchHomeData();
+      if (res.isSuccess) {
+        return Right(res.data!);
+      } else {
+        return Left(Failure(res.message));
+      }
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<AppScreenFlag>>> fetchAppScreenFlags() async {
     try {
       final res = await service.fetchAppScreenFlags();

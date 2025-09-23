@@ -9,6 +9,15 @@ class UiService {
     required this.dio,
   });
 
+  Future<ApiResponse<FetchUiHomeResponse>> fetchHomeData() async {
+    final call = await dio.get(url: '/ui/home');
+    final response = ApiResponse<FetchUiHomeResponse>.fromJson(
+      call.data,
+      (json) => FetchUiHomeResponse.fromJson(json as Map<String, dynamic>),
+    );
+    return response;
+  }
+
   Future<ApiResponse<List<AppScreenFlagDto>>> fetchAppScreenFlags() async {
     final call = await dio.get(url: '/ui/screens');
     final response = ApiResponse<List<AppScreenFlagDto>>.fromJson(

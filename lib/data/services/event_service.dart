@@ -28,10 +28,17 @@ class EventService {
     return response;
   }
 
-  Future<ApiResponse<AllEventsPagedResponse>> fetchAllPaged(int page) async {
+  Future<ApiResponse<AllEventsPagedResponse>> fetchAllPaged({
+    required int page,
+    required int limit,
+    int? categoryId,
+    String? date,
+  }) async {
     final queryParameters = {
       "page": page,
-      "limit": 20,
+      "limit": limit,
+      if (categoryId != null) "categoryId": categoryId,
+      if (date != null) "date": date,
     };
     final call = await _dio.get(
       url: '/event/paged',
@@ -56,7 +63,7 @@ class EventService {
   }
 
   Future<ApiResponse<EventDto>> fetch(String id) async {
-    final call = await _dio.get(url: '/event/$id');
+    final call = await _dio.get(url: '/event/detail/$id');
 
     final response = ApiResponse<EventDto>.fromJson(
       call.data,

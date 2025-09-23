@@ -22,6 +22,27 @@ Map<String, dynamic> _$FetchUiClubsResponseToJson(
       'meta': instance.meta,
     };
 
+FetchUiHomeResponse _$FetchUiHomeResponseFromJson(Map<String, dynamic> json) =>
+    FetchUiHomeResponse(
+      clubs: (json['clubs'] as List<dynamic>)
+          .map((e) => UiClub.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      events: (json['events'] as List<dynamic>)
+          .map((e) => EventDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      artists: (json['artists'] as List<dynamic>)
+          .map((e) => ArtistDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$FetchUiHomeResponseToJson(
+        FetchUiHomeResponse instance) =>
+    <String, dynamic>{
+      'clubs': instance.clubs,
+      'events': instance.events,
+      'artists': instance.artists,
+    };
+
 UiMeta _$UiMetaFromJson(Map<String, dynamic> json) => UiMeta(
       page: (json['page'] as num).toInt(),
       limit: (json['limit'] as num).toInt(),
