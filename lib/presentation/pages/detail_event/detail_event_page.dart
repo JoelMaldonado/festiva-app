@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 class DetailEventPage extends StatefulWidget {
   final String idEvent;
@@ -67,10 +66,11 @@ class _DetailEventPageState extends State<DetailEventPage> {
                     ),
                   ),
                 ),
-                //AppFloatingActionButton(
-                //  onPressed: () {},
-                //  icon: Icons.favorite_outline,
-                //),
+                /*
+                AppFloatingActionButton(
+                  onPressed: () {},
+                  icon: Icons.favorite_outline,
+                ),
                 AppFloatingActionButton(
                   onPressed: () {
                     SharePlus.instance
@@ -78,6 +78,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   },
                   icon: Icons.share_outlined,
                 ),
+                */
               ],
             ),
             CustomExpandableText(text: provider.event?.description ?? ""),

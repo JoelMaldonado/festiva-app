@@ -8,18 +8,18 @@ import 'package:festiva/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class ArtistDetailPage extends StatefulWidget {
+class DetailArtistPage extends StatefulWidget {
   final int idArtist;
-  const ArtistDetailPage({
+  const DetailArtistPage({
     super.key,
     required this.idArtist,
   });
 
   @override
-  State<ArtistDetailPage> createState() => _ArtistDetailPageState();
+  State<DetailArtistPage> createState() => _DetailArtistPageState();
 }
 
-class _ArtistDetailPageState extends State<ArtistDetailPage> {
+class _DetailArtistPageState extends State<DetailArtistPage> {
   @override
   void initState() {
     super.initState();

@@ -1,4 +1,4 @@
-import 'package:festiva/presentation/pages/artist_detail/artist_detail_page.dart';
+import 'package:festiva/presentation/pages/detail_artist/detail_artist_page.dart';
 import 'package:festiva/presentation/pages/artists/artists_page.dart';
 import 'package:festiva/presentation/pages/detail_event/detail_event_page.dart';
 import 'package:festiva/presentation/pages/full_screen_image/full_screen_image_page.dart';
@@ -129,7 +129,7 @@ final appRouter = GoRouter(
       path: AppRoutes.artistDetail,
       builder: (context, state) {
         final idArtist = state.extra as int;
-        return ArtistDetailPage(idArtist: idArtist);
+        return DetailArtistPage(idArtist: idArtist);
       },
     )
   ],
