@@ -41,12 +41,9 @@ class UiRepositoryImpl implements UiRepository {
   }
 
   @override
-  Future<Either<Failure, FetchUiClubsResponse>> fetchClubs(
-    int page,
-    int limit,
-  ) async {
+  Future<Either<Failure, List<UiClub>>> fetchClubs() async {
     try {
-      final res = await service.fetchClubs(page, limit);
+      final res = await service.fetchClubs();
       if (res.isSuccess) {
         return Right(res.data!);
       } else {

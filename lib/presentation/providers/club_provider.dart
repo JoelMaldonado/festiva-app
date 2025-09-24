@@ -24,10 +24,10 @@ class ClubProvider extends ChangeNotifier {
     isLoadingUiClubs = true;
     notifyListeners();
     await Future.delayed(const Duration(milliseconds: 500));
-    final res = await uiRepo.fetchClubs(1, 100);
+    final res = await uiRepo.fetchClubs();
     res.fold(
       (l) {},
-      (r) => listUiClubs = List.of(r.items),
+      (r) => listUiClubs = List.of(r),
     );
     isLoadingUiClubs = false;
     notifyListeners();

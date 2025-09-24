@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 class CustomIconButton extends StatelessWidget {
   final IconData icon;
   final double size;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   const CustomIconButton({
     super.key,
     required this.icon,
     this.size = 42,
-    required this.onPressed,
+    this.onPressed,
   });
 
   @override

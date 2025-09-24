@@ -1,6 +1,7 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
 import 'package:festiva/presentation/pages/detail_club/detail_club_page.dart';
+import 'package:festiva/presentation/pages/detail_event/components/ticket_cta_card.dart';
 import 'package:festiva/presentation/providers/event_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
 import 'package:festiva/presentation/widgets/custom_expandable_text.dart';
@@ -82,6 +83,10 @@ class _DetailEventPageState extends State<DetailEventPage> {
               ],
             ),
             CustomExpandableText(text: provider.event?.description ?? ""),
+            TicketCtaCard(
+              purchaseUrl: '',
+            ),
+            const SizedBox(height: 4),
             if (provider.event?.nameEventCategory != null)
               _categoryEvent(provider.event!.nameEventCategory!),
             if (provider.event?.eventDate != null)

@@ -10,7 +10,7 @@ class UiService {
   });
 
   Future<ApiResponse<FetchUiHomeResponse>> fetchHomeData() async {
-    final call = await dio.get(url: '/ui/home');
+    final call = await dio.get(url: '/ui/v2/home');
     final response = ApiResponse<FetchUiHomeResponse>.fromJson(
       call.data,
       (json) => FetchUiHomeResponse.fromJson(json as Map<String, dynamic>),
@@ -29,20 +29,13 @@ class UiService {
     return response;
   }
 
-  Future<ApiResponse<FetchUiClubsResponse>> fetchClubs(
-    int page,
-    int limit,
-  ) async {
-    final call = await dio.get(
-      url: '/ui/club',
-      queryParameters: {
-        'page': page,
-        'limit': limit,
-      },
-    );
-    final response = ApiResponse<FetchUiClubsResponse>.fromJson(
+  Future<ApiResponse<List<UiClub>>> fetchClubs() async {
+    final call = await dio.get(url: '/ui/v2/club');
+    final response = ApiResponse<List<UiClub>>.fromJson(
       call.data,
-      (json) => FetchUiClubsResponse.fromJson(json as Map<String, dynamic>),
+      (json) => (json as List)
+          .map((e) => UiClub.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
     return response;
   }

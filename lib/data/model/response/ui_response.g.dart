@@ -6,22 +6,6 @@ part of 'ui_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-FetchUiClubsResponse _$FetchUiClubsResponseFromJson(
-        Map<String, dynamic> json) =>
-    FetchUiClubsResponse(
-      items: (json['items'] as List<dynamic>)
-          .map((e) => UiClub.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      meta: UiMeta.fromJson(json['meta'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$FetchUiClubsResponseToJson(
-        FetchUiClubsResponse instance) =>
-    <String, dynamic>{
-      'items': instance.items,
-      'meta': instance.meta,
-    };
-
 FetchUiHomeResponse _$FetchUiHomeResponseFromJson(Map<String, dynamic> json) =>
     FetchUiHomeResponse(
       clubs: (json['clubs'] as List<dynamic>)
@@ -67,7 +51,9 @@ UiClub _$UiClubFromJson(Map<String, dynamic> json) => UiClub(
       logoUrl: json['logoUrl'] as String?,
       coverUrl: json['coverUrl'] as String?,
       address: json['address'] as String?,
-      isOpen: json['isOpen'] as bool?,
+      schedules: (json['schedule'] as List<dynamic>)
+          .map((e) => UiClubSchedule.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$UiClubToJson(UiClub instance) => <String, dynamic>{
@@ -76,7 +62,21 @@ Map<String, dynamic> _$UiClubToJson(UiClub instance) => <String, dynamic>{
       'logoUrl': instance.logoUrl,
       'coverUrl': instance.coverUrl,
       'address': instance.address,
-      'isOpen': instance.isOpen,
+      'schedule': instance.schedules,
+    };
+
+UiClubSchedule _$UiClubScheduleFromJson(Map<String, dynamic> json) =>
+    UiClubSchedule(
+      dayOfWeek: (json['dayOfWeek'] as num).toInt(),
+      openingTime: json['openingTime'] as String,
+      closingTime: json['closingTime'] as String,
+    );
+
+Map<String, dynamic> _$UiClubScheduleToJson(UiClubSchedule instance) =>
+    <String, dynamic>{
+      'dayOfWeek': instance.dayOfWeek,
+      'openingTime': instance.openingTime,
+      'closingTime': instance.closingTime,
     };
 
 UiClubDetail _$UiClubDetailFromJson(Map<String, dynamic> json) => UiClubDetail(

@@ -43,11 +43,11 @@ class _ClubsPageState extends State<ClubsPage> {
                 final club = provider.listUiClubs[index];
                 return CardClub(
                   id: club.id,
-                  name: club.name,
+                  name: club.test(),
                   coverUrl: club.coverUrl,
                   logoUrl: club.logoUrl,
                   address: club.address,
-                  isOpen: club.isOpen,
+                  isOpen: club.isOpen(),
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(height: 16),

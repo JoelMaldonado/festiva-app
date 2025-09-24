@@ -84,7 +84,7 @@ class _CarouselClubsComponentState extends State<CarouselClubsComponent> {
               coverUrl: item.coverUrl,
               logoUrl: item.logoUrl,
               address: item.address,
-              isOpen: item.isOpen,
+              isOpen: item.isOpen(),
             ),
           );
         },

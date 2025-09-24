@@ -1,33 +1,12 @@
+import 'package:collection/collection.dart';
 import 'package:festiva/data/model/dto/artist_dto.dart';
-import 'package:festiva/data/model/dto/club/club_dto.dart';
-import 'package:festiva/data/model/dto/club/club_summary_dto.dart';
 import 'package:festiva/data/model/dto/event_dto.dart';
 import 'package:festiva/domain/model/app_screen_flag.dart';
-import 'package:festiva/domain/model/artist.dart';
-import 'package:festiva/domain/model/club/club_summary.dart';
-import 'package:festiva/domain/model/event.dart';
+import 'package:festiva/util/date_functions.dart';
+import 'package:intl/intl.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'ui_response.g.dart';
-
-@JsonSerializable()
-class FetchUiClubsResponse {
-  @JsonKey(name: 'items')
-  final List<UiClub> items;
-
-  @JsonKey(name: 'meta')
-  final UiMeta meta;
-
-  FetchUiClubsResponse({
-    required this.items,
-    required this.meta,
-  });
-
-  factory FetchUiClubsResponse.fromJson(Map<String, dynamic> json) =>
-      _$FetchUiClubsResponseFromJson(json);
-
-  Map<String, dynamic> toJson() => _$FetchUiClubsResponseToJson(this);
-}
 
 @JsonSerializable()
 class FetchUiHomeResponse {
@@ -103,8 +82,8 @@ class UiClub {
   @JsonKey(name: 'address')
   final String? address;
 
-  @JsonKey(name: 'isOpen')
-  final bool? isOpen;
+  @JsonKey(name: 'schedule')
+  final List<UiClubSchedule> schedules;
 
   UiClub({
     required this.id,
@@ -112,12 +91,128 @@ class UiClub {
     required this.logoUrl,
     required this.coverUrl,
     required this.address,
-    required this.isOpen,
+    required this.schedules,
   });
 
   factory UiClub.fromJson(Map<String, dynamic> json) => _$UiClubFromJson(json);
 
   Map<String, dynamic> toJson() => _$UiClubToJson(this);
+
+  String test() {
+    final now = DateTime.now();
+    final scheduleToday =
+        schedules.firstWhereOrNull((s) => s.dayOfWeek == now.weekday);
+
+    if (scheduleToday == null) {
+      return "${now.format(pattern: "HH:mm")} - Closed";
+    }
+
+    final formatter = DateFormat("HH:mm:ss");
+
+    final opening = formatter.parse(scheduleToday.openingTime);
+    final closing = formatter.parse(scheduleToday.closingTime);
+
+    final openingDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      opening.hour,
+      opening.minute,
+      opening.second,
+    );
+
+    DateTime closingDateTime;
+
+    if (closing.isBefore(opening)) {
+      closingDateTime = DateTime(
+        now.year,
+        now.month,
+        now.day + 1,
+        closing.hour,
+        closing.minute,
+        closing.second,
+      );
+    } else {
+      closingDateTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        closing.hour,
+        closing.minute,
+        closing.second,
+      );
+    }
+
+    return "${now.format(pattern: "HH:mm")} ${openingDateTime.format(pattern: "dd/MM HH:mm")} - ${closingDateTime.format(pattern: "dd/MM HH:mm")}";
+  }
+
+  bool isOpen() {
+    final now = DateTime.now();
+
+    final scheduleToday =
+        schedules.firstWhereOrNull((s) => s.dayOfWeek == now.weekday);
+
+    if (scheduleToday == null) return false;
+
+    final formatter = DateFormat("HH:mm:ss");
+
+    final opening = formatter.parse(scheduleToday.openingTime);
+    final closing = formatter.parse(scheduleToday.closingTime);
+
+    final openingDateTime = DateTime(
+      now.year,
+      now.month,
+      now.day,
+      opening.hour,
+      opening.minute,
+      opening.second,
+    );
+
+    DateTime closingDateTime;
+
+    if (closing.isBefore(opening)) {
+      closingDateTime = DateTime(
+        now.year,
+        now.month,
+        now.day + 1,
+        closing.hour,
+        closing.minute,
+        closing.second,
+      );
+    } else {
+      closingDateTime = DateTime(
+        now.year,
+        now.month,
+        now.day,
+        closing.hour,
+        closing.minute,
+        closing.second,
+      );
+    }
+
+    return now.isAfter(openingDateTime) && now.isBefore(closingDateTime);
+  }
+}
+
+@JsonSerializable()
+class UiClubSchedule {
+  @JsonKey(name: 'dayOfWeek')
+  final int dayOfWeek;
+  @JsonKey(name: 'openingTime')
+  final String openingTime;
+  @JsonKey(name: 'closingTime')
+  final String closingTime;
+
+  UiClubSchedule({
+    required this.dayOfWeek,
+    required this.openingTime,
+    required this.closingTime,
+  });
+
+  factory UiClubSchedule.fromJson(Map<String, dynamic> json) =>
+      _$UiClubScheduleFromJson(json);
+
+  Map<String, dynamic> toJson() => _$UiClubScheduleToJson(this);
 }
 
 @JsonSerializable()
