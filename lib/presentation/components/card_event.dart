@@ -24,8 +24,8 @@ class CardEvent extends StatelessWidget {
       child: InkWell(
         onTap: () {
           GoRouter.of(context).push(
-            AppRoutes.eventDetail,
-            extra: event.eventId.toString(),
+            AppRoutes.detailEvent,
+            extra: event.id.toString(),
           );
         },
         borderRadius: BorderRadius.circular(16),

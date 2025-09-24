@@ -12,5 +12,5 @@ abstract class EventRepository {
     required DateTime? date,
   });
   Future<Either<Failure, List<EventCategory>>> allEventCategories();
-  Future<Either<Failure, Event>> get(String id);
+  Future<Either<Failure, Event>> getEventSchedule(String id);
 }

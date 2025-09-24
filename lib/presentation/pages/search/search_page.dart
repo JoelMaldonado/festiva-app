@@ -54,7 +54,7 @@ class _SearchPageState extends State<SearchPage> {
                       switch (item.type) {
                         case "A":
                           GoRouter.of(context).push(
-                            AppRoutes.artistDetail,
+                            AppRoutes.detailArtist,
                             extra: item.id,
                           );
                           break;
@@ -72,7 +72,7 @@ class _SearchPageState extends State<SearchPage> {
 
                         case "E":
                           GoRouter.of(context).push(
-                            AppRoutes.eventDetail,
+                            AppRoutes.detailEvent,
                             extra: item.id.toString(),
                           );
                           break;

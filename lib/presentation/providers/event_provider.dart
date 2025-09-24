@@ -36,7 +36,7 @@ class EventProvider extends ChangeNotifier {
     try {
       isLoadingEvent = true;
       notifyListeners();
-      final res = await _repo.get(id);
+      final res = await _repo.getEventSchedule(id);
       res.fold(
         (l) {},
         (r) => event = r,

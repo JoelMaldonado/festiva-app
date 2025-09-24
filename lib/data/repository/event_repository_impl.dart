@@ -52,9 +52,9 @@ class EventRepositoryImpl implements EventRepository {
   }
 
   @override
-  Future<Either<Failure, Event>> get(String id) async {
+  Future<Either<Failure, Event>> getEventSchedule(String id) async {
     try {
-      final res = await _service.fetch(id);
+      final res = await _service.getEventSchedule(id);
       if (res.isSuccess) {
         return Right(res.data!.toDomain());
       } else {

@@ -48,7 +48,7 @@ class _ArtistsPageState extends State<ArtistsPage> {
                   detail: artist.tipo,
                   onTap: () {
                     GoRouter.of(context).push(
-                      AppRoutes.artistDetail,
+                      AppRoutes.detailArtist,
                       extra: artist.id,
                     );
                   },

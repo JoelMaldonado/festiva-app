@@ -18,9 +18,10 @@ class AppRoutes {
   static const menu = '/menu';
   static const fullScreenImage = '/full-screen-image';
   static const signIn = '/sign-in';
-  static const eventDetail = '/event-detail';
+  static const detailEvent = '/detail-event';
   static const artistList = '/artist-list';
-  static const artistDetail = '/artist-detail';
+  static const detailArtist = '/detail-artist';
+  static const detailClub = '/detail-club';
 }
 
 final _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -64,7 +65,7 @@ final appRouter = GoRouter(
       },
     ),
     GoRoute(
-      path: AppRoutes.eventDetail,
+      path: AppRoutes.detailEvent,
       builder: (context, state) {
         final idEvent = state.extra as String;
         return DetailEventPage(idEvent: idEvent);
@@ -126,7 +127,7 @@ final appRouter = GoRouter(
       },
     ),
     GoRoute(
-      path: AppRoutes.artistDetail,
+      path: AppRoutes.detailArtist,
       builder: (context, state) {
         final idArtist = state.extra as int;
         return DetailArtistPage(idArtist: idArtist);

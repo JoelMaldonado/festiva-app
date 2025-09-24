@@ -23,7 +23,7 @@ class CardArtist extends StatelessWidget {
           GestureDetector(
             onTap: () {
               GoRouter.of(context).push(
-                AppRoutes.artistDetail,
+                AppRoutes.detailArtist,
                 extra: artist.id,
               );
             },
