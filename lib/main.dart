@@ -6,6 +6,7 @@ import 'package:festiva/app/app_providers.dart';
 import 'package:festiva/core/di/di.dart';
 import 'package:festiva/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,6 +14,7 @@ import 'package:logger/web.dart';
 import 'package:mapbox_maps_flutter/mapbox_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:app_tracking_transparency/app_tracking_transparency.dart';
+import 'package:tiktok_events_sdk/tiktok_events_sdk.dart';
 
 final tagito = Logger();
 final fbAppEvents = FacebookAppEvents();
@@ -24,6 +26,31 @@ Future<void> initTracking() async {
     await fbAppEvents.setAdvertiserTracking(enabled: authorized);
     await fbAppEvents.setAutoLogAppEventsEnabled(true);
   }
+}
+
+Future<void> initTikTok() async {
+  final iosOptions = TikTokIosOptions(
+    disableTracking: false,
+    disableAutomaticTracking: true,
+    disableSKAdNetworkSupport: false,
+  );
+
+  final androidOptions = TikTokAndroidOptions(
+    disableAutoStart: false,
+    enableAutoIapTrack: true,
+    disableAdvertiserIDCollection: false,
+  );
+
+  await TikTokEventsSdk.initSdk(
+    androidAppId: '7553487830857973767',
+    tikTokAndroidId: 'com.festiva.core',
+    iosAppId: '6746812825',
+    tiktokIosId: '7553485791444484114',
+    isDebugMode: kDebugMode,
+    logLevel: kDebugMode ? TikTokLogLevel.debug : TikTokLogLevel.none,
+    androidOptions: androidOptions,
+    iosOptions: iosOptions,
+  );
 }
 
 Future<void> setup() async {
@@ -45,6 +72,8 @@ void main() async {
   await setupDependencies();
 
   await initTracking();
+
+  await initTikTok();
 
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
