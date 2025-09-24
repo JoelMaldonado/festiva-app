@@ -37,7 +37,7 @@ Future<void> initTikTok() async {
 
   final androidOptions = TikTokAndroidOptions(
     disableAutoStart: false,
-    enableAutoIapTrack: true,
+    enableAutoIapTrack: false,
     disableAdvertiserIDCollection: false,
   );
 
