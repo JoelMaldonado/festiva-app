@@ -43,7 +43,7 @@ class _ClubsPageState extends State<ClubsPage> {
                 final club = provider.listUiClubs[index];
                 return CardClub(
                   id: club.id,
-                  name: club.test(),
+                  name: club.name,
                   coverUrl: club.coverUrl,
                   logoUrl: club.logoUrl,
                   address: club.address,
