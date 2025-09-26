@@ -27,12 +27,6 @@ class EventDto {
   @JsonKey(name: 'startTime')
   final String? startTime;
 
-  @JsonKey(name: 'idEventCategory')
-  final int? idEventCategory;
-
-  @JsonKey(name: 'nameEventCategory')
-  final String? nameEventCategory;
-
   @JsonKey(name: 'location')
   final String? location;
 
@@ -45,6 +39,15 @@ class EventDto {
   @JsonKey(name: 'clubName')
   final String? clubName;
 
+  @JsonKey(name: 'nameEventCategory')
+  final String? nameCategory;
+
+  @JsonKey(name: 'ticketUrl')
+  final String? ticketUrl;
+
+  @JsonKey(name: 'categories')
+  final List<CategoryResponse>? categories;
+
   EventDto({
     required this.id,
     required this.eventId,
@@ -53,12 +56,13 @@ class EventDto {
     required this.imageUrl,
     required this.eventDate,
     required this.startTime,
-    required this.idEventCategory,
-    required this.nameEventCategory,
     required this.location,
     required this.nameClub,
     required this.clubId,
     required this.clubName,
+    required this.nameCategory,
+    required this.ticketUrl,
+    required this.categories,
   });
 
   factory EventDto.fromJson(Map<String, dynamic> json) =>
@@ -75,12 +79,32 @@ class EventDto {
       imageUrl: imageUrl ?? '',
       eventDate: eventDate?.toDate(pattern: 'yyyy-MM-dd'),
       startTime: startTime?.toDate(pattern: 'HH:mm:ss'),
-      idEventCategory: idEventCategory,
-      nameEventCategory: nameEventCategory,
       location: location,
       nameClub: nameClub,
       clubId: clubId,
       clubName: clubName,
+      nameCategory: nameCategory,
+      ticketUrl: ticketUrl,
+      categories: categories ?? [],
     );
   }
+}
+
+@JsonSerializable()
+class CategoryResponse {
+  @JsonKey(name: 'id')
+  final int id;
+
+  @JsonKey(name: 'title')
+  final String title;
+
+  CategoryResponse({
+    required this.id,
+    required this.title,
+  });
+
+  factory CategoryResponse.fromJson(Map<String, dynamic> json) =>
+      _$CategoryResponseFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CategoryResponseToJson(this);
 }

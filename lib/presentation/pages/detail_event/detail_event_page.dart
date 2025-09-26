@@ -31,7 +31,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Provider.of<EventProvider>(context, listen: false)
-          .getEvent(widget.idEvent);
+          .getEventByScheduleId(widget.idEvent);
     });
   }
 
@@ -83,12 +83,26 @@ class _DetailEventPageState extends State<DetailEventPage> {
               ],
             ),
             CustomExpandableText(text: provider.event?.description ?? ""),
-            TicketCtaCard(
-              purchaseUrl: '',
+            SizedBox(
+              width: double.infinity,
+              child: Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                alignment: WrapAlignment.start,
+                crossAxisAlignment: WrapCrossAlignment.start,
+                children: provider.event?.categories
+                        .map(
+                          (c) => _categoryEvent(c.title),
+                        )
+                        .toList() ??
+                    [],
+              ),
             ),
-            const SizedBox(height: 4),
-            if (provider.event?.nameEventCategory != null)
-              _categoryEvent(provider.event!.nameEventCategory!),
+            if (provider.event?.ticketUrl != null &&
+                provider.event!.ticketUrl!.isNotEmpty)
+              TicketCtaCard(
+                purchaseUrl: provider.event!.ticketUrl!,
+              ),
             if (provider.event?.eventDate != null)
               Row(
                 spacing: 12,
@@ -158,21 +172,18 @@ class _DetailEventPageState extends State<DetailEventPage> {
   }
 
   Widget _categoryEvent(String category) {
-    return Align(
-      alignment: Alignment.centerLeft,
-      child: Container(
-        padding: EdgeInsets.symmetric(
-          horizontal: 12,
-          vertical: 2,
-        ),
-        decoration: BoxDecoration(
-            border: Border.all(
-              color: AppColors.colorP1,
-              width: 1.5,
-            ),
-            borderRadius: BorderRadius.circular(16)),
-        child: Text(category),
+    return Container(
+      padding: EdgeInsets.symmetric(
+        horizontal: 12,
+        vertical: 2,
       ),
+      decoration: BoxDecoration(
+          border: Border.all(
+            color: AppColors.colorP1,
+            width: 1.5,
+          ),
+          borderRadius: BorderRadius.circular(16)),
+      child: Text(category),
     );
   }
 }

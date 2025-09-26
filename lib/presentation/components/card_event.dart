@@ -59,28 +59,29 @@ class CardEvent extends StatelessWidget {
                         top: 16,
                         child: _date(event.eventDate),
                       ),
-                    Positioned(
-                      left: 8,
-                      bottom: 8,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: AppColors.colorB3,
-                          borderRadius: BorderRadius.circular(50),
-                          border: Border.all(
-                            color: AppColors.colorP1,
-                            width: 1,
+                    if (event.nameCategory != null)
+                      Positioned(
+                        left: 8,
+                        bottom: 8,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: AppColors.colorB3,
+                            borderRadius: BorderRadius.circular(50),
+                            border: Border.all(
+                              color: AppColors.colorP1,
+                              width: 1,
+                            ),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                            vertical: 2,
+                          ),
+                          child: Text(
+                            event.nameCategory!,
+                            style: AppTextStyles.caption1,
                           ),
                         ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                          vertical: 2,
-                        ),
-                        child: Text(
-                          event.nameEventCategory ?? "No Category",
-                          style: AppTextStyles.caption1,
-                        ),
-                      ),
-                    )
+                      )
                   ],
                 ),
               ),

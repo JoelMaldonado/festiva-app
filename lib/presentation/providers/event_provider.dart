@@ -1,5 +1,6 @@
 import 'package:festiva/domain/model/event.dart';
 import 'package:festiva/domain/repository/event_repository.dart';
+import 'package:festiva/main.dart';
 import 'package:flutter/foundation.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -32,20 +33,15 @@ class EventProvider extends ChangeNotifier {
   Event? event;
   bool isLoadingEvent = false;
 
-  getEvent(String id) async {
-    try {
-      isLoadingEvent = true;
-      notifyListeners();
-      final res = await _repo.getEventSchedule(id);
-      res.fold(
-        (l) {},
-        (r) => event = r,
-      );
-    } catch (e) {
-      Fluttertoast.showToast(msg: e.toString());
-    } finally {
-      isLoadingEvent = false;
-      notifyListeners();
-    }
+  getEventByScheduleId(String eventScheduleId) async {
+    isLoadingEvent = true;
+    notifyListeners();
+    final res = await _repo.getEventSchedule(eventScheduleId);
+    res.fold(
+      (l) => tagito.e(l.message),
+      (r) => event = r,
+    );
+    isLoadingEvent = false;
+    notifyListeners();
   }
 }
