@@ -1,4 +1,5 @@
 import 'package:add_2_calendar/add_2_calendar.dart';
+import 'package:festiva/presentation/components/card_event_schedule.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
 import 'package:festiva/presentation/pages/detail_club/detail_club_page.dart';
 import 'package:festiva/presentation/pages/detail_event/components/ticket_cta_card.dart';
@@ -164,6 +165,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   );
                 },
               ),
+            if (kDebugMode) CardEventSchedule(),
             const SizedBox(height: 12),
           ],
         ),

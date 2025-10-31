@@ -1,6 +1,6 @@
 import 'package:festiva/presentation/components/button_social_network.dart';
+import 'package:festiva/presentation/components/card_event.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
-import 'package:festiva/presentation/pages/detail_club/components/carousel_events.dart';
 import 'package:festiva/presentation/pages/club_schedule/club_schedule_page.dart';
 import 'package:festiva/presentation/providers/club_provider.dart';
 import 'package:festiva/presentation/theme/colors.dart';
@@ -296,7 +296,39 @@ class _DetailClubPageState extends State<DetailClubPage> {
                       ],
                     ),
                   ),
-                  CarouselEvents(events: provider.listEventsByClub),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    spacing: 4,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 24, vertical: 8),
+                        child: Text(
+                          "Events",
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w900,
+                            color: AppColors.colorT1,
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 180,
+                        child: ListView.separated(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: provider.listEventsByClub.length,
+                          padding: const EdgeInsets.symmetric(horizontal: 24),
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(width: 12),
+                          itemBuilder: (context, index) {
+                            final event = provider.listEventsByClub[index];
+                            return CardEvent(event: event);
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                  //CarouselEvents(events: provider.listEventsByClub),
                   const SizedBox(height: 24),
                 ],
               ),

@@ -41,6 +41,7 @@ class CardArtist extends StatelessWidget {
             artist.nombre,
             style: AppTextStyles.caption2,
             maxLines: 1,
+            textAlign: TextAlign.center,
           ),
         ],
       ),

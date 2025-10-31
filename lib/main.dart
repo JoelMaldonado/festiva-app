@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:facebook_app_events/facebook_app_events.dart';
 import 'package:festiva/app/app.dart';
 import 'package:festiva/app/app_providers.dart';

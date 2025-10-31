@@ -61,7 +61,7 @@ class _ClubsMapPageState extends State<ClubsMapPage> {
                 coverUrl: club.coverUrl,
                 logoUrl: club.logoUrl,
                 address: club.address,
-                isOpen: null,
+                isOpen: false,
               ),
               Positioned(
                 top: 8,

@@ -35,6 +35,7 @@ class EventsCategories extends StatelessWidget {
             itemBuilder: (context, index) {
               final item = listCategories[index];
               return _chipCategory(
+                id: item.id,
                 text: item.title,
                 isSelected: selectedCategory == item,
                 onPressed: () {
@@ -84,10 +85,12 @@ class EventsCategories extends StatelessWidget {
   }
 
   Widget _chipCategory({
+    required int id,
     required String text,
     required bool isSelected,
     required VoidCallback onPressed,
   }) {
+    final color = id == 18 ? AppColors.colorOrange : AppColors.colorP1;
     return SizedBox(
       height: 24,
       child: OutlinedButton(
@@ -97,7 +100,7 @@ class EventsCategories extends StatelessWidget {
           textStyle: AppTextStyles.caption1,
           foregroundColor: AppColors.colorT1,
           side: BorderSide(
-            color: isSelected ? AppColors.colorP1 : AppColors.colorT2,
+            color: isSelected ? color : AppColors.colorT2,
             width: 1,
           ),
         ),

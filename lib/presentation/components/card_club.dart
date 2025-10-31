@@ -9,7 +9,7 @@ class CardClub extends StatelessWidget {
   final String? coverUrl;
   final String? logoUrl;
   final String? address;
-  final bool? isOpen;
+  final bool isOpen;
 
   const CardClub({
     super.key,
@@ -60,22 +60,20 @@ class CardClub extends StatelessWidget {
                       fit: BoxFit.fitWidth,
                     ),
                   ),
-                  if (isOpen != null)
+                  if (isOpen)
                     Positioned(
                       top: 16,
                       left: 16,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: isOpen!
-                              ? AppColors.colorGreen
-                              : AppColors.colorRed,
+                          color: AppColors.colorGreen,
                           borderRadius: BorderRadius.circular(4),
                         ),
                         padding: EdgeInsets.symmetric(
                           horizontal: 12,
                           vertical: 2,
                         ),
-                        child: Text(isOpen! ? "Open" : "Closed"),
+                        child: Text("Open"),
                       ),
                     ),
                 ],

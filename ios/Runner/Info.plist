@@ -33,9 +33,8 @@
 
 		<!-- ATT (iOS 14+): texto del popup de rastreo -->
 		<key>NSUserTrackingUsageDescription</key>
-		<string>Usamos tu identificador de publicidad para medir instalaciones y mejorar la
-			experiencia.</string>
-
+		<string>Festiva uses your advertising identifier to measure which campaigns drove the
+			install and to show more relevant ads (for example, to avoid repeated ads).</string>
 
 		<key>CADisableMinimumFrameDurationOnPhone</key>
 		<true />
@@ -67,9 +66,11 @@
 			<true />
 		</dict>
 		<key>NSCalendarsUsageDescription</key>
-		<string>This app needs access to your calendar to display and save important events.</string>
+		<string>Festiva needs access to your calendar to save events you choose and remind you of
+			time and place (e.g., “Concert on Friday at 8 pm”).</string>
 		<key>NSLocationWhenInUseUsageDescription</key>
-		<string>Location required to display on map</string>
+		<string>Festiva uses your location to show nearby events and venues on the map and sort the
+			list by distance (e.g., “Events within 1 km”).</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true />
 		<key>UILaunchStoryboardName</key>

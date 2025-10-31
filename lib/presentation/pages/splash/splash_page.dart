@@ -69,7 +69,8 @@ class _SplashPageState extends State<SplashPage>
                 padding: const EdgeInsets.all(50),
                 child: Center(
                   child: Image.asset(
-                    "assets/images/logo_large.png",
+                    //"assets/images/logo_large.png",
+                    "assets/images/festiva_halloween.png",
                   ),
                 ),
               ),
