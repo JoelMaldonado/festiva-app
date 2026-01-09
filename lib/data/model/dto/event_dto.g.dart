@@ -53,3 +53,51 @@ Map<String, dynamic> _$CategoryResponseToJson(CategoryResponse instance) =>
       'id': instance.id,
       'title': instance.title,
     };
+
+EventDetailDto _$EventDetailDtoFromJson(Map<String, dynamic> json) =>
+    EventDetailDto(
+      id: (json['id'] as num?)?.toInt(),
+      title: json['title'] as String?,
+      description: json['description'] as String?,
+      imageUrl: json['imageUrl'] as String?,
+      location: json['location'] as String?,
+      clubId: (json['clubId'] as num?)?.toInt(),
+      clubName: json['clubName'] as String?,
+      clubLogoUrl: json['clubLogoUrl'] as String?,
+      ticketUrl: json['ticketUrl'] as String?,
+      categories: (json['categories'] as List<dynamic>?)
+          ?.map((e) => EventCategoryDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      schedules: (json['schedules'] as List<dynamic>?)
+          ?.map((e) => EventScheduleDto.fromJson(e as Map<String, dynamic>))
+          .toList(),
+    );
+
+Map<String, dynamic> _$EventDetailDtoToJson(EventDetailDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'title': instance.title,
+      'description': instance.description,
+      'imageUrl': instance.imageUrl,
+      'location': instance.location,
+      'clubId': instance.clubId,
+      'clubName': instance.clubName,
+      'clubLogoUrl': instance.clubLogoUrl,
+      'ticketUrl': instance.ticketUrl,
+      'categories': instance.categories,
+      'schedules': instance.schedules,
+    };
+
+EventScheduleDto _$EventScheduleDtoFromJson(Map<String, dynamic> json) =>
+    EventScheduleDto(
+      id: (json['id'] as num?)?.toInt(),
+      eventDate: json['eventDate'] as String?,
+      startTime: json['startTime'] as String?,
+    );
+
+Map<String, dynamic> _$EventScheduleDtoToJson(EventScheduleDto instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'eventDate': instance.eventDate,
+      'startTime': instance.startTime,
+    };

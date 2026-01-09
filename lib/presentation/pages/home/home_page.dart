@@ -65,7 +65,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
               const SizedBox(height: 16),
-              if (provider.listEvents.isNotEmpty)
+              if (provider.listEventSchedules.isNotEmpty)
                 Column(
                   children: [
                     _section(
@@ -74,7 +74,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     CarouselEventsComponent(
                       key: const Key("carousel_events"),
-                      events: provider.listEvents,
+                      eventSchedules: provider.listEventSchedules,
                     ),
                   ],
                 ),

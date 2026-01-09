@@ -1,4 +1,4 @@
-import 'package:add_2_calendar/add_2_calendar.dart';
+import 'package:festiva/domain/model/event.dart';
 import 'package:festiva/presentation/components/card_event_schedule.dart';
 import 'package:festiva/presentation/components/item_detail.dart';
 import 'package:festiva/presentation/pages/detail_club/detail_club_page.dart';
@@ -15,6 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
 import 'package:share_plus/share_plus.dart';
+import 'package:add_2_calendar/add_2_calendar.dart' as calendar;
 
 class DetailEventPage extends StatefulWidget {
   final String idEvent;
@@ -32,7 +33,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      context.read<EventProvider>().getEventByScheduleId(widget.idEvent);
+      context.read<EventProvider>().getEventById(widget.idEvent);
     });
   }
 
@@ -49,7 +50,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
             AspectRatio(
               aspectRatio: 1,
               child: CustomImageNetwork(
-                imageUrl: provider.event?.imageUrl,
+                imageUrl: provider.eventDetail?.imageUrl,
                 isExpandable: true,
                 width: double.infinity,
                 height: double.infinity,
@@ -60,7 +61,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
               children: [
                 Expanded(
                   child: Text(
-                    provider.event?.title ?? "",
+                    provider.eventDetail?.title ?? "",
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.w900,
@@ -76,7 +77,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
                 */
                 AppFloatingActionButton(
                   onPressed: () {
-                    final eventId = provider.event?.eventId ?? "";
+                    final eventId = widget.idEvent;
                     final url = 'https://festiva.no/events/$eventId';
                     SharePlus.instance.share(
                       ShareParams(
@@ -88,7 +89,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
                 ),
               ],
             ),
-            CustomExpandableText(text: provider.event?.description ?? ""),
+            CustomExpandableText(text: provider.eventDetail?.description ?? ""),
             SizedBox(
               width: double.infinity,
               child: Wrap(
@@ -96,7 +97,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
                 runSpacing: 8,
                 alignment: WrapAlignment.start,
                 crossAxisAlignment: WrapCrossAlignment.start,
-                children: provider.event?.categories
+                children: provider.eventDetail?.categories
                         .map(
                           (c) => _categoryEvent(c.title),
                         )
@@ -104,75 +105,165 @@ class _DetailEventPageState extends State<DetailEventPage> {
                     [],
               ),
             ),
-            if (provider.event?.ticketUrl != null &&
-                provider.event!.ticketUrl!.isNotEmpty)
+            if (provider.eventDetail?.ticketUrl != null &&
+                provider.eventDetail!.ticketUrl!.isNotEmpty)
               TicketCtaCard(
-                purchaseUrl: provider.event!.ticketUrl!,
-              ),
-            if (provider.event?.eventDate != null)
-              Row(
-                spacing: 12,
-                children: [
-                  Expanded(
-                    flex: 1,
-                    child: ItemDetail(
-                      icon: Icons.calendar_month_outlined,
-                      title: "Date",
-                      value: provider.event!.eventDate!.format(),
-                      onLongPress: () {
-                        if (kDebugMode) {
-                          final event =
-                              buildEvent(DateTime.now().add(Duration(days: 1)));
-                          Add2Calendar.addEvent2Cal(event);
-                        }
-                      },
-                    ),
-                  ),
-                  if (provider.event?.startTime != null)
-                    Expanded(
-                      flex: 2,
-                      child: ItemDetail(
-                        icon: Icons.schedule_outlined,
-                        title: "Time",
-                        value:
-                            provider.event!.startTime!.format(pattern: 'HH:mm'),
-                      ),
-                    ),
-                ],
+                purchaseUrl: provider.eventDetail!.ticketUrl!,
               ),
             ItemDetail(
               icon: Icons.location_pin,
               title: "Address",
-              value: provider.event?.location ?? "Unknown",
+              value: provider.eventDetail?.location ?? "Unknown",
               onLongPress: kDebugMode
                   ? () {
-                      if (provider.event?.location == null) return;
+                      if (provider.eventDetail?.location == null) return;
                       Fluttertoast.showToast(msg: "Text copied to clipboard");
                       Clipboard.setData(
-                        ClipboardData(text: provider.event!.location!),
+                        ClipboardData(text: provider.eventDetail!.location),
                       );
                     }
                   : null,
             ),
-            if (provider.event?.clubId != null)
+            if (provider.eventDetail?.clubId != null)
               ItemDetail(
                 icon: Icons.explore_outlined,
                 title: "Venue",
-                value: provider.event!.clubName!,
+                value: provider.eventDetail!.clubName,
                 iconAction: Icons.chevron_right,
                 onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
                       builder: (_) =>
-                          DetailClubPage(idClub: provider.event!.clubId!),
+                          DetailClubPage(idClub: provider.eventDetail!.clubId),
                     ),
                   );
                 },
               ),
+            if (provider.eventDetail?.schedules != null &&
+                provider.eventDetail!.schedules.isNotEmpty)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                spacing: 12,
+                children: [
+                  Text(
+                    "Schedules",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w900,
+                      color: AppColors.colorT1,
+                    ),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    height: 90,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: provider.eventDetail!.schedules.length,
+                      itemBuilder: (c, i) {
+                        final schedule = provider.eventDetail!.schedules[i];
+                        return _itemEventSchedule(
+                          schedule: schedule,
+                          onLongPress: () {
+                            if (provider.eventDetail == null) return;
+                            addCalendar(
+                              title: provider.eventDetail!.title,
+                              description: provider.eventDetail!.description,
+                              location: provider.eventDetail!.location,
+                              schedule: schedule,
+                            );
+                          },
+                        );
+                      },
+                      separatorBuilder: (c, i) => const SizedBox(width: 12),
+                    ),
+                  ),
+                ],
+              ),
             if (kDebugMode) CardEventSchedule(),
             const SizedBox(height: 12),
           ],
+        ),
+      ),
+    );
+  }
+
+  void addCalendar({
+    required String title,
+    required String description,
+    required String location,
+    required EventSchedule schedule,
+  }) {
+    final dateTime = DateTime(
+      schedule.eventDate.year,
+      schedule.eventDate.month,
+      schedule.eventDate.day,
+      schedule.startTime.hour,
+      schedule.startTime.minute,
+    );
+    final event = calendar.Event(
+      title: title,
+      description: description,
+      location: location,
+      startDate: dateTime,
+      endDate: dateTime.add(Duration(hours: 4)),
+      iosParams: const calendar.IOSParams(
+        reminder: Duration(minutes: 30),
+      ),
+      androidParams: const calendar.AndroidParams(
+        emailInvites: [],
+      ),
+    );
+    calendar.Add2Calendar.addEvent2Cal(event);
+  }
+
+  Widget _itemEventSchedule({
+    required EventSchedule schedule,
+    required VoidCallback onLongPress,
+  }) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onLongPress: onLongPress,
+        borderRadius: BorderRadius.circular(12),
+        child: Ink(
+          width: 72,
+          height: 90,
+          decoration: BoxDecoration(
+            color: AppColors.colorB4,
+            borderRadius: BorderRadius.circular(12),
+          ),
+          child: Center(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  schedule.eventDate.format(pattern: "MMM"),
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.colorT2,
+                  ),
+                ),
+                Text(
+                  schedule.eventDate.format(pattern: "dd"),
+                  style: TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w900,
+                    color: AppColors.colorT1,
+                  ),
+                ),
+                Text(
+                  schedule.startTime.format(pattern: "HH:mm"),
+                  style: TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.normal,
+                    color: AppColors.colorT3,
+                  ),
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );
@@ -193,15 +284,4 @@ class _DetailEventPageState extends State<DetailEventPage> {
       child: Text(category),
     );
   }
-}
-
-// Duración del evento
-Event buildEvent(DateTime startTime) {
-  return Event(
-    title: 'Mi Evento',
-    description: 'Descripción opcional del evento',
-    location: 'Ubicación opcional',
-    startDate: startTime,
-    endDate: startTime.add(Duration(hours: 2)),
-  );
 }

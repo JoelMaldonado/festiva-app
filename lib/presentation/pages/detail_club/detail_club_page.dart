@@ -322,7 +322,7 @@ class _DetailClubPageState extends State<DetailClubPage> {
                               const SizedBox(width: 12),
                           itemBuilder: (context, index) {
                             final event = provider.listEventsByClub[index];
-                            return CardEvent(event: event);
+                            return CardEvent(eventSchedule: event);
                           },
                         ),
                       ),

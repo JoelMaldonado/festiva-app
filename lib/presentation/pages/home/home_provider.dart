@@ -12,7 +12,7 @@ class HomeProvider extends ChangeNotifier {
   });
 
   List<UiClub> listClubs = [];
-  List<Event> listEvents = [];
+  List<Event> listEventSchedules = [];
   List<Artist> listArtists = [];
 
   bool isLoading = false;
@@ -26,7 +26,7 @@ class HomeProvider extends ChangeNotifier {
       (l) {},
       (r) {
         listClubs = List.of(r.clubs);
-        listEvents = r.events.map((e) => e.toDomain()).toList();
+        listEventSchedules = r.events.map((e) => e.toDomain()).toList();
         listArtists = r.artists.map((e) => e.toDomain()).toList();
       },
     );

@@ -72,4 +72,15 @@ class EventService {
 
     return response;
   }
+
+  Future<ApiResponse<EventDetailDto>> getEventDetail(String eventId) async {
+    final call = await _dio.get(url: '/event/detail/$eventId');
+
+    final response = ApiResponse<EventDetailDto>.fromJson(
+      call.data,
+      (json) => EventDetailDto.fromJson(json as Map<String, dynamic>),
+    );
+
+    return response;
+  }
 }

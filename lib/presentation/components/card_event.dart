@@ -8,12 +8,12 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class CardEvent extends StatelessWidget {
-  final Event event;
+  final Event eventSchedule;
   final bool showDate;
 
   const CardEvent({
     super.key,
-    required this.event,
+    required this.eventSchedule,
     this.showDate = true,
   });
 
@@ -22,9 +22,7 @@ class CardEvent extends StatelessWidget {
     return Material(
       color: Colors.transparent,
       child: InkWell(
-        onTap: () {
-          context.push(AppRoutes.eventDetailLocation(event.id.toString()));
-        },
+        onTap: () => _toDetail(context),
         borderRadius: BorderRadius.circular(16),
         child: Ink(
           width: 180,
@@ -44,7 +42,7 @@ class CardEvent extends StatelessWidget {
                         topRight: Radius.circular(16),
                       ),
                       child: AppImageNetwork(
-                        imageUrl: event.imageUrl,
+                        imageUrl: eventSchedule.imageUrl,
                         width: double.infinity,
                         height: double.infinity,
                         fit: BoxFit.cover,
@@ -54,9 +52,9 @@ class CardEvent extends StatelessWidget {
                       Positioned(
                         left: 16,
                         top: 16,
-                        child: _date(event.eventDate),
+                        child: _date(eventSchedule.eventDate),
                       ),
-                    if (event.nameCategory != null)
+                    if (eventSchedule.nameCategory != null)
                       Positioned(
                         left: 8,
                         bottom: 8,
@@ -74,7 +72,7 @@ class CardEvent extends StatelessWidget {
                             vertical: 2,
                           ),
                           child: Text(
-                            event.nameCategory!,
+                            eventSchedule.nameCategory!,
                             style: AppTextStyles.caption1,
                           ),
                         ),
@@ -94,7 +92,7 @@ class CardEvent extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        event.title,
+                        eventSchedule.title,
                         style: AppTextStyles.footnote.copyWith(
                           fontWeight: FontWeight.bold,
                           color: AppColors.colorT1,
@@ -110,7 +108,7 @@ class CardEvent extends StatelessWidget {
                           ),
                           SizedBox(width: 4),
                           Text(
-                            event.nameClub ?? "Unknown",
+                            eventSchedule.nameClub ?? "Unknown",
                             style: AppTextStyles.caption1.copyWith(
                               color: AppColors.colorT2,
                             ),
@@ -126,6 +124,13 @@ class CardEvent extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _toDetail(
+    BuildContext context,
+  ) {
+    context
+        .push(AppRoutes.eventDetailLocation(eventSchedule.eventId.toString()));
   }
 
   Widget _date(DateTime? date) {

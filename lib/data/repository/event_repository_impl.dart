@@ -66,6 +66,20 @@ class EventRepositoryImpl implements EventRepository {
   }
 
   @override
+  Future<Either<Failure, EventDetail>> getEventDetail(String eventId) async {
+    try {
+      final res = await _service.getEventDetail(eventId);
+      if (res.isSuccess) {
+        return Right(res.data!.toDomain());
+      } else {
+        return Left(Failure(res.message));
+      }
+    } catch (e) {
+      return Left(Failure(e.toString()));
+    }
+  }
+
+  @override
   Future<Either<Failure, List<EventCategory>>> allEventCategories() async {
     try {
       final res = await _service.fetchAllCategories();

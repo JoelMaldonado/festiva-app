@@ -12,7 +12,10 @@ class EventProvider extends ChangeNotifier {
   List<Event> events = [];
   bool isLoadingEvents = false;
 
-  getEvents() async {
+  EventDetail? eventDetail;
+  bool isLoadingEvent = false;
+
+  Future<void> getEvents() async {
     try {
       if (events.isNotEmpty) return;
       isLoadingEvents = true;
@@ -30,16 +33,13 @@ class EventProvider extends ChangeNotifier {
     }
   }
 
-  Event? event;
-  bool isLoadingEvent = false;
-
-  Future<void> getEventByScheduleId(String eventScheduleId) async {
+  Future<void> getEventById(String eventId) async {
     isLoadingEvent = true;
     notifyListeners();
-    final res = await _repo.getEventSchedule(eventScheduleId);
+    final res = await _repo.getEventDetail(eventId);
     res.fold(
       (l) => tagito.e(l.message),
-      (r) => event = r,
+      (r) => eventDetail = r,
     );
     isLoadingEvent = false;
     notifyListeners();

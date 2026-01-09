@@ -86,7 +86,7 @@ class _EventsListPageState extends State<EventsListPage> {
                     itemBuilder: (context, index) {
                       final event = provider.items[index];
                       return CardEvent(
-                        event: event,
+                        eventSchedule: event,
                         showDate: provider.selectedDate == null,
                       );
                     },

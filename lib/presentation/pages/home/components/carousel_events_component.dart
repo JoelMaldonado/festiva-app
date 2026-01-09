@@ -5,11 +5,11 @@ import 'package:festiva/presentation/components/card_event.dart';
 import 'package:flutter/material.dart';
 
 class CarouselEventsComponent extends StatefulWidget {
-  final List<Event> events;
+  final List<Event> eventSchedules;
 
   const CarouselEventsComponent({
     super.key,
-    required this.events,
+    required this.eventSchedules,
   });
 
   @override
@@ -68,11 +68,11 @@ class _CarouselEventsComponentState extends State<CarouselEventsComponent> {
         controller: _scrollController,
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 24),
-        itemCount: widget.events.length,
+        itemCount: widget.eventSchedules.length,
         separatorBuilder: (context, index) => SizedBox(width: 16),
         itemBuilder: (context, index) {
-          final item = widget.events[index];
-          return CardEvent(event: item);
+          final item = widget.eventSchedules[index];
+          return CardEvent(eventSchedule: item);
         },
       ),
     );

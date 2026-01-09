@@ -129,7 +129,7 @@ class _CarouselEventsState extends State<CarouselEvents> {
               // en SizedBox para que el scroll "paso a paso" sea consistente.
               return SizedBox(
                 width: widget.itemWidth,
-                child: CardEvent(event: event),
+                child: CardEvent(eventSchedule: event),
               );
             },
           ),
