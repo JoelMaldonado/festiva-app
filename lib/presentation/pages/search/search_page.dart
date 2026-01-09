@@ -71,10 +71,8 @@ class _SearchPageState extends State<SearchPage> {
                           break;
 
                         case "E":
-                          GoRouter.of(context).push(
-                            AppRoutes.detailEvent,
-                            extra: item.id.toString(),
-                          );
+                          context.push(AppRoutes.eventDetailLocation(
+                              item.id.toString()));
                           break;
                       }
                     },

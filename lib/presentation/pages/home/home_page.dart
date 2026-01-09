@@ -134,8 +134,7 @@ class _HomePageState extends State<HomePage> {
                             ),
                           )
                         : Image.asset(
-                            //"assets/images/logo_large.png",
-                            "assets/images/festiva_marcela.png",
+                            "assets/images/logo_large.png",
                             width: 140,
                             fit: BoxFit.fitWidth,
                           ),

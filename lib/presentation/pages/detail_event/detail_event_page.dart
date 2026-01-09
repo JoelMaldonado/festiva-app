@@ -14,6 +14,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:provider/provider.dart';
+import 'package:share_plus/share_plus.dart';
 
 class DetailEventPage extends StatefulWidget {
   final String idEvent;
@@ -31,8 +32,7 @@ class _DetailEventPageState extends State<DetailEventPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
-      Provider.of<EventProvider>(context, listen: false)
-          .getEventByScheduleId(widget.idEvent);
+      context.read<EventProvider>().getEventByScheduleId(widget.idEvent);
     });
   }
 
@@ -73,14 +73,19 @@ class _DetailEventPageState extends State<DetailEventPage> {
                   onPressed: () {},
                   icon: Icons.favorite_outline,
                 ),
+                */
                 AppFloatingActionButton(
                   onPressed: () {
-                    SharePlus.instance
-                        .share(ShareParams(text: 'https://www.festiva.no/'));
+                    final eventId = provider.event?.eventId ?? "";
+                    final url = 'https://festiva.no/events/$eventId';
+                    SharePlus.instance.share(
+                      ShareParams(
+                        text: url,
+                      ),
+                    );
                   },
                   icon: Icons.share_outlined,
                 ),
-                */
               ],
             ),
             CustomExpandableText(text: provider.event?.description ?? ""),

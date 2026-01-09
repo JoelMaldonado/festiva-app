@@ -18,7 +18,13 @@ class AppRoutes {
   static const menu = '/menu';
   static const fullScreenImage = '/full-screen-image';
   static const signIn = '/sign-in';
-  static const detailEvent = '/detail-event';
+
+  // ✅ Nuevo: ruta deep link real
+  static const eventDetail = '/events/:idEvent';
+
+  // ✅ Helper para navegar sin extra
+  static String eventDetailLocation(String idEvent) => '/events/$idEvent';
+
   static const artistList = '/artist-list';
   static const detailArtist = '/detail-artist';
   static const detailClub = '/detail-club';
@@ -65,10 +71,17 @@ final appRouter = GoRouter(
       },
     ),
     GoRoute(
-      path: AppRoutes.detailEvent,
+      path: AppRoutes.eventDetail,
       builder: (context, state) {
-        final idEvent = state.extra as String;
-        return DetailEventPage(idEvent: idEvent);
+        final idEvent = state.pathParameters['idEvent'] ?? '';
+        return PopScope(
+          canPop: true,
+          onPopInvokedWithResult: (didPop, result) {
+            if (didPop) return;
+            GoRouter.of(context).go(AppRoutes.menu);
+          },
+          child: DetailEventPage(idEvent: idEvent),
+        );
       },
     ),
     GoRoute(

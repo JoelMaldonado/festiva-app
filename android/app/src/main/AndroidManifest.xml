@@ -46,10 +46,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:scheme="https"
-                    android:host="www.festiva.no"
-                    android:pathPrefix="/app/event-detail/" />
+                <data android:scheme="https" android:host="festiva.no" android:pathPrefix="/events" />
+                <data android:scheme="https" android:host="www.festiva.no"
+                    android:pathPrefix="/events" />
             </intent-filter>
 
         </activity>

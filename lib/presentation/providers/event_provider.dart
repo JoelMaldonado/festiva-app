@@ -33,7 +33,7 @@ class EventProvider extends ChangeNotifier {
   Event? event;
   bool isLoadingEvent = false;
 
-  getEventByScheduleId(String eventScheduleId) async {
+  Future<void> getEventByScheduleId(String eventScheduleId) async {
     isLoadingEvent = true;
     notifyListeners();
     final res = await _repo.getEventSchedule(eventScheduleId);
